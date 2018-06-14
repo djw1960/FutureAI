@@ -34,10 +34,6 @@ namespace Console
             //System.Console.WriteLine(DESEncrypt.Decrypt(n1, DESEncrypt.info));
             //var n2 = DESEncrypt.Encrypt("50000.00", DESEncrypt.info);
             //System.Console.WriteLine(n2);
-            //System.Console.WriteLine(DESEncrypt.Decrypt(n2, DESEncrypt.info));
-            //var n3 = DESEncrypt.Encrypt("99999.00", DESEncrypt.info);
-            //System.Console.WriteLine(n3);
-            //System.Console.WriteLine(DESEncrypt.Decrypt(n3, DESEncrypt.info));
 
             //System.Console.WriteLine(DESEncrypt.Encrypt("99999999", DESEncrypt.info));
             //System.Console.WriteLine(DESEncrypt.Encrypt("99999888", DESEncrypt.info));
