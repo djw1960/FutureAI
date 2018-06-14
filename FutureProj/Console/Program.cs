@@ -28,12 +28,6 @@ namespace Console
             //NotifyResultModel t = HttpUtils.PostAsync<NotifyModel, NotifyResultModel>("http://192.168.1.60:8880/api/PayNotify/Notify", model);
 
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    System.Console.WriteLine(Guid.NewGuid().ToString().Replace("-","").ToUpper());
-            //}
-
-            //System.Console.WriteLine("-----------------");
 
             //var n1 = DESEncrypt.Encrypt("15600005", DESEncrypt.info);
             //System.Console.WriteLine(n1);
