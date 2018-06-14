@@ -38,8 +38,6 @@ namespace Console
             //System.Console.WriteLine(DESEncrypt.Encrypt("99999999", DESEncrypt.info));
             //System.Console.WriteLine(DESEncrypt.Encrypt("99999888", DESEncrypt.info));
             //System.Console.WriteLine(DESEncrypt.Encrypt("XSDFSDFF", DESEncrypt.info));
-            //System.Console.WriteLine(DESEncrypt.Encrypt("SDFWERFD", DESEncrypt.info));
-            //System.Console.WriteLine(DESEncrypt.Encrypt("WXX3D44D", DESEncrypt.info));
 
             //System.Console.WriteLine(MD5Encrypt.MD5("1234567890abcdefghijklmnopqrstuvwxyz",Encoding.UTF8));
 
