@@ -76,12 +76,13 @@
     <Compile Include="Entitys\ReturnModel.cs" />
     <Compile Include="Entitys\ServiceConfig.cs" />
     <Compile Include="Entitys\WebPayParams.cs" />
+    <Compile Include="FutureControl.cs" />
     <Compile Include="Helper\ByteConvertHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\ListConvertTableHelper.cs" />
     <Compile Include="Helper\ModelConvertHelper.cs" />
     <Compile Include="Helper\QRCodeHandler.cs" />
-    <Compile Include="HttpUtils.cs" />
+    <Compile Include="Lib\HttpUtils.cs" />
     <Compile Include="Lib\SysConfig.cs" />
     <Compile Include="Lib\Wechat\HttpService.cs" />
     <Compile Include="Lib\Wechat\NativePay.cs" />
@@ -90,13 +91,13 @@
     <Compile Include="Lib\Wechat\WxPayData.cs" />
     <Compile Include="OperationContext.cs" />
     <Compile Include="PayControl.cs" />
-    <Compile Include="PredicateBuilder.cs" />
+    <Compile Include="Lib\PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProvider\AlipayService.cs" />
     <Compile Include="ServiceProvider\IPayService.cs" />
     <Compile Include="ServiceProvider\PayServiceBase.cs" />
     <Compile Include="ServiceProvider\WechatPayService.cs" />
-    <Compile Include="SignUtils.cs" />
+    <Compile Include="Lib\SignUtils.cs" />
     <Compile Include="WindowControl.cs" />
   </ItemGroup>
   <ItemGroup>

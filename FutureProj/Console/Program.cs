@@ -28,22 +28,6 @@ namespace Console
             //NotifyResultModel t = HttpUtils.PostAsync<NotifyModel, NotifyResultModel>("http://192.168.1.60:8880/api/PayNotify/Notify", model);
 
 
-
-            //var n1 = DESEncrypt.Encrypt("15600005", DESEncrypt.info);
-            //System.Console.WriteLine(n1);
-            //System.Console.WriteLine(DESEncrypt.Decrypt(n1, DESEncrypt.info));
-            //var n2 = DESEncrypt.Encrypt("50000.00", DESEncrypt.info);
-            //System.Console.WriteLine(n2);
-
-            //System.Console.WriteLine(DESEncrypt.Encrypt("99999999", DESEncrypt.info));
-
-            //System.Console.WriteLine(MD5Encrypt.MD5("1234567890abcdefghijklmnopqrstuvwxyz",Encoding.UTF8));
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    System.Console.WriteLine(Common.GetBillNo(25));
-            //}
-
             //DateTime dend = DateTime.Parse("2018-05-04").AddDays(1).AddSeconds(-1);
             //System.Console.WriteLine(dend.ToString());
 
@@ -144,19 +128,6 @@ namespace Console
             //{
             //    System.Console.WriteLine(Common.GetBillNo(32));
             //}
-            //System.Console.WriteLine("条件编译符号测试");
-#if test
-            System.Console.WriteLine("asdfasdfasdf");
-#endif
-
-
-            //string a=System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile("123123123qawedasdfasdASD", "MD5");
-            //System.Console.WriteLine(a);
-
-            //System.Console.WriteLine(SignUtils.MD5("123123123qawedasdfasdASD", Encoding.UTF8));
-            //decimal a = decimal.Round(((decimal)156256 / 100), 0, MidpointRounding.AwayFromZero);
-            //System.Console.WriteLine(a);
-
 
             System.Console.ReadKey();
         }
