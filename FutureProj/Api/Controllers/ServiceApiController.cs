@@ -117,7 +117,7 @@ namespace Api.Controllers
 
         #endregion
 
-        #region Pay
+        #region Pay-支付接口
         /// <summary>
         /// PC收银台方式接口
         /// </summary>
