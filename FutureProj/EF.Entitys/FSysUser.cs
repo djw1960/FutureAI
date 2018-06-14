@@ -7,21 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EF.edmx
+namespace EF.Entitys
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class InRawMaterial
+    public partial class FSysUser
     {
         public int ID { get; set; }
-        public string PName { get; set; }
-        public string PCode { get; set; }
-        public string PCate { get; set; }
-        public string Unit { get; set; }
-        public decimal Price { get; set; }
-        public decimal RisePrice { get; set; }
-        public decimal RiseRange { get; set; }
-        public int DateTime { get; set; }
+        public string Login { get; set; }
+        public string Pwd { get; set; }
+        public string UserName { get; set; }
+        public int RoleID { get; set; }
+        public int IsAvailable { get; set; }
+        public System.DateTime AddDate { get; set; }
     }
 }

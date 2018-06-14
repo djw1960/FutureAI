@@ -12,11 +12,47 @@ namespace EF.IRespository.Sons
     {
     
     }
-    public partial interface IFRepository:IBaseRespository<EF.Entitys.FRepository>
+    public partial interface IFAI:IBaseRespository<EF.Entitys.FAI>
     {
     
     }
-    public partial interface IInRawMaterial:IBaseRespository<EF.Entitys.InRawMaterial>
+    public partial interface IFDataMaterial:IBaseRespository<EF.Entitys.FDataMaterial>
+    {
+    
+    }
+    public partial interface IFDataRepository:IBaseRespository<EF.Entitys.FDataRepository>
+    {
+    
+    }
+    public partial interface IFPayGood:IBaseRespository<EF.Entitys.FPayGood>
+    {
+    
+    }
+    public partial interface IFPayMert:IBaseRespository<EF.Entitys.FPayMert>
+    {
+    
+    }
+    public partial interface IFPayOrder:IBaseRespository<EF.Entitys.FPayOrder>
+    {
+    
+    }
+    public partial interface IFSys_Config:IBaseRespository<EF.Entitys.FSys_Config>
+    {
+    
+    }
+    public partial interface IFPayWay:IBaseRespository<EF.Entitys.FPayWay>
+    {
+    
+    }
+    public partial interface IFSys_LoginSession:IBaseRespository<EF.Entitys.FSys_LoginSession>
+    {
+    
+    }
+    public partial interface IFSys_Role:IBaseRespository<EF.Entitys.FSys_Role>
+    {
+    
+    }
+    public partial interface IFSysUser:IBaseRespository<EF.Entitys.FSysUser>
     {
     
     }

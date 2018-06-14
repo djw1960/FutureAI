@@ -58,14 +58,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FAI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDataMaterial.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDataRepository.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="FNews.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="FormatModels\PageData.cs" />
-    <Compile Include="FRepository.cs">
+    <Compile Include="FPayGood.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="InRawMaterial.cs">
+    <Compile Include="FPayMert.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FPayOrder.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FPayWay.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FSysUser.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FSys_Config.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FSys_LoginSession.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FSys_Role.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

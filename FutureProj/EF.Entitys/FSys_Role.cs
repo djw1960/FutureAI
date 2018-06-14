@@ -7,20 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EF.edmx
+namespace EF.Entitys
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class FRepository
+    public partial class FSys_Role
     {
         public long ID { get; set; }
-        public string Exchange { get; set; }
-        public string CateName { get; set; }
-        public string Reps { get; set; }
-        public decimal YTDSum { get; set; }
-        public decimal TDSum { get; set; }
-        public decimal Change { get; set; }
-        public System.DateTime DTime { get; set; }
+        public string RoleCode { get; set; }
+        public string RoleName { get; set; }
     }
 }

@@ -12,15 +12,11 @@ namespace EF.Entitys
     using System;
     using System.Collections.Generic;
     
-    public partial class FRepository
+    public partial class FSys_Config
     {
         public long ID { get; set; }
-        public string Exchange { get; set; }
-        public string CateName { get; set; }
-        public string Reps { get; set; }
-        public decimal YTDSum { get; set; }
-        public decimal TDSum { get; set; }
-        public decimal Change { get; set; }
-        public System.DateTime DTime { get; set; }
+        public string SKey { get; set; }
+        public string SValue { get; set; }
+        public string Remark { get; set; }
     }
 }

@@ -17,21 +17,102 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
-    public partial class FRepository:BaseService<EF.Entitys.FRepository>,EF.IService.Sons.IFRepository
+    public partial class FAI:BaseService<EF.Entitys.FAI>,EF.IService.Sons.IFAI
     {
-    	    //IRespository.Sons.IFRepository dal;
+    	    //IRespository.Sons.IFAI dal;
             public override void Setdal()
             {
-                dal = base.DBSession.FRepository;
+                dal = base.DBSession.FAI;
                 base.dal = dal;
             }
     }
-    public partial class InRawMaterial:BaseService<EF.Entitys.InRawMaterial>,EF.IService.Sons.IInRawMaterial
+    public partial class FDataMaterial:BaseService<EF.Entitys.FDataMaterial>,EF.IService.Sons.IFDataMaterial
     {
-    	    //IRespository.Sons.IInRawMaterial dal;
+    	    //IRespository.Sons.IFDataMaterial dal;
             public override void Setdal()
             {
-                dal = base.DBSession.InRawMaterial;
+                dal = base.DBSession.FDataMaterial;
+                base.dal = dal;
+            }
+    }
+    public partial class FDataRepository:BaseService<EF.Entitys.FDataRepository>,EF.IService.Sons.IFDataRepository
+    {
+    	    //IRespository.Sons.IFDataRepository dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FDataRepository;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayGood:BaseService<EF.Entitys.FPayGood>,EF.IService.Sons.IFPayGood
+    {
+    	    //IRespository.Sons.IFPayGood dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayGood;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayMert:BaseService<EF.Entitys.FPayMert>,EF.IService.Sons.IFPayMert
+    {
+    	    //IRespository.Sons.IFPayMert dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayMert;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayOrder:BaseService<EF.Entitys.FPayOrder>,EF.IService.Sons.IFPayOrder
+    {
+    	    //IRespository.Sons.IFPayOrder dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayOrder;
+                base.dal = dal;
+            }
+    }
+    public partial class FSys_Config:BaseService<EF.Entitys.FSys_Config>,EF.IService.Sons.IFSys_Config
+    {
+    	    //IRespository.Sons.IFSys_Config dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSys_Config;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayWay:BaseService<EF.Entitys.FPayWay>,EF.IService.Sons.IFPayWay
+    {
+    	    //IRespository.Sons.IFPayWay dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayWay;
+                base.dal = dal;
+            }
+    }
+    public partial class FSys_LoginSession:BaseService<EF.Entitys.FSys_LoginSession>,EF.IService.Sons.IFSys_LoginSession
+    {
+    	    //IRespository.Sons.IFSys_LoginSession dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSys_LoginSession;
+                base.dal = dal;
+            }
+    }
+    public partial class FSys_Role:BaseService<EF.Entitys.FSys_Role>,EF.IService.Sons.IFSys_Role
+    {
+    	    //IRespository.Sons.IFSys_Role dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSys_Role;
+                base.dal = dal;
+            }
+    }
+    public partial class FSysUser:BaseService<EF.Entitys.FSysUser>,EF.IService.Sons.IFSysUser
+    {
+    	    //IRespository.Sons.IFSysUser dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSysUser;
                 base.dal = dal;
             }
     }

@@ -18,18 +18,81 @@ namespace EF.Service
     			return new Service.Sons.FNews();
     		}
     	}
-    	public IService.Sons.IFRepository FRepository
+    	public IService.Sons.IFAI FAI
     	{
     		get
     		{
-    			return new Service.Sons.FRepository();
+    			return new Service.Sons.FAI();
     		}
     	}
-    	public IService.Sons.IInRawMaterial InRawMaterial
+    	public IService.Sons.IFDataMaterial FDataMaterial
     	{
     		get
     		{
-    			return new Service.Sons.InRawMaterial();
+    			return new Service.Sons.FDataMaterial();
+    		}
+    	}
+    	public IService.Sons.IFDataRepository FDataRepository
+    	{
+    		get
+    		{
+    			return new Service.Sons.FDataRepository();
+    		}
+    	}
+    	public IService.Sons.IFPayGood FPayGood
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayGood();
+    		}
+    	}
+    	public IService.Sons.IFPayMert FPayMert
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayMert();
+    		}
+    	}
+    	public IService.Sons.IFPayOrder FPayOrder
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayOrder();
+    		}
+    	}
+    	public IService.Sons.IFSys_Config FSys_Config
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSys_Config();
+    		}
+    	}
+    	public IService.Sons.IFPayWay FPayWay
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayWay();
+    		}
+    	}
+    	public IService.Sons.IFSys_LoginSession FSys_LoginSession
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSys_LoginSession();
+    		}
+    	}
+    	public IService.Sons.IFSys_Role FSys_Role
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSys_Role();
+    		}
+    	}
+    	public IService.Sons.IFSysUser FSysUser
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSysUser();
     		}
     	}
     }

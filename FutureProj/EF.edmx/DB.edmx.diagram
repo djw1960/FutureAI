@@ -4,10 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5e20cb8ffbbe4be7800aaaf8d425bc0d" Name="Diagram1" ZoomLevel="29">
-        <EntityTypeShape EntityType="PayServiceModel.FNews" Width="1.5" PointX="5.5" PointY="1.25" />
-        <EntityTypeShape EntityType="PayServiceModel.FRepository" Width="1.5" PointX="1.25" PointY="1.125" />
-        <EntityTypeShape EntityType="PayServiceModel.InRawMaterial" Width="1.5" PointX="3.375" PointY="1.25" />
+      <Diagram DiagramId="5e20cb8ffbbe4be7800aaaf8d425bc0d" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="PayServiceModel.FNews" Width="1.5" PointX="0.875" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FAI" Width="1.5" PointX="10.75" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FDataMaterial" Width="1.5" PointX="3" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FDataRepository" Width="1.5" PointX="3" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayGood" Width="1.5" PointX="5.5" PointY="1.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayMert" Width="1.5" PointX="8" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayOrder" Width="1.5" PointX="5.5" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Config" Width="1.5" PointX="13.375" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayWay" Width="1.5" PointX="8" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_LoginSession" Width="1.5" PointX="13.375" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Role" Width="1.5" PointX="13.375" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSysUser" Width="1.5" PointX="13.375" PointY="0.5" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

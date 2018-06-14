@@ -13,8 +13,17 @@ namespace EF.IService
     public partial interface IServiceSession
     {
     	IService.Sons.IFNews FNews{ get; }
-    	IService.Sons.IFRepository FRepository{ get; }
-    	IService.Sons.IInRawMaterial InRawMaterial{ get; }
+    	IService.Sons.IFAI FAI{ get; }
+    	IService.Sons.IFDataMaterial FDataMaterial{ get; }
+    	IService.Sons.IFDataRepository FDataRepository{ get; }
+    	IService.Sons.IFPayGood FPayGood{ get; }
+    	IService.Sons.IFPayMert FPayMert{ get; }
+    	IService.Sons.IFPayOrder FPayOrder{ get; }
+    	IService.Sons.IFSys_Config FSys_Config{ get; }
+    	IService.Sons.IFPayWay FPayWay{ get; }
+    	IService.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
+    	IService.Sons.IFSys_Role FSys_Role{ get; }
+    	IService.Sons.IFSysUser FSysUser{ get; }
     }
     
     

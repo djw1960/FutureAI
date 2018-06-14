@@ -12,16 +12,17 @@ namespace EF.Entitys
     using System;
     using System.Collections.Generic;
     
-    public partial class InRawMaterial
+    public partial class FPayOrder
     {
-        public int ID { get; set; }
-        public string PName { get; set; }
-        public string PCode { get; set; }
-        public string PCate { get; set; }
-        public string Unit { get; set; }
-        public decimal Price { get; set; }
-        public decimal RisePrice { get; set; }
-        public decimal RiseRange { get; set; }
-        public int DateTime { get; set; }
+        public long ID { get; set; }
+        public string GNo { get; set; }
+        public int Amount { get; set; }
+        public int Status { get; set; }
+        public int IsFinish { get; set; }
+        public string PNo { get; set; }
+        public int IsDel { get; set; }
+        public System.DateTime AddDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string Remark { get; set; }
     }
 }
