@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./common/js/jquery.min.js"></script>
+    <script src="./common/js/global.js?v18012401"></script>
+    <link rel="stylesheet" type="text/css" href="./common/css/global.css?v18012401" />
+    <link rel="stylesheet" type="text/css" href="./css/index.css?v18012401" />
+    <title>收银台</title>
+</head>
+
+<body>
+    <div class="pay-head">
+        <div class="pay-wrap">
+            <div class="head-m fix">
+                <a class="head-l">
+                    <img src="./images/pay_log.png" class="pay-log" />
+                    <span class="log-val">收银台</span>
+                </a>
+                <a class="usual-ask fr">
+                    <i class="icon-ask"></i>
+                    <span>常见问题</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="pay-main">
+        <div class="pay-center">
+            <div class="center-top">
+                <div class="top-left">
+                    <span class="order-num">
+                        商品订单号：
+                    </span>
+                    <span class="num-txt">
+                    </span>
+                </div>
+                <div class="top-center">
+                    <span class="order-time">下单时间：</span>
+                    <span class="time-txt"></span>
+                </div>
+                <div class="top-right">
+                    <span class="pay-money">支付金额（元）:</span>
+                    <span class="money-txt"></span>
+                </div>
+            </div>
+            <!-- 通道选择 -->
+            <div class="asile-wrap">
+                <ul class="asile-sel"></ul>
+
+                <div class="asile-box overlay-wrapper">
+                    <ul class="asile-items"></ul>
+                    <div class="asile-bank hide">
+                        <img src="./images/rmb_bg.png" class="rmb-bg hide" />
+                        <p class="bank-tit">支持银行列表如下</p>
+
+                        <div class="tab-wrap">
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <a class="pay-btn">支 付</a>
+                <div class="bank-txt hide">
+                    <span class="bank-key">中国建设银行 </span>
+                    <span class="bank-val">由于各银行限额随时调整，具体请咨询该行客服热线 95533</span>
+                </div>
+                <img src="./images/table_sm.jpg" class="table-sm hide" />
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/art-template/template.js"></script>
+<script src="./js/art-template/template-extend.js"></script>
+<!--微信、支付宝-->
+<script id="list-app" type="text/html">
+    <div class="app-pay">
+        <div class="deposite-content fix" style="padding:50px 30px 0 10px">
+            {{if type=='alipay'}}
+            <div class="app-qrcode">
+                <img src="./images/alipay01.png" />
+            </div>
+            <div class="app-desc">
+                <img src="./images/alipay02.gif" style="margin: 0 10px 0 12px;" />
+            </div>
+            <div class="app-qrcode">
+                <img src="./images/alipay03.png" />
+            </div>
+            {{else if type=='wechat'}}
+            <div class="app-qrcode">
+                <img src="./images/wechat01.png" />
+            </div>
+            <div class="app-desc">
+                <img src="./images/wechat02.gif" style="margin: 0 10px 0 12px;" />
+            </div>
+            <div class="app-qrcode">
+                <img src="./images/wechat03.png" />
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</script>
+<script>
+    $(function () {
+        var pay = {
+            init: function () {
+                var self = this;
+                self.bindEvent();
+            },
+            ajax: null,
+            data: {
+                urls:location.protocol + '//' + location.host + '/api/paycenter',
+                billtoken: $.getParams("billtoken") || '',
+                merno: $.getParams("merno") || '',
+                scan: {
+                    loop: 1,  //循环获取
+                    loop_time: 5000,
+                    path: ''
+                },
+            },
+            bindEvent: function () {
+                var self = this;
+                if (!self.data.billtoken) {
+                    return;
+                }
+                //加载通道列表
+                self.loadAsile();
+                //tab切换
+                $(document).on("click", ".asile-sel li", function () {
+                    $(this).addClass("tab-active").siblings().removeClass("tab-active");
+                    self.showbankList($(this).attr("data-cno"), $(this).attr("data-type"));
+                });
+                // 银行切换
+                $(document).on("click", ".asile-items li", function () {
+                    if ($(this).hasClass("asile-more")) {
+                        var actIndex = $(this).index();
+                        $(this).addClass("hide").siblings().removeClass("hide");
+                        $(".asile-items li").eq(actIndex + 1).addClass("active").siblings().removeClass("active");
+                    } else {
+                        $(this).addClass("active").siblings().removeClass("active");
+                    }
+                })
+                //支付
+                $(".pay-btn").on("click", function () {
+                    self.doPay($(".tab-active").attr("data-type"));
+                })
+
+            },
+            //加载通道列表
+            loadAsile: function () {
+                var self = this;
+                var params = {
+                    no: 2001,
+                    billtoken: self.data.billtoken,   
+                    merno: self.data.merno,
+                    MediaType: 1
+                };
+                var desc = ['推荐通道', '候选通道', '备选通道'];
+                $.when(self.service(params)).done(function (data) {
+                    if (data.ok == 1 && data.code == 0) {
+                        datas = data.data;
+                        if (datas.length <= 0) {
+                            new w_layer({ message: "无通道可用！" });
+                            return;
+                        };
+                        if (data.data.length > 3) {
+                            datas = data.data.slice(0, 3);
+                        };
+                        //绑定一个默认通道号
+                        $(".pay-btn").attr("data-cno", datas[0].SignNo);
+                        //展示通道
+                        var tabHtml = '';
+                        $.each(datas, function (ind, item) {
+                            if (ind == 0) {
+                                tabHtml += '<li class="tab-active" data-cno=' + item.SignNo + ' data-type=' + item.DataType + '>' + desc[ind] + '<i class="icon-label icon-' + item.DataType + '"></i></li>';
+                            } else {
+                                tabHtml += '<li class="" data-cno=' + item.SignNo + ' data-type=' + item.DataType + '>' + desc[ind] + '<i class="icon-label icon-' + item.DataType + '"></i></li>';
+                            }
+                        });
+                        $(".asile-sel").html(tabHtml);
+                        //通道银行列表方法
+                        //
+                        self.loadOrder($(".asile-sel li.tab-active").attr("data-cno"));
+                    } else {
+                        //失败提示
+                        new w_layer({ message: data.msg });
+                        return;
+                    }
+                })
+            },
+            //加载订单详情数据
+            loadOrder: function (SignNo) {
+                var self = this;
+                var params = {
+                    no: 2010,
+                    billtoken: self.data.billtoken,
+                    MediaType: 1,
+                    SignNo:SignNo
+                    
+                };
+                $.when(self.service(params)).done(function (data) {
+                    if (data.ok == 1 && data.code == 0) {
+                        datas = data.data;
+                        //  商品订单号
+                        $(".num-txt").html(datas.BillNo);
+                        //  下单时间
+                        $(".time-txt").html(datas.AddDate);
+                        //  支付金额
+                        $(".money-txt").html(datas.Amount);
+                        //  执行加载通道方法
+                        self.showbankList($(".asile-sel li").eq(0).attr("data-cno"), $(".asile-sel li").eq(0).attr("data-type"));
+                    } else {
+                        //  失败提示
+                        new w_layer({ message: data.msg });
+                        return;
+                    };
+                });
+            },
+            //获取通道银行列表
+            showbankList: function (cno, signtype) {
+                var self = this;
+                $(".asile-items").html('');
+                var params = {
+                    no: 2002,
+                    billtoken: self.data.billtoken
+                };
+                params.SignNo = cno || $(".pay-btn").attr("data-cno");
+                if (signtype == "alipay" || signtype == 'wechat') {
+                    $(".asile-bank").html(template("list-app", { type: signtype })).removeClass("hide");
+                } else {
+                    $.when(self.service(params)).done(function (data) {
+                        if (data.ok === 1 && data.code == 0) {
+                            $(".asile-items").html('');
+                            var datas = data.data;
+                            //可选银行，不可选银行空集合
+                            var bSelList = [], bList = [];
+                            $.each(datas, function (ind, bItem) {
+                                if (bItem.IsJumpBank == 2) {
+                                    bList.push(bItem);
+                                } else if (bItem.IsJumpBank == 1) {
+                                    bSelList.push(bItem);
+                                }
+                            });
+                            //可选银行
+                            var html = '';
+                            if (bSelList.length != 0) {
+                                if (bSelList.length <= 8) {
+                                    $.each(bSelList, function (ind, item) {
+                                        if (ind == 0) {
+                                            html += '<li class="asile-item active" data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                        } else {
+                                            html += '<li class="asile-item"  data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                        }
+                                    });
+                                } else {
+                                    $.each(bSelList, function (ind, item) {
+                                        if (ind == 0) {
+                                            html += '<li class="asile-item active"  data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                        } else if (ind == 6) {
+                                            html += '<li class="asile-item"  data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                            html += '<li class="asile-item asile-more"><div class="bank-item">其他银行<i class="icon-arrow"></i></div></li>';
+                                        } else if (ind > 6) {
+                                            html += '<li class="asile-item hide"  data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                        } else {
+                                            html += '<li class="asile-item"  data-bankcode="' + item.BankCode + '"><div class="bank-item"><i class="icon-bank icon-bank-' + item.BankCode.toLowerCase() + '"></i></div></li>';
+                                        }
+                                    });
+                                }
+                                $(".asile-items").html(html);
+                            } else {
+                                //可选银行为0
+                                $(".rmb-bg").removeClass("hide");
+                            }
+                            //跳转第三方银行
+                            $(".tab-wrap td").html('');
+                            var tabHtml = '';
+
+                            if (bList.length != 0) {
+                                $(".asile-bank").removeClass("hide");
+                                tabHtml += ' <table border="0" class="tab-bank"><tbody>';
+                                var loopNum = Math.ceil(bList.length / 5);
+                                var floorNum = Math.floor(bList.length / 5);
+
+                                for (var i = 0; i < loopNum * 5; i++) {
+                                    if ((i + 1) % 5 == 1) {
+                                        if ((i + 1) <= 5 * (loopNum - 1)) {
+                                            tabHtml += '<tr class="bbr"><td class="br" style="width:169px;"></td>';
+                                        } else {
+                                            tabHtml += '<tr class=""><td class="br" style="width:169px;"></td>';
+                                        }
+                                    } else if ((i + 1) % 5 == 2 || (i + 1) % 5 == 3 || (i + 1) % 5 == 4) {
+                                        tabHtml += '<td class="br" style="width:169px;"></td>';
+                                    } else if ((i + 1) % 5 == 0) {
+                                        tabHtml += '<td style="width:169px;"></td></tr>';
+                                    }
+                                }
+                                tabHtml += '</tbody></table>';
+                                $(".tab-wrap").html(tabHtml);
+                                //依据数据展示银行
+                                $.each(bList, function (ind, blItem) {
+                                    $(".tab-wrap td").eq(ind).html('<i class="icon-bank icon-bank-' + blItem.BankCode.toLowerCase() + '"></i>');
+                                });
+                            } else {
+                                $(".asile-bank").addClass("hide");
+                            }
+                        } else {
+                            //异常提示
+                            new w_layer({ message: data.msg });
+                            return;
+                        }
+                    })
+                }
+            },
+            doPay: function (type) {
+                var self = this;
+                var params = {
+                    billtoken: self.data.billtoken,
+                    signno: $(".tab-active").attr("data-cno")
+                };
+                if (type == "alipay" || type == "wechat") {
+                    params.no = 2007;
+                } else if (type == "kjpay") {
+                    params.no = 2004;
+                    params.bankcode = $(".asile-items .active").attr("data-bankcode");
+                } else {
+                    params.no = 2003;
+                    params.bankcode = $(".asile-items .active").attr("data-bankcode");
+                }
+
+                $.when(self.service(params)).done(function (data) {
+                    if (data.ok == 1 && data.code == 0) {
+                        if (data.data && data.data.length != 0) {
+                            switch (data.data.Type) {
+                                case 1:
+                                    window.location.href = data.data.Url;
+                                    break;
+                                case 2:
+                                    var form = $('<div>' + data.data.FormStr + '</div>');
+                                    form = form.find("form");
+                                    form.appendTo("body").css('display', 'none').submit();
+                                    form.remove();
+                                    break;
+                                case 3:
+                                    //更新二维码和提交数据
+                                    self.data.scan = $.extend(true, self.data.scan, {
+                                        loop: 1,
+                                        path: data.data.Url
+                                    });
+                                    self.pay_qrcode();
+                                    break;
+                                case 4:
+                                    console.log("转api快捷");
+                                    break;
+                            }
+                        } else {
+                            new w_layer({ message: '支付遇到问题，请刷新重试！'});
+                        }
+                    } else {
+                        //异常提示
+                        self.data.scan = $.extend(true, self.data.scan, {
+                            loop: 0,
+                            path: ''
+                        });
+                        new w_layer({ message: data.msg || '获取二维码失败！' });
+                        return;
+                    }
+                })
+            },
+            pay_qrcode: function () {
+                //显示二维码支付
+                var self = this;
+                var modal = new w_layer({
+                    message: '<div class="qrcode"><img class="qrcode-img" src="' + '/paycenter' + self.data.scan.path + '"/></div><label><i class="icon-hands"></i></label><p>请扫描二维码支付</p>',
+                    close: true, //关闭按钮是否显示，默认显示
+                    btn_show: false, //按钮是否显示，默认显示
+                    cssClass: 'modal-qrcode',
+                    closeCb: function () {
+                        self.data.scan.loop = 0;  //关闭循环
+                    }
+                });
+                self.getScanPayStatus(function () {
+                    $("body").find(".w-layer-close").triggerHandler("click");
+                    //成功付款后关闭弹窗
+                    new w_layer({
+                        message: '<p style="padding-bottom:26px;"><i class="icon-pay-succ"></i>恭喜您支付成功！</p>',
+                        title: '完成支付',
+                        cssClass: 'modal-online pay-success',
+                        type: 'confirm',
+                        button: ['查看订单', '继续购买'],
+                        success: function () {
+                            //我的订单：http://www.xaxzsm.top/shopp/ucenter.php
+                            window.location.href = 'http://www.xaxzsm.top/shopp/ucenter.php';
+                        },
+                        cancel: function () {
+                            //继续存款：http://www.xaxzsm.top/shopp/goods.php
+                            window.location.href = 'http://www.xaxzsm.top/shopp/goods.php';
+                        }
+                    });
+                });
+            },
+            getScanPayStatus: function (cb) {
+
+                //获取支付二维码状态
+                var self = this;
+                var params = {
+                    no: 2008,
+                    billtoken: self.data.billtoken
+                };
+                var run = function () {
+                    if (!self.data.scan.loop) return;
+                    $.when(self.service(params)).done(function (data) {
+                        if (data.ok == 1 && data.code == 0) {
+                            cb && cb();
+                        } else {
+                            setTimeout(run, self.data.scan.loop_time);
+                        }
+                    });
+                }
+                run();
+            },
+            service: function (params) {
+                return this.ajax = $.ajaxF({
+                    async: false,
+                    url: this.data.urls,
+                    data: params,
+                    loading: ".asile-box"
+                });
+            }
+        }
+        //执行初始化方法
+        pay.init();
+
+    })
+</script>
+
+</html>

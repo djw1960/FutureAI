@@ -1,0 +1,397 @@
+html,body{
+  width: 100%;
+  background: #fff;
+}
+.perHeader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 19;
+  width: 100%;
+  height: 0.83rem;
+  line-height: 0.83rem;
+  font-size: 0.3rem;
+  color: #fff;
+  text-align: center;
+  background: #d6a41f;
+}
+.sendBack{
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 0.14rem;
+  height: 0.24rem;
+  padding: 0.3rem 0.36rem;
+  background:url("../images/pay/btn-back.png") no-repeat 0.36rem 0.3rem;
+  background-size: 0.14rem 0.24rem;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -o-box-sizing: content-box;
+  box-sizing: content-box;
+}
+#cont-wrap{
+  position: absolute;
+  top: 0.83rem;
+  left: 0;
+  width: 100%;
+}
+.top-cont{
+  display: block;
+  width: 89.6%;
+  padding: 1.04rem 0 0;
+  font-size: 0.26rem;
+  color: #999;
+  text-align: center;
+  margin: auto;
+}
+.dui{
+  min-height: .42rem;
+  line-height: 0.42rem;
+  font-size: 0;
+}
+.dui span{
+  line-height: 0.42rem;
+  word-wrap: break-word;
+}
+
+.money-num{
+  display: block;
+  color: #f74117;
+  height: .72rem;
+  line-height: 0.72rem;
+  font-size: 0.72rem;
+  padding-bottom: 0.24rem;
+}
+.money-num .rmb{
+  font-size: .36rem;
+  line-height: .72rem;
+}
+.order-key,.time-key{
+  display: inline-block;
+  vertical-align: top;
+  width: 39.29%;
+  text-align: right;
+  font-size: 0.26rem;
+}
+.order-val,.time-val{
+  display: inline-block;
+  vertical-align: top;
+  width: 60.71%;
+  text-align: left;
+  font-size: 0.26rem;
+}
+.asile-lists{
+  display: block;
+  width: 89.33%;
+  margin: 1.04rem auto 0;
+}
+.asile-lists li{
+  position: relative;
+  display: block;
+  height: 0.9rem;
+  line-height: .9rem;
+  font-size: 0.3rem;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  margin:0 auto 0.19rem;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  cursor:pointer;
+}
+.asile-lists li.active{
+  border-color: #e1c087;
+  color: #c9a45f;
+}
+.asile-lists li:active{
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.icon-label{
+  position: absolute;
+  top: -0.04rem;
+  left: -0.04rem;
+  width: 0.88rem;
+  height: 0.80rem;
+  background: url(../images/pay/icon-online.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-kjpay{
+  background: url(../images/pay/icon-kjpay.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-wechat{
+  background: url(../images/pay/icon-wechat.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-alipay{
+  background: url(../images/pay/icon-alipay.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.active::before{
+  position: absolute;
+  content: "";
+  bottom: 0;
+  right: 0;
+  width: 0.48rem;
+  height: 0.49rem;
+  background: url('../images/pay/icon_dui.png') no-repeat 0 0;
+  background-size: 100% 100%;
+}
+.btn-pay{
+  display: block;
+  width: 89.6%;
+  height: 1.04rem;
+  line-height: 1.04rem;
+  text-align: center;
+  color: #60430d;
+  font-size: 0.32rem;
+  margin: 1.83rem auto 0; 
+  background: #fbe2b6;
+  background: -webkit-linear-gradient(left,#fbe2b6,#e8ca96);
+  background: -moz-linear-gradient(left,#fbe2b6,#e8ca96);
+  background: -o-linear-gradient(left,#fbe2b6,#e8ca96);
+  background: linear-gradient(left,#fbe2b6,#e8ca96);
+  filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fbe2b6,endcolorstr=#e8ca96,gradientType=1);
+  -webkit-border-radius: 0.05rem;
+  -moz-border-radius: 0.05rem;
+  border-radius: 0.05rem;
+}
+.btn-pay:active{
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.ask-wrap{
+  display:block;
+  width: 89.6%;
+  height: 0.22rem;
+  line-height: 0.22rem;
+  padding: 0.14rem 0;
+  margin: auto;
+}
+.ask-dui{
+  display:inline-block;
+  font-size: 0;
+
+}
+.icon_ask{
+  display: inline-block;
+  vertical-align: top;
+  width: 0.22rem;
+  height: 0.22rem;
+  margin-right: 0.04rem;
+  background: url(../images/pay/icon_ask_01.png) no-repeat 0 0;
+  background-size: 100% 100%;
+}
+.ask-txt{
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  color: #727272;
+  font-size: 0.22rem;
+  line-height: 0.22rem;
+}
+.cover{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 19;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+/* 选择付款银行卡 */
+.bank-wrap{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 100%;
+  height: 5rem;
+  background: #fff;
+}
+.bank-cont{
+  padding: 0 0.3rem;
+}
+.bank-tit{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1.04rem;
+  line-height: 1.04rem;
+  color: #515151;
+  text-align: center;
+  border-bottom: 1px solid #e9e9e9;
+}
+.icon-close{
+  position: absolute;
+  left: 0.16rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 0.34rem;
+  height: 0.34rem;
+  background: url(../images/pay/icon_close.png) no-repeat 0 0;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+.bank-lists{
+  display: block;
+  height: 4rem;
+  overflow-y: scroll;
+}
+.bank-lists .bank-item{
+  position: relative;
+  display: table;
+  width:100%;
+  height: 1rem;
+  border-bottom: 1px solid #e9e9e9;
+}
+.bank-lists li .part-item{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0;
+}
+.rbot{
+  font-size: .22rem;
+  color: #999;
+}
+.icon-left{
+  width: 0.66rem;
+}
+.right{
+  width: 3.88rem;
+  padding-left: 0.12rem;
+}
+.icon-bank{
+  display: inline-block;
+  vertical-align: top;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: url(../images/pay/ban-NBBC.png) no-repeat 0 0;
+  background-size: 100% 100%;
+}
+.icon-bank{
+  margin: 0 0.08rem;
+}
+.bank-lists li .right{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  margin-left: 0.18rem;
+}
+.icon-right{
+  position: absolute;
+  right: 0.4rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: inline-block;
+  width: 0.17rem;
+  height: 0.27rem;
+  background: url(../images/pay/icon_right.png) no-repeat 0 0;
+  background-size: 100% 100%;
+}
+/* 银行卡 */
+.icon-cmb{
+  background: url(../images/pay/bank-CMB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-abc{
+  background: url(../images/pay/bank-ABC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-boc{
+  background: url(../images/pay/bank-BOC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-bocom{
+  background: url(../images/pay/bank-BOCOM.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-bohc{
+  background: url(../images/pay/bank-BOHC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-bos{
+  background: url(../images/pay/bank-BOS.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.icon-ccb{
+  background: url(../images/pay/bank-CCB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-ceb{
+  background: url(../images/pay/bank-CEB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-gdb{
+  background: url(../images/pay/bank-GDB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-cib{
+  background: url(../images/pay/bank-CIB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-cmbc{
+  background: url(../images/pay/bank-CMBC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-cncb{
+  background: url(../images/pay/bank-CNCB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-egbank{
+  background: url(../images/pay/bank-EGBANK.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-hxb{
+  background: url(../images/pay/bank-HXB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-icbc{
+  background: url(../images/pay/bank-ICBC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-njbc{
+  background: url(../images/pay/bank-NJBC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-pab{
+  background: url(../images/pay/bank-PAB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-psbc{
+  background: url(../images/pay/bank-PSBC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-scb{
+  background: url(../images/pay/bank-SCB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-spdb{
+  background: url(../images/pay/bank-SPDB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-wzcb{
+  background: url(../images/pay/bank-WZCB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-zsbc{
+  background: url(../images/pay/bank-ZSBC.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+.icon-bccb{
+  background: url(../images/pay/bank-BCCB.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+
+

@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./common/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="./css/index.css?v18012402" />
+    <script src="./common/js/jquery3.3.min.js"></script>
+    <script src="./common/js/common.js?v18012402"></script>
+    <script src="./common/js/global.js?v18012402"></script>
+    <title>收银台</title>
+</head>
+
+<body>
+    <header class="perHeader hide">
+        <a class="sendBack" href="javascript:;"></a>
+        <label>账户总览</label>
+        <a class="perMenu"></a>
+    </header>
+    <div id="cont-wrap">
+        <div class="top-cont">
+            <div class="money-num">
+                <span></span>
+            </div>
+            <div class="order-dui dui">
+                <span class="order-key">商品订单号：</span>
+                <span class="order-val"></span>
+            </div>
+            <div class="time-dui dui">
+                <span class="time-key">下单时间：</span>
+                <span class="time-val"></span>
+            </div>
+        </div>
+        <ul class="asile-lists"></ul>
+        <a class="btn-pay data-hide">支付</a>
+        <div class="ask-wrap fix">
+            <a class="ask-dui fr">
+                <i class="icon_ask"></i>
+                <span class="ask-txt">常见问题</span>
+            </a>
+        </div>
+    </div>
+    <div class="cover">
+
+    </div>
+    <div class="bank-wrap">
+        <div class="bank-cont hide">
+            <div class="bank-tit">
+                <i class="icon-close"></i>
+                选择付款银行卡
+            </div>
+            <ul class="bank-lists">
+                <li class="add-card bank-item hide">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-cmb"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="add-btn">添加银行卡付款</div>
+                        <i class="icon-right"></i>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+                <li class="bank-item">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-cmb"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="rtop">
+                            <span class="bank-name">招商银行</span> (尾号
+                            <span class="bank-wh">4208</span>)
+                        </div>
+                        <div class="rbot">单笔限额5万元，当日限额5万元</div>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+                <li class="bank-item">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-cmb"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="rtop">
+                            <span class="bank-name">招商银行</span> (尾号
+                            <span class="bank-wh">4208</span>)
+                        </div>
+                        <div class="rbot">单笔限额5万元，当日限额5万元</div>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+                <li class="bank-item">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-cmb"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="rtop">
+                            <span class="bank-name">招商银行</span> (尾号
+                            <span class="bank-wh">4208</span>)
+                        </div>
+                        <div class="rbot">单笔限额5万元，当日限额5万元</div>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+                <li class="bank-item">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-cmb"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="rtop">
+                            <span class="bank-name">招商银行</span> (尾号
+                            <span class="bank-wh">4208</span>)
+                        </div>
+                        <div class="rbot">单笔限额5万元，当日限额5万元</div>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+<script src="js/art-template/template.js"></script>
+<script src="js/art-template/template-extend.js"></script>
+<script id="testArt" type="text/html">
+    {{if list&&list.length!=0}}
+    <div class="bank-cont">
+        <div class="bank-tit">
+            <i class="icon-close"></i>
+            选择付款银行卡
+        </div>
+        <ul class="bank-lists">
+            <li class="add-card bank-item hide">
+                <div class="icon-left part-item">
+                    <i class="icon-bank icon-cmb"></i>
+                </div>
+                <div class="right part-item">
+                    <div class="add-btn">添加银行卡付款</div>
+                    <i class="icon-right"></i>
+                </div>
+                <div class="part-item"></div>
+            </li>
+            {{each list as item i}}
+                <li class="bank-item" data-id="{{item.ID}}" data-signno="{{item.SignNo}}" data-bankcode="{{item.BankCode}}">
+                    <div class="icon-left part-item">
+                        <i class="icon-bank icon-{{item.BankCode.toLowerCase()}}"></i>
+                    </div>
+                    <div class="right part-item">
+                        <div class="rtop">
+                            <span class="bank-name">{{item.BankName}}</span> 
+                            <span class="bank-wh hide">(尾号4208)</span>
+                        </div>
+                        <div class="rbot">单笔限额{{item.OnceLimit/10000}}万元，当日限额{{item.DayLimit/10000}}万元</div>
+                    </div>
+                    <div class="part-item"></div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+</script>
+<script>
+    $(function () {
+        var pay = {
+            data: {
+                billtoken: $.getParams("billtoken") || '',
+                urls:location.protocol + '//' + location.host + '/api/paycenter',
+                merno: $.getParams("merno"),
+                scan: {
+                    loop: 1,  //循环获取
+                    loop_time: 5000,
+                    path: ''
+                },
+            },
+
+            init: function () {
+                var self = this;
+                self.bindEvent();
+            },
+            ajax: null,
+            bindEvent: function () {
+                var self = this;
+                if (!self.data.billtoken) {
+                    $.toast("没有账单号！");
+                    $(".top-cont").html("账单数据为空")
+                    return;
+                };
+                //加在通道列表
+                self.loadAsile();
+                $(document).on("click", ".asile-lists .asile-item", function () {
+                    $(this).addClass("active").siblings().removeClass("active");
+                });
+                $(".btn-pay").on("click", function () {
+                    if ($(this).hasClass("data-hide")) {
+                        //执行支付方法
+                        self.doPay($(".asile-lists li.active").attr("data-no"), $(".asile-lists li.active").attr("data-type"));
+                    } else {
+                        $(".cover").show();
+                        $(".bank-wrap").slideDown();
+                    }
+                });
+                //选择银行，快捷,网银支付
+                $(document).on("click",".bank-lists .bank-item",function(){
+                    //关闭底部弹窗
+                    $(".cover,.bank-wrap").hide();
+                    //支付
+                    self.doPay($(this).attr("data-signno"),$(".asile-lists li.active").attr("data-type"),$(this).attr("data-bankcode"));
+                })
+                //底部弹窗
+                $(document).on("click", ".icon-close", function () {
+                    $(".cover,.bank-wrap").hide();
+                });
+            },
+            //加载通道列表
+            loadAsile: function () {
+                var self = this;
+                var params = {
+                    no: 2021,
+                    billtoken: self.data.billtoken,
+                    merno: self.data.merno,
+                    MediaType: 2
+                };
+                $.ajaxF({
+                    url: self.data.urls,
+                    data: params,
+                    success: function (data) {
+                        var datas = data.data;
+                        if (datas && datas.length != 0) {
+                            //置空通道列表
+                            $(".asile-lists").html('');
+                            var tabHtml = "";
+                            var desc = ["推荐通道", "候选通道", "备选通道"];
+                            $.each(datas, function (ind, item) {
+                                if (ind == 0) {
+                                    tabHtml += '<li class="asile-item active" data-no="' + item.SignNo + '" data-type="' + item.DataType + '">' + desc[ind] + '<i class="icon-label icon-' + item.DataType + '"></i></li>';
+                                } else {
+                                    tabHtml += '<li class="asile-item" data-no="' + item.SignNo + '" data-type="' + item.DataType + '">' + desc[ind] + '<i class="icon-label icon-' + item.DataType + '"></i></li>';
+                                }
+                            });
+                            $(".asile-lists").html(tabHtml);
+                        }
+                        //加载订单
+                        self.loadOrder($(".asile-lists li.active").attr("data-no"));
+                    },
+                    fail: function (data) {
+                        $.toast(data.mag);
+                        return;
+                    }
+                })
+            },
+            //加载订单信息
+            loadOrder: function (SignNo) {
+                var self = this;
+                var params = {
+                    no: 2010,
+                    billtoken: self.data.billtoken,
+                    SignNo:SignNo,
+                    MediaType: 2
+                };
+                $.ajaxF({
+                    url: this.data.urls,
+                    data: params,
+                    loading: "body",
+                    success: function (data) {
+                        var datas = data.data;
+                        //金额
+                        $(".money-num span").html(datas.Amount + '<em class="rmb">&nbsp;元</em>');
+                        //订单号
+                        $(".order-val").html(datas.BillNo);
+                        //订单日期
+                        $(".time-val").html(datas.AddDate);
+                        //执行加载通道银行方法
+                        var actType=$(".asile-lists li.active").attr("data-type");
+                        if(actType!="wechat"&&actType!="alipay"){
+                            self.loadBankList($(".asile-lists li.active").attr("data-no"));
+                        }
+                    },
+                    fail: function (data) {
+                        $.toast(data.msg);
+                        $(".top-cont").html("账单数据为空");
+                        return;
+                    }
+                });
+            },
+            //加载通道银行
+            loadBankList: function (signno) {
+                var self = this;
+                var params = {
+                    billtoken: self.data.billtoken,
+                    signno: signno,
+                    no: 2022
+                };
+                $.when(self.service(params)).done(function (data) {
+                    if (data.ok == 1 && data.code == 0) {
+                        var dataJumpArr = [],//跳转第三方 2
+                            dataNotArr = [];//选择银行卡 1
+                        $.each(data.data, function (ind, item) {
+                            if (item.IsJumpBank == 1) {
+                                dataNotArr.push(item);
+                            } else if(item.IsJumpBank == 2) {
+                                dataJumpArr.push(item);
+                            }
+                        })
+                        if (dataJumpArr.length !== 0) {
+                            $(".btn-pay").addClass("data-hide");
+                        } else {
+                            $(".btn-pay").removeClass("data-hide");
+                        };
+                        var dbHtml = template("testArt", { list: dataNotArr});
+                        $(".bank-wrap").html(dbHtml);
+                    } else {
+                        //异常提示
+                        $.toast(data.msg);
+                        return;
+                    }
+                })
+            },
+            //支付
+            doPay: function (signno, type,bankcode) {
+                var self = this;
+                //接口号
+                noObj = {
+                    online: 2023,
+                    kjpay: 2024,
+                    wechat: 2027,
+                    alipay: 2027
+                };
+                //参数
+                var params = {
+                    billtoken: self.data.billtoken,
+                    signno: signno,
+                    no: noObj[type]
+                };
+                if (type == 'kjpay'||type == 'online') {
+                    params.bankcode = bankcode||'';
+                } 
+                
+                $.when(self.service(params)).done(function (data) {
+                    if (data.ok == 1 && data.code == 0) {
+                        if (data.data && data.data.length != 0) {
+                            switch (data.data.Type) {
+                                case 1:
+                                    window.location.href = data.data.Url;
+                                    break;
+                                case 2:
+                                    var form = $('<div>' + data.data.FormStr + '</div>');
+                                    form = form.find("form");
+                                    form.appendTo("body").css('display', 'none').submit();
+                                    form.remove();
+                                    break;
+                                case 3:
+                                    //扫码支付，返回Url，客户端依据返回生成二维码
+                                    break;
+                                case 4:
+                                    //调用下个接口发短信
+                                    console.log("转api快捷");
+                                    break;
+                            }
+                        } else {
+                            $.toast("支付遇到问题，请刷新重试！");
+                            return;
+                        }
+                    } else {
+                        //异常提示
+                        $.toast(data.msg);
+                        return;
+                    }
+                })
+            },
+            service: function (params) {
+                return this.ajax = $.ajaxF({
+                    async: false,
+                    url: this.data.urls,
+                    data: params,
+                    loading: "body"
+                });
+            }
+        };
+        pay.init();
+    })
+</script>
+
+</html>

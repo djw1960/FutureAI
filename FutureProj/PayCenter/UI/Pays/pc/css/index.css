@@ -1,0 +1,667 @@
+
+html,body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ececec;
+}
+.pay-head{
+  width: 100%;
+  min-width: 1200px;
+  height: 95px;
+  background: #fff;
+  box-shadow: 0 10 10px #d9d9d9;
+}
+.pay-wrap{
+  width: 1200px;
+  margin: auto;
+}
+.head-m{
+  width: 980px;
+  /* background: #f00; */
+  margin: auto;
+}
+.pay-log{
+  display: inline-block;
+  vertical-align: top;
+}
+.head-l{
+  display: inline-block;
+  vertical-align: top;
+  
+}
+.head-l img{
+  display: inline-block;
+  vertical-align: top;
+  width: 54px;
+  padding-top: 24px;
+  padding-right: 15px;
+  padding-left: 3px;
+}
+.log-val{
+  display: inline-block;
+  vertical-align: top;
+  font-size: 26px;
+  margin: 26px auto 29px;
+  padding: 0 16px;
+  line-height: 40px;
+  border-left: 1px solid #e8e8e8;
+}
+.usual-ask{
+  display: inline-block;
+  vertical-align: top;
+  height: 22px;
+  margin: 26px auto 29px;
+  padding-top: 14px;
+  
+}
+.icon-ask{
+  display: inline-block;
+  vertical-align: top;
+  width: 22px;
+  height: 22px;
+  background: url(../images/icon_ask.png) no-repeat center center;
+}
+.pay-main{
+  width: 100%;
+  min-width: 1200px;
+  margin: 46px auto 0;
+  padding-bottom: 130px;
+}
+.pay-center{
+  position: relative;
+  width: 980px;
+  /* min-height: 912px; */
+  padding-bottom: 38px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  margin: auto;
+}
+.center-top{
+  height: 60px;
+  line-height: 60px;
+  background:#fee7be;
+  background:-webkit-linear-gradient(top,#fee7be,#eed19e);
+  background:-moz-linear-gradient(top,#fee7be,#eed19e);
+  background:-ms-linear-gradient(top,#fee7be,#eed19e);
+  background:-o-linear-gradient(top,#fee7be,#eed19e);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fee7be', endColorstr='#eed19e',GradientType=0 );
+}
+.top-left{
+  display: inline-block;
+  vertical-align: top;
+  /* width: 300px; */
+  margin-right: 20px;
+  font-size: 0;
+}
+.order-num{
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 60px;
+  color: #4a3e29;
+  padding-left: 28px;
+}
+.num-txt{
+  display: inline-block;
+  vertical-align: top;
+  min-width: 180px;
+  font-size: 16px;
+}
+.top-center{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 44px;
+}
+.time-txt{
+  display: inline-block;
+  vertical-align: top;
+  width: 180px;
+  font-size: 16px;
+}
+.top-right{
+  display: inline-block;
+  vertical-align: top;
+}
+.pay-money{
+  display: inline-block;
+  vertical-align: top;
+}
+.money-txt{
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  color: #e9211c;
+}
+.asile-wrap{
+  position: relative;
+  display: block;
+  width: 924px;
+  margin: 20px auto 0;
+}
+.asile-sel{
+  display: block;
+  font-size: 0;
+}
+.asile-sel li{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 143px;
+  height: 45px;
+  margin-right: 8px;
+  line-height: 45px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-transition: all linear .3s;
+  -moz-transition: all linear .3s;
+  -o-transition: all linear .3s;
+  transition: all linear .3s;
+  cursor: pointer;
+}
+.tab-active{
+  font-weight: bold;
+  background: -webkit-linear-gradient(left,#f6dcac,#faeacc);
+  background: -moz-linear-gradient(left,#f6dcac,#faeacc);
+  background: -o-linear-gradient(left,#f6dcac,#faeacc);
+  background: linear-gradient(left,#f6dcac,#faeacc);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6dcac', endColorstr='#faeacc',GradientType=1 );
+  
+}
+.asile-item:hover{
+  border:2px solid #cdad73;
+}
+.asile-items .active{
+  border:2px solid #cdad73;
+}
+.asile-items .active::after{
+  position: absolute;
+  content: '';
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 23px;
+  background: url(../images/icon_right.png) no-repeat center center;
+}
+.label-kj{
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 45px;
+}
+.label-wy{
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 44px;
+}
+.asile-box{
+  position: relative;
+  display: block;
+  padding: 13px 4px 110px;
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+}
+.asile-items{
+  display: table;
+  width: 100%;
+}
+.asile-items .active{
+  border-color: #cdad73;
+}
+.asile-items .active::after{
+  position: absolute;
+  content: '';
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 23px;
+  background: url(../images/icon_right.png) no-repeat center center;
+}
+.asile-item{
+  position: relative;
+  display: inline-table;
+  vertical-align: middle;
+  width: 210px;
+  height: 70px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  font-size: 0;
+  margin: 14px 9px 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.asile-more{
+  position: relative;
+  display: inline-table;
+  vertical-align: bottom;
+  font-size: 16px;
+}
+.asile-more .icon-arrow{
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 16px;
+  border: 6px solid transparent;
+  border-top: 6px solid #a1a1a1;
+}
+.bank-item{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 16px;
+  color: #292929;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.pay-btn{
+  display: block;
+  width: 300px;
+  line-height: 50px;
+  text-align: center;
+  color: #60430d;
+  font-size: 22px;
+  margin: 50px auto 0;
+  background: #fde7bf;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all linear .3s;
+  -moz-transition: all linear .3s;
+  -o-transition: all linear .3s;
+  transition: all linear .3s;
+  cursor: pointer;
+}
+.pay-btn:hover,.pay-btn:active{
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.bank-txt{
+  width: 926px;
+  font-size: 14px;
+  height: 34px;
+  margin: 55px auto 0;
+}
+.bank-key{
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 15px;
+  line-height: 24px;
+  background: #f9e2b9;
+}
+.bank-val{
+  display: inline-block;
+  vertical-align: top;
+  height: 34px;
+  line-height: 34px;
+}
+.table-sm{
+  display: block;
+  width: 926px;
+  margin: 6px auto 0;
+}
+/* 跳转到银行 */
+.rmb-bg{
+  display: block;
+  width: 304px;
+  margin: auto;
+  padding: 24px 0 0;
+}
+.bank-tit{
+  font-size: 16px;
+  color: #333;
+  width: 850px;
+  padding-top: 50px;
+  padding-bottom: 12px;
+  margin: auto;
+  text-indent: 8px;
+}
+.tab-wrap{
+  width: 850px;
+  border: 1px solid #eee;
+  margin: auto;
+}
+.tab-bank{
+  font-size: 14px;
+}
+.bbr{
+  border-bottom: 1px solid #eee;
+}
+.br{
+  border-right: 1px solid #eee;
+}
+.tab-bank tr{
+  height: 62px;
+}
+.testd{
+  border: 1px solid #eee;
+  display: table;
+  width: 850px;
+  
+}
+.testd li{
+  display: inline-table;
+  vertical-align: middle;
+  text-align: center;
+  width: 210px;
+  height: 62px;
+}
+.testd li div{
+  display: table-cell;
+  vertical-align: middle;
+}
+/*支付宝*/
+.deposite-content{
+  text-align: center;
+}
+.app-qrcode{
+  display: inline-block;
+  vertical-align: top;
+}
+.app-qrcode img{
+  display: block;
+}
+.app-desc{
+  display: inline-block;
+  vertical-align: top;
+}
+.app-desc img{
+  display: block;
+}
+.app-qrcode{
+  display:inline-block;
+  vertical-align: top;
+}
+.app-qrcode img{
+  display: block;
+}
+/*支付*/
+.pay-success .w-layer-btn .btn-success{
+  background: #fff;
+  color: #cc9b32;
+  border: 1px solid #cc9b32;
+}
+.pay-success .w-layer-btn .btn-cancel {
+  background: #cc9b32;
+  color: #fff;
+  border-color: #cc9b32;
+}
+.pay-success .icon-pay-succ{
+  display: inline-block;
+  vertical-align: top;
+  width: 24px;
+  height: 24px;
+  background: url(../images/icon_pay_suc.jpg) no-repeat center center;
+}
+.qrcode-img{
+  display: block;
+  width: 247px;
+  height: 247px;
+  margin: auto;
+}
+/*通道图标*/
+.icon-label{
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 44px;
+  height: 40px;
+}
+.icon-kjpay{
+  background: url(../images/icon-pay-type.png) no-repeat 0 0;
+  background-size: 176px 40px;
+}
+.icon-online{
+  background: url(../images/icon-pay-type.png) no-repeat -44px 0;
+  background-size: 176px 40px;
+}
+.icon-wechat{
+  background: url(../images/icon-pay-type.png) no-repeat -88px 0;
+  background-size: 176px 40px;
+}
+.icon-alipay{
+  background: url(../images/icon-pay-type.png) no-repeat -132px 0;
+  background-size: 176px 40px;
+}
+/*银行图标*/
+.icon-bank {
+  width: 142px;
+  height: 40px;
+  background: url(../images/icon-banks.jpg);
+  display: inline-block;
+}
+
+.icon-bank-wzcb {
+  background-position: 0 -40px;
+}
+
+.icon-bank-zsbc {
+  background-position: 0 -520px;
+}
+
+.icon-bank-abc {
+  background-position: 0 -80px;
+}
+
+.icon-bank-bccb {
+  background-position: 0 -120px;
+}
+
+.icon-bank-boc {
+  background-position: 0 -160px;
+}
+
+.icon-bank-bocom {
+  background-position: 0 -200px;
+}
+
+.icon-bank-bohc {
+  background-position: 0 -240px;
+}
+
+.icon-bank-bos {
+  background-position: 0 -280px;
+}
+
+.icon-bank-ccb {
+  background-position: 0 -320px;
+}
+
+.icon-bank-ceb {
+  background-position: 0 -360px;
+}
+
+.icon-bank-gdb {
+  background-position: 0 -400px;
+}
+
+.icon-bank-cib {
+  background-position: 0 -440px;
+}
+
+.icon-bank-cmb {
+  background-position: 0 -480px;
+}
+
+.icon-bank-cmbc {
+  background-position: 0 0;
+}
+
+.icon-bank-cncb {
+  background-position: 0 -560px;
+}
+
+.icon-bank-egbank {
+  background-position: 0 -600px;
+}
+
+.icon-bank-gzcb {
+  background-position: 0 -640px;
+}
+
+.icon-bank-hccb {
+  background-position: 0 -680px;
+}
+
+.icon-bank-hxb {
+  background-position: 0 -720px;
+}
+
+.icon-bank-icbc {
+  background-position: 0 -760px;
+}
+
+.icon-bank-nbbc {
+  background-position: 0 -800px;
+}
+
+.icon-bank-njbc {
+  background-position: 0 -840px;
+}
+
+.icon-bank-pab {
+  background-position: 0 -880px;
+}
+
+.icon-bank-psbc {
+  background-position: 0 -920px;
+}
+
+.icon-bank-scb {
+  background-position: 0 -960px;
+}
+
+.icon-bank-spdb {
+  background-position: 0 -1000px;
+}
+
+.icon-bank-s {
+  background: url(/images/icon-banks-s.png);
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin: 0 8px 0 28px;
+}
+
+.icon-bank-s-cncb {
+  background-position: 0 -40px;
+}
+
+.icon-bank-s-egbank {
+  background-position: 0 -520px;
+}
+
+.icon-bank-s-gzcb {
+  background-position: 0 -80px;
+}
+
+.icon-bank-s-hccb {
+  background-position: 0 -120px;
+}
+
+.icon-bank-s-hxb {
+  background-position: 0 -160px;
+}
+
+.icon-bank-s-icbc {
+  background-position: 0 -200px;
+}
+
+.icon-bank-s-njbc {
+  background-position: 0 -240px;
+}
+
+.icon-bank-s-pab {
+  background-position: 0 -280px;
+}
+
+.icon-bank-s-psbc {
+  background-position: 0 -320px;
+}
+
+.icon-bank-s-scb {
+  background-position: 0 -360px;
+}
+
+.icon-bank-s-spdb {
+  background-position: 0 -400px;
+}
+
+.icon-bank-s-wzcb {
+  background-position: 0 -440px;
+}
+
+.icon-bank-s-zsbc {
+  background-position: 0 -480px;
+}
+
+.icon-bank-s-bccb {
+  background-position: 0 0;
+}
+
+.icon-bank-s-nbbc {
+  background-position: 0 -560px;
+}
+
+.icon-bank-s-abc {
+  background-position: 0 -600px;
+}
+
+.icon-bank-s-boc {
+  background-position: 0 -640px;
+}
+
+.icon-bank-s-bocom {
+  background-position: 0 -680px;
+}
+
+.icon-bank-s-bohc {
+  background-position: 0 -720px;
+}
+
+.icon-bank-s-bos {
+  background-position: 0 -760px;
+}
+
+.icon-bank-s-ccb {
+  background-position: 0 -800px;
+}
+
+.icon-bank-s-ceb {
+  background-position: 0 -840px;
+}
+
+.icon-bank-s-gdb {
+  background-position: 0 -880px;
+}
+
+.icon-bank-s-cib {
+  background-position: 0 -920px;
+}
+
+.icon-bank-s-cmb {
+  background-position: 0 -960px;
+}
+
+.icon-bank-s-cmbc {
+  background-position: 0 -1000px;
+}
+
+.icon-bank-other {
+  background-position: 0 -1049px;
+}

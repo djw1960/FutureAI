@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PayServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NewsType" Type="int" Nullable="false" />
+          <Property Name="NewsRes" Type="int" Nullable="false" />
+          <Property Name="NSource" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewsUrl" Type="varchar" MaxLength="200" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FRepository">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exchange" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reps" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="YTDSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TDSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Change" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InRawMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PCate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RisePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RiseRange" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DateTime" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PayServiceModelStoreContainer">
+          <EntitySet Name="FNews" EntityType="Self.FNews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FRepository" EntityType="Self.FRepository" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InRawMaterial" EntityType="Self.InRawMaterial" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PayServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
+          <EntitySet Name="FRepository" EntityType="PayServiceModel.FRepository" />
+          <EntitySet Name="InRawMaterial" EntityType="PayServiceModel.InRawMaterial" />
+        </EntityContainer>
+        <EntityType Name="FNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NewsType" Type="Int32" Nullable="false" />
+          <Property Name="NewsRes" Type="Int32" Nullable="false" />
+          <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FRepository">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exchange" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reps" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="YTDSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TDSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Change" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="InRawMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PCate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RisePrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RiseRange" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DateTime" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PayServiceModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="FNews">
+            <EntityTypeMapping TypeName="PayServiceModel.FNews">
+              <MappingFragment StoreEntitySet="FNews">
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="NewsUrl" ColumnName="NewsUrl" />
+                <ScalarProperty Name="NSource" ColumnName="NSource" />
+                <ScalarProperty Name="NewsRes" ColumnName="NewsRes" />
+                <ScalarProperty Name="NewsType" ColumnName="NewsType" />
+                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FRepository">
+            <EntityTypeMapping TypeName="PayServiceModel.FRepository">
+              <MappingFragment StoreEntitySet="FRepository">
+                <ScalarProperty Name="DTime" ColumnName="DTime" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="TDSum" ColumnName="TDSum" />
+                <ScalarProperty Name="YTDSum" ColumnName="YTDSum" />
+                <ScalarProperty Name="Reps" ColumnName="Reps" />
+                <ScalarProperty Name="CateName" ColumnName="CateName" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InRawMaterial">
+            <EntityTypeMapping TypeName="PayServiceModel.InRawMaterial">
+              <MappingFragment StoreEntitySet="InRawMaterial">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="RiseRange" ColumnName="RiseRange" />
+                <ScalarProperty Name="RisePrice" ColumnName="RisePrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="PCate" ColumnName="PCate" />
+                <ScalarProperty Name="PCode" ColumnName="PCode" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
