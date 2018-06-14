@@ -38,5 +38,7 @@ namespace EF.Respository
         public virtual DbSet<FSys_Role> FSys_Role { get; set; }
         public virtual DbSet<FSysUser> FSysUser { get; set; }
         public virtual DbSet<FPayWay> FPayWay { get; set; }
+        public virtual DbSet<FDataLV> FDataLV { get; set; }
+        public virtual DbSet<FDataReposInit> FDataReposInit { get; set; }
     }
 }

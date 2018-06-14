@@ -55,6 +55,14 @@ namespace EF.Respository.Sons
     {
     
     }
+    public partial class FDataLV:BaseRespository<EF.Entitys.FDataLV>,EF.IRespository.Sons.IFDataLV
+    {
+    
+    }
+    public partial class FDataReposInit:BaseRespository<EF.Entitys.FDataReposInit>,EF.IRespository.Sons.IFDataReposInit
+    {
+    
+    }
     
     
     

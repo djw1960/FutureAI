@@ -61,7 +61,13 @@
     <Compile Include="FAI.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FDataLV.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="FDataMaterial.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDataReposInit.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="FDataRepository.cs">

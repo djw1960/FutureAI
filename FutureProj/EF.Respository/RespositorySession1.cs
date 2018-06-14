@@ -59,6 +59,14 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FPayWay(); }
     	}
+    	public IRespository.Sons.IFDataLV FDataLV
+    	{
+    		get { return new Respository.Sons.FDataLV(); }
+    	}
+    	public IRespository.Sons.IFDataReposInit FDataReposInit
+    	{
+    		get { return new Respository.Sons.FDataReposInit(); }
+    	}
     }
     
 }

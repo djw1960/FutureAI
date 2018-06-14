@@ -116,6 +116,24 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
+    public partial class FDataLV:BaseService<EF.Entitys.FDataLV>,EF.IService.Sons.IFDataLV
+    {
+    	    //IRespository.Sons.IFDataLV dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FDataLV;
+                base.dal = dal;
+            }
+    }
+    public partial class FDataReposInit:BaseService<EF.Entitys.FDataReposInit>,EF.IService.Sons.IFDataReposInit
+    {
+    	    //IRespository.Sons.IFDataReposInit dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FDataReposInit;
+                base.dal = dal;
+            }
+    }
     
     
     

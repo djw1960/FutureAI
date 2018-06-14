@@ -24,6 +24,8 @@ namespace EF.IService
     	IService.Sons.IFSys_Role FSys_Role{ get; }
     	IService.Sons.IFSysUser FSysUser{ get; }
     	IService.Sons.IFPayWay FPayWay{ get; }
+    	IService.Sons.IFDataLV FDataLV{ get; }
+    	IService.Sons.IFDataReposInit FDataReposInit{ get; }
     }
     
     

@@ -24,6 +24,8 @@ namespace EF.IRespository
     	IRespository.Sons.IFSys_Role FSys_Role{ get; }
     	IRespository.Sons.IFSysUser FSysUser{ get; }
     	IRespository.Sons.IFPayWay FPayWay{ get; }
+    	IRespository.Sons.IFDataLV FDataLV{ get; }
+    	IRespository.Sons.IFDataReposInit FDataReposInit{ get; }
     }
     
     

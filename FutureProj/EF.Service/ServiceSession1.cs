@@ -95,6 +95,20 @@ namespace EF.Service
     			return new Service.Sons.FPayWay();
     		}
     	}
+    	public IService.Sons.IFDataLV FDataLV
+    	{
+    		get
+    		{
+    			return new Service.Sons.FDataLV();
+    		}
+    	}
+    	public IService.Sons.IFDataReposInit FDataReposInit
+    	{
+    		get
+    		{
+    			return new Service.Sons.FDataReposInit();
+    		}
+    	}
     }
     
     

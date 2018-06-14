@@ -56,6 +56,14 @@ namespace EF.IService.Sons
     {
     
     }
+    public partial interface IFDataLV:IBaseService<EF.Entitys.FDataLV>
+    {
+    
+    }
+    public partial interface IFDataReposInit:IBaseService<EF.Entitys.FDataReposInit>
+    {
+    
+    }
     
     
     

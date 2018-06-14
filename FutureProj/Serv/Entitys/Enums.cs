@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace Serv.Entitys
 {
+    public enum InitContentType
+    {
+        /// <summary>
+        /// 仓单
+        /// </summary>
+        Cangdan,
+        /// <summary>
+        /// 会员公司持仓榜单
+        /// </summary>
+        VolRankings,
+    }
     /// <summary>
     /// 支付通道操作编码
     /// </summary>

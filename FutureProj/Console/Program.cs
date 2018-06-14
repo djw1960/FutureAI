@@ -1,5 +1,6 @@
 ﻿using EF.Common;
 using Serv;
+using Serv.Lib;
 using System;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,12 @@ namespace Console
     {
         static void Main(string[] args)
         {
+            var ibll = OperationContext.BLLSession;
+            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
+            var model=CrawlerUtils.GetFDataRepository_First(url);
+            ibll.FDataReposInit.Add(model);
+            int n=ibll.FDataReposInit.SaveChanges();
+            System.Console.WriteLine(n);
             //103.45.13.74:8090  103.45.9.70:8090 https://crmapi.xs9999.com/v2/A401
             //var html =HttpUtils.HttpPostWebProxy("http://crmapi.xs9999.com/v2/A401", "equipment=ios", "103.45.9.70:8090");
             //System.Console.WriteLine(html);
@@ -31,7 +38,7 @@ namespace Console
             //DateTime dend = DateTime.Parse("2018-05-04").AddDays(1).AddSeconds(-1);
             //System.Console.WriteLine(dend.ToString());
 
-            var ibll = OperationContext.BLLSession;
+
 
             System.Console.WriteLine(ibll.FDataMaterial.where(a=>a.ID>0).Count());
             //List<Categorys> list = new List<Categorys>();

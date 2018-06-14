@@ -20,17 +20,19 @@
           <Property Name="Status" Type="int" />
           <Property Name="Result" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6013: 表/视图“xds315586209_db.dbo.FDataLV”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
         <EntityType Name="FDataLV">
-          <Property Name="LV" Type="int" />
-          <Property Name="CV" Type="int" />
-          <Property Name="LV2" Type="int" />
-          <Property Name="FX" Type="int" />
-          <Property Name="STATUS" Type="int" />
-          <Property Name="Result" Type="int" />
-          <Property Name="Type" Type="varchar" MaxLength="255" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LV" Type="int" Nullable="false" />
+          <Property Name="CV" Type="int" Nullable="false" />
+          <Property Name="LV2" Type="int" Nullable="false" />
+          <Property Name="FX" Type="int" Nullable="false" />
+          <Property Name="STATUS" Type="int" Nullable="false" />
+          <Property Name="Result" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="FDataMaterial">
           <Key>
             <PropertyRef Name="ID" />
@@ -44,6 +46,17 @@
           <Property Name="RisePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="RiseRange" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DateTime" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FDataReposInit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="IsCheckFinish" Type="int" Nullable="false" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FDataRepository">
           <Key>
@@ -179,7 +192,9 @@
         </EntityType>
         <EntityContainer Name="PayServiceModelStoreContainer">
           <EntitySet Name="FAI" EntityType="Self.FAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FDataLV" EntityType="Self.FDataLV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataMaterial" EntityType="Self.FDataMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FDataReposInit" EntityType="Self.FDataReposInit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataRepository" EntityType="Self.FDataRepository" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FNews" EntityType="Self.FNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FPayGood" EntityType="Self.FPayGood" Schema="dbo" store:Type="Tables" />
@@ -217,6 +232,8 @@
           <EntitySet Name="FSys_Role" EntityType="PayServiceModel.FSys_Role" />
           <EntitySet Name="FSysUser" EntityType="PayServiceModel.FSysUser" />
           <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
+          <EntitySet Name="FDataLV" EntityType="PayServiceModel.FDataLV" />
+          <EntitySet Name="FDataReposInit" EntityType="PayServiceModel.FDataReposInit" />
         </EntityContainer>
         <EntityType Name="FAI">
           <Key>
@@ -376,6 +393,30 @@
           <Property Name="PayType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PayCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FDataLV">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LV" Type="Int32" Nullable="false" />
+          <Property Name="CV" Type="Int32" Nullable="false" />
+          <Property Name="LV2" Type="Int32" Nullable="false" />
+          <Property Name="FX" Type="Int32" Nullable="false" />
+          <Property Name="STATUS" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FDataReposInit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCheckFinish" Type="Int32" Nullable="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -545,6 +586,32 @@
                 <ScalarProperty Name="PayType" ColumnName="PayType" />
                 <ScalarProperty Name="PayName" ColumnName="PayName" />
                 <ScalarProperty Name="MerNo" ColumnName="MerNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FDataLV">
+            <EntityTypeMapping TypeName="PayServiceModel.FDataLV">
+              <MappingFragment StoreEntitySet="FDataLV">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="FX" ColumnName="FX" />
+                <ScalarProperty Name="LV2" ColumnName="LV2" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="LV" ColumnName="LV" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FDataReposInit">
+            <EntityTypeMapping TypeName="PayServiceModel.FDataReposInit">
+              <MappingFragment StoreEntitySet="FDataReposInit">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsCheckFinish" ColumnName="IsCheckFinish" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
