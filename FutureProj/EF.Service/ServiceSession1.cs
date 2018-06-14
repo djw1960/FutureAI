@@ -11,13 +11,6 @@ namespace EF.Service
     using System.Data.Entity.Infrastructure;
     public partial class ServiceSession:IService.IServiceSession
     {
-    	public IService.Sons.IFNews FNews
-    	{
-    		get
-    		{
-    			return new Service.Sons.FNews();
-    		}
-    	}
     	public IService.Sons.IFAI FAI
     	{
     		get
@@ -37,6 +30,13 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FDataRepository();
+    		}
+    	}
+    	public IService.Sons.IFNews FNews
+    	{
+    		get
+    		{
+    			return new Service.Sons.FNews();
     		}
     	}
     	public IService.Sons.IFPayGood FPayGood
@@ -67,13 +67,6 @@ namespace EF.Service
     			return new Service.Sons.FSys_Config();
     		}
     	}
-    	public IService.Sons.IFPayWay FPayWay
-    	{
-    		get
-    		{
-    			return new Service.Sons.FPayWay();
-    		}
-    	}
     	public IService.Sons.IFSys_LoginSession FSys_LoginSession
     	{
     		get
@@ -93,6 +86,13 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FSysUser();
+    		}
+    	}
+    	public IService.Sons.IFPayWay FPayWay
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayWay();
     		}
     	}
     }

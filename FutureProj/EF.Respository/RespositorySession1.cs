@@ -11,10 +11,6 @@ namespace EF.Respository
     using System.Data.Entity.Infrastructure;
     public partial class RespositorySession:IRespository.IRespositorySession
     {
-    	public IRespository.Sons.IFNews FNews
-    	{
-    		get { return new Respository.Sons.FNews(); }
-    	}
     	public IRespository.Sons.IFAI FAI
     	{
     		get { return new Respository.Sons.FAI(); }
@@ -26,6 +22,10 @@ namespace EF.Respository
     	public IRespository.Sons.IFDataRepository FDataRepository
     	{
     		get { return new Respository.Sons.FDataRepository(); }
+    	}
+    	public IRespository.Sons.IFNews FNews
+    	{
+    		get { return new Respository.Sons.FNews(); }
     	}
     	public IRespository.Sons.IFPayGood FPayGood
     	{
@@ -43,10 +43,6 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FSys_Config(); }
     	}
-    	public IRespository.Sons.IFPayWay FPayWay
-    	{
-    		get { return new Respository.Sons.FPayWay(); }
-    	}
     	public IRespository.Sons.IFSys_LoginSession FSys_LoginSession
     	{
     		get { return new Respository.Sons.FSys_LoginSession(); }
@@ -58,6 +54,10 @@ namespace EF.Respository
     	public IRespository.Sons.IFSysUser FSysUser
     	{
     		get { return new Respository.Sons.FSysUser(); }
+    	}
+    	public IRespository.Sons.IFPayWay FPayWay
+    	{
+    		get { return new Respository.Sons.FPayWay(); }
     	}
     }
     

@@ -12,18 +12,18 @@ namespace EF.IRespository
     
     public partial interface IRespositorySession
     {
-    	IRespository.Sons.IFNews FNews{ get; }
     	IRespository.Sons.IFAI FAI{ get; }
     	IRespository.Sons.IFDataMaterial FDataMaterial{ get; }
     	IRespository.Sons.IFDataRepository FDataRepository{ get; }
+    	IRespository.Sons.IFNews FNews{ get; }
     	IRespository.Sons.IFPayGood FPayGood{ get; }
     	IRespository.Sons.IFPayMert FPayMert{ get; }
     	IRespository.Sons.IFPayOrder FPayOrder{ get; }
     	IRespository.Sons.IFSys_Config FSys_Config{ get; }
-    	IRespository.Sons.IFPayWay FPayWay{ get; }
     	IRespository.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     	IRespository.Sons.IFSys_Role FSys_Role{ get; }
     	IRespository.Sons.IFSysUser FSysUser{ get; }
+    	IRespository.Sons.IFPayWay FPayWay{ get; }
     }
     
     

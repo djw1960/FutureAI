@@ -8,10 +8,6 @@ namespace EF.IRespository.Sons
 {
     using System;
     
-    public partial interface IFNews:IBaseRespository<EF.Entitys.FNews>
-    {
-    
-    }
     public partial interface IFAI:IBaseRespository<EF.Entitys.FAI>
     {
     
@@ -21,6 +17,10 @@ namespace EF.IRespository.Sons
     
     }
     public partial interface IFDataRepository:IBaseRespository<EF.Entitys.FDataRepository>
+    {
+    
+    }
+    public partial interface IFNews:IBaseRespository<EF.Entitys.FNews>
     {
     
     }
@@ -40,10 +40,6 @@ namespace EF.IRespository.Sons
     {
     
     }
-    public partial interface IFPayWay:IBaseRespository<EF.Entitys.FPayWay>
-    {
-    
-    }
     public partial interface IFSys_LoginSession:IBaseRespository<EF.Entitys.FSys_LoginSession>
     {
     
@@ -53,6 +49,10 @@ namespace EF.IRespository.Sons
     
     }
     public partial interface IFSysUser:IBaseRespository<EF.Entitys.FSysUser>
+    {
+    
+    }
+    public partial interface IFPayWay:IBaseRespository<EF.Entitys.FPayWay>
     {
     
     }

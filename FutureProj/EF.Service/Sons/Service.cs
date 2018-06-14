@@ -8,15 +8,6 @@ namespace EF.Service.Sons
 {
     using System;
     
-    public partial class FNews:BaseService<EF.Entitys.FNews>,EF.IService.Sons.IFNews
-    {
-    	    //IRespository.Sons.IFNews dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FNews;
-                base.dal = dal;
-            }
-    }
     public partial class FAI:BaseService<EF.Entitys.FAI>,EF.IService.Sons.IFAI
     {
     	    //IRespository.Sons.IFAI dal;
@@ -41,6 +32,15 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FDataRepository;
+                base.dal = dal;
+            }
+    }
+    public partial class FNews:BaseService<EF.Entitys.FNews>,EF.IService.Sons.IFNews
+    {
+    	    //IRespository.Sons.IFNews dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FNews;
                 base.dal = dal;
             }
     }
@@ -80,15 +80,6 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
-    public partial class FPayWay:BaseService<EF.Entitys.FPayWay>,EF.IService.Sons.IFPayWay
-    {
-    	    //IRespository.Sons.IFPayWay dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FPayWay;
-                base.dal = dal;
-            }
-    }
     public partial class FSys_LoginSession:BaseService<EF.Entitys.FSys_LoginSession>,EF.IService.Sons.IFSys_LoginSession
     {
     	    //IRespository.Sons.IFSys_LoginSession dal;
@@ -113,6 +104,15 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FSysUser;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayWay:BaseService<EF.Entitys.FPayWay>,EF.IService.Sons.IFPayWay
+    {
+    	    //IRespository.Sons.IFPayWay dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayWay;
                 base.dal = dal;
             }
     }

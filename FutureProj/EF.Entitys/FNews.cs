@@ -20,7 +20,9 @@ namespace EF.Entitys
         public int NewsRes { get; set; }
         public string NSource { get; set; }
         public string NewsUrl { get; set; }
+        public string NewContent { get; set; }
         public System.DateTime AddDate { get; set; }
         public bool IsDel { get; set; }
+        public bool IsPublish { get; set; }
     }
 }

@@ -25,17 +25,17 @@ namespace EF.edmx
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<FNews> FNews { get; set; }
         public virtual DbSet<FAI> FAI { get; set; }
         public virtual DbSet<FDataMaterial> FDataMaterial { get; set; }
         public virtual DbSet<FDataRepository> FDataRepository { get; set; }
+        public virtual DbSet<FNews> FNews { get; set; }
         public virtual DbSet<FPayGood> FPayGood { get; set; }
         public virtual DbSet<FPayMert> FPayMert { get; set; }
         public virtual DbSet<FPayOrder> FPayOrder { get; set; }
         public virtual DbSet<FSys_Config> FSys_Config { get; set; }
-        public virtual DbSet<FPayWay> FPayWay { get; set; }
         public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
         public virtual DbSet<FSys_Role> FSys_Role { get; set; }
         public virtual DbSet<FSysUser> FSysUser { get; set; }
+        public virtual DbSet<FPayWay> FPayWay { get; set; }
     }
 }

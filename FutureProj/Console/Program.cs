@@ -62,6 +62,7 @@ namespace Console
             //System.Console.WriteLine(dend.ToString());
 
             var ibll = OperationContext.BLLSession;
+
             System.Console.WriteLine(ibll.FDataMaterial.where(a=>a.ID>0).Count());
             //List<Categorys> list = new List<Categorys>();
             //Categorys c=list.FirstOrDefault(s => s.ID > 1000);

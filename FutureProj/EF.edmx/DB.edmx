@@ -68,8 +68,10 @@
           <Property Name="NewsRes" Type="int" Nullable="false" />
           <Property Name="NSource" Type="nvarchar" MaxLength="50" />
           <Property Name="NewsUrl" Type="varchar" MaxLength="200" />
+          <Property Name="NewContent" Type="nvarchar(max)" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
           <Property Name="IsDel" Type="bit" Nullable="false" />
+          <Property Name="IsPublish" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FPayGood">
           <Key>
@@ -203,32 +205,19 @@
     <edmx:ConceptualModels>
       <Schema Namespace="PayServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
           <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
           <EntitySet Name="FDataMaterial" EntityType="PayServiceModel.FDataMaterial" />
           <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
+          <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
           <EntitySet Name="FPayGood" EntityType="PayServiceModel.FPayGood" />
           <EntitySet Name="FPayMert" EntityType="PayServiceModel.FPayMert" />
           <EntitySet Name="FPayOrder" EntityType="PayServiceModel.FPayOrder" />
           <EntitySet Name="FSys_Config" EntityType="PayServiceModel.FSys_Config" />
-          <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
           <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
           <EntitySet Name="FSys_Role" EntityType="PayServiceModel.FSys_Role" />
           <EntitySet Name="FSysUser" EntityType="PayServiceModel.FSysUser" />
+          <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
         </EntityContainer>
-        <EntityType Name="FNews">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewsTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="NewsType" Type="Int32" Nullable="false" />
-          <Property Name="NewsRes" Type="Int32" Nullable="false" />
-          <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsDel" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="FAI">
           <Key>
             <PropertyRef Name="ID" />
@@ -270,6 +259,21 @@
           <Property Name="TDSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Change" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NewsType" Type="Int32" Nullable="false" />
+          <Property Name="NewsRes" Type="Int32" Nullable="false" />
+          <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NewContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
+          <Property Name="IsPublish" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="FPayGood">
           <Key>
@@ -326,22 +330,6 @@
           <Property Name="SValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="FPayWay">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="MerNo" />
-            <PropertyRef Name="PayName" />
-            <PropertyRef Name="PayType" />
-            <PropertyRef Name="PayCode" />
-            <PropertyRef Name="IsAvailable" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PayType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PayCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsAvailable" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="FSys_LoginSession">
           <Key>
             <PropertyRef Name="ID" />
@@ -373,26 +361,28 @@
           <Property Name="IsAvailable" Type="Int32" Nullable="false" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-      </Schema>
+        <EntityType Name="FPayWay">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MerNo" />
+            <PropertyRef Name="PayName" />
+            <PropertyRef Name="PayType" />
+            <PropertyRef Name="PayCode" />
+            <PropertyRef Name="IsAvailable" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PayServiceModelStoreContainer" CdmEntityContainer="DBEntities">
-          <EntitySetMapping Name="FNews">
-            <EntityTypeMapping TypeName="PayServiceModel.FNews">
-              <MappingFragment StoreEntitySet="FNews">
-                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
-                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
-                <ScalarProperty Name="NewsUrl" ColumnName="NewsUrl" />
-                <ScalarProperty Name="NSource" ColumnName="NSource" />
-                <ScalarProperty Name="NewsRes" ColumnName="NewsRes" />
-                <ScalarProperty Name="NewsType" ColumnName="NewsType" />
-                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FAI">
             <EntityTypeMapping TypeName="PayServiceModel.FAI">
               <MappingFragment StoreEntitySet="FAI">
@@ -434,6 +424,22 @@
                 <ScalarProperty Name="Reps" ColumnName="Reps" />
                 <ScalarProperty Name="CateName" ColumnName="CateName" />
                 <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FNews">
+            <EntityTypeMapping TypeName="PayServiceModel.FNews">
+              <MappingFragment StoreEntitySet="FNews">
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="NewContent" ColumnName="NewContent" />
+                <ScalarProperty Name="NewsUrl" ColumnName="NewsUrl" />
+                <ScalarProperty Name="NSource" ColumnName="NSource" />
+                <ScalarProperty Name="NewsRes" ColumnName="NewsRes" />
+                <ScalarProperty Name="NewsType" ColumnName="NewsType" />
+                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -497,18 +503,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FPayWay">
-            <EntityTypeMapping TypeName="PayServiceModel.FPayWay">
-              <MappingFragment StoreEntitySet="FPayWay">
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="PayCode" ColumnName="PayCode" />
-                <ScalarProperty Name="PayType" ColumnName="PayType" />
-                <ScalarProperty Name="PayName" ColumnName="PayName" />
-                <ScalarProperty Name="MerNo" ColumnName="MerNo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FSys_LoginSession">
             <EntityTypeMapping TypeName="PayServiceModel.FSys_LoginSession">
               <MappingFragment StoreEntitySet="FSys_LoginSession">
@@ -543,7 +537,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="FPayWay">
+            <EntityTypeMapping TypeName="PayServiceModel.FPayWay">
+              <MappingFragment StoreEntitySet="FPayWay">
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="PayCode" ColumnName="PayCode" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="PayName" ColumnName="PayName" />
+                <ScalarProperty Name="MerNo" ColumnName="MerNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
