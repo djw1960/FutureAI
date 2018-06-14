@@ -1,14 +1,8 @@
 ﻿using EF.Common;
-using EF.Entitys;
-using Newtonsoft.Json;
 using Serv;
-using Serv.Entitys;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Console
 {
