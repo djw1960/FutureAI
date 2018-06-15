@@ -13,9 +13,9 @@ namespace Console
 
             //System.Console.WriteLine(s);
 
-            ////string ss = Regex.Replace(str, @"<* *?", "");
-            ////System.Console.WriteLine("---------------------------------------------------------------");
-            ////System.Console.WriteLine(ss);
+            //string ss = Regex.Replace(str, @"<* *?", "");
+            //System.Console.WriteLine("---------------------------------------------------------------");
+            //System.Console.WriteLine(ss);
             //System.Console.ReadKey();
 
 
@@ -24,7 +24,7 @@ namespace Console
 
             /*
             var ibll = OperationContext.BLLSession;
-            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
+            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html?year=2018&month=5&day=15";
             var model = CrawlerUtils.GetDSFDataRepository_First(url);
             ibll.FDataReposInit.Add(model);
             int n = ibll.FDataReposInit.SaveChanges();

@@ -203,9 +203,9 @@ namespace Serv.Lib
         }
         #endregion
 
-        #region 获取业务通知/活动通知/交易所新闻
+        #region 获取业务通知/交易所新闻
         /// <summary>
-        /// 获取业务通知/活动通知/交易所新闻
+        /// 获取业务通知/交易所新闻
         /// </summary>
         /// <param name="type">(1:业务通知;2:交易所新闻;)</param>
         /// <returns></returns>
