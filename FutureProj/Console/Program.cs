@@ -19,9 +19,9 @@ namespace Console
 
             //System.Console.WriteLine(s);
 
-            ////string ss = Regex.Replace(str, @"<* *?", "");
-            ////System.Console.WriteLine("---------------------------------------------------------------");
-            ////System.Console.WriteLine(ss);
+            //string ss = Regex.Replace(str, @"<* *?", "");
+            //System.Console.WriteLine("---------------------------------------------------------------");
+            //System.Console.WriteLine(ss);
             //System.Console.ReadKey();
 
             var ibll = OperationContext.BLLSession;
