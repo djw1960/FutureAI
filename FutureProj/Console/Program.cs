@@ -1,6 +1,9 @@
-﻿using Serv.Lib;
+﻿using EF.Entitys;
+using Serv.Lib;
 using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Console
 {
@@ -19,8 +22,27 @@ namespace Console
             //System.Console.ReadKey();
 
 
-            var list = CrawlerUtils.GetNewsFromUrl(1);
-            list.ForEach(f=> { System.Console.WriteLine($"{f.AddDate.ToShortDateString()} {f.NewsTitle}"); });
+            var list = new List<FNews> { };
+            var pageIndex = 1;
+            while (pageIndex > 0)
+            {
+                var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+                foreach (var item in news)
+                {
+                    System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
+                }
+
+                if (news.Count == 0)
+                {
+                    pageIndex = 0;
+                    break;
+                }
+
+                // 请求太快貌似会被4O4
+                Thread.Sleep(1000);
+                pageIndex++;
+            }
+
 
             /*
             var ibll = OperationContext.BLLSession;

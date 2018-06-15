@@ -7,7 +7,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace Serv.Lib
 {
@@ -208,8 +207,9 @@ namespace Serv.Lib
         /// 获取业务通知/交易所新闻
         /// </summary>
         /// <param name="type">(1:业务通知;2:交易所新闻;)</param>
+        /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public static List<FNews> GetNewsFromUrl(int type)
+        public static List<FNews> GetNewsFromUrl(int type, int pageIndex)
         {
             var list = new List<FNews> { };
             var url = string.Empty;
@@ -221,39 +221,25 @@ namespace Serv.Lib
                 default: break;
             }
 
-            var pageIndex = 1;
-            var html = string.Empty;
             var doc = new HtmlDocument();
-            while (pageIndex > 0)
+            var html = GetWebClient(string.Format(url, pageIndex));
+            if (html.Length == 0) return list;
+
+            doc.LoadHtml(html);
+            var rootNode = doc.DocumentNode;
+            var nodelCollection = rootNode.SelectNodes("//*[@class='list_tpye06']/li");
+            foreach (var node in nodelCollection)
             {
-                html = GetWebClient(string.Format(url, pageIndex));
-                if (html.Length == 0 || pageIndex > 3)
+                var aNode = node.LastChild;
+                list.Add(new FNews
                 {
-                    pageIndex = 0;
-                    break;
-                }
-
-                doc.LoadHtml(html);
-                var rootNode = doc.DocumentNode;
-                var nodelCollection = rootNode.SelectNodes("//*[@class='list_tpye06']/li");
-                foreach (var node in nodelCollection)
-                {
-                    var aNode = node.LastChild;
-                    list.Add(new FNews
-                    {
-                        AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
-                        NewsTitle = aNode.InnerText,
-                        NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
-                        NewsType = type,
-                        NewContent = "",
-                        NSource = "",
-
-                    });
-                }
-
-                // 请求太快貌似会被4O4
-                Thread.Sleep(1000);
-                pageIndex++;
+                    AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
+                    NewsTitle = aNode.InnerText,
+                    NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
+                    NewsType = type,
+                    NewContent = "",
+                    NSource = "",
+                });
             }
 
             return list;
