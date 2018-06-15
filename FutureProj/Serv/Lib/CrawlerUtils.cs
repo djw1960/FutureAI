@@ -35,12 +35,16 @@ namespace Serv.Lib
         /// <returns></returns>
         public static string GetWebClient(string url)
         {
-            string strHTML = "";
-            WebClient myWebClient = new WebClient();
-            Stream myStream = myWebClient.OpenRead(url);
-            StreamReader sr = new StreamReader(myStream, Encoding.UTF8);//注意编码
-            strHTML = sr.ReadToEnd();
-            myStream.Close();
+            var strHTML = string.Empty;
+            try
+            {
+                WebClient myWebClient = new WebClient();
+                Stream myStream = myWebClient.OpenRead(url);
+                StreamReader sr = new StreamReader(myStream, Encoding.UTF8);//注意编码
+                strHTML = sr.ReadToEnd();
+                myStream.Close();
+            }
+            catch { /* TODO */ }
             return strHTML;
         }
 

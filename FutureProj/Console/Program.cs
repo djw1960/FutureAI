@@ -23,7 +23,7 @@ namespace Console
 
 
             var list = new List<FNews> { };
-            var pageIndex = 1;
+            var pageIndex = 50;
             while (pageIndex > 0)
             {
                 var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
