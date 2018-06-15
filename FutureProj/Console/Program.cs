@@ -25,7 +25,7 @@ namespace Console
             //System.Console.ReadKey();
 
             var ibll = OperationContext.BLLSession;
-            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
+            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html?year=2018&month=5&day=15";
             var model = CrawlerUtils.GetDSFDataRepository_First(url);
             ibll.FDataReposInit.Add(model);
             int n = ibll.FDataReposInit.SaveChanges();
