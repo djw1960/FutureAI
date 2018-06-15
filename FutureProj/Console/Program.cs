@@ -25,10 +25,10 @@ namespace Console
             //System.Console.ReadKey();
 
             var ibll = OperationContext.BLLSession;
-            //string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
-            //var model = CrawlerUtils.GetDSFDataRepository_First(url);
-            //ibll.FDataReposInit.Add(model);
-            //int n = ibll.FDataReposInit.SaveChanges();
+            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
+            var model = CrawlerUtils.GetDSFDataRepository_First(url);
+            ibll.FDataReposInit.Add(model);
+            int n = ibll.FDataReposInit.SaveChanges();
             FDataReposInit m=ibll.FDataReposInit.Single(a => a.ID == 8);
             List<FDataRepository> list= CrawlerUtils.GetDSFDataRepository_Second(m.Content, m.Date);
             foreach (var item in list)
