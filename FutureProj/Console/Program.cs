@@ -1,7 +1,9 @@
 ﻿using EF.Common;
+using EF.Entitys;
 using Serv;
 using Serv.Lib;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -13,10 +15,14 @@ namespace Console
         {
             var ibll = OperationContext.BLLSession;
             string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
-            var model=CrawlerUtils.GetFDataRepository_First(url);
+            var model = CrawlerUtils.GetDSFDataRepository_First(url);
             ibll.FDataReposInit.Add(model);
-            int n=ibll.FDataReposInit.SaveChanges();
-            System.Console.WriteLine(n);
+            int n = ibll.FDataReposInit.SaveChanges();
+            string table= "<tr><td>豆一</td><tdstyle='font - weight:bold'>良运库</td><td>5725</td><td>5725</td><td>0</td></tr><tr><td>豆一</td><tdstyle='font - weight:bold'>哈尔滨益海</td><td>5210</td><td>5210</td><td>0</td></tr>";
+            FDataReposInit m=ibll.FDataReposInit.Single(a => a.ID == 4);
+            List<FDataRepository> list= CrawlerUtils.GetDSFDataRepository_Second(table, m.Date);
+
+            System.Console.WriteLine(list.Count);
             //103.45.13.74:8090  103.45.9.70:8090 https://crmapi.xs9999.com/v2/A401
             //var html =HttpUtils.HttpPostWebProxy("http://crmapi.xs9999.com/v2/A401", "equipment=ios", "103.45.9.70:8090");
             //System.Console.WriteLine(html);

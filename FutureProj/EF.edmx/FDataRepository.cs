@@ -15,12 +15,12 @@ namespace EF.edmx
     public partial class FDataRepository
     {
         public long ID { get; set; }
-        public string Exchange { get; set; }
+        public int Date { get; set; }
         public string CateName { get; set; }
         public string Reps { get; set; }
-        public decimal YTDSum { get; set; }
-        public decimal TDSum { get; set; }
-        public decimal Change { get; set; }
+        public int YTDSum { get; set; }
+        public int TDSum { get; set; }
+        public int Change { get; set; }
         public System.DateTime DTime { get; set; }
     }
 }

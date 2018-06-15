@@ -47,10 +47,10 @@ namespace Serv.Lib
 
         #region 仓单信息获取
         /// <summary>
-        /// 获取仓单块信息
+        /// 01-获取大商所仓单块信息
         /// </summary>
         /// <returns></returns>
-        public static FDataReposInit GetFDataRepository_First(string url)
+        public static FDataReposInit GetDSFDataRepository_First(string url)
         {
             //下载网页源代码 
             var docText = GetWebClient(url);
@@ -69,7 +69,7 @@ namespace Serv.Lib
             {
                 FDataReposInit model = new FDataReposInit();
                 model.AddDate = DateTime.Now;
-                model.Content = Regex.Replace(res.InnerHtml, @"\s", "");//去掉空格
+                model.Content = Regex.Replace(res.OuterHtml, @"\s", "");//去掉空格
                 int d = 0; int.TryParse(date, out d);
                 model.Date = d;
                 model.IsCheckFinish = 0;
@@ -79,20 +79,38 @@ namespace Serv.Lib
             return null;
         }
         /// <summary>
-        /// 获取仓单详情信息
+        /// 02-解析大商仓单详情信息
         /// </summary>
         /// <returns></returns>
-        public static List<FDataRepository> GetFDataRepository_Second(string table)
+        public static List<FDataRepository> GetDSFDataRepository_Second(string table, int date)
         {
+
             List<FDataRepository> list = new List<FDataRepository>();
             //加载源代码，获取文档对象
             var tnode = HtmlNode.CreateNode(table);
             if (tnode != null)
             {
                 var trlist = tnode.SelectNodes(@"tr");//获取所有的表格行
+                Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
                 //每一行都是一个对象
-
-
+                foreach (var tr in trlist)
+                {
+                    //<tr><td>豆一</td><tdstyle="font-weight:bold">良运库</td><td>5725</td><td>5725</td><td>0</td></tr>
+                    MatchCollection mc = regex.Matches(tr.InnerText);
+                    if (mc.Count>0)
+                    {
+                        FDataRepository model = new FDataRepository();
+                        model.Date = date;
+                        model.CateName = mc[0].ToString();
+                        model.Reps = mc[1].ToString();
+                        model.YTDSum =Convert.ToInt32(mc[2]);
+                        model.TDSum = Convert.ToInt32(mc[3]);
+                        model.Change = Convert.ToInt32(mc[4]);
+                        model.DTime = DateTime.Now;
+                        list.Add(model);
+                    }
+                    else break;
+                }
             }
             return list;
         }

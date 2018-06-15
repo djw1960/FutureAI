@@ -27,7 +27,6 @@ namespace EF.edmx
     
         public virtual DbSet<FAI> FAI { get; set; }
         public virtual DbSet<FDataMaterial> FDataMaterial { get; set; }
-        public virtual DbSet<FDataRepository> FDataRepository { get; set; }
         public virtual DbSet<FNews> FNews { get; set; }
         public virtual DbSet<FPayGood> FPayGood { get; set; }
         public virtual DbSet<FPayMert> FPayMert { get; set; }
@@ -39,5 +38,6 @@ namespace EF.edmx
         public virtual DbSet<FPayWay> FPayWay { get; set; }
         public virtual DbSet<FDataLV> FDataLV { get; set; }
         public virtual DbSet<FDataReposInit> FDataReposInit { get; set; }
+        public virtual DbSet<FDataRepository> FDataRepository { get; set; }
     }
 }

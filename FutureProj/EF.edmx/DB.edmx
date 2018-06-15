@@ -63,12 +63,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Exchange" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="int" Nullable="false" />
           <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Reps" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="YTDSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="TDSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Change" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="YTDSum" Type="int" Nullable="false" />
+          <Property Name="TDSum" Type="int" Nullable="false" />
+          <Property Name="Change" Type="int" Nullable="false" />
           <Property Name="DTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FNews">
@@ -222,7 +222,6 @@
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
           <EntitySet Name="FDataMaterial" EntityType="PayServiceModel.FDataMaterial" />
-          <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
           <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
           <EntitySet Name="FPayGood" EntityType="PayServiceModel.FPayGood" />
           <EntitySet Name="FPayMert" EntityType="PayServiceModel.FPayMert" />
@@ -234,6 +233,7 @@
           <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
           <EntitySet Name="FDataLV" EntityType="PayServiceModel.FDataLV" />
           <EntitySet Name="FDataReposInit" EntityType="PayServiceModel.FDataReposInit" />
+          <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
         </EntityContainer>
         <EntityType Name="FAI">
           <Key>
@@ -263,19 +263,6 @@
           <Property Name="RisePrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="RiseRange" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DateTime" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FDataRepository">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Exchange" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Reps" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="YTDSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="TDSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Change" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="FNews">
           <Key>
@@ -418,6 +405,19 @@
           <Property Name="IsCheckFinish" Type="Int32" Nullable="false" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="FDataRepository">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="Int32" Nullable="false" />
+          <Property Name="CateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reps" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="YTDSum" Type="Int32" Nullable="false" />
+          <Property Name="TDSum" Type="Int32" Nullable="false" />
+          <Property Name="Change" Type="Int32" Nullable="false" />
+          <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -451,20 +451,6 @@
                 <ScalarProperty Name="PCate" ColumnName="PCate" />
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FDataRepository">
-            <EntityTypeMapping TypeName="PayServiceModel.FDataRepository">
-              <MappingFragment StoreEntitySet="FDataRepository">
-                <ScalarProperty Name="DTime" ColumnName="DTime" />
-                <ScalarProperty Name="Change" ColumnName="Change" />
-                <ScalarProperty Name="TDSum" ColumnName="TDSum" />
-                <ScalarProperty Name="YTDSum" ColumnName="YTDSum" />
-                <ScalarProperty Name="Reps" ColumnName="Reps" />
-                <ScalarProperty Name="CateName" ColumnName="CateName" />
-                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -611,6 +597,20 @@
                 <ScalarProperty Name="IsCheckFinish" ColumnName="IsCheckFinish" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FDataRepository">
+            <EntityTypeMapping TypeName="PayServiceModel.FDataRepository">
+              <MappingFragment StoreEntitySet="FDataRepository">
+                <ScalarProperty Name="DTime" ColumnName="DTime" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="TDSum" ColumnName="TDSum" />
+                <ScalarProperty Name="YTDSum" ColumnName="YTDSum" />
+                <ScalarProperty Name="Reps" ColumnName="Reps" />
+                <ScalarProperty Name="CateName" ColumnName="CateName" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
