@@ -69,7 +69,7 @@ namespace Serv.Lib
             {
                 FDataReposInit model = new FDataReposInit();
                 model.AddDate = DateTime.Now;
-                model.Content = Regex.Replace(res.OuterHtml, @"\s", "");//去掉空格
+                model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""),@" +"," ");//去掉空格
                 int d = 0; int.TryParse(date, out d);
                 model.Date = d;
                 model.IsCheckFinish = 0;
@@ -95,21 +95,31 @@ namespace Serv.Lib
                 //每一行都是一个对象
                 foreach (var tr in trlist)
                 {
-                    //<tr><td>豆一</td><tdstyle="font-weight:bold">良运库</td><td>5725</td><td>5725</td><td>0</td></tr>
-                    MatchCollection mc = regex.Matches(tr.InnerText);
-                    if (mc.Count>0)
+                    MatchCollection mc = regex.Matches(tr.InnerHtml);
+                    if (mc.Count>0&&!string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
                     {
                         FDataRepository model = new FDataRepository();
                         model.Date = date;
-                        model.CateName = mc[0].ToString();
-                        model.Reps = mc[1].ToString();
-                        model.YTDSum =Convert.ToInt32(mc[2]);
-                        model.TDSum = Convert.ToInt32(mc[3]);
-                        model.Change = Convert.ToInt32(mc[4]);
+                        model.CateName = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
+                        model.Reps = HtmlNode.CreateNode(mc[1].ToString()).InnerText;
+                        model.Type = 1;
+                        if (model.CateName.Contains("小计"))
+                        {
+                            model.Type = 2;//统计
+                            model.Reps = "ALL";
+                        }
+                        else if (model.CateName.Contains("总计"))
+                        {
+                            model.Type = 3;//统计
+                            model.Reps = "ALL";
+                        }
+                        model.YTDSum =Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
+                        model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[3].ToString()).InnerText);
+                        model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[4].ToString()).InnerText);
                         model.DTime = DateTime.Now;
                         list.Add(model);
                     }
-                    else break;
+                    else continue;
                 }
             }
             return list;

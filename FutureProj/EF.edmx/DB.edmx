@@ -65,10 +65,11 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="int" Nullable="false" />
           <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Reps" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Reps" Type="nvarchar" MaxLength="20" />
           <Property Name="YTDSum" Type="int" Nullable="false" />
           <Property Name="TDSum" Type="int" Nullable="false" />
           <Property Name="Change" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="DTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FNews">
@@ -412,11 +413,12 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="Int32" Nullable="false" />
           <Property Name="CateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Reps" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Reps" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="YTDSum" Type="Int32" Nullable="false" />
           <Property Name="TDSum" Type="Int32" Nullable="false" />
           <Property Name="Change" Type="Int32" Nullable="false" />
           <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -605,6 +607,7 @@
           <EntitySetMapping Name="FDataRepository">
             <EntityTypeMapping TypeName="PayServiceModel.FDataRepository">
               <MappingFragment StoreEntitySet="FDataRepository">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DTime" ColumnName="DTime" />
                 <ScalarProperty Name="Change" ColumnName="Change" />
                 <ScalarProperty Name="TDSum" ColumnName="TDSum" />

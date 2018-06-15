@@ -22,5 +22,6 @@ namespace EF.Entitys
         public int TDSum { get; set; }
         public int Change { get; set; }
         public System.DateTime DTime { get; set; }
+        public int Type { get; set; }
     }
 }

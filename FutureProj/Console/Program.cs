@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Console
 {
@@ -13,16 +14,30 @@ namespace Console
     {
         static void Main(string[] args)
         {
-            var ibll = OperationContext.BLLSession;
-            string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
-            var model = CrawlerUtils.GetDSFDataRepository_First(url);
-            ibll.FDataReposInit.Add(model);
-            int n = ibll.FDataReposInit.SaveChanges();
-            string table= "<tr><td>豆一</td><tdstyle='font - weight:bold'>良运库</td><td>5725</td><td>5725</td><td>0</td></tr><tr><td>豆一</td><tdstyle='font - weight:bold'>哈尔滨益海</td><td>5210</td><td>5210</td><td>0</td></tr>";
-            FDataReposInit m=ibll.FDataReposInit.Single(a => a.ID == 4);
-            List<FDataRepository> list= CrawlerUtils.GetDSFDataRepository_Second(table, m.Date);
+            //string str = " as  d   fas     dfas     df     asd  f ";
+            //string s = Regex.Replace(str, @" +", " ");
 
-            System.Console.WriteLine(list.Count);
+            //System.Console.WriteLine(s);
+
+            ////string ss = Regex.Replace(str, @"<* *?", "");
+            ////System.Console.WriteLine("---------------------------------------------------------------");
+            ////System.Console.WriteLine(ss);
+            //System.Console.ReadKey();
+
+            var ibll = OperationContext.BLLSession;
+            //string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
+            //var model = CrawlerUtils.GetDSFDataRepository_First(url);
+            //ibll.FDataReposInit.Add(model);
+            //int n = ibll.FDataReposInit.SaveChanges();
+            FDataReposInit m=ibll.FDataReposInit.Single(a => a.ID == 8);
+            List<FDataRepository> list= CrawlerUtils.GetDSFDataRepository_Second(m.Content, m.Date);
+            foreach (var item in list)
+            {
+                ibll.FDataRepository.Add(item);
+            }
+            int num=ibll.FDataRepository.SaveChanges();
+            System.Console.WriteLine(num);
+            //System.Console.WriteLine(list.Count);
             //103.45.13.74:8090  103.45.9.70:8090 https://crmapi.xs9999.com/v2/A401
             //var html =HttpUtils.HttpPostWebProxy("http://crmapi.xs9999.com/v2/A401", "equipment=ios", "103.45.9.70:8090");
             //System.Console.WriteLine(html);
@@ -44,9 +59,6 @@ namespace Console
             //DateTime dend = DateTime.Parse("2018-05-04").AddDays(1).AddSeconds(-1);
             //System.Console.WriteLine(dend.ToString());
 
-
-
-            System.Console.WriteLine(ibll.FDataMaterial.where(a=>a.ID>0).Count());
             //List<Categorys> list = new List<Categorys>();
             //Categorys c=list.FirstOrDefault(s => s.ID > 1000);
             //System.Console.WriteLine(c.CateName);
@@ -109,10 +121,6 @@ namespace Console
             //System.Console.WriteLine(s);
 
             //System.Console.WriteLine(DESEncrypt.Decrypt("5CBD1785551853BD074D5377288E009D",DESEncrypt.info));
-            string en = "姓名|身份证号";
-            string str = DESEncrypt.Encrypt(en, DESEncrypt.info);
-            System.Console.WriteLine(str);
-            System.Console.WriteLine(str.Length);
             ////拼接签名字符串 CustomerNo={0}&BillNo={1}&Amount={2}&Status={3}{4}
             //string signStr = string.Format("CustomerNo={0}&BillNo={1}&Amount={2}&Status={3}{4}",
             //    "800002", "801180403165700382", "10000", "1", DESEncrypt.Decrypt("5CBD1785551853BD074D5377288E009D", DESEncrypt.info));
