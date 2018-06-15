@@ -1,12 +1,6 @@
-﻿using EF.Common;
-using EF.Entitys;
-using Serv;
-using Serv.Lib;
+﻿using Serv.Lib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Console
 {
@@ -24,6 +18,11 @@ namespace Console
             ////System.Console.WriteLine(ss);
             //System.Console.ReadKey();
 
+
+            var list = CrawlerUtils.GetNewsFromUrl(1);
+            list.ForEach(f=> { System.Console.WriteLine($"{f.AddDate.ToShortDateString()} {f.NewsTitle}"); });
+
+            /*
             var ibll = OperationContext.BLLSession;
             string url = "http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html";
             var model = CrawlerUtils.GetDSFDataRepository_First(url);
@@ -37,6 +36,8 @@ namespace Console
             }
             int num=ibll.FDataRepository.SaveChanges();
             System.Console.WriteLine(num);
+            */
+
             //System.Console.WriteLine(list.Count);
             //103.45.13.74:8090  103.45.9.70:8090 https://crmapi.xs9999.com/v2/A401
             //var html =HttpUtils.HttpPostWebProxy("http://crmapi.xs9999.com/v2/A401", "equipment=ios", "103.45.9.70:8090");
