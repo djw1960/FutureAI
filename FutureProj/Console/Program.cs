@@ -25,30 +25,75 @@ namespace Console
             //System.Console.ReadKey();
 
 
-            var list = new List<FNews> { };
-            var pageIndex = 50;
-            while (pageIndex > 0)
-            {
-                var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
-                foreach (var item in news)
-                {
-                    System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
-                }
+            #region NewsTest
+            //var list = new List<FNews> { };
+            //var pageIndex = 50;
+            //while (pageIndex > 0)
+            //{
+            //    var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+            //    foreach (var item in news)
+            //    {
+            //        System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
+            //    }
 
-                if (news.Count == 0)
-                {
-                    pageIndex = 0;
-                    break;
-                }
+            //    if (news.Count == 0)
+            //    {
+            //        pageIndex = 0;
+            //        break;
+            //    }
 
-                // 请求太快貌似会被4O4
-                Thread.Sleep(1000);
-                pageIndex++;
-            }
+            //    // 请求太快貌似会被4O4
+            //    Thread.Sleep(1000);
+            //    pageIndex++;
+            //} 
+            #endregion
+
+            //获取上海交易所每日仓单
+            GetSHFDataRepository_First();
             System.Console.ReadKey();
         }
         /// <summary>
-        /// 初始化大商所数据
+        /// 初始化上海商品交易所仓单数据
+        /// </summary>
+        public static void GetSHFDataRepository_First()
+        {
+            var ibll = OperationContext.BLLSession;
+            string[] years = new string[] {"2012"};
+            int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+            ,"13","14","15","16","17","18","19","20","21","22"
+            ,"23","24","25","26","27","28","29","30","31"};
+            foreach (string year in years)
+            {
+                foreach (int month in months)
+                {
+                    foreach (string day in days)
+                    {
+                        int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
+                        if (date > 20140516)
+                        {
+                            continue;
+                        }
+                        if (ibll.FDataReposInit.where(a => a.Date == date && a.TradeHouse == TradeHouseType.shfe.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
+                        {
+                            string url = string.Format("http://www.shfe.com.cn/data/dailydata/{0}dailystock.html?isAjax=true",
+                                            date);
+                            var model = CrawlerUtils.GetSHFDataRepository_First(url, date.ToString());
+                            if (model!=null)
+                            {
+                                ibll.FDataReposInit.Add(model);
+                                System.Console.WriteLine("上海：" + date);
+                            }
+                        }
+                    }
+                    int n = ibll.FDataReposInit.SaveChanges();
+                    System.Console.WriteLine("上海：Save --{0}",n);
+                }
+            }
+            System.Console.WriteLine("上海：FINISH" );
+        }
+        /// <summary>
+        /// 初始化大商所仓单数据
         /// </summary>
         public static void GetDSFDataRepository_First()
         {

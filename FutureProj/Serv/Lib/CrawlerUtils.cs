@@ -69,7 +69,31 @@ namespace Serv.Lib
         }
         #endregion
 
-        #region 仓单信息获取
+        #region 上海交易所仓单信息
+        public static FDataReposInit GetSHFDataRepository_First(string url,string date)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(url);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签 
+            HtmlNode res = doc.DocumentNode.SelectSingleNode("//*[@id=\"仓单日报20100329_20236\"]/table");
+            if (res != null)
+            {
+                FDataReposInit model = new FDataReposInit();
+                model.TradeHouse = TradeHouseType.shfe.ToString();
+                model.AddDate = DateTime.Now;
+                model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""), @" +", " ");//去掉空格
+                int d = 0; int.TryParse(date, out d);
+                model.Date = d;
+                model.IsCheckFinish = 0;
+                model.Type = InitContentType.Cangdan.ToString();
+                return model;
+            }
+            return null;
+        } 
+        #endregion
+        #region 大商所仓单信息获取
         /// <summary>
         /// 01-获取大商所仓单块信息
         /// </summary>
