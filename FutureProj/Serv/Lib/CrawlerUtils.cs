@@ -68,6 +68,7 @@ namespace Serv.Lib
             if (res != null)
             {
                 FDataReposInit model = new FDataReposInit();
+                model.TradeHouse = TradeHouseType.dce.ToString();
                 model.AddDate = DateTime.Now;
                 model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""),@" +"," ");//去掉空格
                 int d = 0; int.TryParse(date, out d);
@@ -99,6 +100,7 @@ namespace Serv.Lib
                     if (mc.Count>0&&!string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
                     {
                         FDataRepository model = new FDataRepository();
+                        model.TradeHouse = TradeHouseType.dce.ToString();
                         model.Date = date;
                         model.CateName = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
                         model.Reps = HtmlNode.CreateNode(mc[1].ToString()).InnerText;

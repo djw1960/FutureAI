@@ -20,5 +20,6 @@ namespace EF.Entitys
         public string Content { get; set; }
         public int IsCheckFinish { get; set; }
         public System.DateTime AddDate { get; set; }
+        public string TradeHouse { get; set; }
     }
 }

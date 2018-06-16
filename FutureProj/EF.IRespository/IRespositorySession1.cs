@@ -14,7 +14,6 @@ namespace EF.IRespository
     {
     	IRespository.Sons.IFAI FAI{ get; }
     	IRespository.Sons.IFDataMaterial FDataMaterial{ get; }
-    	IRespository.Sons.IFDataRepository FDataRepository{ get; }
     	IRespository.Sons.IFNews FNews{ get; }
     	IRespository.Sons.IFPayGood FPayGood{ get; }
     	IRespository.Sons.IFPayMert FPayMert{ get; }
@@ -23,9 +22,10 @@ namespace EF.IRespository
     	IRespository.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     	IRespository.Sons.IFSys_Role FSys_Role{ get; }
     	IRespository.Sons.IFSysUser FSysUser{ get; }
-    	IRespository.Sons.IFPayWay FPayWay{ get; }
     	IRespository.Sons.IFDataLV FDataLV{ get; }
     	IRespository.Sons.IFDataReposInit FDataReposInit{ get; }
+    	IRespository.Sons.IFDataRepository FDataRepository{ get; }
+    	IRespository.Sons.IFPayWay FPayWay{ get; }
     }
     
     

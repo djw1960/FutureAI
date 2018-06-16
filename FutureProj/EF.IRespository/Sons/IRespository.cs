@@ -16,10 +16,6 @@ namespace EF.IRespository.Sons
     {
     
     }
-    public partial interface IFDataRepository:IBaseRespository<EF.Entitys.FDataRepository>
-    {
-    
-    }
     public partial interface IFNews:IBaseRespository<EF.Entitys.FNews>
     {
     
@@ -52,15 +48,19 @@ namespace EF.IRespository.Sons
     {
     
     }
-    public partial interface IFPayWay:IBaseRespository<EF.Entitys.FPayWay>
-    {
-    
-    }
     public partial interface IFDataLV:IBaseRespository<EF.Entitys.FDataLV>
     {
     
     }
     public partial interface IFDataReposInit:IBaseRespository<EF.Entitys.FDataReposInit>
+    {
+    
+    }
+    public partial interface IFDataRepository:IBaseRespository<EF.Entitys.FDataRepository>
+    {
+    
+    }
+    public partial interface IFPayWay:IBaseRespository<EF.Entitys.FPayWay>
     {
     
     }

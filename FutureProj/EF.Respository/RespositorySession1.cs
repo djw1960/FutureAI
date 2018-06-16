@@ -19,10 +19,6 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FDataMaterial(); }
     	}
-    	public IRespository.Sons.IFDataRepository FDataRepository
-    	{
-    		get { return new Respository.Sons.FDataRepository(); }
-    	}
     	public IRespository.Sons.IFNews FNews
     	{
     		get { return new Respository.Sons.FNews(); }
@@ -55,10 +51,6 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FSysUser(); }
     	}
-    	public IRespository.Sons.IFPayWay FPayWay
-    	{
-    		get { return new Respository.Sons.FPayWay(); }
-    	}
     	public IRespository.Sons.IFDataLV FDataLV
     	{
     		get { return new Respository.Sons.FDataLV(); }
@@ -66,6 +58,14 @@ namespace EF.Respository
     	public IRespository.Sons.IFDataReposInit FDataReposInit
     	{
     		get { return new Respository.Sons.FDataReposInit(); }
+    	}
+    	public IRespository.Sons.IFDataRepository FDataRepository
+    	{
+    		get { return new Respository.Sons.FDataRepository(); }
+    	}
+    	public IRespository.Sons.IFPayWay FPayWay
+    	{
+    		get { return new Respository.Sons.FPayWay(); }
     	}
     }
     

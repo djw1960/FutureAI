@@ -25,13 +25,6 @@ namespace EF.Service
     			return new Service.Sons.FDataMaterial();
     		}
     	}
-    	public IService.Sons.IFDataRepository FDataRepository
-    	{
-    		get
-    		{
-    			return new Service.Sons.FDataRepository();
-    		}
-    	}
     	public IService.Sons.IFNews FNews
     	{
     		get
@@ -88,13 +81,6 @@ namespace EF.Service
     			return new Service.Sons.FSysUser();
     		}
     	}
-    	public IService.Sons.IFPayWay FPayWay
-    	{
-    		get
-    		{
-    			return new Service.Sons.FPayWay();
-    		}
-    	}
     	public IService.Sons.IFDataLV FDataLV
     	{
     		get
@@ -107,6 +93,20 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FDataReposInit();
+    		}
+    	}
+    	public IService.Sons.IFDataRepository FDataRepository
+    	{
+    		get
+    		{
+    			return new Service.Sons.FDataRepository();
+    		}
+    	}
+    	public IService.Sons.IFPayWay FPayWay
+    	{
+    		get
+    		{
+    			return new Service.Sons.FPayWay();
     		}
     	}
     }

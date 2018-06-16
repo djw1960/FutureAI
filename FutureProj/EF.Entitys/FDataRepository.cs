@@ -23,5 +23,6 @@ namespace EF.Entitys
         public int Change { get; set; }
         public System.DateTime DTime { get; set; }
         public int Type { get; set; }
+        public string TradeHouse { get; set; }
     }
 }

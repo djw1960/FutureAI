@@ -26,15 +26,6 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
-    public partial class FDataRepository:BaseService<EF.Entitys.FDataRepository>,EF.IService.Sons.IFDataRepository
-    {
-    	    //IRespository.Sons.IFDataRepository dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FDataRepository;
-                base.dal = dal;
-            }
-    }
     public partial class FNews:BaseService<EF.Entitys.FNews>,EF.IService.Sons.IFNews
     {
     	    //IRespository.Sons.IFNews dal;
@@ -107,15 +98,6 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
-    public partial class FPayWay:BaseService<EF.Entitys.FPayWay>,EF.IService.Sons.IFPayWay
-    {
-    	    //IRespository.Sons.IFPayWay dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FPayWay;
-                base.dal = dal;
-            }
-    }
     public partial class FDataLV:BaseService<EF.Entitys.FDataLV>,EF.IService.Sons.IFDataLV
     {
     	    //IRespository.Sons.IFDataLV dal;
@@ -131,6 +113,24 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FDataReposInit;
+                base.dal = dal;
+            }
+    }
+    public partial class FDataRepository:BaseService<EF.Entitys.FDataRepository>,EF.IService.Sons.IFDataRepository
+    {
+    	    //IRespository.Sons.IFDataRepository dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FDataRepository;
+                base.dal = dal;
+            }
+    }
+    public partial class FPayWay:BaseService<EF.Entitys.FPayWay>,EF.IService.Sons.IFPayWay
+    {
+    	    //IRespository.Sons.IFPayWay dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FPayWay;
                 base.dal = dal;
             }
     }

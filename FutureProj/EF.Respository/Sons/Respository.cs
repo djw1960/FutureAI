@@ -15,10 +15,6 @@ namespace EF.Respository.Sons
     {
     
     }
-    public partial class FDataRepository:BaseRespository<EF.Entitys.FDataRepository>,EF.IRespository.Sons.IFDataRepository
-    {
-    
-    }
     public partial class FNews:BaseRespository<EF.Entitys.FNews>,EF.IRespository.Sons.IFNews
     {
     
@@ -51,15 +47,19 @@ namespace EF.Respository.Sons
     {
     
     }
-    public partial class FPayWay:BaseRespository<EF.Entitys.FPayWay>,EF.IRespository.Sons.IFPayWay
-    {
-    
-    }
     public partial class FDataLV:BaseRespository<EF.Entitys.FDataLV>,EF.IRespository.Sons.IFDataLV
     {
     
     }
     public partial class FDataReposInit:BaseRespository<EF.Entitys.FDataReposInit>,EF.IRespository.Sons.IFDataReposInit
+    {
+    
+    }
+    public partial class FDataRepository:BaseRespository<EF.Entitys.FDataRepository>,EF.IRespository.Sons.IFDataRepository
+    {
+    
+    }
+    public partial class FPayWay:BaseRespository<EF.Entitys.FPayWay>,EF.IRespository.Sons.IFPayWay
     {
     
     }

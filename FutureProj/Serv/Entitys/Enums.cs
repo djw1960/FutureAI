@@ -6,6 +6,22 @@ using System.Threading.Tasks;
 
 namespace Serv.Entitys
 {
+    public enum TradeHouseType
+    {
+        /// <summary>
+        /// 大连期货商品交易所
+        /// </summary>
+        dce,
+        /// <summary>
+        /// 郑州期货商品交易所
+        /// </summary>
+        czce,
+        /// <summary>
+        /// 上海期货商品交易所
+        /// </summary>
+        shfe,
+    }
+
     public enum InitContentType
     {
         /// <summary>

@@ -24,5 +24,6 @@ namespace EF.edmx
         public System.DateTime AddDate { get; set; }
         public bool IsDel { get; set; }
         public bool IsPublish { get; set; }
+        public string TradeHouse { get; set; }
     }
 }
