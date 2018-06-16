@@ -1,13 +1,11 @@
-﻿using EF.Common;
-using EF.Entitys;
+﻿using EF.Entitys;
 using Serv;
 using Serv.Entitys;
 using Serv.Lib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Console
 {
@@ -24,6 +22,31 @@ namespace Console
             //System.Console.WriteLine("---------------------------------------------------------------");
             //System.Console.WriteLine(ss);
             //System.Console.ReadKey();
+
+
+            var list = new List<FNews> { };
+            var pageIndex = 50;
+            while (pageIndex > 0)
+            {
+                var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+                foreach (var item in news)
+                {
+                    System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
+                }
+
+                if (news.Count == 0)
+                {
+                    pageIndex = 0;
+                    break;
+                }
+
+                // 请求太快貌似会被4O4
+                Thread.Sleep(1000);
+                pageIndex++;
+            }
+
+
+            /*
             System.Console.ReadKey();
         }
         /// <summary>

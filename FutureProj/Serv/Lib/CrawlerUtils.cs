@@ -4,26 +4,50 @@ using Serv.Entitys;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Serv.Lib
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CrawlerUtils
     {
+        /// <summary>
+        /// 大连商品交易所
+        /// </summary>
+        const string site = "http://www.dce.com.cn";
+        /// <summary>
+        /// 业务通知页面地址
+        /// </summary>
+        const string businessUrl = "/dalianshangpin/yw/fw/jystz/ywtz/13305-{0}.html";
+        /// <summary>
+        /// 交易所新闻页面地址
+        /// </summary>
+        const string exchangeUrl = "/dalianshangpin/xwzx93/jysxw/13363-{0}.html";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string GetWebClient(string url)
         {
-            string strHTML = "";
-            WebClient myWebClient = new WebClient();
-            Stream myStream = myWebClient.OpenRead(url);
-            StreamReader sr = new StreamReader(myStream, Encoding.UTF8);//注意编码
-            strHTML = sr.ReadToEnd();
-            myStream.Close();
+            var strHTML = string.Empty;
+            try
+            {
+                WebClient myWebClient = new WebClient();
+                Stream myStream = myWebClient.OpenRead(url);
+                StreamReader sr = new StreamReader(myStream, Encoding.UTF8);//注意编码
+                strHTML = sr.ReadToEnd();
+                myStream.Close();
+            }
+            catch { /* TODO */ }
             return strHTML;
         }
+
         #region 获取公告通知，新闻
         /// <summary>
         /// 获取公告，新闻信息
@@ -42,7 +66,7 @@ namespace Serv.Lib
                 var list = res.SelectNodes(@"tr");//获取所有的表格行
             }
             return new List<FNews>();
-        } 
+        }
         #endregion
 
         #region 仓单信息获取
@@ -59,10 +83,10 @@ namespace Serv.Lib
             //更加xpath获取总的对象，如果不为空，就继续选择dl标签 
             HtmlNode titleNode = doc.DocumentNode.SelectSingleNode("//*[@id=\"wbillWeeklyQuotesForm\"]/div/div[2]/p[2]/span");
             string date = "";
-            if (titleNode!=null)
+            if (titleNode != null)
             {
                 var title = titleNode.InnerText;//查询日期：20180614 仓单数据在每日下午4点生成
-                date ="20"+MatchSubString(title, "20", 1, 6);
+                date = "20" + MatchSubString(title, "20", 1, 6);
             }
             var res = doc.DocumentNode.SelectSingleNode("//*[@id=\"printData\"]/div/table");
             if (res != null)
@@ -70,7 +94,7 @@ namespace Serv.Lib
                 FDataReposInit model = new FDataReposInit();
                 model.TradeHouse = TradeHouseType.dce.ToString();
                 model.AddDate = DateTime.Now;
-                model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""),@" +"," ");//去掉空格
+                model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""), @" +", " ");//去掉空格
                 int d = 0; int.TryParse(date, out d);
                 model.Date = d;
                 model.IsCheckFinish = 0;
@@ -79,6 +103,7 @@ namespace Serv.Lib
             }
             return null;
         }
+
         /// <summary>
         /// 02-解析大商仓单详情信息
         /// </summary>
@@ -97,7 +122,7 @@ namespace Serv.Lib
                 foreach (var tr in trlist)
                 {
                     MatchCollection mc = regex.Matches(tr.InnerHtml);
-                    if (mc.Count>0&&!string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
+                    if (mc.Count > 0 && !string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
                     {
                         FDataRepository model = new FDataRepository();
                         model.TradeHouse = TradeHouseType.dce.ToString();
@@ -115,7 +140,7 @@ namespace Serv.Lib
                             model.Type = 3;//统计
                             model.Reps = "ALL";
                         }
-                        model.YTDSum =Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
+                        model.YTDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
                         model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[3].ToString()).InnerText);
                         model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[4].ToString()).InnerText);
                         model.DTime = DateTime.Now;
@@ -182,5 +207,51 @@ namespace Serv.Lib
             }
         }
         #endregion
+
+        #region 获取业务通知/交易所新闻
+        /// <summary>
+        /// 获取业务通知/交易所新闻
+        /// </summary>
+        /// <param name="type">(1:业务通知;2:交易所新闻;)</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns></returns>
+        public static List<FNews> GetNewsFromUrl(int type, int pageIndex)
+        {
+            var list = new List<FNews> { };
+            var url = string.Empty;
+
+            switch (type)
+            {
+                case 1: url = $"{site}{businessUrl}"; break;
+                case 2: url = $"{site}{exchangeUrl}"; break;
+                default: break;
+            }
+
+            var doc = new HtmlDocument();
+            var html = GetWebClient(string.Format(url, pageIndex));
+            if (html.Length == 0) return list;
+
+            doc.LoadHtml(html);
+            var rootNode = doc.DocumentNode;
+            var nodelCollection = rootNode.SelectNodes("//*[@class='list_tpye06']/li");
+            foreach (var node in nodelCollection)
+            {
+                var aNode = node.LastChild;
+                list.Add(new FNews
+                {
+                    AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
+                    NewsTitle = aNode.InnerText,
+                    NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
+                    NewsType = type,
+                    NewContent = "",
+                    NSource = "",
+                });
+            }
+
+            return list;
+        }
+
+        #endregion
+
     }
 }
