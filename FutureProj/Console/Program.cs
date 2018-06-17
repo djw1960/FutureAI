@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Console
@@ -14,16 +15,21 @@ namespace Console
     {
         static void Main(string[] args)
         {
-            //string str = " as  d   fas     dfas     df     asd  f ";
-            //string s = Regex.Replace(str, @" +", " ");
-
+            //string str = "{\"VARNAME\":\"铜$$COPPER\",\"VARSORT\":0,\"REGNAME\":\"上海$$Shanghai\",\"REGSORT\":0,\"WHABBRNAME\":\"期晟公司$$Qisheng\",\"WHROWS\":12,\"WGHTUNIT\":\"2\",\"WRTWGHTS\":1919,\"WRTCHANGE\":0,\"ROWORDER\":1,\"ROWSTATUS\":\"0\"}";
+            //string s = Regex.Replace(str, "(,\"VARSORT\".+?,)", ",");
+            //s = Regex.Replace(s, "(,\"REGSORT\".+?,)", ",");
+            //s = Regex.Replace(s, "(,\"WHROWS\".+?,)", ",");
+            //System.Console.WriteLine(s);
+            //s = Regex.Replace(s, "(,\"ROWORDER\".+?,)", ",");
+            //s = Regex.Replace(s, "(,\"WGHTUNIT\".+?,)", ",");
+            //s = Regex.Replace(s, "(,\"ROWSTATUS\".+?})", "}");
+            //s = Regex.Replace(s, "(\\$\\$.+?\")", "\"");
             //System.Console.WriteLine(s);
 
-            //string ss = Regex.Replace(str, @"<* *?", "");
             //System.Console.WriteLine("---------------------------------------------------------------");
-            //System.Console.WriteLine(ss);
             //System.Console.ReadKey();
 
+            //var ibll = OperationContext.BLLSession;
 
             #region NewsTest
             //var list = new List<FNews> { };
@@ -48,12 +54,11 @@ namespace Console
             //} 
             #endregion
 
-            //获取上海交易所每日仓单
-            //GetSHFDataRepository_First();
             System.Console.ReadKey();
         }
         /// <summary>
         /// 初始化上海商品交易所仓单数据
+        /// 2011-20140516
         /// </summary>
         public static void GetSHFDataRepository_First()
         {
@@ -91,6 +96,46 @@ namespace Console
                 }
             }
             System.Console.WriteLine("上海：FINISH" );
+        }
+        /// <summary>
+        /// 20140519-2018 上海仓单数据
+        /// </summary>
+        public static void GetSHFDataRepository_Second()
+        {
+            var ibll = OperationContext.BLLSession;
+            string[] years = new string[] { "2015","2016","2017","2018" };
+            int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+            ,"13","14","15","16","17","18","19","20","21","22"
+            ,"23","24","25","26","27","28","29","30","31"};
+            foreach (string year in years)
+            {
+                foreach (int month in months)
+                {
+                    foreach (string day in days)
+                    {
+                        int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
+                        if (date >=20180616)
+                        {
+                            continue;
+                        }
+                        if (ibll.FDataReposInit.where(a => a.Date == date && a.TradeHouse == TradeHouseType.shfe.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
+                        {
+                            string url = string.Format("http://www.shfe.com.cn/data/dailydata/{0}dailystock.dat",
+                                            date);
+                            var model = CrawlerUtils.GetSHFDataRepository_Second(url, date.ToString());
+                            if (model != null)
+                            {
+                                ibll.FDataReposInit.Add(model);
+                                System.Console.WriteLine("上海：" + date);
+                            }
+                        }
+                    }
+                    int n = ibll.FDataReposInit.SaveChanges();
+                    System.Console.WriteLine("上海：Save --{0}", n);
+                }
+            }
+            System.Console.WriteLine("上海：FINISH");
         }
         /// <summary>
         /// 初始化大商所仓单数据

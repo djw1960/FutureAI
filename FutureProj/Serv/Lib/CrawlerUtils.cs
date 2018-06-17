@@ -70,6 +70,12 @@ namespace Serv.Lib
         #endregion
 
         #region 上海交易所仓单信息
+        /// <summary>
+        /// 处理2011年-2014年5月16日之间的数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static FDataReposInit GetSHFDataRepository_First(string url,string date)
         {
             //下载网页源代码 
@@ -84,6 +90,11 @@ namespace Serv.Lib
                 model.TradeHouse = TradeHouseType.shfe.ToString();
                 model.AddDate = DateTime.Now;
                 model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""), @" +", " ");//去掉空格
+                string temp = Regex.Replace(model.Content, @"(<table .+?>)", "<table>");
+                temp = Regex.Replace(temp, @"(<col .+?>)", "<col>");
+                temp = Regex.Replace(temp, @"(<tr .+?>)", "<tr>");
+                temp = Regex.Replace(temp, @"(<td .+?>)", "<td>");
+                model.Content = temp;
                 int d = 0; int.TryParse(date, out d);
                 model.Date = d;
                 model.IsCheckFinish = 0;
@@ -91,8 +102,41 @@ namespace Serv.Lib
                 return model;
             }
             return null;
-        } 
+        }
+        /// <summary>
+        /// 处理20140516年-2018年之间的数据
+        /// 返回json
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static FDataReposInit GetSHFDataRepository_Second(string url, string date)
+        {
+            var docText = GetWebClient(url);//返回json
+            
+            if (!string.IsNullOrEmpty(docText))
+            {
+                FDataReposInit model = new FDataReposInit();
+                model.TradeHouse = TradeHouseType.shfe.ToString();
+                model.AddDate = DateTime.Now;
+                string temp = Regex.Replace(docText, "(,\"VARSORT\".+?,)", ",");//去掉空格
+                temp = Regex.Replace(temp, "(,\"REGSORT\".+?,)", ",");
+                temp = Regex.Replace(temp, "(,\"WHROWS\".+?,)", ",");
+                temp = Regex.Replace(temp, "(,\"ROWORDER\".+?,)", ",");
+                temp = Regex.Replace(temp, "(,\"WGHTUNIT\".+?,)", ",");
+                temp = Regex.Replace(temp, "(,\"ROWSTATUS\".+?})", "}");
+                temp = Regex.Replace(temp, "(\\$\\$.+?\")", "\"");
+                model.Content = temp;
+                int d = 0; int.TryParse(date, out d);
+                model.Date = d;
+                model.IsCheckFinish = 0;
+                model.Type = InitContentType.Cangdan.ToString();
+                return model;
+            }
+            return null;
+        }
         #endregion
+
         #region 大商所仓单信息获取
         /// <summary>
         /// 01-获取大商所仓单块信息
