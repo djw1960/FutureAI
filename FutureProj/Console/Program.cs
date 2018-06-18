@@ -32,26 +32,26 @@ namespace Console
             //var ibll = OperationContext.BLLSession;
 
             #region NewsTest
-            //var list = new List<FNews> { };
-            //var pageIndex = 50;
-            //while (pageIndex > 0)
-            //{
-            //    var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
-            //    foreach (var item in news)
-            //    {
-            //        System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
-            //    }
+            var list = new List<FNews> { };
+            var pageIndex = 1;
+            while (pageIndex > 0)
+            {
+                var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+                foreach (var item in news)
+                {
+                    System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
+                }
 
-            //    if (news.Count == 0)
-            //    {
-            //        pageIndex = 0;
-            //        break;
-            //    }
+                if (news.Count == 0)
+                {
+                    pageIndex = 0;
+                    break;
+                }
 
-            //    // 请求太快貌似会被4O4
-            //    Thread.Sleep(1000);
-            //    pageIndex++;
-            //} 
+                // 请求太快貌似会被4O4
+                Thread.Sleep(1000);
+                pageIndex++;
+            }
             #endregion
 
             System.Console.ReadKey();
@@ -63,7 +63,7 @@ namespace Console
         public static void GetSHFDataRepository_First()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] {"2014"};
+            string[] years = new string[] { "2014" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -84,7 +84,7 @@ namespace Console
                             string url = string.Format("http://www.shfe.com.cn/data/dailydata/{0}dailystock.html?isAjax=true",
                                             date);
                             var model = CrawlerUtils.GetSHFDataRepository_First(url, date.ToString());
-                            if (model!=null)
+                            if (model != null)
                             {
                                 ibll.FDataReposInit.Add(model);
                                 System.Console.WriteLine("上海：" + date);
@@ -92,10 +92,10 @@ namespace Console
                         }
                     }
                     int n = ibll.FDataReposInit.SaveChanges();
-                    System.Console.WriteLine("上海：Save --{0}",n);
+                    System.Console.WriteLine("上海：Save --{0}", n);
                 }
             }
-            System.Console.WriteLine("上海：FINISH" );
+            System.Console.WriteLine("上海：FINISH");
         }
         /// <summary>
         /// 20140519-2018 上海仓单数据
@@ -103,7 +103,7 @@ namespace Console
         public static void GetSHFDataRepository_Second()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] { "2015","2016","2017","2018" };
+            string[] years = new string[] { "2015", "2016", "2017", "2018" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -115,7 +115,7 @@ namespace Console
                     foreach (string day in days)
                     {
                         int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                        if (date >=20180616)
+                        if (date >= 20180616)
                         {
                             continue;
                         }
@@ -143,8 +143,8 @@ namespace Console
         public static void GetDSFDataRepository_First()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] {"2013", "2014", "2015", "2016", "2017", "2018" };
-            int[] months = new int[] {0,1,2,3, 4, 5, 6,7,8,9, 10,11 };
+            string[] years = new string[] { "2013", "2014", "2015", "2016", "2017", "2018" };
+            int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
             ,"23","24","25","26","27","28","29","30","31"};
@@ -154,12 +154,12 @@ namespace Console
                 {
                     foreach (string day in days)
                     {
-                        int d = Convert.ToInt32(string.Format("{0}{1}{2}", year, month+1<10?"0"+(month+1).ToString():(month+1).ToString(), day));
-                        if (d<20130530)
+                        int d = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
+                        if (d < 20130530)
                         {
                             continue;
                         }
-                        if (ibll.FDataReposInit.where(a=>a.Date==d&&a.TradeHouse==TradeHouseType.dce.ToString()&&a.Type== InitContentType.Cangdan.ToString()).Count()<1)
+                        if (ibll.FDataReposInit.where(a => a.Date == d && a.TradeHouse == TradeHouseType.dce.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
                         {
                             string url = string.Format("http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html?year={0}&month={1}&day={2}",
                             year, month, day);
@@ -177,9 +177,9 @@ namespace Console
         {
             var ibll = OperationContext.BLLSession;
             int count = ibll.FDataReposInit.where(a => a.ID > 0 && a.IsCheckFinish == 0).Count();
-            for (int page = 1; page <= (count/10)+1; page++)
+            for (int page = 1; page <= (count / 10) + 1; page++)
             {
-                List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.ID > 0&&a.IsCheckFinish==0).OrderBy(s=>s.ID).Take(10).ToList();
+                List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.ID > 0 && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
                 foreach (FDataReposInit model in list)
                 {
                     if (ibll.FDataRepository.where(a => a.Date == model.Date && a.TradeHouse == TradeHouseType.dce.ToString()).Count() < 1)
@@ -192,7 +192,7 @@ namespace Console
                         model.IsCheckFinish = 1;
                         ibll.FDataReposInit.Update(model, new string[] { "IsCheckFinish" });
                         int num = ibll.SaveChanges();
-                        System.Console.WriteLine("大商Check："+model.Date);
+                        System.Console.WriteLine("大商Check：" + model.Date);
                     }
                     else continue;
                 }

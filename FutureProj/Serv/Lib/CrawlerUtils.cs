@@ -76,7 +76,7 @@ namespace Serv.Lib
         /// <param name="url"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static FDataReposInit GetSHFDataRepository_First(string url,string date)
+        public static FDataReposInit GetSHFDataRepository_First(string url, string date)
         {
             //下载网页源代码 
             var docText = GetWebClient(url);
@@ -113,7 +113,7 @@ namespace Serv.Lib
         public static FDataReposInit GetSHFDataRepository_Second(string url, string date)
         {
             var docText = GetWebClient(url);//返回json
-            
+
             if (!string.IsNullOrEmpty(docText))
             {
                 FDataReposInit model = new FDataReposInit();
@@ -305,20 +305,39 @@ namespace Serv.Lib
             foreach (var node in nodelCollection)
             {
                 var aNode = node.LastChild;
-                list.Add(new FNews
+                var news = new FNews
                 {
                     AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
                     NewsTitle = aNode.InnerText,
                     NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
                     NewsType = type,
                     NewContent = "",
-                    NSource = "",
-                });
+                    NSource = url,
+                };
+
+                GetDetailByLink(ref news);
+                list.Add(news);
             }
 
             return list;
         }
 
+        /// <summary>
+        /// 通过标题获取详情
+        /// </summary>
+        /// <param name="model"></param>
+        private static void GetDetailByLink(ref FNews model)
+        {
+            var doc = new HtmlDocument();
+            var html = GetWebClient(model.NewsUrl);
+            if (html.Length > 0)
+            {
+                doc.LoadHtml(html);
+                var rootNode = doc.DocumentNode;
+                var node = rootNode.SelectSingleNode("//*[@id='zoom']");
+                model.NewContent = node.InnerHtml;
+            }
+        }
         #endregion
 
     }
