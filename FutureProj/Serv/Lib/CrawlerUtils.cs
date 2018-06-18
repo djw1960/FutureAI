@@ -34,14 +34,15 @@ namespace Serv.Lib
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string GetWebClient(string url)
+        public static string GetWebClient(string url,Encoding encode=null)
         {
             var strHTML = string.Empty;
             try
             {
                 WebClient myWebClient = new WebClient();
                 Stream myStream = myWebClient.OpenRead(url);
-                StreamReader sr = new StreamReader(myStream, Encoding.UTF8);//注意编码
+                Encoding encd = encode == null ? Encoding.UTF8 : encode;
+                StreamReader sr = new StreamReader(myStream, encd);//注意编码
                 strHTML = sr.ReadToEnd();
                 myStream.Close();
             }
@@ -67,6 +68,50 @@ namespace Serv.Lib
                 var list = res.SelectNodes(@"tr");//获取所有的表格行
             }
             return new List<FNews>();
+        }
+        #endregion
+        #region 郑州商品交易所仓单
+
+        /// <summary>
+        /// 郑州商品交易所仓单
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static FDataReposInit GetZZFDataRepository_First(string url, int date)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(url,Encoding.Default);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            HtmlNode res = null;
+            if (date < 20151001)
+            {
+                res = doc.DocumentNode.SelectSingleNode("//*[@id=\"toexcel\"]");
+            }
+            else
+            {
+                res = doc.DocumentNode.SelectSingleNode("/html/body/table");
+            }
+            if (res != null)
+            {
+                FDataReposInit model = new FDataReposInit();
+                model.TradeHouse = TradeHouseType.czce.ToString();
+                model.AddDate = DateTime.Now;
+                model.Content = Regex.Replace(Regex.Replace(res.OuterHtml, @"[\f\n\r\t\v]", ""), @" +", " ");//去掉空格
+                string temp = Regex.Replace(model.Content, @"(<table .+?>)", "<table>");
+                temp = Regex.Replace(temp, @"(<div .+?>)", "<div>");
+                temp = Regex.Replace(temp, @"(<col .+?>)", "<col>");
+                temp = Regex.Replace(temp, @"(<tr .+?>)", "<tr>");
+                temp = Regex.Replace(temp, @"(<td .+?>)", "<td>");
+                temp = temp.Replace("&nbsp;", "");
+                model.Content = temp;
+                model.Date = date;
+                model.IsCheckFinish = 0;
+                model.Type = InitContentType.Cangdan.ToString();
+                return model;
+            }
+            return null;
         }
         #endregion
 
