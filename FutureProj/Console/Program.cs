@@ -32,26 +32,26 @@ namespace Console
             //var ibll = OperationContext.BLLSession;
 
             #region NewsTest
-            //var list = new List<FNews> { };
-            //var pageIndex = 50;
-            //while (pageIndex > 0)
-            //{
-            //    var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
-            //    foreach (var item in news)
-            //    {
-            //        System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}");
-            //    }
+            var list = new List<FNews> { };
+            var pageIndex = 1;
+            while (pageIndex > 0)
+            {
+                var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+                foreach (var item in news)
+                {
+                    System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
+                }
 
-            //    if (news.Count == 0)
-            //    {
-            //        pageIndex = 0;
-            //        break;
-            //    }
+                if (news.Count == 0)
+                {
+                    pageIndex = 0;
+                    break;
+                }
 
-            //    // 请求太快貌似会被4O4
-            //    Thread.Sleep(1000);
-            //    pageIndex++;
-            //} 
+                // 请求太快貌似会被4O4
+                Thread.Sleep(1000);
+                pageIndex++;
+            }
             #endregion
 
             System.Console.ReadKey();
