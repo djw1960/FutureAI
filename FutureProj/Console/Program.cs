@@ -56,6 +56,7 @@ namespace Console
 
             System.Console.ReadKey();
         }
+        #region 上海商品交易所仓单初始化
         /// <summary>
         /// 初始化上海商品交易所仓单数据
         /// 2011-20140516
@@ -63,7 +64,7 @@ namespace Console
         public static void GetSHFDataRepository_First()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] {"2014"};
+            string[] years = new string[] { "2014" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -84,7 +85,7 @@ namespace Console
                             string url = string.Format("http://www.shfe.com.cn/data/dailydata/{0}dailystock.html?isAjax=true",
                                             date);
                             var model = CrawlerUtils.GetSHFDataRepository_First(url, date.ToString());
-                            if (model!=null)
+                            if (model != null)
                             {
                                 ibll.FDataReposInit.Add(model);
                                 System.Console.WriteLine("上海：" + date);
@@ -92,10 +93,47 @@ namespace Console
                         }
                     }
                     int n = ibll.FDataReposInit.SaveChanges();
-                    System.Console.WriteLine("上海：Save --{0}",n);
+                    System.Console.WriteLine("上海：Save --{0}", n);
                 }
             }
-            System.Console.WriteLine("上海：FINISH" );
+            System.Console.WriteLine("上海：FINISH");
+        }
+        /// <summary>
+        /// 上海仓单初始化
+        /// 2011-20140516
+        /// </summary>
+        public static void GetSHFDataRepository_FirstD()
+        {
+            TaskStart:
+            try
+            {
+                var ibll = OperationContext.BLLSession;
+                int count = ibll.FDataReposInit.where(a => a.Date <= 20140516 && a.TradeHouse == TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).Count();
+                for (int page = 1; page <= (count / 10) + 1; page++)
+                {
+                    List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date <= 20140516 && a.TradeHouse == TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
+                    foreach (FDataReposInit model in list)
+                    {
+                        List<FDataRepository> resplist = CrawlerUtils.GetSHFDataRepository_FirstD(model.Content, model.Date);
+                        foreach (var item in resplist)
+                        {
+                            ibll.FDataRepository.Add(item);
+                        }
+                        model.IsCheckFinish = 1;
+                        ibll.FDataReposInit.Update(model, new string[] { "IsCheckFinish" });
+                        int num = ibll.SaveChanges();
+                        System.Console.WriteLine("上海2011-2014Check：" + model.Date);
+                    }
+                }
+                System.Console.WriteLine("上海2011-2014Check：FINISH");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(string.Format("异常：{0} 开始休眠",ex.Message));
+                System.Threading.Thread.Sleep(60000);
+                goto TaskStart;
+            }
+            
         }
         /// <summary>
         /// 20140519-2018 上海仓单数据
@@ -103,7 +141,7 @@ namespace Console
         public static void GetSHFDataRepository_Second()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] { "2015","2016","2017","2018" };
+            string[] years = new string[] { "2015", "2016", "2017", "2018" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -115,7 +153,7 @@ namespace Console
                     foreach (string day in days)
                     {
                         int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                        if (date >=20180616)
+                        if (date >= 20180616)
                         {
                             continue;
                         }
@@ -138,13 +176,45 @@ namespace Console
             System.Console.WriteLine("上海：FINISH");
         }
         /// <summary>
+        /// 20140519-2018 上海仓单数据解析
+        /// </summary>
+        public static void GetSHFDataRepository_SecondD()
+        {
+            var ibll = OperationContext.BLLSession;
+            int count = ibll.FDataReposInit.where(a => a.Date > 20140516 &&a.TradeHouse==TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).Count();
+            for (int page = 1; page <= (count / 10) + 1; page++)
+            {
+                List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date > 20140516 && a.TradeHouse == TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
+                foreach (FDataReposInit model in list)
+                {
+                    if (ibll.FDataRepository.where(a => a.Date == model.Date && a.TradeHouse == TradeHouseType.shfe.ToString()).Count() < 1)
+                    {
+                        List<FDataRepository> resplist = CrawlerUtils.GetSHFDataRepository_SecondD(model.Content, model.Date);
+                        foreach (var item in resplist)
+                        {
+                            ibll.FDataRepository.Add(item);
+                        }
+                        model.IsCheckFinish = 1;
+                        ibll.FDataReposInit.Update(model, new string[] { "IsCheckFinish" });
+                        int num = ibll.SaveChanges();
+                        System.Console.WriteLine("上海2014Check：" + model.Date);
+                    }
+                    else continue;
+                }
+            }
+            System.Console.WriteLine("上海2014Check：FINISH");
+        }
+        #endregion
+
+        #region  初始化大商所仓单数据
+        /// <summary>
         /// 初始化大商所仓单数据
         /// </summary>
         public static void GetDSFDataRepository_First()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] {"2013", "2014", "2015", "2016", "2017", "2018" };
-            int[] months = new int[] {0,1,2,3, 4, 5, 6,7,8,9, 10,11 };
+            string[] years = new string[] { "2013", "2014", "2015", "2016", "2017", "2018" };
+            int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
             ,"23","24","25","26","27","28","29","30","31"};
@@ -154,12 +224,12 @@ namespace Console
                 {
                     foreach (string day in days)
                     {
-                        int d = Convert.ToInt32(string.Format("{0}{1}{2}", year, month+1<10?"0"+(month+1).ToString():(month+1).ToString(), day));
-                        if (d<20130530)
+                        int d = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
+                        if (d < 20130530)
                         {
                             continue;
                         }
-                        if (ibll.FDataReposInit.where(a=>a.Date==d&&a.TradeHouse==TradeHouseType.dce.ToString()&&a.Type== InitContentType.Cangdan.ToString()).Count()<1)
+                        if (ibll.FDataReposInit.where(a => a.Date == d && a.TradeHouse == TradeHouseType.dce.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
                         {
                             string url = string.Format("http://www.dce.com.cn/publicweb/quotesdata/wbillWeeklyQuotes.html?year={0}&month={1}&day={2}",
                             year, month, day);
@@ -176,10 +246,10 @@ namespace Console
         public static void GetDSFDataRepository_Second()
         {
             var ibll = OperationContext.BLLSession;
-            int count = ibll.FDataReposInit.where(a => a.ID > 0 && a.IsCheckFinish == 0).Count();
-            for (int page = 1; page <= (count/10)+1; page++)
+            int count = ibll.FDataReposInit.where(a => a.ID > 0 && a.TradeHouse == TradeHouseType.dce.ToString() && a.IsCheckFinish == 0).Count();
+            for (int page = 1; page <= (count / 10) + 1; page++)
             {
-                List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.ID > 0&&a.IsCheckFinish==0).OrderBy(s=>s.ID).Take(10).ToList();
+                List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.ID > 0 && a.TradeHouse == TradeHouseType.dce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
                 foreach (FDataReposInit model in list)
                 {
                     if (ibll.FDataRepository.where(a => a.Date == model.Date && a.TradeHouse == TradeHouseType.dce.ToString()).Count() < 1)
@@ -192,13 +262,14 @@ namespace Console
                         model.IsCheckFinish = 1;
                         ibll.FDataReposInit.Update(model, new string[] { "IsCheckFinish" });
                         int num = ibll.SaveChanges();
-                        System.Console.WriteLine("大商Check："+model.Date);
+                        System.Console.WriteLine("大商Check：" + model.Date);
                     }
                     else continue;
                 }
             }
             System.Console.WriteLine("大商Check：FINISH");
-        }
+        } 
+        #endregion
         /// <summary>
         /// 多条件查询拼接
         /// </summary>

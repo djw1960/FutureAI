@@ -78,6 +78,7 @@
     <Compile Include="Entitys\RequestParamsM.cs" />
     <Compile Include="Entitys\ReturnModel.cs" />
     <Compile Include="Entitys\ServiceConfig.cs" />
+    <Compile Include="Entitys\SHFEModel.cs" />
     <Compile Include="Entitys\WebPayParams.cs" />
     <Compile Include="FutureControl.cs" />
     <Compile Include="Helper\ByteConvertHelper.cs" />

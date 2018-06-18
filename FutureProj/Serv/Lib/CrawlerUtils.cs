@@ -1,5 +1,6 @@
 ﻿using EF.Entitys;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using Serv.Entitys;
 using System;
 using System.Collections.Generic;
@@ -104,6 +105,106 @@ namespace Serv.Lib
             return null;
         }
         /// <summary>
+        /// 处理2011年-2014年5月16日之间的数据
+        /// 处理table
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static List<FDataRepository> GetSHFDataRepository_FirstD(string table, int date)
+        {
+            List<FDataRepository> list = new List<FDataRepository>();
+            //加载源代码，获取文档对象
+            var tnode = HtmlNode.CreateNode(table);
+            if (tnode != null)
+            {
+                var trlist = tnode.SelectNodes(@"tr");//获取所有的表格行
+                Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
+                string cate = "";
+                //每一行都是一个对象
+                foreach (var tr in trlist)
+                {
+                    MatchCollection mc = regex.Matches(tr.InnerHtml);
+                    if (mc.Count < 3)
+                    {
+                        continue;
+                    }
+                    else if (mc.Count == 3)
+                    {
+                        var mc0 = HtmlNode.CreateNode(mc[0].ToString());
+                        var mc1 = HtmlNode.CreateNode(mc[1].ToString());
+                        var mc2 = HtmlNode.CreateNode(mc[2].ToString());
+                        if (string.IsNullOrWhiteSpace(cate)|| string.IsNullOrWhiteSpace(mc0.InnerText) || string.IsNullOrWhiteSpace(mc1.InnerText) || string.IsNullOrWhiteSpace(mc2.InnerText))
+                        {
+                            continue;
+                        }
+                        if (mc0.InnerText.Contains("上期所指定")||mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            FDataRepository model = new FDataRepository();
+                            model.TradeHouse = TradeHouseType.shfe.ToString();
+                            model.Date = date;
+                            model.CateName = cate;
+                            model.Reps = mc0.InnerText;
+                            model.Type = 1;
+                            if (mc0.InnerText.Contains("合")&& mc0.InnerText.Contains("计"))//小计
+                            {
+                                model.Type = 2;//统计
+                                model.Reps = "ALL";
+                            }
+                            else if (mc0.InnerText.Contains("总") && mc0.InnerText.Contains("计"))
+                            {
+                                model.Type = 3;//统计
+                                model.Reps = "ALL";
+                            }
+                            model.TDSum = Convert.ToInt32(mc1.InnerText);
+                            model.Change = Convert.ToInt32(mc2.InnerText);
+                            model.YTDSum = model.TDSum - model.Change;
+                            model.DTime = DateTime.Now;
+                            list.Add(model);
+                        }
+                    }
+                    else if (mc.Count == 4)//品种信息
+                    {
+                        var mc0 = HtmlNode.CreateNode(mc[0].ToString());
+                        var mc1 = HtmlNode.CreateNode(mc[1].ToString());
+                        var mc2 = HtmlNode.CreateNode(mc[2].ToString());
+                        var mc3 = HtmlNode.CreateNode(mc[3].ToString());
+                        if (string.IsNullOrWhiteSpace(mc1.InnerText) && string.IsNullOrWhiteSpace(mc2.InnerText))
+                        {
+                            cate = mc0.InnerText.Replace("&nbsp;","");
+                        }
+                        if (mc0.InnerText.Contains("地区")||mc0.InnerText.Contains ("上期所指定")|| mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
+                        {
+                            continue;
+                        }
+                        if (!string.IsNullOrWhiteSpace(mc0.InnerText) && !string.IsNullOrWhiteSpace(mc1.InnerText) && !string.IsNullOrWhiteSpace(mc2.InnerText) && !string.IsNullOrWhiteSpace(mc3.InnerText))
+                        {
+                            if (string.IsNullOrWhiteSpace(cate))
+                            {
+                                continue;
+                            }
+                            FDataRepository model = new FDataRepository();
+                            model.TradeHouse = TradeHouseType.shfe.ToString();
+                            model.Date = date;
+                            model.CateName = cate;
+                            model.Reps = mc1.InnerText;
+                            model.Type = 1;
+                            model.TDSum = Convert.ToInt32(mc2.InnerText);
+                            model.Change = Convert.ToInt32(mc3.InnerText);
+                            model.YTDSum = model.TDSum - model.Change;
+                            model.DTime = DateTime.Now;
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        /// <summary>
         /// 处理20140516年-2018年之间的数据
         /// 返回json
         /// </summary>
@@ -134,6 +235,45 @@ namespace Serv.Lib
                 return model;
             }
             return null;
+        }
+
+        public static List<FDataRepository> GetSHFDataRepository_SecondD(string table, int date)
+        {
+            List<FDataRepository> list = new List<FDataRepository>();
+            //table is jsonobject
+            SHFE_DataModel obj = JsonConvert.DeserializeObject<SHFE_DataModel>(table);
+            if (obj != null&&obj.o_cursor.Count>0)
+            {
+                foreach (SHFE_CangDanModel item in obj.o_cursor)
+                {
+                    if (string.IsNullOrEmpty(item.REGNAME)&&(!item.WHABBRNAME.Equals("合计") && !item.WHABBRNAME.Equals("总计")))
+                    {
+                        continue;
+                    }
+                    FDataRepository model = new FDataRepository();
+                    model.TradeHouse = TradeHouseType.shfe.ToString();
+                    model.Date = date;
+                    model.CateName = item.VARNAME;
+                    model.Reps =item.WHABBRNAME;
+                    model.Type = 1;
+                    if (model.Reps.Equals("合计"))
+                    {
+                        model.Type = 2;//统计
+                        model.Reps = "ALL";
+                    }
+                    else if (model.Reps.Equals("总计"))
+                    {
+                        model.Type = 3;//统计
+                        model.Reps = "ALL";
+                    }
+                    model.TDSum = Convert.ToInt32(item.WRTWGHTS);
+                    model.Change = Convert.ToInt32(item.WRTCHANGE);
+                    model.YTDSum = model.TDSum - model.Change;
+                    model.DTime = DateTime.Now;
+                    list.Add(model);
+                }
+            }
+            return list;
         }
         #endregion
 
