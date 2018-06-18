@@ -53,8 +53,7 @@ namespace Console
             //    pageIndex++;
             //}
             #endregion
-
-            GetZZFDataRepository_First();
+            
             System.Console.ReadKey();
         }
         #region 郑州商品交易所仓单
@@ -80,6 +79,10 @@ namespace Console
                         foreach (string day in days)
                         {
                             int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
+                            if (date>20180616)
+                            {
+                                continue;
+                            }
                             if (ibll.FDataReposInit.where(a => a.Date == date && a.TradeHouse == TradeHouseType.czce.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
                             {
                                 string url = "";
