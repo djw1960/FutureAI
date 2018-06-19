@@ -113,6 +113,68 @@ namespace Serv.Lib
             }
             return null;
         }
+        /// <summary>
+        /// 郑商所仓单解析
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static List<FDataRepository> GetZZFDataRepository_Second(string table, int date)
+        {
+            List<FDataRepository> list = new List<FDataRepository>();
+
+            if (date > 20151001)
+            {
+                #region 20151001-2018
+
+                #endregion
+            }
+            else
+            {
+                #region 20110104-20151001
+
+                #endregion
+            }
+
+            //加载源代码，获取文档对象
+            var tnode = HtmlNode.CreateNode(table);
+            if (tnode != null)
+            {
+                var trlist = tnode.SelectNodes(@"tr");//获取所有的表格行
+                Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
+                //每一行都是一个对象
+                foreach (var tr in trlist)
+                {
+                    MatchCollection mc = regex.Matches(tr.InnerHtml);
+                    if (mc.Count > 0 && !string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
+                    {
+                        FDataRepository model = new FDataRepository();
+                        model.TradeHouse = TradeHouseType.dce.ToString();
+                        model.Date = date;
+                        model.CateName = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
+                        model.Reps = HtmlNode.CreateNode(mc[1].ToString()).InnerText;
+                        model.Type = 1;
+                        if (model.CateName.Contains("小计"))
+                        {
+                            model.Type = 2;//统计
+                            model.Reps = "ALL";
+                        }
+                        else if (model.CateName.Contains("总计"))
+                        {
+                            model.Type = 3;//统计
+                            model.Reps = "ALL";
+                        }
+                        model.YTDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
+                        model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[3].ToString()).InnerText);
+                        model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[4].ToString()).InnerText);
+                        model.DTime = DateTime.Now;
+                        list.Add(model);
+                    }
+                    else continue;
+                }
+            }
+            return list;
+        }
         #endregion
 
         #region 上海交易所仓单信息

@@ -86,7 +86,7 @@ namespace Console
                             if (ibll.FDataReposInit.where(a => a.Date == date && a.TradeHouse == TradeHouseType.czce.ToString() && a.Type == InitContentType.Cangdan.ToString()).Count() < 1)
                             {
                                 string url = "";
-                                if (date < 20151008)
+                                if (date < 20151001)
                                 {
                                     url = string.Format("http://www.czce.com.cn/portal/exchange/{0}/datawhsheet/{1}.htm", year, date);
                                 }
@@ -113,6 +113,42 @@ namespace Console
                 System.Console.WriteLine("郑商所仓单：{0}",ex.Message);
                 System.Threading.Thread.Sleep(60000);
                 goto ZZTaskStart;
+            }
+        }
+        /// <summary>
+        /// 解析郑商所交易仓单详情数据
+        /// 20110104-20151001-2018
+        /// </summary>
+        public static void GetZZFDataRepository_Second()
+        {
+            TaskStart:
+            try
+            {
+                var ibll = OperationContext.BLLSession;
+                int count = ibll.FDataReposInit.where(a =>a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
+                for (int page = 1; page <= (count / 10) + 1; page++)
+                {
+                    List<FDataReposInit> list = ibll.FDataReposInit.where(a =>a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
+                    foreach (FDataReposInit model in list)
+                    {
+                        List<FDataRepository> resplist = CrawlerUtils.GetZZFDataRepository_Second(model.Content, model.Date);
+                        foreach (var item in resplist)
+                        {
+                            ibll.FDataRepository.Add(item);
+                        }
+                        model.IsCheckFinish = 1;
+                        ibll.FDataReposInit.Update(model, new string[] { "IsCheckFinish" });
+                        int num = ibll.SaveChanges();
+                        System.Console.WriteLine("郑州Check：" + model.Date);
+                    }
+                }
+                System.Console.WriteLine("上海Check：FINISH");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(string.Format("异常：{0} 开始休眠", ex.Message));
+                System.Threading.Thread.Sleep(60000);
+                goto TaskStart;
             }
         }
         #endregion
