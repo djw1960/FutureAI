@@ -26,10 +26,28 @@ namespace Console
             //s = Regex.Replace(s, "(\\$\\$.+?\")", "\"");
             //System.Console.WriteLine(s);
 
+            //string title = "品种：苹果AP单位：张日期：2018-06-19";
+            //string temp = Regex.Match(title, "(品种：.+单位：)").ToString();
+            //System.Console.WriteLine(temp);
+            //temp = temp.Replace("品种：", "").Replace("单位：", "");
+            //System.Console.WriteLine(temp);
             //System.Console.WriteLine("---------------------------------------------------------------");
             //System.Console.ReadKey();
 
             //var ibll = OperationContext.BLLSession;
+            //List<string> list = new List<string>() { "j","h","g","f","e","d"};
+            //foreach (var item in list)
+            //{
+            //    System.Console.WriteLine(1);
+            //    foreach (var str in list)
+            //    {
+            //        System.Console.Write(str);
+            //        if (str=="g")
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
 
             #region NewsTest
             //var list = new List<FNews> { };
@@ -125,10 +143,10 @@ namespace Console
             try
             {
                 var ibll = OperationContext.BLLSession;
-                int count = ibll.FDataReposInit.where(a =>a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
+                int count = ibll.FDataReposInit.where(a =>a.Date<20151001&&a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
                 for (int page = 1; page <= (count / 10) + 1; page++)
                 {
-                    List<FDataReposInit> list = ibll.FDataReposInit.where(a =>a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
+                    List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date < 20151001 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
                     foreach (FDataReposInit model in list)
                     {
                         List<FDataRepository> resplist = CrawlerUtils.GetZZFDataRepository_Second(model.Content, model.Date);
@@ -142,7 +160,7 @@ namespace Console
                         System.Console.WriteLine("郑州Check：" + model.Date);
                     }
                 }
-                System.Console.WriteLine("上海Check：FINISH");
+                System.Console.WriteLine("郑州Check：FINISH");
             }
             catch (Exception ex)
             {

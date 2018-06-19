@@ -126,53 +126,140 @@ namespace Serv.Lib
             if (date > 20151001)
             {
                 #region 20151001-2018
+                var tnode = HtmlNode.CreateNode(table);
+                if (tnode != null)
+                {
+                    var tablelist = tnode.SelectNodes(@"tr/td/table");
+                    foreach (var item in tablelist)
+                    {
+                        var trlist = item.SelectNodes(@"tr");
+                        Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
+                        //每一行都是一个对象
+                        int cdsum = 0;
+                        int cdchange = 0;
+                        string cate = "";
+                        foreach (var tr in trlist)
+                        {
+                            MatchCollection mc = regex.Matches(tr.InnerHtml);
+                            if (mc.Count <=2)//标题
+                            {
+                                //品种：苹果AP单位：张    日期：2018-06-19
+                                string title = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
 
+                                string temp = Regex.Match(title, "(品种：.+单位：)").ToString();
+                                temp = temp.Replace("品种：", "").Replace("单位：", "");
+                                cate = temp.Trim();
+                            }
+                            else if (mc.Count > 2)
+                            {
+                                string mc0 = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
+                                if (mc0.Contains("仓库编号")||mc0.Contains("厂库编号"))
+                                {
+                                    for (int i = 0; i < mc.Count; i++)
+                                    {
+                                        string mctemp1 = HtmlNode.CreateNode(mc[i].ToString()).InnerText;
+                                        if (mctemp1.Contains("仓单数量"))
+                                        {
+                                            cdsum = i;
+                                        }
+                                        if (mctemp1.Contains("当日增减"))
+                                        {
+                                            cdchange = i;
+                                        }
+                                    }
+                                }
+                                else if (mc0.Contains("总计"))
+                                {
+                                    FDataRepository model = new FDataRepository();
+                                    model.TradeHouse = TradeHouseType.czce.ToString();
+                                    model.Date = date;
+                                    model.CateName = cate;
+                                    model.Type = 2;//品种统计
+                                    model.Reps = "ALL";
+                                    model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[cdsum].ToString()).InnerText);
+                                    model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[cdchange].ToString()).InnerText);
+                                    model.YTDSum = model.TDSum - model.Change;
+                                    model.DTime = DateTime.Now;
+                                    list.Add(model);
+                                    break;
+                                }
+                            }
+                            else continue;
+                        }
+
+                    }
+                }
                 #endregion
             }
             else
             {
                 #region 20110104-20151001
+                var tnode = HtmlNode.CreateNode(table);
+                if (tnode != null)
+                {
+                    var tablelist = tnode.SelectNodes(@"table[1]/tr/td/table");
+                    foreach (var item in tablelist)
+                    {
+                        var trlist = item.SelectNodes(@"tr");
+                        Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
+                        //每一行都是一个对象
+                        int cdsum = 0;
+                        int cdchange = 0;
+                        string cate = "";
+                        foreach (var tr in trlist)
+                        {
+                            MatchCollection mc = regex.Matches(tr.InnerHtml);
+                            if (mc.Count <= 2)//标题
+                            {
+                                //品种：苹果AP单位：张    日期：2018-06-19
+                                string title = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
 
+                                string temp = Regex.Match(title, "(品种：.+单位：)").ToString();
+                                temp = temp.Replace("品种：", "").Replace("单位：", "");
+                                cate = temp.Trim();
+                            }
+                            else if (mc.Count > 2)
+                            {
+                                string mc0 = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
+                                if (mc0.Contains("仓库编号") || mc0.Contains("厂库编号"))
+                                {
+                                    for (int i = 0; i < mc.Count; i++)
+                                    {
+                                        string mctemp1 = HtmlNode.CreateNode(mc[i].ToString()).InnerText;
+                                        if (mctemp1.Contains("仓单数量"))
+                                        {
+                                            cdsum = i;
+                                        }
+                                        if (mctemp1.Contains("当日增减"))
+                                        {
+                                            cdchange = i;
+                                        }
+                                    }
+                                }
+                                else if (mc0.Contains("总计"))
+                                {
+                                    FDataRepository model = new FDataRepository();
+                                    model.TradeHouse = TradeHouseType.czce.ToString();
+                                    model.Date = date;
+                                    model.CateName = cate;
+                                    model.Type = 2;//品种统计
+                                    model.Reps = "ALL";
+                                    model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[cdsum].ToString()).InnerText);
+                                    model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[cdchange].ToString()).InnerText);
+                                    model.YTDSum = model.TDSum - model.Change;
+                                    model.DTime = DateTime.Now;
+                                    list.Add(model);
+                                    break;
+                                }
+                            }
+                            else continue;
+                        }
+
+                    }
+                }
                 #endregion
             }
 
-            //加载源代码，获取文档对象
-            var tnode = HtmlNode.CreateNode(table);
-            if (tnode != null)
-            {
-                var trlist = tnode.SelectNodes(@"tr");//获取所有的表格行
-                Regex regex = new Regex(@"<td.*?>[\s\S]*?<\/td>");
-                //每一行都是一个对象
-                foreach (var tr in trlist)
-                {
-                    MatchCollection mc = regex.Matches(tr.InnerHtml);
-                    if (mc.Count > 0 && !string.IsNullOrEmpty(HtmlNode.CreateNode(mc[0].ToString()).InnerText))
-                    {
-                        FDataRepository model = new FDataRepository();
-                        model.TradeHouse = TradeHouseType.dce.ToString();
-                        model.Date = date;
-                        model.CateName = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
-                        model.Reps = HtmlNode.CreateNode(mc[1].ToString()).InnerText;
-                        model.Type = 1;
-                        if (model.CateName.Contains("小计"))
-                        {
-                            model.Type = 2;//统计
-                            model.Reps = "ALL";
-                        }
-                        else if (model.CateName.Contains("总计"))
-                        {
-                            model.Type = 3;//统计
-                            model.Reps = "ALL";
-                        }
-                        model.YTDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
-                        model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[3].ToString()).InnerText);
-                        model.Change = Convert.ToInt32(HtmlNode.CreateNode(mc[4].ToString()).InnerText);
-                        model.DTime = DateTime.Now;
-                        list.Add(model);
-                    }
-                    else continue;
-                }
-            }
             return list;
         }
         #endregion
