@@ -9,10 +9,6 @@ namespace Serv.Entitys
     public class ReturnModel
     {
         /// <summary>
-        /// 1-成功，0-失败
-        /// </summary>
-        public int ok { get; set; }
-        /// <summary>
         /// 通讯状态
         /// </summary>
         public int code { get; set; }

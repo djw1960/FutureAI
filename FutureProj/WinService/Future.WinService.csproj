@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FE8F5F72-8183-4BB0-9B92-7DC2B08F4F75}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PayService.WinService</RootNamespace>
-    <AssemblyName>PayService.WinService</AssemblyName>
+    <RootNamespace>Future.WinService</RootNamespace>
+    <AssemblyName>Future.WinService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

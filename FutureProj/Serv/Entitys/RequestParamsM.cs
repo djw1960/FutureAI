@@ -36,88 +36,18 @@ namespace Serv.Entitys
         /// 通用，各个接口中含义不同
         /// </summary>
         public string ID { get; set; }
-        public string Account { get; set; }
-        /// <summary>
-        /// 用户账号类型 1-优质，2-普通，3-首次注资，4-风险
-        /// </summary>
-        public int AccountType { get; set; }
-        /// <summary>
-        /// 当前注资设备类型
-        /// 1-PC，2-WAP ，3-WX,4-APP
-        /// </summary>
-        public int MediaType { get; set; }
-        /// <summary>
-        /// 支付通道id
-        /// </summary>
-        public string SignNo { get; set; }
-        /// <summary>
-        /// 订单号
-        /// </summary>
-        public string BillNo { get; set; }
         /// <summary>
         /// 订单token
         /// </summary>
         public string BillToken { get; set; }
         /// <summary>
-        /// 银行编码
+        /// 分类
+        /// 新闻分类：对应tradehouse
         /// </summary>
-        public string BankCode { get; set; }
-        /// <summary>
-        /// 通道特定银行编码
-        /// </summary>
-        public string BankValue { get; set; }
-        /// <summary>
-        /// 金额-人民币单位分
-        /// </summary>
-        public string Amount { get; set; }
-        /// <summary>
-        /// 商家返回地址
-        /// </summary>
-        public string ReturnUrl { get; set; }
-        /// <summary>
-        /// 商家异步通知地址
-        /// </summary>
-        public string NotifyUrl { get; set; }
-        /// <summary>
-        /// 快捷支付短信验证码
-        /// </summary>
-        public string SmsCode { get; set; }
-        /// <summary>
-        /// 商品标题
-        /// </summary>
-        public string Subject { get; set; }
-        /// <summary>
-        /// 商品描述
-        /// </summary>
-        public string SubjectDesrc { get; set; }
-        /// <summary>
-        /// 测试用参数，指定商户号测试
-        /// </summary>
-        public string MerNo { get; set; }
+        public string Type { get; set; }
 
         #endregion
-        /// <summary>
-        /// 支付通道编码
-        /// </summary>
-        //public string PayWayCode { get; set; }
 
-        #region 签约绑卡业务参数
-        //绑卡四要素-身份证号
-        public string IDCard { get; set; }
-        //绑卡四要素-姓名
-        public string UserName { get; set; }
-        //绑卡四要素-银行卡号
-        public string BankCard { get; set; }
-        //绑卡四要素-手机号
-        public string Mobile { get; set; }
-        #endregion
-        /// <summary>
-        /// 支付类型
-        /// 1-网银
-        /// 2-快捷
-        /// 3-微信扫码
-        /// 4-支付宝扫码
-        /// </summary>
-        public int PayType { get; set; }
+        public int page { get; set; }
     }
 }

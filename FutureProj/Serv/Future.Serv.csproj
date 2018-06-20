@@ -7,8 +7,8 @@
     <ProjectGuid>{17EF5C6F-033D-477E-A0AA-591808719CD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PayService.Serv</RootNamespace>
-    <AssemblyName>PayService.Serv</AssemblyName>
+    <RootNamespace>Future.Serv</RootNamespace>
+    <AssemblyName>Future.Serv</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

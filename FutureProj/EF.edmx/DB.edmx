@@ -86,9 +86,10 @@
           <Property Name="NSource" Type="nvarchar" MaxLength="50" />
           <Property Name="NewsUrl" Type="varchar" MaxLength="200" />
           <Property Name="NewContent" Type="nvarchar(max)" />
-          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="AddDate" Type="datetime" />
           <Property Name="IsDel" Type="bit" Nullable="false" />
           <Property Name="IsPublish" Type="bit" Nullable="false" />
+          <Property Name="PublishDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FPayGood">
           <Key>
@@ -262,11 +263,12 @@
           <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NewContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Precision="3" />
           <Property Name="IsDel" Type="Boolean" Nullable="false" />
           <Property Name="IsPublish" Type="Boolean" Nullable="false" />
           <Property Name="TradeHouse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NewsNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PublishDate" Type="DateTime" Precision="3" Nullable="false" />
         </EntityType>
         <EntityType Name="FPayGood">
           <Key>
@@ -445,6 +447,7 @@
           <EntitySetMapping Name="FNews">
             <EntityTypeMapping TypeName="PayServiceModel.FNews">
               <MappingFragment StoreEntitySet="FNews">
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
                 <ScalarProperty Name="NewsNo" ColumnName="NewsNo" />
                 <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
                 <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />

@@ -1,5 +1,6 @@
 ﻿using EF.Common;
 using Newtonsoft.Json;
+using PayService.Serv;
 using Serv;
 using Serv.Entitys;
 using System;
@@ -26,67 +27,19 @@ namespace Api.Controllers
         /// <returns></returns>
         public ReturnModel FutureCenter(RequestParamsM parm)
         {
-            ReturnModel result = new ReturnModel() { ok = RespCodeConfig.OK, code = RespCodeConfig.Normal };
+            ReturnModel result = new ReturnModel() { code = RespCodeConfig.Normal };
             long startT = DateTime.Now.Ticks;
             LogHelper.Info<ServiceApiController>("请求：" + JsonConvert.SerializeObject(parm));
             try
             {
                 switch (parm.No)
                 {
-                    //case ApiConfig.PayCenter_GetOrderInfo:
-                    //    PayControl.PayCenter_GetOrderInfo(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_OrderInit:
-                    //    PayControl.PayCenter_OrderInit(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_GetChannelList:
-                    //    PayControl.PayCenter_GetChannelList(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_GetChannelBankList:
-                    //    PayControl.PayCenter_GetChannelBankList(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_WebPay:
-                    //    PayControl.PayCenter_WebPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_KJSignUp:
-                    //    PayControl.PayCenter_KJSignUp(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_KJCreateOrder:
-                    //    PayControl.PayCenter_KJCreateOrder(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_KJConfirmPay:
-                    //    PayControl.PayCenter_KJConfirmPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_ScanPay:
-                    //    PayControl.PayCenter_ScanPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenter_ScanPayStatus:
-                    //    PayControl.PayCenter_ScanPayStatus(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_GetChannelList:
-                    //    PayControl.PayCenter_GetChannelList(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_GetChannelBankList:
-                    //    PayControl.PayCenter_GetChannelBankList(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_WebPay:
-                    //    PayControl.PayCenter_WebPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_KJSignUp:
-                    //    PayControl.PayCenter_KJSignUp(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_KJCreateOrder:
-                    //    PayControl.PayCenter_KJCreateOrder(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_KJConfirmPay:
-                    //    PayControl.PayCenter_KJConfirmPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_ScanPay:
-                    //    PayControl.PayCenter_ScanPay(result, parm);
-                    //    break;
-                    //case ApiConfig.PayCenterM_ScanPayStatus:
-                    //    PayControl.PayCenter_ScanPayStatus(result, parm);
-                    //    break;
+                    case ApiConfig.SERVICE_GetNewsList:
+                        FutureControl.SERVICE_GetNewsList(result, parm);
+                        break;
+                    case ApiConfig.SERVICE_GetNewsInfo:
+                        FutureControl.SERVICE_GetNewsInfo(result,parm);
+                        break;
 
                 }
             }
@@ -98,15 +51,11 @@ namespace Api.Controllers
             catch (Exception ex)
             {
                 result.code = RespCodeConfig.ServerError;
-                result.msg = "通道异常，请联系客服";
+                result.msg = "";
                 LogHelper.Error<ServiceApiController>(ex);
             }
             long endT = DateTime.Now.Ticks;
             result.Timespan = TimeSpan.FromTicks(endT - startT).TotalMilliseconds.ToString();
-            if (result.code != RespCodeConfig.Normal)
-            {
-                result.ok = RespCodeConfig.NotOK;
-            }
             if (string.IsNullOrEmpty(result.msg))
             {
                 result.msg = "";
@@ -125,7 +74,7 @@ namespace Api.Controllers
         /// <returns></returns>
         public ReturnModel PayCenter(RequestParamsM parm)
         {
-            ReturnModel result = new ReturnModel() { ok = RespCodeConfig.OK, code = RespCodeConfig.Normal };
+            ReturnModel result = new ReturnModel() { code = RespCodeConfig.Normal };
             long startT = DateTime.Now.Ticks;
             LogHelper.Info<ServiceApiController>("请求：" + JsonConvert.SerializeObject(parm));
             try
@@ -202,10 +151,6 @@ namespace Api.Controllers
             }
             long endT = DateTime.Now.Ticks;
             result.Timespan = TimeSpan.FromTicks(endT - startT).TotalMilliseconds.ToString();
-            if (result.code != RespCodeConfig.Normal)
-            {
-                result.ok = RespCodeConfig.NotOK;
-            }
             if (string.IsNullOrEmpty(result.msg))
             {
                 result.msg = "";

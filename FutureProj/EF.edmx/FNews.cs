@@ -20,10 +20,11 @@ namespace EF.edmx
         public string NSource { get; set; }
         public string NewsUrl { get; set; }
         public string NewContent { get; set; }
-        public System.DateTime AddDate { get; set; }
+        public Nullable<System.DateTime> AddDate { get; set; }
         public bool IsDel { get; set; }
         public bool IsPublish { get; set; }
         public string TradeHouse { get; set; }
         public string NewsNo { get; set; }
+        public System.DateTime PublishDate { get; set; }
     }
 }
