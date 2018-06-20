@@ -6,13 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Console
 {
     class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             //string str = "{\"VARNAME\":\"铜$$COPPER\",\"VARSORT\":0,\"REGNAME\":\"上海$$Shanghai\",\"REGSORT\":0,\"WHABBRNAME\":\"期晟公司$$Qisheng\",\"WHROWS\":12,\"WGHTUNIT\":\"2\",\"WRTWGHTS\":1919,\"WRTCHANGE\":0,\"ROWORDER\":1,\"ROWSTATUS\":\"0\"}";
@@ -34,26 +37,33 @@ namespace Console
             //System.Console.WriteLine("---------------------------------------------------------------");
             //System.Console.ReadKey();
 
-            var ibll = OperationContext.BLLSession;
+            //var ibll = OperationContext.BLLSession;
             //string str = "/dalianshangpin/yw/fw/jystz/ywtz/6095044/index.html";
             //string no = Regex.Match(str, "(/[0-9]+/)").ToString();
             //System.Console.WriteLine(no);
+
             #region NewsTest
             //var list = new List<FNews> { };
             //var pageIndex = 1;
-            //while (pageIndex > 0&&pageIndex<=10)
+            //while (pageIndex > 0 && pageIndex <= 2)
             //{
-            //    var news = CrawlerUtils.GetNewsFromUrl(2, pageIndex);
+            //    /* 郑州所 这个站点做了处理
+            //     * 1.登录会话做了限制，会被重定向
+            //     * 2.详情被生成为PDF格式，需要解析
+            //     * */
+            //    var news = CrawlerUtils.GetNewsFromUrl_ZZ(1, pageIndex);
             //    foreach (var item in news)
             //    {
-            //        ibll.FNews.Add(item);
-            //        System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
+            //        //ibll.FNews.Add(item);
+            //        System.Console.WriteLine($"{item.AddDate.Value.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
             //    }
-            //    int n=ibll.FNews.SaveChanges();
-            //    if (n>0)
+            //    /*
+            //    int n = ibll.FNews.SaveChanges();
+            //    if (n > 0)
             //    {
-            //        System.Console.WriteLine("大商新闻：save-{0}",n);
+            //        System.Console.WriteLine("新闻：save-{0}", n);
             //    }
+            //    */
             //    if (news.Count == 0)
             //    {
             //        pageIndex = 0;
@@ -64,11 +74,12 @@ namespace Console
             //    Thread.Sleep(1000);
             //    pageIndex++;
             //}
-            //System.Console.WriteLine("大商新闻：Finish");
+            //System.Console.WriteLine("新闻：Finish");
             #endregion
 
             System.Console.ReadKey();
         }
+
         #region 郑州商品交易所仓单
         /// <summary>
         /// 获取商品交易所仓单数据
@@ -92,7 +103,7 @@ namespace Console
                         foreach (string day in days)
                         {
                             int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                            if (date>20180616)
+                            if (date > 20180616)
                             {
                                 continue;
                             }
@@ -123,7 +134,7 @@ namespace Console
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("郑商所仓单：{0}",ex.Message);
+                System.Console.WriteLine("郑商所仓单：{0}", ex.Message);
                 System.Threading.Thread.Sleep(60000);
                 goto ZZTaskStart;
             }
@@ -138,7 +149,7 @@ namespace Console
             try
             {
                 var ibll = OperationContext.BLLSession;
-                int count = ibll.FDataReposInit.where(a =>a.Date<20151001&&a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
+                int count = ibll.FDataReposInit.where(a => a.Date < 20151001 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
                 for (int page = 1; page <= (count / 10) + 1; page++)
                 {
                     List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date < 20151001 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
@@ -239,11 +250,11 @@ namespace Console
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(string.Format("异常：{0} 开始休眠",ex.Message));
+                System.Console.WriteLine(string.Format("异常：{0} 开始休眠", ex.Message));
                 System.Threading.Thread.Sleep(60000);
                 goto TaskStart;
             }
-            
+
         }
         /// <summary>
         /// 20140519-2018 上海仓单数据
@@ -291,7 +302,7 @@ namespace Console
         public static void GetSHFDataRepository_SecondD()
         {
             var ibll = OperationContext.BLLSession;
-            int count = ibll.FDataReposInit.where(a => a.Date > 20140516 &&a.TradeHouse==TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).Count();
+            int count = ibll.FDataReposInit.where(a => a.Date > 20140516 && a.TradeHouse == TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).Count();
             for (int page = 1; page <= (count / 10) + 1; page++)
             {
                 List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date > 20140516 && a.TradeHouse == TradeHouseType.shfe.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
@@ -378,7 +389,7 @@ namespace Console
                 }
             }
             System.Console.WriteLine("大商Check：FINISH");
-        } 
+        }
         #endregion
         /// <summary>
         /// 多条件查询拼接
@@ -424,6 +435,7 @@ namespace Console
 
         }
     }
+
     public static class Base64Util
     {
         public static string EncodeBase64(Encoding encode, string source)
@@ -456,4 +468,5 @@ namespace Console
             return decode;
         }
     }
+
 }

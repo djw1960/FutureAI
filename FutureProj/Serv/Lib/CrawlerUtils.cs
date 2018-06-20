@@ -19,22 +19,48 @@ namespace Serv.Lib
         /// <summary>
         /// 大连商品交易所
         /// </summary>
-        const string site = "http://www.dce.com.cn";
+        const string site1 = "http://www.dce.com.cn";
         /// <summary>
         /// 业务通知页面地址
         /// </summary>
-        const string businessUrl = "/dalianshangpin/yw/fw/jystz/ywtz/13305-{0}.html";
+        const string businessUrl1 = "/dalianshangpin/yw/fw/jystz/ywtz/13305-{0}.html";
         /// <summary>
         /// 交易所新闻页面地址
         /// </summary>
-        const string exchangeUrl = "/dalianshangpin/xwzx93/jysxw/13363-{0}.html";
+        const string exchangeUrl1 = "/dalianshangpin/xwzx93/jysxw/13363-{0}.html";
+
+        /// <summary>
+        /// 郑州商品交易所
+        /// </summary>
+        const string site2 = "http://www.czce.com.cn";
+        /// <summary>
+        /// 业务通知页面地址
+        /// </summary>
+        const string businessUrl2 = "/portal/jysdt/ggytz/A090601index_{0}.htm";
+        /// <summary>
+        /// 交易所新闻页面地址
+        /// </summary>
+        const string exchangeUrl2 = "/portal/jysdt/jysxw/A090603index_{0}.htm";
+
+        /// <summary>
+        /// 上海交易所
+        /// </summary>
+        const string site3 = "http://www.shfe.com.cn";
+        /// <summary>
+        /// 业务通知页面地址
+        /// </summary>
+        const string businessUrl3 = "/news/notice/index_{0}.html";
+        /// <summary>
+        /// 交易所新闻页面地址
+        /// </summary>
+        const string exchangeUrl3 = "/news/Spotlight/index_{0}.html";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string GetWebClient(string url,Encoding encode=null)
+        public static string GetWebClient(string url, Encoding encode = null)
         {
             var strHTML = string.Empty;
             try
@@ -46,7 +72,10 @@ namespace Serv.Lib
                 strHTML = sr.ReadToEnd();
                 myStream.Close();
             }
-            catch { /* TODO */ }
+            catch (Exception ex)
+            {
+                /* TODO */
+            }
             return strHTML;
         }
 
@@ -82,7 +111,7 @@ namespace Serv.Lib
         public static FDataReposInit GetZZFDataRepository_First(string url, int date)
         {
             //下载网页源代码 
-            var docText = GetWebClient(url,Encoding.Default);
+            var docText = GetWebClient(url, Encoding.Default);
             //加载源代码，获取文档对象
             var doc = new HtmlDocument(); doc.LoadHtml(docText);
             HtmlNode res = null;
@@ -142,7 +171,7 @@ namespace Serv.Lib
                         foreach (var tr in trlist)
                         {
                             MatchCollection mc = regex.Matches(tr.InnerHtml);
-                            if (mc.Count <=2)//标题
+                            if (mc.Count <= 2)//标题
                             {
                                 //品种：苹果AP单位：张    日期：2018-06-19
                                 string title = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
@@ -154,7 +183,7 @@ namespace Serv.Lib
                             else if (mc.Count > 2)
                             {
                                 string mc0 = HtmlNode.CreateNode(mc[0].ToString()).InnerText;
-                                if (mc0.Contains("仓库编号")||mc0.Contains("厂库编号"))
+                                if (mc0.Contains("仓库编号") || mc0.Contains("厂库编号"))
                                 {
                                     for (int i = 0; i < mc.Count; i++)
                                     {
@@ -329,11 +358,11 @@ namespace Serv.Lib
                         var mc0 = HtmlNode.CreateNode(mc[0].ToString());
                         var mc1 = HtmlNode.CreateNode(mc[1].ToString());
                         var mc2 = HtmlNode.CreateNode(mc[2].ToString());
-                        if (string.IsNullOrWhiteSpace(cate)|| string.IsNullOrWhiteSpace(mc0.InnerText) || string.IsNullOrWhiteSpace(mc1.InnerText) || string.IsNullOrWhiteSpace(mc2.InnerText))
+                        if (string.IsNullOrWhiteSpace(cate) || string.IsNullOrWhiteSpace(mc0.InnerText) || string.IsNullOrWhiteSpace(mc1.InnerText) || string.IsNullOrWhiteSpace(mc2.InnerText))
                         {
                             continue;
                         }
-                        if (mc0.InnerText.Contains("上期所指定")||mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
+                        if (mc0.InnerText.Contains("上期所指定") || mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
                         {
                             continue;
                         }
@@ -345,7 +374,7 @@ namespace Serv.Lib
                             model.CateName = cate;
                             model.Reps = mc0.InnerText;
                             model.Type = 1;
-                            if (mc0.InnerText.Contains("合")&& mc0.InnerText.Contains("计"))//小计
+                            if (mc0.InnerText.Contains("合") && mc0.InnerText.Contains("计"))//小计
                             {
                                 model.Type = 2;//统计
                                 model.Reps = "ALL";
@@ -370,9 +399,9 @@ namespace Serv.Lib
                         var mc3 = HtmlNode.CreateNode(mc[3].ToString());
                         if (string.IsNullOrWhiteSpace(mc1.InnerText) && string.IsNullOrWhiteSpace(mc2.InnerText))
                         {
-                            cate = mc0.InnerText.Replace("&nbsp;","");
+                            cate = mc0.InnerText.Replace("&nbsp;", "");
                         }
-                        if (mc0.InnerText.Contains("地区")||mc0.InnerText.Contains ("上期所指定")|| mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
+                        if (mc0.InnerText.Contains("地区") || mc0.InnerText.Contains("上期所指定") || mc0.InnerText.Contains("保税总计") || mc0.InnerText.Contains("完税总计"))
                         {
                             continue;
                         }
@@ -437,11 +466,11 @@ namespace Serv.Lib
             List<FDataRepository> list = new List<FDataRepository>();
             //table is jsonobject
             SHFE_DataModel obj = JsonConvert.DeserializeObject<SHFE_DataModel>(table);
-            if (obj != null&&obj.o_cursor.Count>0)
+            if (obj != null && obj.o_cursor.Count > 0)
             {
                 foreach (SHFE_CangDanModel item in obj.o_cursor)
                 {
-                    if (string.IsNullOrEmpty(item.REGNAME)&&(!item.WHABBRNAME.Equals("合计") && !item.WHABBRNAME.Equals("总计")))
+                    if (string.IsNullOrEmpty(item.REGNAME) && (!item.WHABBRNAME.Equals("合计") && !item.WHABBRNAME.Equals("总计")))
                     {
                         continue;
                     }
@@ -449,7 +478,7 @@ namespace Serv.Lib
                     model.TradeHouse = TradeHouseType.shfe.ToString();
                     model.Date = date;
                     model.CateName = item.VARNAME;
-                    model.Reps =item.WHABBRNAME;
+                    model.Reps = item.WHABBRNAME;
                     model.Type = 1;
                     if (model.Reps.Equals("合计"))
                     {
@@ -618,15 +647,15 @@ namespace Serv.Lib
         /// <param name="type">(1:业务通知;2:交易所新闻;)</param>
         /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public static List<FNews> GetNewsFromUrl(int type, int pageIndex)
+        public static List<FNews> GetNewsFromUrl_DL(int type, int pageIndex)
         {
             var list = new List<FNews> { };
             var url = string.Empty;
 
             switch (type)
             {
-                case 1: url = $"{site}{businessUrl}"; break;
-                case 2: url = $"{site}{exchangeUrl}"; break;
+                case 1: url = $"{site1}{businessUrl1}"; break;
+                case 2: url = $"{site1}{exchangeUrl1}"; break;
                 default: break;
             }
 
@@ -642,17 +671,17 @@ namespace Serv.Lib
                 var aNode = node.LastChild;
                 var news = new FNews
                 {
-                    TradeHouse=TradeHouseType.dce.ToString(),
+                    TradeHouse = TradeHouseType.dce.ToString(),
                     AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
                     NewsTitle = aNode.InnerText,
-                    NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
+                    NewsUrl = $"{site1}{aNode.Attributes["href"].Value}",
                     NewsType = type,
                     NewContent = "",
                     NSource = "",
-                    NewsNo = Regex.Match(aNode.Attributes["href"].Value, "(/[0-9]+/)").ToString().Replace("/","")
+                    NewsNo = Regex.Match(aNode.Attributes["href"].Value, "(/[0-9]+/)").ToString().Replace("/", "")
                 };
 
-                GetDetailByLink(ref news);
+                GetDetailByLink_DL(ref news);
                 list.Add(news);
             }
 
@@ -663,7 +692,7 @@ namespace Serv.Lib
         /// 通过标题获取详情
         /// </summary>
         /// <param name="model"></param>
-        private static void GetDetailByLink(ref FNews model)
+        private static void GetDetailByLink_DL(ref FNews model)
         {
             var doc = new HtmlDocument();
             var html = GetWebClient(model.NewsUrl);
@@ -674,10 +703,77 @@ namespace Serv.Lib
                 var node = rootNode.SelectSingleNode("//*[@id='zoom']");
                 model.NewContent = node.InnerHtml;
                 var sourceNode = rootNode.SelectSingleNode("//*[@id=\"13380\"]/div[2]/div[2]/div[1]/p/span[1]");
-                model.NSource = sourceNode==null?"": sourceNode.InnerText.Replace("来源：","");
+                model.NSource = sourceNode == null ? "" : sourceNode.InnerText.Replace("来源：", "");
             }
         }
         #endregion
 
+        #region 郑州所业务通知/交易所新闻
+        /// <summary>
+        /// 获取业务通知/交易所新闻
+        /// </summary>
+        /// <param name="type">(1:公告/通知;2:交易所新闻;)</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns></returns>
+        public static List<FNews> GetNewsFromUrl_ZZ(int type, int pageIndex)
+        {
+            var list = new List<FNews> { };
+            var url = string.Empty;
+
+            switch (type)
+            {
+                case 1: url = $"{site2}{businessUrl2}"; break;
+                case 2: url = $"{site2}{exchangeUrl2}"; break;
+                default: break;
+            }
+
+            var doc = new HtmlDocument();
+            var html = GetWebClient(string.Format(url, pageIndex));
+            if (html.Length == 0) return list;
+
+            doc.LoadHtml(html);
+            var rootNode = doc.DocumentNode;
+            var nodelCollection = rootNode.SelectNodes("//*[@class='listtab']/tr");
+            foreach (var node in nodelCollection)
+            {
+                var aNode = node.FirstChild.FirstChild;
+                var news = new FNews
+                {
+                    TradeHouse = TradeHouseType.czce.ToString(),
+                    AddDate = Convert.ToDateTime(node.LastChild.InnerText),
+                    NewsTitle = aNode.InnerText,
+                    NewsUrl = $"{site2}{aNode.Attributes["href"].Value}",
+                    NewsType = type,
+                    NewContent = "",
+                    NSource = "",
+                    NewsNo = Regex.Match(aNode.Attributes["href"].Value, "(/[0-9]+/)").ToString().Replace("/", "")
+                };
+
+                GetDetailByLink_ZZ(ref news);
+                list.Add(news);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// 通过标题获取详情
+        /// </summary>
+        /// <param name="model"></param>
+        private static void GetDetailByLink_ZZ(ref FNews model)
+        {
+            var doc = new HtmlDocument();
+            var html = GetWebClient(model.NewsUrl);
+            if (html.Length > 0)
+            {
+                doc.LoadHtml(html);
+                var rootNode = doc.DocumentNode;
+                var node = rootNode.SelectSingleNode("//*[@id='zoom']");
+                model.NewContent = node.InnerHtml;
+                var sourceNode = rootNode.SelectSingleNode("//*[@id=\"13380\"]/div[2]/div[2]/div[1]/p/span[1]");
+                model.NSource = sourceNode == null ? "" : sourceNode.InnerText.Replace("来源：", "");
+            }
+        }
+        #endregion
     }
 }
