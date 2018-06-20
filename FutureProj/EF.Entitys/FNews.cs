@@ -17,7 +17,6 @@ namespace EF.Entitys
         public int ID { get; set; }
         public string NewsTitle { get; set; }
         public int NewsType { get; set; }
-        public int NewsRes { get; set; }
         public string NSource { get; set; }
         public string NewsUrl { get; set; }
         public string NewContent { get; set; }
@@ -25,5 +24,6 @@ namespace EF.Entitys
         public bool IsDel { get; set; }
         public bool IsPublish { get; set; }
         public string TradeHouse { get; set; }
+        public string NewsNo { get; set; }
     }
 }

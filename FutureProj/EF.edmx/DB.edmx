@@ -80,9 +80,9 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TradeHouse" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NewsNo" Type="varchar" MaxLength="50" />
           <Property Name="NewsTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="NewsType" Type="int" Nullable="false" />
-          <Property Name="NewsRes" Type="int" Nullable="false" />
           <Property Name="NSource" Type="nvarchar" MaxLength="50" />
           <Property Name="NewsUrl" Type="varchar" MaxLength="200" />
           <Property Name="NewContent" Type="nvarchar(max)" />
@@ -259,7 +259,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NewsTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NewsType" Type="Int32" Nullable="false" />
-          <Property Name="NewsRes" Type="Int32" Nullable="false" />
           <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NewContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -267,6 +266,7 @@
           <Property Name="IsDel" Type="Boolean" Nullable="false" />
           <Property Name="IsPublish" Type="Boolean" Nullable="false" />
           <Property Name="TradeHouse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NewsNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FPayGood">
           <Key>
@@ -445,6 +445,7 @@
           <EntitySetMapping Name="FNews">
             <EntityTypeMapping TypeName="PayServiceModel.FNews">
               <MappingFragment StoreEntitySet="FNews">
+                <ScalarProperty Name="NewsNo" ColumnName="NewsNo" />
                 <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
                 <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
                 <ScalarProperty Name="IsDel" ColumnName="IsDel" />
@@ -452,7 +453,6 @@
                 <ScalarProperty Name="NewContent" ColumnName="NewContent" />
                 <ScalarProperty Name="NewsUrl" ColumnName="NewsUrl" />
                 <ScalarProperty Name="NSource" ColumnName="NSource" />
-                <ScalarProperty Name="NewsRes" ColumnName="NewsRes" />
                 <ScalarProperty Name="NewsType" ColumnName="NewsType" />
                 <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

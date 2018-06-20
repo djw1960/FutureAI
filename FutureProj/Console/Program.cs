@@ -29,19 +29,26 @@ namespace Console
             //System.Console.WriteLine("---------------------------------------------------------------");
             //System.Console.ReadKey();
 
-            //var ibll = OperationContext.BLLSession;
-
+            var ibll = OperationContext.BLLSession;
+            //string str = "/dalianshangpin/yw/fw/jystz/ywtz/6095044/index.html";
+            //string no = Regex.Match(str, "(/[0-9]+/)").ToString();
+            //System.Console.WriteLine(no);
             #region NewsTest
             //var list = new List<FNews> { };
             //var pageIndex = 1;
-            //while (pageIndex > 0)
+            //while (pageIndex > 0&&pageIndex<=10)
             //{
-            //    var news = CrawlerUtils.GetNewsFromUrl(1, pageIndex);
+            //    var news = CrawlerUtils.GetNewsFromUrl(2, pageIndex);
             //    foreach (var item in news)
             //    {
+            //        ibll.FNews.Add(item);
             //        System.Console.WriteLine($"{item.AddDate.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
             //    }
-
+            //    int n=ibll.FNews.SaveChanges();
+            //    if (n>0)
+            //    {
+            //        System.Console.WriteLine("大商新闻：save-{0}",n);
+            //    }
             //    if (news.Count == 0)
             //    {
             //        pageIndex = 0;
@@ -52,8 +59,9 @@ namespace Console
             //    Thread.Sleep(1000);
             //    pageIndex++;
             //}
+            //System.Console.WriteLine("大商新闻：Finish");
             #endregion
-            
+
             System.Console.ReadKey();
         }
         #region 郑州商品交易所仓单

@@ -70,6 +70,7 @@ namespace Serv.Lib
             return new List<FNews>();
         }
         #endregion
+
         #region 郑州商品交易所仓单
 
         /// <summary>
@@ -523,7 +524,7 @@ namespace Serv.Lib
         }
         #endregion
 
-        #region 获取业务通知/交易所新闻
+        #region 大商所业务通知/交易所新闻
         /// <summary>
         /// 获取业务通知/交易所新闻
         /// </summary>
@@ -554,12 +555,14 @@ namespace Serv.Lib
                 var aNode = node.LastChild;
                 var news = new FNews
                 {
+                    TradeHouse=TradeHouseType.dce.ToString(),
                     AddDate = Convert.ToDateTime(node.FirstChild.InnerText),
                     NewsTitle = aNode.InnerText,
                     NewsUrl = $"{site}{aNode.Attributes["href"].Value}",
                     NewsType = type,
                     NewContent = "",
-                    NSource = url,
+                    NSource = "",
+                    NewsNo = Regex.Match(aNode.Attributes["href"].Value, "(/[0-9]+/)").ToString().Replace("/","")
                 };
 
                 GetDetailByLink(ref news);
@@ -583,6 +586,8 @@ namespace Serv.Lib
                 var rootNode = doc.DocumentNode;
                 var node = rootNode.SelectSingleNode("//*[@id='zoom']");
                 model.NewContent = node.InnerHtml;
+                var sourceNode = rootNode.SelectSingleNode("//*[@id=\"13380\"]/div[2]/div[2]/div[1]/p/span[1]");
+                model.NSource = sourceNode==null?"": sourceNode.InnerText.Replace("来源：","");
             }
         }
         #endregion
