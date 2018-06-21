@@ -134,6 +134,73 @@ namespace PayService.Serv
         #endregion
 
         #region 统计局数据模块
+        /// <summary>
+        /// 1030-获取统计局信息
+        /// 1-获取某一期的统计信息
+        /// 2-获取某品种历史统计信息，最长6个月，超过6个月历史数据提需求申请
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetMaterialList(ReturnModel result, RequestParamsM param)
+        {
+            switch (param.Cate)
+            {
+                case "new":
+                    //获取最新一期的数据
+                    break;
+            }
+
+            var exp = PredicateBuilder.True<FDataMaterial>();
+            //最长查询6个月内数据
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
+            if (!string.IsNullOrEmpty(param.Code))//按照品种获取的时候，必须传时间
+            {
+                exp = exp.And<FDataMaterial>(s => s.PCode == param.Code);
+                //单个品种查询默认一个月数据
+                int d = Convert.ToInt32(DateTime.Now.AddMonths(-1).ToString("yyyyMMdd"));
+                if (!string.IsNullOrEmpty(param.StartT))
+                {
+                    d = Convert.ToInt32(param.StartT);
+                }
+                d = d > dlimit ? d : dlimit;
+                exp = exp.And<FDataMaterial>(s => s.DateTime >= d);
+            }
+            else if (!string.IsNullOrEmpty(param.StartT))//查询某一期
+            {
+                int d = Convert.ToInt32(param.StartT);
+                d = d > dlimit ? d : dlimit;
+                exp = exp.And<FDataMaterial>(s => s.DateTime == d);
+            }
+            else
+            {
+                int d = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
+                exp = exp.And<FDataMaterial>(s => s.DateTime == d);
+            }
+        }
+        /// <summary>
+        /// 1031 两个品种的数据对比
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetMaterList_TwoCate(ReturnModel result, RequestParamsM param)
+        {
+
+        }
+        #endregion
+
+        #region 固定资产数据版块
+
+        #endregion
+
+        #region 持仓版块
+
+        #endregion
+
+        #region 朋友圈版块
+
+        #endregion
+
+        #region 会员版块
 
         #endregion
     }

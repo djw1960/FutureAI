@@ -46,6 +46,10 @@ namespace Serv.Entitys
         /// </summary>
         public string Type { get; set; }
         /// <summary>
+        /// 数据分类
+        /// </summary>
+        public string Cate { get; set; }
+        /// <summary>
         /// 交易品种Code
         /// </summary>
         public string Code { get; set; }

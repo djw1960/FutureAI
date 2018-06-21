@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ORM", "ORM", "{035430D4-EC72-422A-B4FC-04ED12A9194A}"
 EndProject
@@ -36,6 +36,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Future.PayCenter", "PayCenter\Future.PayCenter.csproj", "{6CAF8CC1-9EA2-4CBB-B2CE-84E4CE2F50E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Future.WinService", "WinService\Future.WinService.csproj", "{FE8F5F72-8183-4BB0-9B92-7DC2B08F4F75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Axure", "Axure", "{5F6CB08E-7089-4922-BB02-EADEF78CFA7A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\UI\FutureAI.rp = ..\..\..\UI\FutureAI.rp
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

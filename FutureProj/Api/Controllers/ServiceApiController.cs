@@ -49,6 +49,12 @@ namespace Api.Controllers
                     case ApiConfig.SERVICE_GetReposList:
                         FutureControl.SERVICE_GetReposList(result, parm);
                         break;
+                    case ApiConfig.SERVICE_GetMaterialList:
+                        FutureControl.SERVICE_GetMaterialList(result,parm);
+                        break;
+                    case ApiConfig.SERVICE_GetMaterList_TwoCate:
+                        FutureControl.SERVICE_GetMaterList_TwoCate(result, parm);
+                        break;
 
                 }
             }
