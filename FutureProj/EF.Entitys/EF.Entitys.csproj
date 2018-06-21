@@ -92,6 +92,9 @@
     <Compile Include="FSysUser.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FSys_Category.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="FSys_Config.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

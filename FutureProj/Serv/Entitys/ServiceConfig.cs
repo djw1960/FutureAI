@@ -17,6 +17,7 @@ namespace Serv.Entitys
 
         public const int SERVICE_GetNewsList = 1010;//获取资讯列表
         public const int SERVICE_GetNewsInfo = 1011;//获取资讯详情
+        public const int SERVICE_GetReposList = 1020;//获取仓单列表数据
 
     }
     public class RespCodeConfig

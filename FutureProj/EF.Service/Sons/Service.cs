@@ -134,6 +134,15 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
+    public partial class FSys_Category:BaseService<EF.Entitys.FSys_Category>,EF.IService.Sons.IFSys_Category
+    {
+    	    //IRespository.Sons.IFSys_Category dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSys_Category;
+                base.dal = dal;
+            }
+    }
     
     
     

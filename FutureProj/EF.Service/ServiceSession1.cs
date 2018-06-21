@@ -109,6 +109,13 @@ namespace EF.Service
     			return new Service.Sons.FPayWay();
     		}
     	}
+    	public IService.Sons.IFSys_Category FSys_Category
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSys_Category();
+    		}
+    	}
     }
     
     

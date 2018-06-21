@@ -28,6 +28,12 @@ namespace Api.Controllers
         public ReturnModel FutureCenter(RequestParamsM parm)
         {
             ReturnModel result = new ReturnModel() { code = RespCodeConfig.Normal };
+            if (null== parm)
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return result;
+            }
             long startT = DateTime.Now.Ticks;
             LogHelper.Info<ServiceApiController>("请求：" + JsonConvert.SerializeObject(parm));
             try
@@ -39,6 +45,9 @@ namespace Api.Controllers
                         break;
                     case ApiConfig.SERVICE_GetNewsInfo:
                         FutureControl.SERVICE_GetNewsInfo(result,parm);
+                        break;
+                    case ApiConfig.SERVICE_GetReposList:
+                        FutureControl.SERVICE_GetReposList(result, parm);
                         break;
 
                 }

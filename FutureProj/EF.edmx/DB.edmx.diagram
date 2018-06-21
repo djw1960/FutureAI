@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="PayServiceModel.FDataReposInit" Width="2.125" PointX="2.75" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FDataRepository" Width="2.125" PointX="2.75" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FPayWay" Width="1.5" PointX="6.75" PointY="3.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Category" Width="1.5" PointX="10.25" PointY="3.625" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

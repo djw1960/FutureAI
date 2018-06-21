@@ -39,5 +39,6 @@ namespace EF.edmx
         public virtual DbSet<FDataReposInit> FDataReposInit { get; set; }
         public virtual DbSet<FDataRepository> FDataRepository { get; set; }
         public virtual DbSet<FPayWay> FPayWay { get; set; }
+        public virtual DbSet<FSys_Category> FSys_Category { get; set; }
     }
 }

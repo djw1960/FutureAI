@@ -64,6 +64,10 @@ namespace EF.IService.Sons
     {
     
     }
+    public partial interface IFSys_Category:IBaseService<EF.Entitys.FSys_Category>
+    {
+    
+    }
     
     
     

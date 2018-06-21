@@ -67,6 +67,10 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FPayWay(); }
     	}
+    	public IRespository.Sons.IFSys_Category FSys_Category
+    	{
+    		get { return new Respository.Sons.FSys_Category(); }
+    	}
     }
     
 }

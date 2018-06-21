@@ -63,6 +63,10 @@ namespace EF.Respository.Sons
     {
     
     }
+    public partial class FSys_Category:BaseRespository<EF.Entitys.FSys_Category>,EF.IRespository.Sons.IFSys_Category
+    {
+    
+    }
     
     
     

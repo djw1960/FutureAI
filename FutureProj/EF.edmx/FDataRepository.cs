@@ -24,5 +24,6 @@ namespace EF.edmx
         public System.DateTime DTime { get; set; }
         public int Type { get; set; }
         public string TradeHouse { get; set; }
+        public string CateCode { get; set; }
     }
 }

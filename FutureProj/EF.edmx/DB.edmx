@@ -67,6 +67,7 @@
           <Property Name="TradeHouse" Type="varchar" MaxLength="20" />
           <Property Name="Date" Type="int" Nullable="false" />
           <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CateCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Reps" Type="nvarchar" MaxLength="20" />
           <Property Name="YTDSum" Type="int" Nullable="false" />
           <Property Name="TDSum" Type="int" Nullable="false" />
@@ -148,6 +149,17 @@
           <Property Name="PayCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsAvailable" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FSys_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CateKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CateValue" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="IsDel" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="FSys_Config">
           <Key>
             <PropertyRef Name="ID" />
@@ -199,6 +211,7 @@
           <EntitySet Name="FPayMert" EntityType="Self.FPayMert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FPayOrder" EntityType="Self.FPayOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FPayWay" EntityType="Self.FPayWay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FSys_Category" EntityType="Self.FSys_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSys_Config" EntityType="Self.FSys_Config" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSys_LoginSession" EntityType="Self.FSys_LoginSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSys_Role" EntityType="Self.FSys_Role" Schema="dbo" store:Type="Tables" />
@@ -223,6 +236,7 @@
           <EntitySet Name="FDataReposInit" EntityType="PayServiceModel.FDataReposInit" />
           <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
           <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
+          <EntitySet Name="FSys_Category" EntityType="PayServiceModel.FSys_Category" />
         </EntityContainer>
         <EntityType Name="FAI">
           <Key>
@@ -395,6 +409,7 @@
           <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="TradeHouse" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CateCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FPayWay">
           <Key>
@@ -406,6 +421,17 @@
           <Property Name="PayType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PayCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FSys_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CateKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CateValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -585,6 +611,7 @@
           <EntitySetMapping Name="FDataRepository">
             <EntityTypeMapping TypeName="PayServiceModel.FDataRepository">
               <MappingFragment StoreEntitySet="FDataRepository">
+                <ScalarProperty Name="CateCode" ColumnName="CateCode" />
                 <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DTime" ColumnName="DTime" />
@@ -606,6 +633,18 @@
                 <ScalarProperty Name="PayType" ColumnName="PayType" />
                 <ScalarProperty Name="PayName" ColumnName="PayName" />
                 <ScalarProperty Name="MerNo" ColumnName="MerNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FSys_Category">
+            <EntityTypeMapping TypeName="PayServiceModel.FSys_Category">
+              <MappingFragment StoreEntitySet="FSys_Category">
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CateValue" ColumnName="CateValue" />
+                <ScalarProperty Name="CateKey" ColumnName="CateKey" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
