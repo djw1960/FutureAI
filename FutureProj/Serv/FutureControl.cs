@@ -143,16 +143,24 @@ namespace PayService.Serv
         /// <param name="param"></param>
         public static void SERVICE_GetMaterialList(ReturnModel result, RequestParamsM param)
         {
+            var exp = PredicateBuilder.True<FDataMaterial>();
+            //最长查询6个月内数据
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
             switch (param.Cate)
             {
                 case "new":
                     //获取最新一期的数据
+                    int maxDateTime = ibll.FDataMaterial.where(a => true).Max(a => a.DateTime);
+                    var toplist = ibll.FDataMaterial.where(a => a.DateTime== maxDateTime);
+                    result.code = RespCodeConfig.Normal;
+                    result.data = toplist;
+                    return;
+                    break;
+                default:
+
                     break;
             }
 
-            var exp = PredicateBuilder.True<FDataMaterial>();
-            //最长查询6个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
             if (!string.IsNullOrEmpty(param.Code))//按照品种获取的时候，必须传时间
             {
                 exp = exp.And<FDataMaterial>(s => s.PCode == param.Code);
