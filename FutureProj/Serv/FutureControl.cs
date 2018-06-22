@@ -94,30 +94,83 @@ namespace PayService.Serv
             }
             //最长查询6个月内数据
             int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
-            if (!string.IsNullOrEmpty(param.Code))//按照品种获取的时候，必须传时间
+            switch (param.Cate)
             {
-                exp = exp.And<FDataRepository>(s => s.CateCode == param.Code);
-                //单个品种查询默认一个月数据
-                int d = Convert.ToInt32(DateTime.Now.AddMonths(-1).ToString("yyyyMMdd"));
-                if (!string.IsNullOrEmpty(param.StartT))
-                {
-                    d = Convert.ToInt32(param.StartT);
-                }
-                d = d > dlimit ? d : dlimit;
-                exp = exp.And<FDataRepository>(s => s.Date >= d);
+                case "n"://new
+                    //获取最近一期的数据
+                    {
+                        int maxDateTime = ibll.FDataRepository.where(a => true).Max(a => a.Date);
+                        exp = exp.And<FDataRepository>(s => s.Date == maxDateTime);
+                        var toplist = ibll.FDataRepository.where(exp).OrderBy(a => a.CateCode).Select(ss => new {
+                            ss.Date,
+                            ss.CateName,
+                            ss.CateCode,
+                            ss.YTDSum,
+                            ss.TDSum,
+                            ss.Change
+                        }).ToList();
+                        result.data =new {Date=maxDateTime,list=toplist };
+                        result.code = RespCodeConfig.Normal;
+                        return;
+                    }
+                    break;
+                case "s"://someone
+                    //查询某一天的数据
+                    if (!string.IsNullOrEmpty(param.StartT))
+                    {
+                        int d = Convert.ToInt32(param.StartT);
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataRepository>(s => s.Date == d);
+                        var toplist = ibll.FDataRepository.where(exp).OrderBy(a => a.CateCode).Select(ss => new {
+                            ss.Date,
+                            ss.CateName,
+                            ss.CateCode,
+                            ss.YTDSum,
+                            ss.TDSum,
+                            ss.Change
+                        }).ToList();
+                        result.data = new { Date = d, list = toplist };
+                        result.code = RespCodeConfig.Normal;
+                        return;
+                    }
+                    else
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                    }
+                    break;
+                case "l"://list
+                    //查询某一个品种的
+                    if (!string.IsNullOrEmpty(param.Code)&& !string.IsNullOrEmpty(param.StartT))//按照品种获取的时候，必须传时间
+                    {
+                        exp = exp.And<FDataRepository>(s => s.CateCode == param.Code);
+                        int d = Convert.ToInt32(param.StartT);
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataRepository>(s => s.Date >= d);
+                    }
+                    else
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                    }
+                    break;
+                case "m"://month
+                    //按月份查询某品种
+                    if (!string.IsNullOrEmpty(param.Code) && param.Number > 0)//按照品种获取的时候，必须传时间
+                    {
+                        exp = exp.And<FDataRepository>(s => s.CateCode == param.Code);
+                        //单个品种查询默认一个月数据
+                        int d = Convert.ToInt32(DateTime.Now.AddMonths(0- param.Number).ToString("yyyyMMdd"));
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataRepository>(s => s.Date >= d);
+                    }
+                    else
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                    }
+                    break;
             }
-            else if (!string.IsNullOrEmpty(param.StartT))
-            {
-                int d = Convert.ToInt32(param.StartT);
-                d = d > dlimit ? d : dlimit;
-                exp = exp.And<FDataRepository>(s => s.Date == d);
-            }
-            else
-            {
-                int d = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
-                exp = exp.And<FDataRepository>(s => s.Date == d);
-            }
-
             var list = ibll.FDataRepository.where(exp).OrderBy(s => s.Date).Select(ss=>new {
                 ss.Date,
                 ss.CateName,
@@ -145,45 +198,70 @@ namespace PayService.Serv
         {
             var exp = PredicateBuilder.True<FDataMaterial>();
             //最长查询6个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-12).ToString("yyyyMMdd"));
             switch (param.Cate)
             {
-                case "new":
+                case "n"://new
                     //获取最新一期的数据
-                    int maxDateTime = ibll.FDataMaterial.where(a => true).Max(a => a.DateTime);
-                    var toplist = ibll.FDataMaterial.where(a => a.DateTime== maxDateTime);
-                    result.code = RespCodeConfig.Normal;
-                    result.data = toplist;
-                    return;
+                    {
+                        int maxDateTime = ibll.FDataMaterial.where(a => true).Max(a => a.DateTime);
+                        var toplist = ibll.FDataMaterial.where(a => a.DateTime == maxDateTime).OrderBy(a => a.PCode);
+                        result.code = RespCodeConfig.Normal;
+                        result.data = new { Date = maxDateTime, list = toplist };
+                        return;
+                    }
                     break;
-                default:
-
+                case "s"://someone
+                    //单个品种查询默认一个月数据
+                    {
+                        int d = 0;
+                        if (!string.IsNullOrEmpty(param.StartT))
+                        {
+                            d = Convert.ToInt32(param.StartT);
+                        }
+                        else
+                        {
+                            result.code = RespCodeConfig.ArgumentExp;
+                            result.msg = "参数错误";
+                        }
+                        var someList = ibll.FDataMaterial.where(a => a.DateTime == d).OrderBy(a => a.PCode);
+                        result.code = RespCodeConfig.Normal;
+                        result.data = new { Date = d, list = someList };
+                        return;
+                    }
+                    break;
+                case "l"://list
+                    if (!string.IsNullOrEmpty(param.Code)&&!string.IsNullOrEmpty(param.StartT))//按照品种获取的时候，必须传时间
+                    {
+                        exp = exp.And<FDataMaterial>(s => s.PCode == param.Code);
+                        int d = Convert.ToInt32(param.StartT);
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataMaterial>(s => s.DateTime >= d);
+                    }
+                    else
+                    {
+                        result.code = RespCodeConfig.ArgumentExp;
+                        result.msg = "参数错误";
+                    }
+                    break;
+                case "m"://month
+                    if (!string.IsNullOrEmpty(param.Code) && param.Number > 0)//按照品种获取的时候，必须传时间
+                    {
+                        exp = exp.And<FDataMaterial>(s => s.PCode == param.Code);
+                        int d = Convert.ToInt32(DateTime.Now.AddMonths(0 - param.Number).ToString("yyyyMMdd"));
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataMaterial>(s => s.DateTime >= d);
+                    }
+                    else
+                    {
+                        result.code = RespCodeConfig.ArgumentExp;
+                        result.msg = "参数错误";
+                    }
                     break;
             }
-
-            if (!string.IsNullOrEmpty(param.Code))//按照品种获取的时候，必须传时间
-            {
-                exp = exp.And<FDataMaterial>(s => s.PCode == param.Code);
-                //单个品种查询默认一个月数据
-                int d = Convert.ToInt32(DateTime.Now.AddMonths(-1).ToString("yyyyMMdd"));
-                if (!string.IsNullOrEmpty(param.StartT))
-                {
-                    d = Convert.ToInt32(param.StartT);
-                }
-                d = d > dlimit ? d : dlimit;
-                exp = exp.And<FDataMaterial>(s => s.DateTime >= d);
-            }
-            else if (!string.IsNullOrEmpty(param.StartT))//查询某一期
-            {
-                int d = Convert.ToInt32(param.StartT);
-                d = d > dlimit ? d : dlimit;
-                exp = exp.And<FDataMaterial>(s => s.DateTime == d);
-            }
-            else
-            {
-                int d = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
-                exp = exp.And<FDataMaterial>(s => s.DateTime == d);
-            }
+            var list = ibll.FDataMaterial.where(exp).OrderBy(s=>s.DateTime).ToList();
+            result.data = list;
+            result.code = RespCodeConfig.Normal;
         }
         /// <summary>
         /// 1031 两个品种的数据对比

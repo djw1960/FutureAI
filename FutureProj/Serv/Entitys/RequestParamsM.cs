@@ -61,6 +61,10 @@ namespace Serv.Entitys
         /// 结束时间
         /// </summary>
         public string EndT { get; set; }
+        /// <summary>
+        /// 数字：月份
+        /// </summary>
+        public int Number { get; set; }
         #endregion
 
         public int page { get; set; }
