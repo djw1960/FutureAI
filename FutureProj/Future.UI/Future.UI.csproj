@@ -78,7 +78,6 @@
     <Content Include="FrozenVer\html\t\l.html" />
     <Content Include="FrozenVer\images\FAI.png" />
     <Content Include="FrozenVer\images\userh.png" />
-    <Content Include="FrozenVer\js\index.js" />
     <Content Include="FrozenVer\js\lib\zepto.min.js" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -89,6 +88,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FrozenVer\js\main.js" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\fn.css" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\global.css" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\icons\icon-arrowlink.css" />
