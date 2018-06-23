@@ -1,0 +1,46 @@
+html {
+    width: 100%
+}
+
+body {
+    -webkit-user-select: initial;
+    background-color: #f2f2f2;
+    width: 100%
+}
+.index-wrap {
+    width: 100%;
+    overflow-x: hidden
+}
+
+    .index-wrap .header {
+        background-color: #F7F7F7;
+        height: 80px;
+        width:100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: center;
+        -webkit-box-pack: center
+    }
+
+    .index-wrap .footer {
+        height: 55px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-align: center;
+        -webkit-box-pack: center;
+        background-color: #F7F7F7
+    }
+
+.adlogo {
+    width: 95px;
+    height: 60px;
+    background: url(../images/FAI.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.userimg {
+    width: 60px;
+    height: 60px;
+    background: url(../images/userh.png) no-repeat;
+    background-size: 100% auto;
+}
