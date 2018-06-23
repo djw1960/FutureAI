@@ -170,6 +170,12 @@ namespace PayService.Serv
                         result.code = RespCodeConfig.ArgumentExp;
                     }
                     break;
+                default:
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                    }
+                    break;
             }
             var list = ibll.FDataRepository.where(exp).OrderBy(s => s.Date).Select(ss=>new {
                 ss.Date,
@@ -256,6 +262,12 @@ namespace PayService.Serv
                     {
                         result.code = RespCodeConfig.ArgumentExp;
                         result.msg = "参数错误";
+                    }
+                    break;
+                default:
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
                     }
                     break;
             }
