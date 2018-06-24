@@ -71,6 +71,7 @@
     <Content Include="FrozenVer\css\frozenui.css" />
     <Content Include="FrozenVer\css\style.css" />
     <Content Include="FrozenVer\html\a\i.html" />
+    <Content Include="FrozenVer\html\c\d.html" />
     <Content Include="FrozenVer\html\c\l.html" />
     <Content Include="FrozenVer\html\f\i.html" />
     <Content Include="FrozenVer\html\index.html" />

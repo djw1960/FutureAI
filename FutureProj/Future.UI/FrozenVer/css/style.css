@@ -44,3 +44,26 @@ body {
     background: url(../images/userh.png) no-repeat;
     background-size: 100% auto;
 }
+#cdcontent {
+}
+    #cdcontent .contenthr {
+        width: 100%;
+        line-height: 36px;
+    }
+    #cdcontent .contentdr {
+        width: 100%;
+        line-height: 48px;
+    }
+    #cdcontent .contentdh {
+        text-align: left;
+        background-color: #fcfcfc;
+        padding-left: 5px;
+        border-bottom: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+    }
+    #cdcontent .contentdd {
+        text-align: right;
+        padding-right: 15px;
+        border-bottom: 1px solid #ddd;
+    }
