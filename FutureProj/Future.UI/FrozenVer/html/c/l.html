@@ -41,7 +41,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">螺纹钢</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">螺纹钢</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -49,7 +49,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">铜</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">铜</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -57,7 +57,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">豆粕</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">豆粕</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -65,7 +65,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">甲醇</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">甲醇</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -73,7 +73,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">PTA</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">PTA</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -81,7 +81,7 @@
                                 </li>
                                 <li class="ui-border-t">
                                     <ul class="ui-row contentdr">
-                                        <li class="ui-col ui-col-25 ui-border-r contentdh">聚乙烯</li>
+                                        <li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">聚乙烯</li>
                                         <li class="ui-col ui-col-25 contentdd">4238</li>
                                         <li class="ui-col ui-col-25 contentdd">+79</li>
                                         <li class="ui-col ui-col-25 contentdd">+0.6%</li>
@@ -95,7 +95,7 @@
                 </div>
             </section>
             <div class="footer ui-footer">
-                <ul class="ui-tiled ui-border-t linklist">
+                <ul class="ui-tiled linklist">
                     <li data-href="../index.html" class="ui-border-r">资讯</li>
                     <li data-href="l.html" class="ui-border-r">仓单</li>
                     <li data-href="../t/l.html" class="ui-border-r">统计局</li>
@@ -107,5 +107,20 @@
     </section>
     <script src="../../js/lib/zepto.min.js"></script>
     <script src="../../js/main.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var clist = $('.contentdr');
+            for (var i = 0; i < clist.length; i++) {
+                $(clist[i].children[0]).on('click', function () {
+                    var dcode = $(this).data("code");
+                    if (!dcode) {
+                        return;
+                    }
+                    location.href = "d.html?code=" + dcode;
+                });
+            }
+            
+        });
+    </script>
 </body>
 </html>
