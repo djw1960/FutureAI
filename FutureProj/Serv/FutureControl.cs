@@ -91,6 +91,7 @@ namespace PayService.Serv
             {
                 result.code = RespCodeConfig.ArgumentExp;
                 result.msg = "参数错误";
+                return;
             }
             //最长查询6个月内数据
             int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
@@ -137,6 +138,7 @@ namespace PayService.Serv
                     {
                         result.msg = "参数错误";
                         result.code = RespCodeConfig.ArgumentExp;
+                        return;
                     }
                     break;
                 case "l"://list
@@ -152,6 +154,7 @@ namespace PayService.Serv
                     {
                         result.msg = "参数错误";
                         result.code = RespCodeConfig.ArgumentExp;
+                        return;
                     }
                     break;
                 case "m"://month
@@ -168,12 +171,14 @@ namespace PayService.Serv
                     {
                         result.msg = "参数错误";
                         result.code = RespCodeConfig.ArgumentExp;
+                        return;
                     }
                     break;
                 default:
                     {
                         result.msg = "参数错误";
                         result.code = RespCodeConfig.ArgumentExp;
+                        return;
                     }
                     break;
             }
@@ -229,6 +234,7 @@ namespace PayService.Serv
                         {
                             result.code = RespCodeConfig.ArgumentExp;
                             result.msg = "参数错误";
+                            return;
                         }
                         var someList = ibll.FDataMaterial.where(a => a.DateTime == d).OrderBy(a => a.PCode);
                         result.code = RespCodeConfig.Normal;
@@ -248,6 +254,7 @@ namespace PayService.Serv
                     {
                         result.code = RespCodeConfig.ArgumentExp;
                         result.msg = "参数错误";
+                        return;
                     }
                     break;
                 case "m"://month
@@ -262,12 +269,14 @@ namespace PayService.Serv
                     {
                         result.code = RespCodeConfig.ArgumentExp;
                         result.msg = "参数错误";
+                        return;
                     }
                     break;
                 default:
                     {
                         result.msg = "参数错误";
                         result.code = RespCodeConfig.ArgumentExp;
+                        return;
                     }
                     break;
             }
