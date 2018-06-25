@@ -80,6 +80,7 @@
     <Content Include="FrozenVer\html\t\l.html" />
     <Content Include="FrozenVer\images\FAI.png" />
     <Content Include="FrozenVer\images\userh.png" />
+    <Content Include="FrozenVer\js\common.js" />
     <Content Include="FrozenVer\js\lib\echarts.js" />
     <Content Include="FrozenVer\js\lib\echarts.min.js" />
     <Content Include="FrozenVer\js\lib\zepto.min.js" />

@@ -14,7 +14,7 @@ body {
 
     .index-wrap .header {
         background-color: #F7F7F7;
-        height: 80px;
+        height: 66px;
         width:100%;
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -45,6 +45,14 @@ body {
     background: url(../images/userh.png) no-repeat;
     background-size: 100% auto;
 }
+
+.overlayload {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -65px;
+    margin-top: -55px;
+} 
 #cdcontent {
 }
     #cdcontent .contenthr {
