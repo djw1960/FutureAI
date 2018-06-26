@@ -83,3 +83,10 @@ body {
         padding-right: 15px;
         border-bottom: 1px solid #ddd;
     }
+#monthlist {
+    line-height: 40px;
+    text-align: center;
+}
+    #monthlist .current {
+        background-color: lightcoral;
+    }

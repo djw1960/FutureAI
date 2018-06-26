@@ -7,7 +7,7 @@
             code: $.getParams("code") || '',
             id: $.getParams("id") || '',
             page: 0,
-            number:6,
+            number:1,
         },
         init: function () {
             var self = this;
@@ -33,6 +33,24 @@
                 //加载tab数据-切换tabContent
                 self.loadcd(this);
             });
+            //根据月份查询
+            $('#monthlist>div').on('click', function () {
+                $(this).parent().find('div').removeClass('current');
+                $(this).addClass('current');
+                var page = $('#monthlist').data('page');
+                var month = $(this).data('month');
+                self.data.number = month;
+                switch (page) {
+                    case 't':
+                        self.loadtjlist();
+                        break;
+                    case 'c':
+                        self.loadcdlist();
+                        break;
+                    default:
+                }
+                
+            });
             $("#ntabcontent>.ui-tab-content ul>li").live("click", function () {
                 var url = $(this).data('href');
                 if (url) {
@@ -45,6 +63,12 @@
                     location.href = url;
                 }
                 
+            })
+            $("#ttabcontent>.ui-tab-content ul.ui-list>li").live("click", function () {
+                var url = $(this).data('href');
+                if (url) {
+                    location.href = url;
+                }
             })
         },
         loadnews: function (ethisobj) {
@@ -166,7 +190,7 @@
                 }
             })
         },
-        loadcdlist: function (callback) {
+        loadcdlist: function () {
             var self = this;
             var params = {
                 no: 1020,
@@ -183,10 +207,16 @@
                 timeout: 9000,
                 success: function (data) {
                     if (data.code == 0) {
-                        if (typeof callback == 'function') {
-                            callback(data.data);
+                        var dlist = data.data;
+                        var dt = [];
+                        var da = [];
+                        var model = dlist[0];
+                        for (var i = 0; i < dlist.length; i++) {
+                            var item = dlist[i];
+                            dt.push(item.Date);
+                            da.push(item.TDSum);
                         }
-                        //chart数据处理
+                        self.InitEChartOneTable(model.CateName, dt, da);
                     }
                     else
                     {
@@ -204,6 +234,147 @@
                     $.overlay("body").remove();
                 }
             })
+        },
+        loadtj: function () {
+            var self = this;
+            var params = {
+                no: 1030,
+                cate: self.data.cate,
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        var list = data.data.list;
+                        var lihtml = '<ul class="ui-list ui-border-tb "><li class="ui-border-t"><ul class="ui-row contenthr"><li class="ui-col ui-col-25 ui-border-r contentdh">名称</li><li class="ui-col ui-col-25 contentdd">价格</li><li class="ui-col ui-col-25 contentdd">涨跌</li><li class="ui-col ui-col-25 contentdd">涨跌幅</li></ul></li>';
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            lihtml += '<li data-href="d.html?cate=m&code=' + item.PCode + '"><ul class="ui-row contentdr"><li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh ui-nowrap ui-whitespace">' + item.PName + '</li><li class="ui-col ui-col-25 contentdd">' + item.Price + '</li><li class="ui-col ui-col-25 contentdd">' + item.RisePrice + '</li><li class="ui-col ui-col-25 contentdd">' + item.RiseRange+ '%</li></ul></li>';
+                        }
+                        lihtml += '</ul">';
+                        $('#cdcontent>li').eq(0).html(lihtml);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+        loadtjlist: function () {
+            var self = this;
+            var params = {
+                no: 1030,
+                cate: self.data.cate,
+                code: self.data.code,
+                number: self.data.number
+            };
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        var dlist = data.data;
+                        var dt = [];
+                        var da = [];
+                        var model = dlist[0];
+                        for (var i = 0; i < dlist.length; i++) {
+                            var item = dlist[i];
+                            dt.push(item.DateTime);
+                            da.push(item.Price);
+                        }
+                        self.InitEChartOneTable(model.PName, dt, da);
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+        InitEChartOneTable: function (title,date,data) {
+            var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                title: {
+                    left: 'center',
+                    text: title + '趋势面积图',
+                },
+                toolbox: {
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: date
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%']
+                },
+                series: [
+                    {
+                        name: title,
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            normal: {
+                                color: 'rgb(255, 70, 131)'
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgb(255, 158, 68)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgb(255, 70, 131)'
+                                }])
+                            }
+                        },
+                        data: data
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
         }
     };
     $.fn.future = future;

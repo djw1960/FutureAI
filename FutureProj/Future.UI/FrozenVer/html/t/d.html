@@ -15,8 +15,8 @@
         <div class="index-wrap">
             <section class="ui-panel ui-panel-center-multi ui-border-tb">
                 <h2>
-                    <span>螺纹仓单趋势图</span>
-                    <span class="ui-panel-subtitle">来源：上交所  日期：2018.06.20</span>
+                    <span>主要生产资料全国市场价格趋势</span>
+                    <span class="ui-panel-subtitle">来源：国家统计局  日期：2018.06.20</span>
                 </h2>
             </section>
             <section class="ui-panel">
@@ -24,13 +24,13 @@
                     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                     <div id="main" style="width: 100%;height:400px;"></div>
                 </div>
-                <div class="ui-row-flex ui-whitespace">
-                    <div class="ui-col ui-col">1个月</div>
-                    <div class="ui-col ui-col">3个月</div>
-                    <div class="ui-col ui-col">6个月</div>
+                <div id="monthlist" data-page="t" class="ui-row-flex ui-whitespace">
+                    <div data-month="3" class="ui-col ui-col current">3个月</div>
+                    <div data-month="6" class="ui-col ui-col">6个月</div>
+                    <div data-month="9" class="ui-col ui-col">9个月</div>
                 </div>
             </section>
-            <section class="ui-panel ui-border-t">
+            <!--<section class="ui-panel ui-border-t">
                 <h4>历史搜索：</h4>
                 <ul class="ui-list ui-list-pure ui-border-tb">
                     <li class="ui-border-t">
@@ -46,7 +46,7 @@
                         <h4>标题标题标题标题标题标题题标题标题标题标题标题标题标题标题标题</h4>
                     </li>
                 </ul>
-            </section>
+            </section>-->
 
             <div class="footer ui-footer">
                 <ul class="ui-tiled linklist">
@@ -63,96 +63,9 @@
     <script src="../../js/main.js"></script>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'), null, {renderer:'canvas'});
-        var base = +new Date(1968, 9, 3);
-        var oneDay = 24 * 3600 * 1000;
-        var date = [];
-
-        var data = [Math.random() * 300];
-
-        for (var i = 1; i < 2000; i++) {
-            var now = new Date(base += oneDay);
-            date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-            data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-        }
-
-        option = {
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
-            title: {
-                left: 'center',
-                text: '大数据量面积图',
-            },
-            toolbox: {
-                feature: {
-                    dataZoom: {
-                        yAxisIndex: 'none'
-                    },
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: date
-            },
-            yAxis: {
-                type: 'value',
-                boundaryGap: [0, '100%']
-            },
-            dataZoom: [{
-                type: 'inside',
-                start: 0,
-                end: 10
-            }, {
-                start: 0,
-                end: 10,
-                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                handleSize: '80%',
-                handleStyle: {
-                    color: '#fff',
-                    shadowBlur: 3,
-                    shadowColor: 'rgba(0, 0, 0, 0.6)',
-                    shadowOffsetX: 2,
-                    shadowOffsetY: 2
-                }
-            }],
-            series: [
-                {
-                    name: '模拟数据',
-                    type: 'line',
-                    smooth: true,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(255, 70, 131)'
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(255, 158, 68)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 70, 131)'
-                            }])
-                        }
-                    },
-                    data: data
-                }
-            ]
-        };
-
-
-                            // 使用刚指定的配置项和数据显示图表。
-                            myChart.setOption(option);
+        $(function () {
+            $.fn.future.loadtjlist();
+        });
     </script>
 </body>
 </html>

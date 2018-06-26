@@ -24,13 +24,13 @@
                     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
                     <div id="main" style="width: 100%;height:400px;"></div>
                 </div>
-                <div class="ui-row-flex ui-whitespace">
-                    <div class="ui-col ui-col">1个月</div>
-                    <div class="ui-col ui-col">3个月</div>
-                    <div class="ui-col ui-col">6个月</div>
+                <div id="monthlist" data-page="c" class="ui-row-flex ui-whitespace">
+                    <div data-month="1" class="ui-col ui-col current">1个月</div>
+                    <div data-month="3" class="ui-col ui-col">3个月</div>
+                    <div data-month="6" class="ui-col ui-col">6个月</div>
                 </div>
             </section>
-            <section class="ui-panel ui-border-t">
+            <!--<section class="ui-panel ui-border-t">
                 <h4>历史搜索：</h4>
                 <ul class="ui-list ui-list-pure ui-border-tb">
                     <li class="ui-border-t">
@@ -46,7 +46,7 @@
                         <h4>标题标题标题标题标题标题题标题标题标题标题标题标题标题标题标题</h4>
                     </li>
                 </ul>
-            </section>
+            </section>-->
            
             <div class="footer ui-footer">
                 <ul class="ui-tiled linklist">
@@ -64,77 +64,7 @@
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         $(function () {
-            $.fn.future.loadcdlist(function (dlist) {
-                if (dlist && dlist.length > 0) {
-                    var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
-                    var date = [];
-                    var data = [];
-                    var model = dlist[0];
-                    for (var i = 0; i < dlist.length; i++) {
-                        var item = dlist[i];
-                        date.push(item.Date);
-                        data.push(item.TDSum);
-                    }
-                    option = {
-                        tooltip: {
-                            trigger: 'axis',
-                            position: function (pt) {
-                                return [pt[0], '10%'];
-                            }
-                        },
-                        title: {
-                            left: 'center',
-                            text: model.CateName + '趋势面积图',
-                        },
-                        toolbox: {
-                            feature: {
-                                dataZoom: {
-                                    yAxisIndex: 'none'
-                                },
-                                restore: {},
-                                saveAsImage: {}
-                            }
-                        },
-                        xAxis: {
-                            type: 'category',
-                            boundaryGap: false,
-                            data: date
-                        },
-                        yAxis: {
-                            type: 'value',
-                            boundaryGap: [0, '100%']
-                        },
-                        series: [
-                            {
-                                name: model.CateName,
-                                type: 'line',
-                                smooth: true,
-                                symbol: 'none',
-                                sampling: 'average',
-                                itemStyle: {
-                                    normal: {
-                                        color: 'rgb(255, 70, 131)'
-                                    }
-                                },
-                                areaStyle: {
-                                    normal: {
-                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                            offset: 0,
-                                            color: 'rgb(255, 158, 68)'
-                                        }, {
-                                            offset: 1,
-                                            color: 'rgb(255, 70, 131)'
-                                        }])
-                                    }
-                                },
-                                data: data
-                            }
-                        ]
-                    };
-                    // 使用刚指定的配置项和数据显示图表。
-                    myChart.setOption(option);
-                }
-            });
+            $.fn.future.loadcdlist();
         });
     </script>
 </body>
