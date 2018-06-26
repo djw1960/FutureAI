@@ -2,11 +2,12 @@
     var future = {
         data: {
             urls: "http://www.doapi.info/api/futurecenter",
-            type: '',
+            type: $.getParams("type") ||'',
             cate: $.getParams("cate")||'n',
             code: $.getParams("code") || '',
             id: $.getParams("id") || '',
             page: 0,
+            number:6,
         },
         init: function () {
             var self = this;
@@ -33,11 +34,18 @@
                 self.loadcd(this);
             });
             $("#ntabcontent>.ui-tab-content ul>li").live("click", function () {
-                location.href = $(this).data('href');
+                var url = $(this).data('href');
+                if (url) {
+                    location.href = url;
+                }
             })
-        },
-        turncontent: function (conthtml) {
-
+            $("#cdtabcontent>.ui-tab-content ul.ui-list>li").live("click", function () {
+                var url = $(this).data('href');
+                if (url) {
+                    location.href = url;
+                }
+                
+            })
         },
         loadnews: function (ethisobj) {
             var self = this;
@@ -60,7 +68,7 @@
                         var lihtml = '<ul class=\"ui-list ui-border-tb \">';
                         for (var i = 0; i < list.length; i++) {
                             var item = list[i];
-                            lihtml += '<li data-href="./n/d.html?id=' + item.ID + '"><div class="ui-list-img-square nimg"><span style="background-image:url(http://placeholder.qiniudn.com/140x140)"></span></div><div class=\"ui-list-info ui-border-t\"><h4 class=\"ui-nowrap\">' + item.NewsTitle + '</h4><p class=\"ui-nowrap\">来源：' + item.NSource + '日期：' + item.PublishDate + '</p></div></li>';
+                            lihtml += '<li data-href="./n/d.html?id=' + item.ID + '"><div class="ui-list-img-square nimg"><span style="background-image:url(http://placeholder.qiniudn.com/140x140)"></span></div><div class=\"ui-list-info ui-border-t\"><h4 class=\"ui-nowrap\">' + item.NewsTitle + '</h4><p class=\"ui-nowrap\">来源：' + item.NSource + '  日期：' + item.PublishDate + '</p></div></li>';
                         }
                         lihtml += '</ul">';
                         $('.ui-tab-content>li').eq($(ethisobj).index()).html(lihtml);
@@ -111,21 +119,90 @@
                 },
                 complete: function () {
                     $.overlay("body").hide();
+                    $.overlay("body").remove();
                 }
             })
         },
-        loadcd: function (ethisObj) {
+        loadcd: function (ethisobj) {
             var self = this;
-            var lihtml = '<ul class="ui-list ui-border - tb ">';
-            lihtml += '<li class="ui-border-t" style= "margin-left:0px;" >';
-            lihtml += '<ul class="ui-row contenthr"><li class="ui-col ui-col-25 ui-border-r contentdh">名称</li><li class="ui-col ui-col-25 contentdd">价格</li>';
-            lihtml += '<li class="ui-col ui-col-25 contentdd">涨跌额</li><li class="ui-col ui-col-25 contentdd">涨跌幅</li></ul></li >';
-            lihtml += '<li class="ui-border-t" style="margin-left:0px;"><ul class="ui-row contentdr"><li class="ui-col ui-col-25 ui-border-r contentdh">螺纹钢</li><li class="ui-col ui-col-25 contentdd">4238</li><li class="ui-col ui-col-25 contentdd">+79</li> <li class="ui-col ui-col-25 contentdd">+0.6%</li></ul> </li></ul>';
+            self.data.type = $(ethisobj).data('type');
+            var params = {
+                no: 1020,
+                type: self.data.type,
+                cate: self.data.cate,
+            };
 
-            $('.ui-tab-content>li').eq($(ethisObj).index()).html(lihtml);
-            $('.ui-tab-content').eq(0).css({
-                'transform': 'translate3d(-' + ($(ethisObj).index() * $('.ui-tab-content li').offset().width) + 'px,0,0)',
-                'transition': 'transform 0.5s linear'
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        var list = data.data.list;
+                        var lihtml = '<ul class="ui-list ui-border-tb "><li class="ui-border-t"><ul class="ui-row contenthr"><li class="ui-col ui-col-25 ui-border-r contentdh">名称</li><li class="ui-col ui-col-25 contentdd">仓单</li><li class="ui-col ui-col-25 contentdd">增加</li><li class="ui-col ui-col-25 contentdd">幅度</li></ul></li>';
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            lihtml += '<li data-href="d.html?type=' + self.data.type+'&cate=m&code=' + item.CateCode + '"><ul class="ui-row contentdr"><li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">' + item.CateName + '</li><li class="ui-col ui-col-25 contentdd">' + item.TDSum + '</li><li class="ui-col ui-col-25 contentdd">' + item.Change + '</li><li class="ui-col ui-col-25 contentdd">' + item.Change / item.YTDSum +'%</li></ul></li>';
+                        }
+                        lihtml += '</ul">';
+                        $('.ui-tab-content>li').eq($(ethisobj).index()).html(lihtml);
+                        $('.ui-tab-content').eq(0).css({
+                            'transform': 'translate3d(-' + ($(ethisobj).index() * $('.ui-tab-content li').offset().width) + 'px,0,0)',
+                            'transition': 'transform 0.5s linear'
+                        })
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+        loadcdlist: function (callback) {
+            var self = this;
+            var params = {
+                no: 1020,
+                type: self.data.type,
+                cate: self.data.cate,
+                code: self.data.code,
+                number: self.data.number
+            };
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        if (typeof callback == 'function') {
+                            callback(data.data);
+                        }
+                        //chart数据处理
+                    }
+                    else
+                    {
+                        alert(data.msg);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
             })
         }
     };
