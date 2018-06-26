@@ -2,9 +2,10 @@
     var future = {
         data: {
             urls: "http://www.doapi.info/api/futurecenter",
-            type: 'dce',
+            type: '',
             cate: $.getParams("cate")||'n',
             code: $.getParams("code") || '',
+            id: $.getParams("id") || '',
             page: 0,
         },
         init: function () {
@@ -24,7 +25,6 @@
                 //加载tab数据-切换tabContent
                 self.loadnews(this);            
             });
-
             //tab切换
             $('#cdtabcontent>.ui-tab-nav').eq(0).find('li').on('click', function () {
                 $(this).parent().find('li').removeClass('current');
@@ -41,6 +41,7 @@
         },
         loadnews: function (ethisobj) {
             var self = this;
+            self.data.type = $(ethisobj).data('type');
             var params = {
                 no: 1010,
                 page: self.data.page,
@@ -59,7 +60,7 @@
                         var lihtml = '<ul class=\"ui-list ui-border-tb \">';
                         for (var i = 0; i < list.length; i++) {
                             var item = list[i];
-                            lihtml += '<li data-href="./n/d.html"><div class=\"ui-list-img-square\"><span style=\"background-image:url(http://placeholder.qiniudn.com/188x188)\" ></span> </div><div class=\"ui-list-info ui-border-t\"><h4 class=\"ui-nowrap\">' + item.NewsTitle + '</h4><p class=\"ui-nowrap\">来源：' + item.NSource + '日期：' + item.PublishDate+'</p></div></li>';
+                            lihtml += '<li data-href="./n/d.html?id=' + item.ID + '"><div class="ui-list-img-square nimg"><span style="background-image:url(http://placeholder.qiniudn.com/140x140)"></span></div><div class=\"ui-list-info ui-border-t\"><h4 class=\"ui-nowrap\">' + item.NewsTitle + '</h4><p class=\"ui-nowrap\">来源：' + item.NSource + '日期：' + item.PublishDate + '</p></div></li>';
                         }
                         lihtml += '</ul">';
                         $('.ui-tab-content>li').eq($(ethisobj).index()).html(lihtml);
@@ -67,6 +68,39 @@
                             'transform': 'translate3d(-' + ($(ethisobj).index() * $('.ui-tab-content li').offset().width) + 'px,0,0)',
                             'transition': 'transform 0.5s linear'
                         })
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+        loadnewsinfo: function () {
+            var self = this;
+            var params = {
+                no: 1011,
+                id: self.data.id,
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        var item = data.data;
+                        $('#newsheader span').eq(0).text(item.NewsTitle);
+                        $('#newsheader span').eq(1).text('来源：' + item.NSource + '  日期：' + item.PublishDate);
+                        $("#newsContent .ui-whitespace").html(item.NewContent);
                     }
                 },
                 error: function (xhr, type) {
@@ -95,5 +129,6 @@
             })
         }
     };
+    $.fn.future = future;
     future.init();
 })(document, window);

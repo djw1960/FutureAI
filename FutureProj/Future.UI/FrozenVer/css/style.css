@@ -52,7 +52,14 @@ body {
     top: 50%;
     margin-left: -65px;
     margin-top: -55px;
-} 
+}
+#ntabcontent {
+}
+#ntabcontent .nimg{
+    width:70px;
+    height:70px;
+}
+
 #cdcontent {
 }
     #cdcontent .contenthr {
