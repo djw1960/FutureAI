@@ -135,7 +135,18 @@
         return overlay;
     };
     $.toast = function (msg) {
-        var msgm = '<div class="ui-tooltips ui-tooltips-warn ui-tooltips-hignlight"><div class="ui-tooltips-cnt ui-tooltips-cnt-link ui-border-b"><i></i>' + msg+'</div ></div >';
-        $('body').append(msgm);
-    }
+        //var msgm = '<div class="ui-tooltips ui-tooltips-warn"><div class="ui-tooltips-cnt ui-border-b"><i></i>' + msg + '<a class="ui-icon-close"></a></div></div>';
+        var msgm2 = '<div class="ui-tooltips ui-tooltips-warn ui-tooltips-hignlight"><div class="ui-tooltips-cnt ui-border-b" ><i></i>' + msg + '<a class="ui-icon-close"></a></div ></div >'
+        if ($('body').find('div.ui-tooltips.ui-tooltips-warn')) {
+            $('body').find('div.ui-tooltips.ui-tooltips-warn').remove();
+        }
+        $('body').append(msgm2);
+        $('body').find('div.ui-tooltips.ui-tooltips-warn').css({ "position": "fixed"});
+    };
+    $(document).on("click", "a.ui-icon-close", function () {
+        $(this).parent().parent().remove()
+    });
+    //$('a.ui-icon-close').live('click', function () {
+    //    $(this).parent('div.ui-tooltips.ui-tooltips-warn').remove();
+    //});
 })(window.Zepto);

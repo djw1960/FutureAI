@@ -7,7 +7,7 @@
             code: $.getParams("code") || '',
             id: $.getParams("id") || '',
             page: 0,
-            number:1,
+            number:3,
         },
         init: function () {
             var self = this;
@@ -70,6 +70,27 @@
                     location.href = url;
                 }
             })
+            $("#tjcatelist label").live("click", function () {
+                if ($(this).hasClass('labcurrent')) {
+                    $(this).removeClass('labcurrent');
+                    return;
+                }
+                var sel = $(this).parent().find('label.labcurrent');
+                if (sel.length >= 2) {
+                    $.toast("最多只能选择两个品种");
+                    return;
+                }
+                $(this).addClass('labcurrent');
+            })
+
+            //$(document).on("click", "#tjcatelist label", function () {
+            //    var sel = $(this).parent().find('label.labcurrent');
+            //    alert(99);
+            //    if (sel.length > 2) {
+            //        alert("最多只能选择两个品种");
+            //    }
+            //    $(this).addClass('labcurrent');
+            //})
         },
         loadnews: function (ethisobj) {
             var self = this;
@@ -315,6 +336,43 @@
                 }
             })
         },
+        loadtjcate: function () {
+            var self = this;
+            var params = {
+                no: 1030,
+                cate:'n',
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        var list = data.data.list;
+                        var lihtml = '';
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            lihtml += '<label data-code=' + item.PCode + ' class="ui-label">' + item.PName + '</label>';
+                        }
+                        $('#tjcatelist').html(lihtml);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+
         InitEChartOneTable: function (title,date,data) {
             var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
             option = {

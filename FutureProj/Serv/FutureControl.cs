@@ -94,7 +94,7 @@ namespace PayService.Serv
                 return;
             }
             //最长查询6个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-6).ToString("yyyyMMdd"));
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-36).ToString("yyyyMMdd"));
             switch (param.Cate)
             {
                 case "n"://new
@@ -208,8 +208,8 @@ namespace PayService.Serv
         public static void SERVICE_GetMaterialList(ReturnModel result, RequestParamsM param)
         {
             var exp = PredicateBuilder.True<FDataMaterial>();
-            //最长查询6个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-12).ToString("yyyyMMdd"));
+            //最长查询12个月内数据
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-36).ToString("yyyyMMdd"));
             switch (param.Cate)
             {
                 case "n"://new
