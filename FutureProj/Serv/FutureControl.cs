@@ -291,7 +291,44 @@ namespace PayService.Serv
         /// <param name="param"></param>
         public static void SERVICE_GetMaterList_TwoCate(ReturnModel result, RequestParamsM param)
         {
-
+            var exp = PredicateBuilder.True<FDataMaterial>();
+            //最长查询12个月内数据
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-36).ToString("yyyyMMdd"));
+            string[] codes = param.Code.Split(new char[] { '|',',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (codes.Length != 2)
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "只允许两个品种对比";
+                return;
+            }
+            switch (param.Cate)
+            {
+                case "m"://两个品种对比只能按月份取数据
+                    if (!string.IsNullOrEmpty(param.Code.Trim()) && param.Number > 0)
+                    {
+                        exp = exp.And<FDataMaterial>(s => codes.Contains(s.PCode));
+                        int d = Convert.ToInt32(DateTime.Now.AddMonths(0 - param.Number).ToString("yyyyMMdd"));
+                        d = d > dlimit ? d : dlimit;
+                        exp = exp.And<FDataMaterial>(s => s.DateTime >= d);
+                    }
+                    else
+                    {
+                        result.code = RespCodeConfig.ArgumentExp;
+                        result.msg = "参数错误";
+                        return;
+                    }
+                    break;
+                default:
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                        return;
+                    }
+                    break;
+            }
+            var list = ibll.FDataMaterial.where(exp).OrderBy(s => s.DateTime).ToList();
+            result.data = new { list1=list.Where(a=>a.PCode==codes[0]).ToList(),list2= list.Where(a => a.PCode == codes[1]).ToList() };
+            result.code = RespCodeConfig.Normal;
         }
         #endregion
 

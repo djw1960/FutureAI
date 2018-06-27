@@ -61,6 +61,18 @@
     <script type="text/javascript">
         $(function () {
             $.fn.future.loadtjcate();
+            $('#tjcateselect button').on('click', function () {
+                var tags = $(tjcatelist).find('label.labcurrent');
+                if (tags.length!=2) {
+                    $.toast('必须选择两个品种对比');
+                    return;
+                }
+                var codes = "";
+                for (var i = 0; i < tags.length; i++) {
+                    codes += tags[i].getAttribute('data-code')+"|";
+                }
+                location.href = "compared.html?cs=" + codes;
+            })
         });
     </script>
 </body>

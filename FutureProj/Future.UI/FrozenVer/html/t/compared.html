@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title>FrozenUI Demo</title>
+    <!-- 引入 FrozenUI -->
+    <link rel="stylesheet" href="../../css/frozenui.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/lib/zepto.min.js"></script>
+    <script src="../../js/common.js"></script>
+</head>
+<body ontouchstart>
+    <section class="ui-container">
+        <div class="index-wrap">
+            <section class="ui-panel ui-panel-center-multi ui-border-tb">
+                <h2>
+                    <span>市场价格对比趋势</span>
+                    <span class="ui-panel-subtitle">数据来源：国家统计局发布</span>
+                </h2>
+            </section>
+            <section class="ui-panel">
+                <div style="width:100%;height:100px;">
+                   两个品种最新一期数据详情
+                </div>
+            </section>
+            <section class="ui-panel">
+                <div>
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main" style="width: 100%;height:300px;"></div>
+                </div>
+                <div id="monthlist" data-page="t" class="ui-row-flex ui-whitespace">
+                    <div data-month="3" class="ui-col ui-col current">3个月</div>
+                    <div data-month="6" class="ui-col ui-col">6个月</div>
+                    <div data-month="9" class="ui-col ui-col">9个月</div>
+                    <div data-month="36" class="ui-col ui-col">36个月</div>
+                </div>
+            </section>
+            <!--<section class="ui-panel ui-border-t">
+                <h4>历史搜索：</h4>
+                <ul class="ui-list ui-list-pure ui-border-tb">
+                    <li class="ui-border-t">
+                        <h5><span>1.faycheng </span><span class="date"> 2月12日</span></h5>
+                        <h4>这本书太赞了，每次看都有不一样的体会和感悟，超级喜欢！期待大结局。</h4>
+                    </li>
+                    <li class="ui-border-t">
+                        <h5><span>2.faycheng </span><span class="date"> 2月12日</span></h5>
+                        <h4>标题标题标题标题标题标题题标题标题标题标题标题标题标题标题标题</h4>
+                    </li>
+                    <li class="ui-border-t">
+                        <h5><span>3.faycheng </span><span class="date"> 2月12日</span></h5>
+                        <h4>标题标题标题标题标题标题题标题标题标题标题标题标题标题标题标题</h4>
+                    </li>
+                </ul>
+            </section>-->
+
+            <div class="footer ui-footer">
+                <ul class="ui-tiled linklist">
+                    <li data-href="../index.html" class="ui-border-r">资讯</li>
+                    <li data-href="../c/l.html" class="ui-border-r">仓单</li>
+                    <li data-href="../t/l.html" class="ui-border-r">统计局</li>
+                    <li data-href="../f/i.html" class="ui-border-r">圈子</li>
+                    <li data-href="../a/i.html">AI量化</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="../../js/lib/echarts.js"></script>
+    <script src="../../js/main.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        $(function () {
+            $.fn.future.loadtjcompare();
+        });
+    </script>
+</body>
+</html>

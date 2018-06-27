@@ -372,7 +372,52 @@
                 }
             })
         },
-
+        loadtjcompare: function () {
+            var self = this;
+            var params = {
+                no: 1031,
+                cate: 'm',
+                code: $.getParams('cs'),
+                number: self.data.number
+            };
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0 && data.data) {
+                        var dlist1 = data.data.list1;
+                        var dlist2 = data.data.list2;
+                        var dt = [];
+                        var da1 = [];
+                        var da2 = [];
+                        var model1 = dlist1[0];
+                        var model2 = dlist2[0];
+                        for (var i = 0; i < dlist1.length; i++) {
+                            dt.push(dlist1[i].DateTime);
+                            da1.push(dlist1[i].Price);
+                            da2.push(dlist2[i].Price);
+                        }
+                        self.InitEChartMoreTable(dt, da1,da2);
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
         InitEChartOneTable: function (title,date,data) {
             var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
             option = {
@@ -428,6 +473,81 @@
                             }
                         },
                         data: data
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        InitEChartMoreTable: function (date, data1, data2) {
+            var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                title: {
+                    left: 'center',
+                    text:'多品种趋势面积图',
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: date
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%']
+                },
+                series: [
+                    {
+                        name: data1[0].PName,
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            normal: {
+                                color: 'rgb(255, 70, 131)'
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgb(255, 158, 68)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgb(255, 70, 131)'
+                                }])
+                            }
+                        },
+                        data: data1
+                    }, {
+                        name: data2[0].PName,
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            normal: {
+                                color: 'rgb(255, 70, 131)'
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgb(255, 158, 68)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgb(255, 70, 131)'
+                                }])
+                            }
+                        },
+                        data: data2
                     }
                 ]
             };

@@ -65,6 +65,11 @@ namespace Serv.Entitys
         /// 数字：月份
         /// </summary>
         public int Number { get; set; }
+        /// <summary>
+        /// 多分类对比：a|m|s
+        /// 
+        /// </summary>
+        public string Content { get; set; }
         #endregion
 
         public int page { get; set; }
