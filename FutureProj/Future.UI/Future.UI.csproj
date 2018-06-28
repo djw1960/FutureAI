@@ -75,6 +75,7 @@
     <Content Include="FrozenVer\html\c\l.html" />
     <Content Include="FrozenVer\html\f\i.html" />
     <Content Include="FrozenVer\html\index.html" />
+    <Content Include="FrozenVer\html\m\a.html" />
     <Content Include="FrozenVer\html\n\d.html" />
     <Content Include="FrozenVer\html\t\compare.html" />
     <Content Include="FrozenVer\html\t\compared.html" />

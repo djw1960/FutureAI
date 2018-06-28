@@ -24,12 +24,25 @@
                 </ul>
             </div>
             <section>
-                <div id="ttabcontent" class="ui-tab">
-                    <table id="cdcontent" class="ui-table ui-border-tb">
+                <div id="aitabcontent">
+                    <table class="ui-table ui-border-tb">
                         <thead>
-                            <tr><th>名称</th><th>价格</th><th>涨跌</th><th>涨跌幅</th></tr>
+                            <tr><th>品种</th><th>已购买</th><th>状态</th><th>会员到期时间</th></tr>
                         </thead>
                         <tbody>
+                            <tr><td class="fcol">螺纹钢螺纹钢</td><td>2014257777</td><td>使用中</td><td>2016-02-06</td></tr>
+                            <tr><td class="fcol">大豆螺纹钢</td><td>2014257777</td><td>待付款</td><td><a href="#">付款</a></td></tr>
+                            <tr><td class="fcol">豆粕螺纹钢</td><td>2014257777</td><td>待付款</td><td><a href="#">付款</a></td></tr>
+                        </tbody>
+                    </table>
+                    <table class="ui-table ui-border">
+                        <thead>
+                            <tr><th>品种</th><th>已购买</th><th>状态</th><th>会员到期时间</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="fcol">螺纹钢螺纹钢</td><td>2014257777</td><td>使用中</td><td>2016-02-06</td></tr>
+                            <tr><td class="fcol">螺纹钢螺纹钢</td><td>2014257777</td><td>待付款</td><td><a href="#">付款</a></td></tr>
+                            <tr><td class="fcol">螺纹钢螺纹钢</td><td>2014257777</td><td>待付款</td><td><a href="#">付款</a></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -37,8 +50,8 @@
             <div class="footer ui-footer">
                 <ul class="ui-tiled linklist">
                     <li data-href="../index.html" class="ui-border-r">资讯</li>
-                    <li data-href="../c/l.html" class="ui-border-r">仓单</li>
-                    <li data-href="l.html" class="ui-border-r">统计局</li>
+                    <li data-href="l.html" class="ui-border-r">仓单</li>
+                    <li data-href="../t/l.html" class="ui-border-r">统计局</li>
                     <li data-href="../f/i.html" class="ui-border-r">圈子</li>
                     <li data-href="../a/i.html">AI量化</li>
                 </ul>
@@ -46,10 +59,5 @@
         </div>
     </section>
     <script src="../../js/main.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $.fn.future.loadtj();
-        });
-    </script>
 </body>
 </html>

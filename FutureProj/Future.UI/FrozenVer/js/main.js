@@ -47,6 +47,9 @@
                     case 'c':
                         self.loadcdlist();
                         break;
+                    case 'tc':
+                        self.loadtjcompare();
+                        break;
                     default:
                 }
                 
@@ -64,7 +67,7 @@
                 }
                 
             })
-            $("#ttabcontent>.ui-tab-content ul.ui-list>li").live("click", function () {
+            $("#cdcontent>tbody>tr").live("click", function () {
                 var url = $(this).data('href');
                 if (url) {
                     location.href = url;
@@ -272,13 +275,12 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var list = data.data.list;
-                        var lihtml = '<ul class="ui-list ui-border-tb "><li class="ui-border-t"><ul class="ui-row contenthr"><li class="ui-col ui-col-25 ui-border-r contentdh">名称</li><li class="ui-col ui-col-25 contentdd">价格</li><li class="ui-col ui-col-25 contentdd">涨跌</li><li class="ui-col ui-col-25 contentdd">涨跌幅</li></ul></li>';
+                        var lihtml = '';
                         for (var i = 0; i < list.length; i++) {
                             var item = list[i];
-                            lihtml += '<li data-href="d.html?cate=m&code=' + item.PCode + '"><ul class="ui-row contentdr"><li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh ui-nowrap ui-whitespace">' + item.PName + '</li><li class="ui-col ui-col-25 contentdd">' + item.Price + '</li><li class="ui-col ui-col-25 contentdd">' + item.RisePrice + '</li><li class="ui-col ui-col-25 contentdd">' + item.RiseRange+ '%</li></ul></li>';
+                            lihtml += '<tr data-href="d.html?cate=m&code=' + item.PCode + '"><td class="fcol" >' + self.namesubstring(item.PName) + '</td><td>' + item.Price + '</td><td>' + item.RisePrice + '</td><td>' + item.RiseRange + '%</td></tr>';
                         }
-                        lihtml += '</ul">';
-                        $('#cdcontent>li').eq(0).html(lihtml);
+                        $('#cdcontent>tbody').html(lihtml);
                     }
                 },
                 error: function (xhr, type) {
@@ -553,6 +555,9 @@
             };
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
+        },
+        namesubstring: function (str) {
+            return str.substring(0, str.indexOf('（') < 1 ? 2 : str.indexOf('（')) 
         }
     };
     $.fn.future = future;
