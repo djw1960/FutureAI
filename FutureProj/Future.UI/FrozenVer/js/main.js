@@ -426,15 +426,6 @@
                     left: 'center',
                     text: title + '趋势面积图',
                 },
-                toolbox: {
-                    feature: {
-                        dataZoom: {
-                            yAxisIndex: 'none'
-                        },
-                        restore: {},
-                        saveAsImage: {}
-                    }
-                },
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
