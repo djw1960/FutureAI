@@ -60,7 +60,7 @@
                     location.href = url;
                 }
             })
-            $("#cdtabcontent>.ui-tab-content ul.ui-list>li").live("click", function () {
+            $(".ui-tab-content>li tbody>tr").live("click", function () {
                 var url = $(this).data('href');
                 if (url) {
                     location.href = url;
@@ -85,15 +85,6 @@
                 }
                 $(this).addClass('labcurrent');
             })
-
-            //$(document).on("click", "#tjcatelist label", function () {
-            //    var sel = $(this).parent().find('label.labcurrent');
-            //    alert(99);
-            //    if (sel.length > 2) {
-            //        alert("最多只能选择两个品种");
-            //    }
-            //    $(this).addClass('labcurrent');
-            //})
         },
         loadnews: function (ethisobj) {
             var self = this;
@@ -189,12 +180,14 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var list = data.data.list;
-                        var lihtml = '<ul class="ui-list ui-border-tb "><li class="ui-border-t"><ul class="ui-row contenthr"><li class="ui-col ui-col-25 ui-border-r contentdh">名称</li><li class="ui-col ui-col-25 contentdd">仓单</li><li class="ui-col ui-col-25 contentdd">增加</li><li class="ui-col ui-col-25 contentdd">幅度</li></ul></li>';
+                        var lihtml = '<table class="ui-table ui-border-tb"><thead><tr><th>名称</th><th>价格</th><th>涨跌</th><th>涨跌幅</th></tr></thead><tbody>';
+
+
                         for (var i = 0; i < list.length; i++) {
                             var item = list[i];
-                            lihtml += '<li data-href="d.html?type=' + self.data.type+'&cate=m&code=' + item.CateCode + '"><ul class="ui-row contentdr"><li data-code="a" class="ui-col ui-col-25 ui-border-r contentdh">' + item.CateName + '</li><li class="ui-col ui-col-25 contentdd">' + item.TDSum + '</li><li class="ui-col ui-col-25 contentdd">' + item.Change + '</li><li class="ui-col ui-col-25 contentdd">' + item.Change / item.YTDSum +'%</li></ul></li>';
+                            lihtml += '<tr data-href="d.html?type=' + self.data.type + '&cate=m&code=' + item.CateCode + '"><td class="fcol" >' + item.CateName + '</td><td>' + item.TDSum + '</td><td>' + item.Change + '</td><td>' + self.numFormat(item.Change / item.YTDSum,2) + '%</td></tr>';
                         }
-                        lihtml += '</ul">';
+                        lihtml += '</tbody></table>';
                         $('.ui-tab-content>li').eq($(ethisobj).index()).html(lihtml);
                         $('.ui-tab-content').eq(0).css({
                             'transform': 'translate3d(-' + ($(ethisobj).index() * $('.ui-tab-content li').offset().width) + 'px,0,0)',
@@ -558,6 +551,13 @@
         },
         namesubstring: function (str) {
             return str.substring(0, str.indexOf('（') < 1 ? 2 : str.indexOf('（')) 
+        },
+        numFormat: function (num, n) {
+            if (isNaN(num)) {
+                return '0.00';
+            }
+            var result = num.toFixed(n);
+            return result;
         }
     };
     $.fn.future = future;
