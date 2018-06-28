@@ -240,6 +240,7 @@
     <Content Include="Frozen\frozenui-2.0.0\release\demo\img\tab.png" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\img\toast.png" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\js\index.js" />
+    <Content Include="Frozen\frozenui-2.0.0\release\demo\js\lib\Encoding.js" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\js\lib\zepto.min.js" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\pic\all-tab.png" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\pic\blue.png" />

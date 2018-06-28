@@ -1,4 +1,5 @@
-﻿using EF.Entitys;
+﻿using EF.Common;
+using EF.Entitys;
 using Serv;
 using Serv.Entitys;
 using System;
@@ -12,6 +13,43 @@ namespace PayService.Serv
     public class FutureControl
     {
         private static EF.IService.IServiceSession ibll = OperationContext.BLLSession;
+
+        #region 用户基础模块
+        public static void SERVICE_SignIn(ReturnModel result, RequestParamsM param)
+        {
+            #region 参数验证
+            if (string.IsNullOrEmpty(param.Account) || string.IsNullOrEmpty(param.Pwd))
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return;
+            }
+            string account = Base64Util.DecodeBase64(Encoding.UTF8, param.Account);
+            string pwd = Base64Util.DecodeBase64(Encoding.UTF8, param.Pwd);
+            if (account == param.Account || pwd == param.Pwd)
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return;
+            }
+            #endregion
+
+            var model=ibll.FSysUser.Single(a => a.Login == account);
+            if (model!=null&&model.Pwd == MD5Encrypt.MD5(pwd, Encoding.UTF8))
+            {
+                //写入登录session
+
+                result.data = new {token= Common.BillToken(),username=model.UserName,account=model.Login };
+                result.code = RespCodeConfig.Normal;
+            }
+            else
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "用户名或密码错误";
+                return;
+            }
+        }
+        #endregion
 
         #region 资讯模块
         /// <summary>

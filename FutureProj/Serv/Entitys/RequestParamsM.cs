@@ -70,7 +70,12 @@ namespace Serv.Entitys
         /// 
         /// </summary>
         public string Content { get; set; }
+
+        public string Account { get; set; }
+        public string Pwd { get; set; }
+
         #endregion
+
 
         public int page { get; set; }
     }

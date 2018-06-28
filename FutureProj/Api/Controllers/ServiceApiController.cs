@@ -40,6 +40,9 @@ namespace Api.Controllers
             {
                 switch (parm.No)
                 {
+                    case ApiConfig.SERVICE_SignIn:
+                        FutureControl.SERVICE_SignIn(result, parm);
+                        break;
                     case ApiConfig.SERVICE_GetNewsList:
                         FutureControl.SERVICE_GetNewsList(result, parm);
                         break;

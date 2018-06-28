@@ -19,14 +19,18 @@
                         <div class="adlogo"></div>
                     </li>
                     <li class="ui-col ui-col-20">
-                        <div class="userimg"></div>
+                        <div class="ui-user userimg">
+                        </div>
+                        <div class="ui-user username">
+                            <button class="ui-btn-lg">user</button>
+                        </div>
                     </li>
                 </ul>
             </div>
             <section>
                 <div id="ntabcontent" class="ui-tab">
                     <ul class="ui-tab-nav ui-border-b">
-                        <li class="current"><span>最新</span></li>
+                        <li class="current"><span>最新发布</span></li>
                         <li data-type="dce"><span>大商所</span></li>
                         <li data-type="czce"><span>郑商所</span></li>
                         <li data-type="shfe"><span>上商所</span></li>
@@ -56,5 +60,14 @@
             $('#ntabcontent>.ui-tab-nav>li.current').trigger('click');
         });
     </script>
+    <div class="ui-actionsheet" id="actionsheet1">
+        <div class="ui-actionsheet-cnt am-actionsheet-down">
+            <h4>同时会将我从对方的列表中删除</h4>
+            <button>分享</button>
+            <button class="ui-actionsheet-del">删除</button>
+            <div class="ui-actionsheet-split-line"></div>
+            <button id="cancel">取消</button>
+        </div>
+    </div>
 </body>
 </html>

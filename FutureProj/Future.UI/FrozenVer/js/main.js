@@ -9,6 +9,11 @@
             page: 0,
             number:3,
         },
+        commonobj: {
+            utoken: '',
+            uname: '',
+            ulogin:''
+        },
         init: function () {
             var self = this;
             self.bindevent();
@@ -16,6 +21,15 @@
         ajax: null,
         bindevent: function () {
             var self = this;
+            var r = self.getCookies();
+            if (r&&self.commonobj.uname.length>0) {
+                $(".header .userimg").hide();
+                $(".header .username .ui-btn-lg").text(self.commonobj.uname);
+                $(".header .username").show();
+            } else {
+                $(".header .username").hide()
+                $(".header .userimg").show();
+            }
             $('#list td,#list li,.linklist li').click(function () {
                 location.href = $(this).data('href');
             });
@@ -59,20 +73,20 @@
                 if (url) {
                     location.href = url;
                 }
-            })
+            });
             $(".ui-tab-content>li tbody>tr").live("click", function () {
                 var url = $(this).data('href');
                 if (url) {
                     location.href = url;
                 }
-                
-            })
+
+            });
             $("#cdcontent>tbody>tr").live("click", function () {
                 var url = $(this).data('href');
                 if (url) {
                     location.href = url;
                 }
-            })
+            });
             $("#tjcatelist label").live("click", function () {
                 if ($(this).hasClass('labcurrent')) {
                     $(this).removeClass('labcurrent');
@@ -84,7 +98,13 @@
                     return;
                 }
                 $(this).addClass('labcurrent');
-            })
+            });
+            $(".ui-user").on("click", function () {
+                $('.ui-actionsheet').addClass('show');
+            });
+            $("#cancel").live('click',function () {
+                $(".ui-actionsheet").removeClass("show");
+            });
         },
         loadnews: function (ethisobj) {
             var self = this;
@@ -180,7 +200,7 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var list = data.data.list;
-                        var lihtml = '<table class="ui-table ui-border-tb"><thead><tr><th>名称</th><th>价格</th><th>涨跌</th><th>涨跌幅</th></tr></thead><tbody>';
+                        var lihtml = '<table class="ui-table ui-border-tb"><thead><tr><th>品种名称</th><th>价格</th><th>涨跌</th><th>涨跌幅</th></tr></thead><tbody>';
 
 
                         for (var i = 0; i < list.length; i++) {
@@ -413,6 +433,45 @@
                 }
             })
         },
+        signin: function () {
+            var self = this;
+            var encoder = new Base64();
+            var params = {
+                no: 1000,
+                account: encoder.encode('account'),
+                pwd: encoder.encode('pwd')
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: self.data.urls,
+                data: params,
+                dataType: 'json',
+                timeout: 9000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        self.commonobj.account = data.data.account;
+                        self.commonobj.uname = data.data.username;
+                        self.commonobj.ulogin = data.data.token;
+                        self.setCookies();
+                    } else {
+                        $.toast(data.msg);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!')
+                },
+                beforeSend: function () {
+                    $.overlay("body").show();
+                },
+                complete: function () {
+                    $.overlay("body").hide();
+                    $.overlay("body").remove();
+                }
+            })
+        },
+        signout: function () {
+        },
         InitEChartOneTable: function (title,date,data) {
             var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
             option = {
@@ -549,7 +608,21 @@
             }
             var result = num.toFixed(n);
             return result;
-        }
+        },
+        setCookies: function () {
+            var self = this;
+            $.fn.cookie('commonobj', JSON.stringify(self.commonobj));
+        },
+        getCookies: function () {
+            var self = this;
+            var data = $.fn.cookie("commonobj");
+            if (data) {
+                self.commonobj = data;
+                return true;
+            } else {
+                return false;
+            }
+        },
     };
     $.fn.future = future;
     future.init();

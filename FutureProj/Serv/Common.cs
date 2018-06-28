@@ -27,9 +27,9 @@ namespace Serv
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public static string BillToken(string amount)
+        public static string BillToken()
         {
-            return GUID+ DESEncrypt.Encrypt(amount, DESEncrypt.info);
+            return GUID+ DESEncrypt.Encrypt(DateTime.Now.ToString("yyyyMMddHHmmssfff"), DESEncrypt.info);
         }
 
         private static object BillLock = new object();
