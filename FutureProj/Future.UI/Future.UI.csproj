@@ -248,6 +248,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FrozenOnePage\" />
+    <Folder Include="FrozenVue\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>

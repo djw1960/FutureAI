@@ -82,3 +82,7 @@ body {
 .contentb {
     margin-bottom:55px;
 }
+.ui-actionsheet-cnt h4 {
+    color: #7CAE23;
+    letter-spacing: 2px;
+}
