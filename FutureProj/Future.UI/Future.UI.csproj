@@ -245,6 +245,7 @@
     <Content Include="Frozen\frozenui-2.0.0\release\demo\pic\all-tab.png" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\pic\blue.png" />
     <Content Include="Frozen\frozenui-2.0.0\release\demo\pic\gray.png" />
+    <Content Include="README.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
