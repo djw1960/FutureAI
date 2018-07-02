@@ -52,3 +52,6 @@ npm run build
 
 
 VUE:http://www.runoob.com/vue2/vue-install.html
+
+
+http://doc.vue-js.com/v2/api/#mounted
