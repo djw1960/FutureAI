@@ -50,6 +50,16 @@ npm run build
 
 
 
+VSCODE HTML TAB快捷键 在vue文件不起作用问题
+文件-首选项-设置  新增用户设置
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.showAbbreviationSuggestions": true,
+    "emmet.showExpandedAbbreviation": "always",
+    "emmet.includeLanguages": {
+        "vue-html": "html",
+        "vue": "html"
+    }
+
 
 VUE:http://www.runoob.com/vue2/vue-install.html
 
