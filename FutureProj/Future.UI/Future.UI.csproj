@@ -87,6 +87,24 @@
     <Content Include="FrozenVer\js\lib\echarts.js" />
     <Content Include="FrozenVer\js\lib\echarts.min.js" />
     <Content Include="FrozenVer\js\lib\zepto.min.js" />
+    <Content Include="FrozenVue\.babelrc" />
+    <Content Include="FrozenVue\.editorconfig" />
+    <Content Include="FrozenVue\build\build.js" />
+    <Content Include="FrozenVue\build\check-versions.js" />
+    <Content Include="FrozenVue\build\logo.png" />
+    <Content Include="FrozenVue\build\utils.js" />
+    <Content Include="FrozenVue\build\vue-loader.conf.js" />
+    <Content Include="FrozenVue\build\webpack.base.conf.js" />
+    <Content Include="FrozenVue\build\webpack.dev.conf.js" />
+    <Content Include="FrozenVue\build\webpack.prod.conf.js" />
+    <Content Include="FrozenVue\package-lock.json" />
+    <Content Include="FrozenVue\package.json" />
+    <Content Include="FrozenVue\README.md" />
+    <Content Include="FrozenVue\src\App.vue" />
+    <Content Include="FrozenVue\src\components\FHeader.vue" />
+    <Content Include="FrozenVue\src\components\Menus.vue" />
+    <Content Include="FrozenVue\src\components\News.Vue" />
+    <Content Include="FrozenVue\static\.gitkeep" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -97,6 +115,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrozenVer\js\main.js" />
+    <Content Include="FrozenVue\.gitignore" />
+    <Content Include="FrozenVue\.postcssrc.js" />
+    <Content Include="FrozenVue\config\dev.env.js" />
+    <Content Include="FrozenVue\config\index.js" />
+    <Content Include="FrozenVue\config\prod.env.js" />
+    <Content Include="FrozenVue\index.html" />
+    <Content Include="FrozenVue\src\assets\css\frozenui.css" />
+    <Content Include="FrozenVue\src\assets\css\style.css" />
+    <Content Include="FrozenVue\src\assets\images\FAI.png" />
+    <Content Include="FrozenVue\src\assets\images\userh.png" />
+    <Content Include="FrozenVue\src\assets\logo.png" />
+    <Content Include="FrozenVue\src\main.js" />
+    <Content Include="FrozenVue\src\router\index.js" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\fn.css" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\global.css" />
     <Content Include="Frozen\frozenui-2.0.0\release\css\base\icons\icon-arrowlink.css" />
@@ -250,7 +281,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FrozenOnePage\" />
-    <Folder Include="FrozenVue\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
