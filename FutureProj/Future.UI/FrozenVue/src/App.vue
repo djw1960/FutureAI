@@ -3,11 +3,11 @@
     <router-view/>
     <div class="footer ui-footer">
       <ul class="ui-tiled linklist">
-        <li class="ui-border-r">资讯</li>
-        <li class="ui-border-r">仓单</li>
-        <li class="ui-border-r">统计局</li>
-        <li class="ui-border-r">圈子</li>
-        <li>AI量化</li>
+        <li class="ui-border-r"><router-link to="/">资讯</router-link></li>
+        <li class="ui-border-r"><router-link to="/c">仓单</router-link></li>
+        <li class="ui-border-r"><router-link to="/t">统计局</router-link></li>
+        <li class="ui-border-r"><router-link to="/f">圈子</router-link></li>
+        <li ><router-link to="/f">AI量化</router-link></li>
       </ul>
     </div>
   </div>
@@ -17,8 +17,9 @@
 export default {
 data(){
   return{
-    flinklist:[]
   }
+},
+methods:{
 }
 }
 </script>
