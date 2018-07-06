@@ -25,6 +25,7 @@
 import echarts from 'echarts'
 import FHeader from '@/components/FHeader'
 import NewsLi from '@/components/NewsLi'
+import {getdataPost} from '@/api/ApiList.js'
 export default {
   components:{
       'toFHeader':FHeader,
@@ -36,8 +37,25 @@ export default {
       }
 
   },
-  mounted(){
-  }
+  methods:{
+      loadNews(){
+          var params = {
+                no: 1010,
+                page: 1,
+                type: '',
+            };
+            getdataPost(params).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+      },
+
+  },
+  created() {
+      this.loadNews();
+  },
+
 }
 </script>
 <style>
