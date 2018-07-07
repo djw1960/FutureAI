@@ -27,6 +27,8 @@ namespace EF.IRespository
     	IRespository.Sons.IFDataRepository FDataRepository{ get; }
     	IRespository.Sons.IFPayWay FPayWay{ get; }
     	IRespository.Sons.IFSys_Category FSys_Category{ get; }
+    	IRespository.Sons.IFMoments FMoments{ get; }
+    	IRespository.Sons.IFMomentsReply FMomentsReply{ get; }
     }
     
     

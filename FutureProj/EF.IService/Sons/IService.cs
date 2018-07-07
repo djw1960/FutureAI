@@ -68,6 +68,14 @@ namespace EF.IService.Sons
     {
     
     }
+    public partial interface IFMoments:IBaseService<EF.Entitys.FMoments>
+    {
+    
+    }
+    public partial interface IFMomentsReply:IBaseService<EF.Entitys.FMomentsReply>
+    {
+    
+    }
     
     
     

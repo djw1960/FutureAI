@@ -68,6 +68,14 @@ namespace EF.IRespository.Sons
     {
     
     }
+    public partial interface IFMoments:IBaseRespository<EF.Entitys.FMoments>
+    {
+    
+    }
+    public partial interface IFMomentsReply:IBaseRespository<EF.Entitys.FMomentsReply>
+    {
+    
+    }
     
     
     

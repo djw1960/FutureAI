@@ -11,14 +11,17 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DT" Type="datetime" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cate" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="TurnType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DataType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsPublish" Type="int" Nullable="false" />
+          <Property Name="TurnType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DataType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsPublish" Type="bit" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
-          <Property Name="Result" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ResultHight" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ResultLow" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ResultClose" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FDataLV">
           <Key>
@@ -74,6 +77,29 @@
           <Property Name="Change" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="DTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FMoments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsPublish" Type="bit" Nullable="false" />
+          <Property Name="Care" Type="int" Nullable="false" />
+          <Property Name="AddBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FMomentsReply">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="200" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MID" Type="int" Nullable="false" />
+          <Property Name="IsDel" Type="bit" Nullable="false" />
+          <Property Name="AddBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FNews">
           <Key>
@@ -206,6 +232,8 @@
           <EntitySet Name="FDataMaterial" EntityType="Self.FDataMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataReposInit" EntityType="Self.FDataReposInit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataRepository" EntityType="Self.FDataRepository" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FMoments" EntityType="Self.FMoments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FMomentsReply" EntityType="Self.FMomentsReply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FNews" EntityType="Self.FNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FPayGood" EntityType="Self.FPayGood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FPayMert" EntityType="Self.FPayMert" Schema="dbo" store:Type="Tables" />
@@ -222,7 +250,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="PayServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
           <EntitySet Name="FDataMaterial" EntityType="PayServiceModel.FDataMaterial" />
           <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
           <EntitySet Name="FPayGood" EntityType="PayServiceModel.FPayGood" />
@@ -237,22 +264,10 @@
           <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
           <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
           <EntitySet Name="FSys_Category" EntityType="PayServiceModel.FSys_Category" />
+          <EntitySet Name="FMoments" EntityType="PayServiceModel.FMoments" />
+          <EntitySet Name="FMomentsReply" EntityType="PayServiceModel.FMomentsReply" />
+          <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
         </EntityContainer>
-        <EntityType Name="FAI">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DT" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="TurnType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DataType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsPublish" Type="Int32" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Result" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="FDataMaterial">
           <Key>
             <PropertyRef Name="ID" />
@@ -433,28 +448,53 @@
           <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
           <Property Name="IsDel" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="FMoments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+          <Property Name="Care" Type="Int32" Nullable="false" />
+          <Property Name="AddBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FMomentsReply">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MID" Type="Int32" Nullable="false" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
+          <Property Name="AddBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FAI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TurnType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DataType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ResultHight" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultLow" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PayServiceModelStoreContainer" CdmEntityContainer="DBEntities">
-          <EntitySetMapping Name="FAI">
-            <EntityTypeMapping TypeName="PayServiceModel.FAI">
-              <MappingFragment StoreEntitySet="FAI">
-                <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
-                <ScalarProperty Name="DataType" ColumnName="DataType" />
-                <ScalarProperty Name="TurnType" ColumnName="TurnType" />
-                <ScalarProperty Name="NPrice" ColumnName="NPrice" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DT" ColumnName="DT" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FDataMaterial">
             <EntityTypeMapping TypeName="PayServiceModel.FDataMaterial">
               <MappingFragment StoreEntitySet="FDataMaterial">
@@ -645,6 +685,50 @@
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="CateValue" ColumnName="CateValue" />
                 <ScalarProperty Name="CateKey" ColumnName="CateKey" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FMoments">
+            <EntityTypeMapping TypeName="PayServiceModel.FMoments">
+              <MappingFragment StoreEntitySet="FMoments">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="AddBy" ColumnName="AddBy" />
+                <ScalarProperty Name="Care" ColumnName="Care" />
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FMomentsReply">
+            <EntityTypeMapping TypeName="PayServiceModel.FMomentsReply">
+              <MappingFragment StoreEntitySet="FMomentsReply">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="AddBy" ColumnName="AddBy" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAI">
+            <EntityTypeMapping TypeName="PayServiceModel.FAI">
+              <MappingFragment StoreEntitySet="FAI">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="ResultClose" ColumnName="ResultClose" />
+                <ScalarProperty Name="ResultLow" ColumnName="ResultLow" />
+                <ScalarProperty Name="ResultHight" ColumnName="ResultHight" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="TurnType" ColumnName="TurnType" />
+                <ScalarProperty Name="NPrice" ColumnName="NPrice" />
+                <ScalarProperty Name="Cate" ColumnName="Cate" />
+                <ScalarProperty Name="DT" ColumnName="DT" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

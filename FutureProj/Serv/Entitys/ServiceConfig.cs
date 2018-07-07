@@ -22,6 +22,11 @@ namespace Serv.Entitys
         //--统计数据
         public const int SERVICE_GetMaterialList = 1030;//获取生产资料统计数据
         public const int SERVICE_GetMaterList_TwoCate = 1031;//获取两个品种数据对比
+
+        public const int SERVICE_GetMomentList = 1040;//获取朋友圈列表
+        public const int SERVICE_GetMomentDetail = 1041;//获取帖子详情
+
+        public const int SERVICE_GetAIList = 1060;//当前获取AI列表
     }
     public class RespCodeConfig
     {

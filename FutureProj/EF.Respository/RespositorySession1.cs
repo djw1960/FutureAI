@@ -71,6 +71,14 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FSys_Category(); }
     	}
+    	public IRespository.Sons.IFMoments FMoments
+    	{
+    		get { return new Respository.Sons.FMoments(); }
+    	}
+    	public IRespository.Sons.IFMomentsReply FMomentsReply
+    	{
+    		get { return new Respository.Sons.FMomentsReply(); }
+    	}
     }
     
 }

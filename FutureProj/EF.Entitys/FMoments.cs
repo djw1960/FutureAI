@@ -12,20 +12,13 @@ namespace EF.Entitys
     using System;
     using System.Collections.Generic;
     
-    public partial class FAI
+    public partial class FMoments
     {
         public int ID { get; set; }
-        public System.DateTime DT { get; set; }
-        public string Cate { get; set; }
-        public decimal NPrice { get; set; }
-        public string TurnType { get; set; }
-        public string DataType { get; set; }
+        public string Content { get; set; }
         public bool IsPublish { get; set; }
-        public string Remark { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<decimal> ResultHight { get; set; }
-        public Nullable<decimal> ResultLow { get; set; }
-        public Nullable<decimal> ResultClose { get; set; }
+        public int Care { get; set; }
+        public string AddBy { get; set; }
         public System.DateTime AddDate { get; set; }
     }
 }

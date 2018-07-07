@@ -143,6 +143,24 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
+    public partial class FMoments:BaseService<EF.Entitys.FMoments>,EF.IService.Sons.IFMoments
+    {
+    	    //IRespository.Sons.IFMoments dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FMoments;
+                base.dal = dal;
+            }
+    }
+    public partial class FMomentsReply:BaseService<EF.Entitys.FMomentsReply>,EF.IService.Sons.IFMomentsReply
+    {
+    	    //IRespository.Sons.IFMomentsReply dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FMomentsReply;
+                base.dal = dal;
+            }
+    }
     
     
     
