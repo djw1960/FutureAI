@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import News from '@/components/News'
-import CList from '@/components/CList'
-import TList from '@/components/TList'
-import FIndex from '@/components/FIndex'
-import AIndex from '@/components/AIndex'
+import login from '@/components/Share/login'
+import task from '@/components/M/task'
 
 Vue.use(Router)
 
@@ -13,28 +10,17 @@ export default new Router({
   routes: [
     {
       path:'/',
-      name: 'News',
-      component: News
+      name: 'login',
+      component: login
     },
     {
-      path:'/c',
-      name:'CList',
-      component: CList
+      path: '/task',
+      name: 'task',
+      component: task
     },
     {
-      path: '/t',
-      name: 'TList',
-      component: TList
-    },
-    {
-      path:'/f',
-      name:'FIndex',
-      component:FIndex
-    },
-    {
-      path:'/a',
-      name:'AIndex',
-      component:AIndex
+      path:'*',
+      redirect:'/'
     }
   ]
 })
