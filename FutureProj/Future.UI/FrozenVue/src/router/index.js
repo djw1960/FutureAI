@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/Share/login'
-import task from '@/components/M/task'
+import home from '@/components/M/home'
 
 Vue.use(Router)
 
@@ -14,9 +14,9 @@ export default new Router({
       component: login
     },
     {
-      path: '/task',
-      name: 'task',
-      component: task
+      path: '/home',
+      name: 'home',
+      component: home
     },
     {
       path:'*',
