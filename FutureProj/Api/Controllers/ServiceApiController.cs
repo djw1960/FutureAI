@@ -208,8 +208,10 @@ namespace Api.Controllers
             {
                 switch (parm.No)
                 {
-                    case ApiConfig.SERVICE_SignIn:
+                    case ApiConfig.Admin_SignIn:
                         AdminControl.Admin_SignIn(result, parm);
+                        break;
+                    case ApiConfig.Admin_NewsList:
                         break;
 
                 }
