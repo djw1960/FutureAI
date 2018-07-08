@@ -16,13 +16,16 @@ namespace EF.edmx
     {
         public int ID { get; set; }
         public System.DateTime DT { get; set; }
-        public string Name { get; set; }
+        public string Cate { get; set; }
         public decimal NPrice { get; set; }
         public string TurnType { get; set; }
         public string DataType { get; set; }
-        public int IsPublish { get; set; }
+        public bool IsPublish { get; set; }
         public string Remark { get; set; }
         public Nullable<int> Status { get; set; }
-        public Nullable<decimal> Result { get; set; }
+        public Nullable<decimal> ResultHight { get; set; }
+        public Nullable<decimal> ResultLow { get; set; }
+        public Nullable<decimal> ResultClose { get; set; }
+        public System.DateTime AddDate { get; set; }
     }
 }

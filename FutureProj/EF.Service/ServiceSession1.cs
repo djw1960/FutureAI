@@ -116,6 +116,20 @@ namespace EF.Service
     			return new Service.Sons.FSys_Category();
     		}
     	}
+    	public IService.Sons.IFMoments FMoments
+    	{
+    		get
+    		{
+    			return new Service.Sons.FMoments();
+    		}
+    	}
+    	public IService.Sons.IFMomentsReply FMomentsReply
+    	{
+    		get
+    		{
+    			return new Service.Sons.FMomentsReply();
+    		}
+    	}
     }
     
     

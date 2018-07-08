@@ -1,6 +1,5 @@
 ﻿using EF.Common;
 using Newtonsoft.Json;
-using PayService.Serv;
 using Serv;
 using Serv.Entitys;
 using System;
@@ -57,6 +56,15 @@ namespace Api.Controllers
                         break;
                     case ApiConfig.SERVICE_GetMaterList_TwoCate:
                         FutureControl.SERVICE_GetMaterList_TwoCate(result, parm);
+                        break;
+                    case ApiConfig.SERVICE_GetMomentList:
+                        FutureControl.SERVICE_GetMomentList(result, parm);
+                        break;
+                    case ApiConfig.SERVICE_GetMomentDetail:
+                        FutureControl.SERVICE_GetMomentDetail(result, parm);
+                        break;
+                    case ApiConfig.SERVICE_GetAIList:
+                        FutureControl.SERVICE_GetAIList(result, parm);
                         break;
 
                 }
@@ -165,6 +173,56 @@ namespace Api.Controllers
             {
                 result.code = RespCodeConfig.ServerError;
                 result.msg = "通道异常，请联系客服";
+                LogHelper.Error<ServiceApiController>(ex);
+            }
+            long endT = DateTime.Now.Ticks;
+            result.Timespan = TimeSpan.FromTicks(endT - startT).TotalMilliseconds.ToString();
+            if (string.IsNullOrEmpty(result.msg))
+            {
+                result.msg = "";
+            }
+            LogHelper.Info<ServiceApiController>("返回：" + JsonConvert.SerializeObject(result));
+            return result;
+        }
+
+        #endregion
+
+        #region Future-后台接口
+        /// <summary>
+        /// 后台接口
+        /// </summary>
+        /// <param name="parm"></param>
+        /// <returns></returns>
+        public ReturnModel FutureAdmin(AdminParamsM parm)
+        {
+            ReturnModel result = new ReturnModel() { code = RespCodeConfig.Normal };
+            if (null == parm)
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return result;
+            }
+            long startT = DateTime.Now.Ticks;
+            LogHelper.Info<ServiceApiController>("请求：" + JsonConvert.SerializeObject(parm));
+            try
+            {
+                switch (parm.No)
+                {
+                    case ApiConfig.SERVICE_SignIn:
+                        AdminControl.Admin_SignIn(result, parm);
+                        break;
+
+                }
+            }
+            catch (NotImplementedException notImp)
+            {
+                result.code = RespCodeConfig.ServerError;
+                result.msg = "支付通道未开通";
+            }
+            catch (Exception ex)
+            {
+                result.code = RespCodeConfig.ServerError;
+                result.msg = "";
                 LogHelper.Error<ServiceApiController>(ex);
             }
             long endT = DateTime.Now.Ticks;
