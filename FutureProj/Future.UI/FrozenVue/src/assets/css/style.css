@@ -12,6 +12,15 @@ body {
     overflow-x: hidden
 }
 
+    .index-wrap .header {
+        background-color: #F7F7F7;
+        height: 100px;
+        width:100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: center;
+        -webkit-box-pack: center
+    }
     .index-wrap .loginheader {
         background-color: #F7F7F7;
         width:100%;
@@ -52,15 +61,12 @@ body {
     margin-left: -65px;
     margin-top: -55px;
 }
-#ntabcontent {
-}
+
 #ntabcontent .nimg{
     width:70px;
     height:70px;
 }
 
-#cdcontent {
-}
 #monthlist {
     line-height: 40px;
     text-align: center;
@@ -85,7 +91,11 @@ body {
     color: #7CAE23;
     letter-spacing: 2px;
 }
-
+.icon {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto;
+}
 .icon-actionsheet {
     background: url(../images/actionsheet.png) no-repeat;
     -webkit-background-size: 100% auto;

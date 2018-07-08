@@ -1,4 +1,8 @@
 <template>
+<div>
+    <div class="header">
+        
+    </div>
 <section id="tasklist">
     <table class="ui-table ui-border">
             <tr class="">
@@ -26,6 +30,8 @@
             </tr>
     </table>
 </section>
+</div>
+
 </template>
 
 <script>
@@ -35,7 +41,6 @@
 </script>
 
 <style scoped>
-#tasklist{}
 #tasklist>table td{
      width: 33.33%;
     position: relative;
