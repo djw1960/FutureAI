@@ -108,10 +108,12 @@
     <Content Include="FrozenVue\static\.gitkeep" />
     <Content Include="FrozenVue\src\components\CList.vue" />
     <Content Include="FrozenVue\src\components\NewsLi.vue" />
-    <Content Include="FrozenVue\src\components\404.vue" />
     <Content Include="FrozenVue\src\components\TList.vue" />
     <Content Include="FrozenVue\src\components\AIndex.vue" />
     <Content Include="FrozenVue\src\components\FIndex.vue" />
+    <Content Include="FrozenVue\src\components\M\404.vue" />
+    <Content Include="FrozenVue\src\components\M\home.vue" />
+    <Content Include="FrozenVue\src\components\Share\login.vue" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
