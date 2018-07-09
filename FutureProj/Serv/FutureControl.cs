@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PayService.Serv
+namespace Serv
 {
     public class FutureControl
     {
@@ -379,7 +379,36 @@ namespace PayService.Serv
         #endregion
 
         #region 朋友圈版块
+        /// <summary>
+        /// 1040 获取朋友圈帖子列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetMomentList(ReturnModel result, RequestParamsM param)
+        {
 
+        }
+        /// <summary>
+        /// 1041 获取帖子详情和评论
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetMomentDetail(ReturnModel result, RequestParamsM param)
+        {
+
+        }
+        #endregion
+
+        #region AI版块
+        /// <summary>
+        /// 1060 获取AI预测列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetAIList(ReturnModel result, RequestParamsM param)
+        {
+
+        }
         #endregion
 
         #region 会员版块

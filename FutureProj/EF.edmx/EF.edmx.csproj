@@ -85,6 +85,12 @@
     <Compile Include="FDataRepository.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FMoments.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FMomentsReply.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="FNews.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

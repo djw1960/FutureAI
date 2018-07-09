@@ -25,7 +25,6 @@ namespace EF.edmx
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<FAI> FAI { get; set; }
         public virtual DbSet<FDataMaterial> FDataMaterial { get; set; }
         public virtual DbSet<FNews> FNews { get; set; }
         public virtual DbSet<FPayGood> FPayGood { get; set; }
@@ -40,5 +39,8 @@ namespace EF.edmx
         public virtual DbSet<FDataRepository> FDataRepository { get; set; }
         public virtual DbSet<FPayWay> FPayWay { get; set; }
         public virtual DbSet<FSys_Category> FSys_Category { get; set; }
+        public virtual DbSet<FMoments> FMoments { get; set; }
+        public virtual DbSet<FMomentsReply> FMomentsReply { get; set; }
+        public virtual DbSet<FAI> FAI { get; set; }
     }
 }

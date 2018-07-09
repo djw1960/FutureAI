@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControl.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Entitys\AdminParamsM.cs" />
     <Compile Include="Entitys\Enums.cs" />
