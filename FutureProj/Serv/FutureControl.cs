@@ -49,6 +49,15 @@ namespace Serv
                 return;
             }
         }
+        /// <summary>
+        /// 1002 获取菜单列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_GetMenuList(ReturnModel result, RequestParamsM param)
+        {
+            //获取主菜单列表
+        }
         #endregion
 
         #region 资讯模块
@@ -407,6 +416,64 @@ namespace Serv
         /// <param name="param"></param>
         public static void SERVICE_GetAIList(ReturnModel result, RequestParamsM param)
         {
+            var exp= PredicateBuilder.True<FAI>();
+            exp = exp.And<FAI>(s => s.IsPublish);
+            switch (param.Cate)
+            {
+                case "n"://new
+                    //获取今天的数据
+                    {
+                        exp = exp.And<FAI>(s => s.DT >= DateTime.Today);
+                    }
+                    break;
+                case "s"://someone
+                    //查询某一天的数据
+                    if (!string.IsNullOrEmpty(param.StartT))
+                    {
+                        var dt = Convert.ToDateTime(param.StartT);
+                        exp = exp.And<FAI>(s => s.DT>= dt);
+                    }
+                    else
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                        return;
+                    }
+                    break;
+                case "m"://month
+                    if (param.Number > 0)
+                    {
+                        var dt = DateTime.Now.AddMonths(0 - param.Number);
+                        exp = exp.And<FAI> (s =>s.DT>=dt&&s.DT<DateTime.Today);
+                    }
+                    else
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                        return;
+                    }
+                    break;
+                default:
+                    {
+                        result.msg = "参数错误";
+                        result.code = RespCodeConfig.ArgumentExp;
+                        return;
+                    }
+                    break;
+            }
+            var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList().Select(ss => new {
+                ss.ID,
+                ss.DT,
+                ss.Cate,
+                ss.DataType,
+                ss.TurnType,
+                Star=ss.Star>85?3:ss.Star>70?2:1,
+                ss.NPrice,
+                ss.AddDate,
+                ss.Status
+            });
+            result.code = RespCodeConfig.Normal;
+            result.data = list;
 
         }
         #endregion

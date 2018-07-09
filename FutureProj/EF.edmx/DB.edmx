@@ -15,6 +15,8 @@
           <Property Name="NPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TurnType" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DataType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Star" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsPublish" Type="bit" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
@@ -88,7 +90,6 @@
           <Property Name="MenuIcon" Type="varchar" MaxLength="50" />
           <Property Name="MenuCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ParentMCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="100" />
           <Property Name="IsAvailable" Type="bit" Nullable="false" />
         </EntityType>
@@ -318,9 +319,9 @@
           <EntitySet Name="FMoments" EntityType="PayServiceModel.FMoments" />
           <EntitySet Name="FMomentsReply" EntityType="PayServiceModel.FMomentsReply" />
           <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
-          <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
           <EntitySet Name="View_AdminUser" EntityType="PayServiceModel.View_AdminUser" />
           <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
+          <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
         </EntityContainer>
         <EntityType Name="FDataMaterial">
           <Key>
@@ -531,20 +532,8 @@
           <Property Name="ResultLow" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="FMenus">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="MenuTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ParentMCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="AValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Star" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="View_AdminUser">
           <Key>
@@ -578,6 +567,19 @@
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TimeOut" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FMenus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MenuTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -795,6 +797,8 @@
           <EntitySetMapping Name="FAI">
             <EntityTypeMapping TypeName="PayServiceModel.FAI">
               <MappingFragment StoreEntitySet="FAI">
+                <ScalarProperty Name="Star" ColumnName="Star" />
+                <ScalarProperty Name="AValue" ColumnName="AValue" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />
                 <ScalarProperty Name="ResultClose" ColumnName="ResultClose" />
                 <ScalarProperty Name="ResultLow" ColumnName="ResultLow" />
@@ -807,21 +811,6 @@
                 <ScalarProperty Name="NPrice" ColumnName="NPrice" />
                 <ScalarProperty Name="Cate" ColumnName="Cate" />
                 <ScalarProperty Name="DT" ColumnName="DT" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FMenus">
-            <EntityTypeMapping TypeName="PayServiceModel.FMenus">
-              <MappingFragment StoreEntitySet="FMenus">
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="ParentMCode" ColumnName="ParentMCode" />
-                <ScalarProperty Name="Mode" ColumnName="Mode" />
-                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
-                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
-                <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -849,6 +838,20 @@
                 <ScalarProperty Name="Source" ColumnName="Source" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FMenus">
+            <EntityTypeMapping TypeName="PayServiceModel.FMenus">
+              <MappingFragment StoreEntitySet="FMenus">
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

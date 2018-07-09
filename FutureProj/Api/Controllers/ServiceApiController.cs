@@ -42,6 +42,8 @@ namespace Api.Controllers
                     case ApiConfig.SERVICE_SignIn:
                         FutureControl.SERVICE_SignIn(result, parm);
                         break;
+                    case ApiConfig.SERVICE_GetMenuList:
+                        break;
                     case ApiConfig.SERVICE_GetNewsList:
                         FutureControl.SERVICE_GetNewsList(result, parm);
                         break;
@@ -214,7 +216,9 @@ namespace Api.Controllers
                     case ApiConfig.Admin_NewsList:
                         AdminControl.Admin_NewsList(result, parm);
                         break;
-
+                    case ApiConfig.Admin_AIList:
+                        AdminControl.Admin_AIList(result, parm);
+                        break;
                 }
             }
             catch (NotImplementedException notImp)

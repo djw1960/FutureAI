@@ -27,5 +27,7 @@ namespace EF.edmx
         public Nullable<decimal> ResultLow { get; set; }
         public Nullable<decimal> ResultClose { get; set; }
         public System.DateTime AddDate { get; set; }
+        public Nullable<decimal> AValue { get; set; }
+        public Nullable<decimal> Star { get; set; }
     }
 }

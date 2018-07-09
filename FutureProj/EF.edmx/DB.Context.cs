@@ -41,8 +41,8 @@ namespace EF.edmx
         public virtual DbSet<FMoments> FMoments { get; set; }
         public virtual DbSet<FMomentsReply> FMomentsReply { get; set; }
         public virtual DbSet<FAI> FAI { get; set; }
-        public virtual DbSet<FMenus> FMenus { get; set; }
         public virtual DbSet<View_AdminUser> View_AdminUser { get; set; }
         public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
+        public virtual DbSet<FMenus> FMenus { get; set; }
     }
 }

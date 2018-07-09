@@ -82,7 +82,71 @@ namespace Serv
                 result.msg = "登录状态正常";
             }
         }
+        public static void Admin_AIList(ReturnModel result, AdminParamsM param)
+        {
+            if (IsLogin(result, param.Token))
+            {
+                var exp = PredicateBuilder.True<FAI>();
+                exp = exp.And<FAI>(s => s.IsPublish);
+                switch (param.Cate)
+                {
+                    case "n"://new
+                             //获取今天的数据
+                        {
+                            exp = exp.And<FAI>(s => s.DT >= DateTime.Today);
+                        }
+                        break;
+                    case "s"://someone
+                             //查询某一天的数据
+                        if (!string.IsNullOrEmpty(param.StartT))
+                        {
+                            var dt = Convert.ToDateTime(param.StartT);
+                            exp = exp.And<FAI>(s => s.DT >= dt);
+                        }
+                        else
+                        {
+                            result.msg = "参数错误";
+                            result.code = RespCodeConfig.ArgumentExp;
+                            return;
+                        }
+                        break;
+                    case "m"://month
+                        if (param.Number > 0)
+                        {
+                            var dt = DateTime.Now.AddMonths(0 - param.Number);
+                            exp = exp.And<FAI>(s => s.DT >= dt && s.DT < DateTime.Today);
+                        }
+                        else
+                        {
+                            result.msg = "参数错误";
+                            result.code = RespCodeConfig.ArgumentExp;
+                            return;
+                        }
+                        break;
+                    default:
+                        {
+                            result.msg = "参数错误";
+                            result.code = RespCodeConfig.ArgumentExp;
+                            return;
+                        }
+                        break;
+                }
+                var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList().Select(ss => new {
+                    ss.ID,
+                    ss.DT,
+                    ss.Cate,
+                    ss.DataType,
+                    ss.TurnType,
+                    Star = ss.Star > 85 ? 3 : ss.Star > 70 ? 2 : 1,
+                    ss.NPrice,
+                    ss.AddDate,
+                    ss.Status
+                });
+                result.code = RespCodeConfig.Normal;
+                result.data = list;
+            }
 
+        }
         private static bool IsLogin(ReturnModel result,string token)
         {
             var tokensession=ibll.FSys_LoginSession.Single(a => a.Token == token);

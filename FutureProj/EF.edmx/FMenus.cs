@@ -20,7 +20,6 @@ namespace EF.edmx
         public string MenuIcon { get; set; }
         public string MenuCode { get; set; }
         public string Mode { get; set; }
-        public string ParentMCode { get; set; }
         public string Url { get; set; }
         public bool IsAvailable { get; set; }
     }
