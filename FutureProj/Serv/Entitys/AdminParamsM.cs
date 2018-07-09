@@ -46,6 +46,10 @@ namespace Serv.Entitys
         /// </summary>
         public string Account { get; set; }
         /// <summary>
+        /// 密码
+        /// </summary>
+        public string Pwd { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public string Content { get; set; }

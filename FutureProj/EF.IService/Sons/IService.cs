@@ -8,10 +8,6 @@ namespace EF.IService.Sons
 {
     using System;
     
-    public partial interface IFAI:IBaseService<EF.Entitys.FAI>
-    {
-    
-    }
     public partial interface IFDataMaterial:IBaseService<EF.Entitys.FDataMaterial>
     {
     
@@ -33,10 +29,6 @@ namespace EF.IService.Sons
     
     }
     public partial interface IFSys_Config:IBaseService<EF.Entitys.FSys_Config>
-    {
-    
-    }
-    public partial interface IFSys_LoginSession:IBaseService<EF.Entitys.FSys_LoginSession>
     {
     
     }
@@ -73,6 +65,22 @@ namespace EF.IService.Sons
     
     }
     public partial interface IFMomentsReply:IBaseService<EF.Entitys.FMomentsReply>
+    {
+    
+    }
+    public partial interface IFAI:IBaseService<EF.Entitys.FAI>
+    {
+    
+    }
+    public partial interface IFMenus:IBaseService<EF.Entitys.FMenus>
+    {
+    
+    }
+    public partial interface IView_AdminUser:IBaseService<EF.Entitys.View_AdminUser>
+    {
+    
+    }
+    public partial interface IFSys_LoginSession:IBaseService<EF.Entitys.FSys_LoginSession>
     {
     
     }

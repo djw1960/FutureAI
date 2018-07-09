@@ -8,15 +8,6 @@ namespace EF.Service.Sons
 {
     using System;
     
-    public partial class FAI:BaseService<EF.Entitys.FAI>,EF.IService.Sons.IFAI
-    {
-    	    //IRespository.Sons.IFAI dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FAI;
-                base.dal = dal;
-            }
-    }
     public partial class FDataMaterial:BaseService<EF.Entitys.FDataMaterial>,EF.IService.Sons.IFDataMaterial
     {
     	    //IRespository.Sons.IFDataMaterial dal;
@@ -68,15 +59,6 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FSys_Config;
-                base.dal = dal;
-            }
-    }
-    public partial class FSys_LoginSession:BaseService<EF.Entitys.FSys_LoginSession>,EF.IService.Sons.IFSys_LoginSession
-    {
-    	    //IRespository.Sons.IFSys_LoginSession dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FSys_LoginSession;
                 base.dal = dal;
             }
     }
@@ -158,6 +140,42 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FMomentsReply;
+                base.dal = dal;
+            }
+    }
+    public partial class FAI:BaseService<EF.Entitys.FAI>,EF.IService.Sons.IFAI
+    {
+    	    //IRespository.Sons.IFAI dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FAI;
+                base.dal = dal;
+            }
+    }
+    public partial class FMenus:BaseService<EF.Entitys.FMenus>,EF.IService.Sons.IFMenus
+    {
+    	    //IRespository.Sons.IFMenus dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FMenus;
+                base.dal = dal;
+            }
+    }
+    public partial class View_AdminUser:BaseService<EF.Entitys.View_AdminUser>,EF.IService.Sons.IView_AdminUser
+    {
+    	    //IRespository.Sons.IView_AdminUser dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.View_AdminUser;
+                base.dal = dal;
+            }
+    }
+    public partial class FSys_LoginSession:BaseService<EF.Entitys.FSys_LoginSession>,EF.IService.Sons.IFSys_LoginSession
+    {
+    	    //IRespository.Sons.IFSys_LoginSession dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSys_LoginSession;
                 base.dal = dal;
             }
     }

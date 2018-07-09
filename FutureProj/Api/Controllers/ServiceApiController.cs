@@ -193,7 +193,7 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="parm"></param>
         /// <returns></returns>
-        public ReturnModel FutureAdmin(AdminParamsM parm)
+        public ReturnModel M(AdminParamsM parm)
         {
             ReturnModel result = new ReturnModel() { code = RespCodeConfig.Normal };
             if (null == parm)
@@ -212,6 +212,7 @@ namespace Api.Controllers
                         AdminControl.Admin_SignIn(result, parm);
                         break;
                     case ApiConfig.Admin_NewsList:
+                        AdminControl.Admin_NewsList(result, parm);
                         break;
 
                 }

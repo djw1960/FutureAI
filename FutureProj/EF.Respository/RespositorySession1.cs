@@ -11,10 +11,6 @@ namespace EF.Respository
     using System.Data.Entity.Infrastructure;
     public partial class RespositorySession:IRespository.IRespositorySession
     {
-    	public IRespository.Sons.IFAI FAI
-    	{
-    		get { return new Respository.Sons.FAI(); }
-    	}
     	public IRespository.Sons.IFDataMaterial FDataMaterial
     	{
     		get { return new Respository.Sons.FDataMaterial(); }
@@ -38,10 +34,6 @@ namespace EF.Respository
     	public IRespository.Sons.IFSys_Config FSys_Config
     	{
     		get { return new Respository.Sons.FSys_Config(); }
-    	}
-    	public IRespository.Sons.IFSys_LoginSession FSys_LoginSession
-    	{
-    		get { return new Respository.Sons.FSys_LoginSession(); }
     	}
     	public IRespository.Sons.IFSys_Role FSys_Role
     	{
@@ -78,6 +70,22 @@ namespace EF.Respository
     	public IRespository.Sons.IFMomentsReply FMomentsReply
     	{
     		get { return new Respository.Sons.FMomentsReply(); }
+    	}
+    	public IRespository.Sons.IFAI FAI
+    	{
+    		get { return new Respository.Sons.FAI(); }
+    	}
+    	public IRespository.Sons.IFMenus FMenus
+    	{
+    		get { return new Respository.Sons.FMenus(); }
+    	}
+    	public IRespository.Sons.IView_AdminUser View_AdminUser
+    	{
+    		get { return new Respository.Sons.View_AdminUser(); }
+    	}
+    	public IRespository.Sons.IFSys_LoginSession FSys_LoginSession
+    	{
+    		get { return new Respository.Sons.FSys_LoginSession(); }
     	}
     }
     

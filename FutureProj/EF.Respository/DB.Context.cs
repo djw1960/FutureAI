@@ -26,14 +26,12 @@ namespace EF.Respository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<FAI> FAI { get; set; }
         public virtual DbSet<FDataMaterial> FDataMaterial { get; set; }
         public virtual DbSet<FNews> FNews { get; set; }
         public virtual DbSet<FPayGood> FPayGood { get; set; }
         public virtual DbSet<FPayMert> FPayMert { get; set; }
         public virtual DbSet<FPayOrder> FPayOrder { get; set; }
         public virtual DbSet<FSys_Config> FSys_Config { get; set; }
-        public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
         public virtual DbSet<FSys_Role> FSys_Role { get; set; }
         public virtual DbSet<FSysUser> FSysUser { get; set; }
         public virtual DbSet<FDataLV> FDataLV { get; set; }
@@ -43,5 +41,9 @@ namespace EF.Respository
         public virtual DbSet<FSys_Category> FSys_Category { get; set; }
         public virtual DbSet<FMoments> FMoments { get; set; }
         public virtual DbSet<FMomentsReply> FMomentsReply { get; set; }
+        public virtual DbSet<FAI> FAI { get; set; }
+        public virtual DbSet<FMenus> FMenus { get; set; }
+        public virtual DbSet<View_AdminUser> View_AdminUser { get; set; }
+        public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
     }
 }

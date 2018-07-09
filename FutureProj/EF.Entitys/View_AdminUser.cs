@@ -7,18 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EF.edmx
+namespace EF.Entitys
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class FSys_LoginSession
+    public partial class View_AdminUser
     {
-        public long ID { get; set; }
-        public long UID { get; set; }
-        public string Token { get; set; }
-        public string Source { get; set; }
-        public System.DateTime TimeOut { get; set; }
-        public string UserType { get; set; }
+        public int ID { get; set; }
+        public string Login { get; set; }
+        public string Pwd { get; set; }
+        public string UserName { get; set; }
+        public int RoleID { get; set; }
+        public int IsAvailable { get; set; }
+        public System.DateTime AddDate { get; set; }
+        public string RoleCode { get; set; }
+        public string RoleName { get; set; }
     }
 }

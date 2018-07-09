@@ -7,21 +7,23 @@
       <Diagram DiagramId="5e20cb8ffbbe4be7800aaaf8d425bc0d" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="PayServiceModel.FDataMaterial" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FNews" Width="1.5" PointX="0.875" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FPayGood" Width="1.5" PointX="6.625" PointY="2.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FPayMert" Width="1.5" PointX="6.75" PointY="1.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FPayOrder" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FSys_Config" Width="1.5" PointX="10.375" PointY="0.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FSys_LoginSession" Width="1.5" PointX="10.25" PointY="2" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FSys_Role" Width="1.5" PointX="10.375" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FSysUser" Width="1.5" PointX="10.25" PointY="2.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayGood" Width="1.5" PointX="5.5" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayMert" Width="1.5" PointX="5.5" PointY="1.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayOrder" Width="1.5" PointX="5.5" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Config" Width="1.5" PointX="8.25" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Role" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSysUser" Width="1.5" PointX="8.125" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FDataLV" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FDataReposInit" Width="2.125" PointX="2.75" PointY="2.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FDataRepository" Width="2.125" PointX="2.75" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FPayWay" Width="1.5" PointX="6.75" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="PayServiceModel.FSys_Category" Width="1.5" PointX="10.25" PointY="3.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FDataReposInit" Width="1.5" PointX="2.75" PointY="2.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FDataRepository" Width="1.625" PointX="2.75" PointY="3" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FPayWay" Width="1.5" PointX="5.625" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_Category" Width="1.5" PointX="8.125" PointY="3.75" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FMoments" Width="1.5" PointX="0.875" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FMomentsReply" Width="1.5" PointX="0.875" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FAI" Width="1.5" PointX="0.875" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FMenus" Width="1.5" PointX="0.875" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.View_AdminUser" Width="1.5" PointX="10.625" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSys_LoginSession" Width="1.5" PointX="8.125" PointY="2.125" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

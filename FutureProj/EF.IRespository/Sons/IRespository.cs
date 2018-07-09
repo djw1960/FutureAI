@@ -8,10 +8,6 @@ namespace EF.IRespository.Sons
 {
     using System;
     
-    public partial interface IFAI:IBaseRespository<EF.Entitys.FAI>
-    {
-    
-    }
     public partial interface IFDataMaterial:IBaseRespository<EF.Entitys.FDataMaterial>
     {
     
@@ -33,10 +29,6 @@ namespace EF.IRespository.Sons
     
     }
     public partial interface IFSys_Config:IBaseRespository<EF.Entitys.FSys_Config>
-    {
-    
-    }
-    public partial interface IFSys_LoginSession:IBaseRespository<EF.Entitys.FSys_LoginSession>
     {
     
     }
@@ -73,6 +65,22 @@ namespace EF.IRespository.Sons
     
     }
     public partial interface IFMomentsReply:IBaseRespository<EF.Entitys.FMomentsReply>
+    {
+    
+    }
+    public partial interface IFAI:IBaseRespository<EF.Entitys.FAI>
+    {
+    
+    }
+    public partial interface IFMenus:IBaseRespository<EF.Entitys.FMenus>
+    {
+    
+    }
+    public partial interface IView_AdminUser:IBaseRespository<EF.Entitys.View_AdminUser>
+    {
+    
+    }
+    public partial interface IFSys_LoginSession:IBaseRespository<EF.Entitys.FSys_LoginSession>
     {
     
     }

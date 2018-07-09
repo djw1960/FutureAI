@@ -12,13 +12,16 @@ namespace EF.edmx
     using System;
     using System.Collections.Generic;
     
-    public partial class FSys_LoginSession
+    public partial class FMenus
     {
-        public long ID { get; set; }
-        public long UID { get; set; }
-        public string Token { get; set; }
-        public string Source { get; set; }
-        public System.DateTime TimeOut { get; set; }
-        public string UserType { get; set; }
+        public int ID { get; set; }
+        public string Type { get; set; }
+        public string MenuTitle { get; set; }
+        public string MenuIcon { get; set; }
+        public string MenuCode { get; set; }
+        public string Mode { get; set; }
+        public string ParentMCode { get; set; }
+        public string Url { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }

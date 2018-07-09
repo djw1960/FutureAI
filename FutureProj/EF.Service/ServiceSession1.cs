@@ -11,13 +11,6 @@ namespace EF.Service
     using System.Data.Entity.Infrastructure;
     public partial class ServiceSession:IService.IServiceSession
     {
-    	public IService.Sons.IFAI FAI
-    	{
-    		get
-    		{
-    			return new Service.Sons.FAI();
-    		}
-    	}
     	public IService.Sons.IFDataMaterial FDataMaterial
     	{
     		get
@@ -58,13 +51,6 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FSys_Config();
-    		}
-    	}
-    	public IService.Sons.IFSys_LoginSession FSys_LoginSession
-    	{
-    		get
-    		{
-    			return new Service.Sons.FSys_LoginSession();
     		}
     	}
     	public IService.Sons.IFSys_Role FSys_Role
@@ -128,6 +114,34 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FMomentsReply();
+    		}
+    	}
+    	public IService.Sons.IFAI FAI
+    	{
+    		get
+    		{
+    			return new Service.Sons.FAI();
+    		}
+    	}
+    	public IService.Sons.IFMenus FMenus
+    	{
+    		get
+    		{
+    			return new Service.Sons.FMenus();
+    		}
+    	}
+    	public IService.Sons.IView_AdminUser View_AdminUser
+    	{
+    		get
+    		{
+    			return new Service.Sons.View_AdminUser();
+    		}
+    	}
+    	public IService.Sons.IFSys_LoginSession FSys_LoginSession
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSys_LoginSession();
     		}
     	}
     }

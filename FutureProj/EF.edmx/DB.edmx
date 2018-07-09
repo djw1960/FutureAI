@@ -78,6 +78,20 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="DTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="FMenus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MenuTitle" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MenuIcon" Type="varchar" MaxLength="50" />
+          <Property Name="MenuCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentMCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="FMoments">
           <Key>
             <PropertyRef Name="ID" />
@@ -204,7 +218,7 @@
           <Property Name="Token" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="TimeOut" Type="datetime" Nullable="false" />
-          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="FSys_Role">
           <Key>
@@ -226,12 +240,37 @@
           <Property Name="IsAvailable" Type="int" Nullable="false" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xds315586209_db.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_AdminUser">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Pwd" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="IsAvailable" />
+            <PropertyRef Name="AddDate" />
+            <PropertyRef Name="RoleCode" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pwd" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="IsAvailable" Type="int" Nullable="false" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="RoleCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="PayServiceModelStoreContainer">
           <EntitySet Name="FAI" EntityType="Self.FAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataLV" EntityType="Self.FDataLV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataMaterial" EntityType="Self.FDataMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataReposInit" EntityType="Self.FDataReposInit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FDataRepository" EntityType="Self.FDataRepository" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FMenus" EntityType="Self.FMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FMoments" EntityType="Self.FMoments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FMomentsReply" EntityType="Self.FMomentsReply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FNews" EntityType="Self.FNews" Schema="dbo" store:Type="Tables" />
@@ -244,6 +283,19 @@
           <EntitySet Name="FSys_LoginSession" EntityType="Self.FSys_LoginSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSys_Role" EntityType="Self.FSys_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSysUser" EntityType="Self.FSysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_AdminUser" EntityType="Self.View_AdminUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_AdminUser].[ID] AS [ID], 
+    [View_AdminUser].[Login] AS [Login], 
+    [View_AdminUser].[Pwd] AS [Pwd], 
+    [View_AdminUser].[UserName] AS [UserName], 
+    [View_AdminUser].[RoleID] AS [RoleID], 
+    [View_AdminUser].[IsAvailable] AS [IsAvailable], 
+    [View_AdminUser].[AddDate] AS [AddDate], 
+    [View_AdminUser].[RoleCode] AS [RoleCode], 
+    [View_AdminUser].[RoleName] AS [RoleName]
+    FROM [dbo].[View_AdminUser] AS [View_AdminUser]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -256,7 +308,6 @@
           <EntitySet Name="FPayMert" EntityType="PayServiceModel.FPayMert" />
           <EntitySet Name="FPayOrder" EntityType="PayServiceModel.FPayOrder" />
           <EntitySet Name="FSys_Config" EntityType="PayServiceModel.FSys_Config" />
-          <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
           <EntitySet Name="FSys_Role" EntityType="PayServiceModel.FSys_Role" />
           <EntitySet Name="FSysUser" EntityType="PayServiceModel.FSysUser" />
           <EntitySet Name="FDataLV" EntityType="PayServiceModel.FDataLV" />
@@ -267,6 +318,9 @@
           <EntitySet Name="FMoments" EntityType="PayServiceModel.FMoments" />
           <EntitySet Name="FMomentsReply" EntityType="PayServiceModel.FMomentsReply" />
           <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
+          <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
+          <EntitySet Name="View_AdminUser" EntityType="PayServiceModel.View_AdminUser" />
+          <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
         </EntityContainer>
         <EntityType Name="FDataMaterial">
           <Key>
@@ -353,17 +407,6 @@
           <Property Name="SKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="FSys_LoginSession">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UID" Type="Int64" Nullable="false" />
-          <Property Name="Token" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="TimeOut" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserType" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="FSys_Role">
           <Key>
@@ -489,6 +532,53 @@
           <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="FMenus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MenuTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentMCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_AdminUser">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Login" />
+            <PropertyRef Name="Pwd" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="IsAvailable" />
+            <PropertyRef Name="AddDate" />
+            <PropertyRef Name="RoleCode" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FSys_LoginSession">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int64" Nullable="false" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TimeOut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -583,18 +673,6 @@
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="SValue" ColumnName="SValue" />
                 <ScalarProperty Name="SKey" ColumnName="SKey" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FSys_LoginSession">
-            <EntityTypeMapping TypeName="PayServiceModel.FSys_LoginSession">
-              <MappingFragment StoreEntitySet="FSys_LoginSession">
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -729,6 +807,48 @@
                 <ScalarProperty Name="NPrice" ColumnName="NPrice" />
                 <ScalarProperty Name="Cate" ColumnName="Cate" />
                 <ScalarProperty Name="DT" ColumnName="DT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FMenus">
+            <EntityTypeMapping TypeName="PayServiceModel.FMenus">
+              <MappingFragment StoreEntitySet="FMenus">
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ParentMCode" ColumnName="ParentMCode" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AdminUser">
+            <EntityTypeMapping TypeName="PayServiceModel.View_AdminUser">
+              <MappingFragment StoreEntitySet="View_AdminUser">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FSys_LoginSession">
+            <EntityTypeMapping TypeName="PayServiceModel.FSys_LoginSession">
+              <MappingFragment StoreEntitySet="FSys_LoginSession">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

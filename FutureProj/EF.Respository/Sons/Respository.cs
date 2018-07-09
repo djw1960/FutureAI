@@ -7,10 +7,6 @@
 namespace EF.Respository.Sons
 {
     using System;
-    public partial class FAI:BaseRespository<EF.Entitys.FAI>,EF.IRespository.Sons.IFAI
-    {
-    
-    }
     public partial class FDataMaterial:BaseRespository<EF.Entitys.FDataMaterial>,EF.IRespository.Sons.IFDataMaterial
     {
     
@@ -32,10 +28,6 @@ namespace EF.Respository.Sons
     
     }
     public partial class FSys_Config:BaseRespository<EF.Entitys.FSys_Config>,EF.IRespository.Sons.IFSys_Config
-    {
-    
-    }
-    public partial class FSys_LoginSession:BaseRespository<EF.Entitys.FSys_LoginSession>,EF.IRespository.Sons.IFSys_LoginSession
     {
     
     }
@@ -72,6 +64,22 @@ namespace EF.Respository.Sons
     
     }
     public partial class FMomentsReply:BaseRespository<EF.Entitys.FMomentsReply>,EF.IRespository.Sons.IFMomentsReply
+    {
+    
+    }
+    public partial class FAI:BaseRespository<EF.Entitys.FAI>,EF.IRespository.Sons.IFAI
+    {
+    
+    }
+    public partial class FMenus:BaseRespository<EF.Entitys.FMenus>,EF.IRespository.Sons.IFMenus
+    {
+    
+    }
+    public partial class View_AdminUser:BaseRespository<EF.Entitys.View_AdminUser>,EF.IRespository.Sons.IView_AdminUser
+    {
+    
+    }
+    public partial class FSys_LoginSession:BaseRespository<EF.Entitys.FSys_LoginSession>,EF.IRespository.Sons.IFSys_LoginSession
     {
     
     }

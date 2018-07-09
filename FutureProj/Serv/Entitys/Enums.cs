@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace Serv.Entitys
 {
+    public enum SysConfigType {
+        TokenTimeout,
+        IsEncry,
+        EncryKey
+    }
+    public enum SysRuleType {
+        manager,
+        view
+    }
     public enum TradeHouseType
     {
         /// <summary>
@@ -432,17 +441,5 @@ namespace Serv.Entitys
         AlipayQuery,
         WechatQuery,
         HXFuQuery
-    }
-
-    public enum CategorysType
-    {
-        PaySerPType,
-        GoodsType
-    }
-    public enum GoodsType
-    {
-        手机=1,
-        平板=2,
-        电脑=3
     }
 }

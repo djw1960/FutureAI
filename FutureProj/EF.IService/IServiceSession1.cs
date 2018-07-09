@@ -12,14 +12,12 @@ namespace EF.IService
     
     public partial interface IServiceSession
     {
-    	IService.Sons.IFAI FAI{ get; }
     	IService.Sons.IFDataMaterial FDataMaterial{ get; }
     	IService.Sons.IFNews FNews{ get; }
     	IService.Sons.IFPayGood FPayGood{ get; }
     	IService.Sons.IFPayMert FPayMert{ get; }
     	IService.Sons.IFPayOrder FPayOrder{ get; }
     	IService.Sons.IFSys_Config FSys_Config{ get; }
-    	IService.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     	IService.Sons.IFSys_Role FSys_Role{ get; }
     	IService.Sons.IFSysUser FSysUser{ get; }
     	IService.Sons.IFDataLV FDataLV{ get; }
@@ -29,6 +27,10 @@ namespace EF.IService
     	IService.Sons.IFSys_Category FSys_Category{ get; }
     	IService.Sons.IFMoments FMoments{ get; }
     	IService.Sons.IFMomentsReply FMomentsReply{ get; }
+    	IService.Sons.IFAI FAI{ get; }
+    	IService.Sons.IFMenus FMenus{ get; }
+    	IService.Sons.IView_AdminUser View_AdminUser{ get; }
+    	IService.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     }
     
     

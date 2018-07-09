@@ -19,6 +19,6 @@ namespace EF.Entitys
         public string Token { get; set; }
         public string Source { get; set; }
         public System.DateTime TimeOut { get; set; }
-        public int UserType { get; set; }
+        public string UserType { get; set; }
     }
 }
