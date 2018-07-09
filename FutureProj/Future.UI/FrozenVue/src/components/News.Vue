@@ -1,5 +1,6 @@
 <template>
 <div>
+    <router-view></router-view>
     <toFHeader></toFHeader>
     <div id="ntabcontent" class="ui-tab">
     <ul class="ui-tab-nav ui-border-b">
