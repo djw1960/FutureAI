@@ -467,7 +467,7 @@ namespace Serv
                 ss.Cate,
                 ss.DataType,
                 ss.TurnType,
-                Star=ss.Star>85?3:ss.Star>70?2:1,
+                Star=ss.Star>85?3:ss.Star>75?2:1,
                 ss.NPrice,
                 ss.AddDate,
                 ss.Status

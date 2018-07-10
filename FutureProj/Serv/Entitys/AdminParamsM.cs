@@ -50,6 +50,31 @@ namespace Serv.Entitys
         /// </summary>
         public string Pwd { get; set; }
         /// <summary>
+        /// 分类
+        /// 新闻分类：对应tradehouse
+        /// </summary>
+        public string Type { get; set; }
+        /// <summary>
+        /// 数据分类
+        /// </summary>
+        public string Cate { get; set; }
+        /// <summary>
+        /// 交易品种Code
+        /// </summary>
+        public string Code { get; set; }
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        public string StartT { get; set; }
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        public string EndT { get; set; }
+        /// <summary>
+        /// 数字：月份
+        /// </summary>
+        public int Number { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public string Content { get; set; }
