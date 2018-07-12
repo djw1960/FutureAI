@@ -29,5 +29,8 @@ namespace EF.Entitys
         public System.DateTime AddDate { get; set; }
         public Nullable<decimal> AValue { get; set; }
         public Nullable<decimal> Star { get; set; }
+        public Nullable<decimal> ReviseLV { get; set; }
+        public Nullable<decimal> ReviseStar { get; set; }
+        public string CateType { get; set; }
     }
 }

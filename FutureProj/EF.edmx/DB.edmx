@@ -12,18 +12,21 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DT" Type="datetime" Nullable="false" />
           <Property Name="Cate" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TurnType" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DataType" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="AValue" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Star" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReviseLV" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReviseStar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsPublish" Type="bit" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
-          <Property Name="ResultHight" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ResultLow" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ResultClose" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ResultHight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ResultLow" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ResultClose" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="CateType" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="FDataLV">
           <Key>
@@ -522,18 +525,21 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="TurnType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="DataType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsPublish" Type="Boolean" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
-          <Property Name="ResultHight" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultLow" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultHight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ResultLow" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AValue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Star" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReviseLV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReviseStar" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CateType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="View_AdminUser">
           <Key>
@@ -797,6 +803,9 @@
           <EntitySetMapping Name="FAI">
             <EntityTypeMapping TypeName="PayServiceModel.FAI">
               <MappingFragment StoreEntitySet="FAI">
+                <ScalarProperty Name="CateType" ColumnName="CateType" />
+                <ScalarProperty Name="ReviseStar" ColumnName="ReviseStar" />
+                <ScalarProperty Name="ReviseLV" ColumnName="ReviseLV" />
                 <ScalarProperty Name="Star" ColumnName="Star" />
                 <ScalarProperty Name="AValue" ColumnName="AValue" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />

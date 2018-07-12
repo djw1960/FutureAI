@@ -1,5 +1,6 @@
 ﻿using EF.Common;
 using EF.Entitys;
+using Newtonsoft.Json;
 using Serv;
 using Serv.Entitys;
 using System;
@@ -14,6 +15,43 @@ namespace Serv
     {
         private static EF.IService.IServiceSession ibll = OperationContext.BLLSession;
 
+        private static bool IsLogin(ReturnModel result, string token)
+        {
+            var tokensession = ibll.FSys_LoginSession.Single(a => a.Token == token);
+            if (tokensession != null)
+            {
+                var loginsession = ibll.FSys_LoginSession.where(a => a.UID == tokensession.UID).OrderByDescending(a => a.ID).Take(1).ToList();
+                if (loginsession.Count() > 0)
+                {
+                    var model = loginsession[0];
+                    if (model.Token.Equals(token) && model.TimeOut > DateTime.Now)
+                    {
+                        result.code = RespCodeConfig.Normal;
+                        model.TimeOut = DateTime.Now.AddHours(8);
+                        ibll.FSys_LoginSession.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        result.code = RespCodeConfig.Faild;
+                        result.msg = "token失效";
+                        return false;
+                    }
+                }
+                else
+                {
+                    result.code = RespCodeConfig.Faild;
+                    result.msg = "Login Error";
+                    return false;
+                }
+            }
+            else
+            {
+                result.code = RespCodeConfig.Faild;
+                result.msg = "Login Error";
+                return false;
+            }
+        }
         /// <summary>
         /// 2000 后台登录操作
         /// </summary>
@@ -82,6 +120,11 @@ namespace Serv
                 result.msg = "登录状态正常";
             }
         }
+        /// <summary>
+        /// 2060 获取预测列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
         public static void Admin_AIList(ReturnModel result, AdminParamsM param)
         {
             if (IsLogin(result, param.Token))
@@ -146,41 +189,67 @@ namespace Serv
             }
 
         }
-        private static bool IsLogin(ReturnModel result,string token)
+        /// <summary>
+        /// 2061 获取某条预测详情
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void Admin_AIItemInfo(ReturnModel result, AdminParamsM param)
         {
-            var tokensession=ibll.FSys_LoginSession.Single(a => a.Token == token);
-            if (tokensession!=null)
+            if (IsLogin(result, param.Token))
             {
-                var loginsession = ibll.FSys_LoginSession.where(a => a.UID == tokensession.UID).OrderByDescending(a => a.ID).Take(1).ToList();
-                if (loginsession.Count() > 0)
+                var model = ibll.FAI.Single(a => a.ID == param.ID);
+                if (model==null)
                 {
-                    var model = loginsession[0];
-                    if (model.Token.Equals(token) && model.TimeOut > DateTime.Now)
+                    result.code = RespCodeConfig.ServerError;
+                    result.msg = "数据不存在";
+                    return;
+                }
+                result.code = RespCodeConfig.Normal;
+                result.data = model;
+            }
+        }
+        /// <summary>
+        /// 2062 新增一条预测记录
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void Admin_AIItemAdd(ReturnModel result, AdminParamsM param)
+        {
+            if (IsLogin(result, param.Token))
+            {
+                if (string.IsNullOrEmpty(param.Content))
+                {
+                    result.code = RespCodeConfig.ServerError;
+                    result.msg = "内容为空";
+                    return;
+                }
+                FAI model = JsonConvert.DeserializeObject<FAI>(param.Content);
+                if (model.AValue > 0 && model.Star > 0 && model.NPrice > 0)
+                {
+                    model.ReviseLV = (model.AValue * 100) / model.NPrice;
+                    model.ReviseStar = model.ReviseLV * model.Star;
+                    model.IsPublish = false;
+                    model.Status = 0;
+                    model.AddDate = DateTime.Now;
+                    ibll.FAI.Add(model);
+                    int n = ibll.SaveChanges();
+                    if (n > 0)
                     {
                         result.code = RespCodeConfig.Normal;
-                        model.TimeOut = DateTime.Now.AddHours(8);
-                        ibll.FSys_LoginSession.SaveChanges();
-                        return true;
+                        result.data = "保存成功";
                     }
                     else
                     {
-                        result.code = RespCodeConfig.Faild;
-                        result.msg = "token失效";
-                        return false;
+                        result.code = RespCodeConfig.ServerError;
+                        result.data = "保存失败";
                     }
                 }
                 else
                 {
-                    result.code = RespCodeConfig.Faild;
-                    result.msg = "Login Error";
-                    return false;
+                    result.code = RespCodeConfig.ArgumentExp;
+                    result.data = "数据有误";
                 }
-            }
-            else
-            {
-                result.code = RespCodeConfig.Faild;
-                result.msg = "Login Error";
-                return false;
             }
         }
     }

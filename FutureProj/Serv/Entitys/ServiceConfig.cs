@@ -37,6 +37,9 @@ namespace Serv.Entitys
         public const int Admin_MomentCommentList = 2041;//帖子评论管理
 
         public const int Admin_AIList = 2060;//AI 列表，发布删除
+        public const int Admin_AIItemInfo = 2061;//某一个预测详情，用于编辑
+        public const int Admin_AIItemAdd = 2062;//新增一条预测
+
         #endregion
     }
     public class RespCodeConfig

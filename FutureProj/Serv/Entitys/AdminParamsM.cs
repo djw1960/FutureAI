@@ -40,7 +40,7 @@ namespace Serv.Entitys
         /// <summary>
         /// 通用类型ID
         /// </summary>
-        public string ID { get; set; }
+        public int ID { get; set; }
         /// <summary>
         /// 账号
         /// </summary>

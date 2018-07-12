@@ -219,6 +219,12 @@ namespace Api.Controllers
                     case ApiConfig.Admin_AIList:
                         AdminControl.Admin_AIList(result, parm);
                         break;
+                    case ApiConfig.Admin_AIItemInfo:
+                        AdminControl.Admin_AIItemInfo(result,parm);
+                        break;
+                    case ApiConfig.Admin_AIItemAdd:
+                        AdminControl.Admin_AIItemAdd(result, parm);
+                        break;
                 }
             }
             catch (NotImplementedException notImp)
