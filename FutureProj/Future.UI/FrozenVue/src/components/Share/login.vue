@@ -56,7 +56,7 @@
                     if(resp.data.code==0)
                     {
                         //login信息存储
-                        self.$router.push({ name: 'home'});
+                        self.$router.push({ name: 'home',params:{token:resp.data.data.token}});
                     }
                 }).catch(function (error) {
                     console.log(error);

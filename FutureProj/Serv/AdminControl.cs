@@ -108,6 +108,20 @@ namespace Serv
             }
         }
         /// <summary>
+        /// 2002 登录获取菜单列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void Admin_GetMenuList(ReturnModel result, AdminParamsM param)
+        {
+            if (IsLogin(result, param.Token))
+            {
+                var menulist= ibll.FMenus.where(s => s.Mode == SysModeType.index.ToString() && s.IsAvailable&&s.Type=="2").ToList();
+                result.code = RespCodeConfig.Normal;
+                result.data = menulist;
+            }
+        }
+        /// <summary>
         /// 2010 审批资讯列表
         /// </summary>
         /// <param name="result"></param>

@@ -213,6 +213,9 @@ namespace Api.Controllers
                     case ApiConfig.Admin_SignIn:
                         AdminControl.Admin_SignIn(result, parm);
                         break;
+                    case ApiConfig.Admin_GetMenuList:
+                        AdminControl.Admin_GetMenuList(result, parm);
+                        break;
                     case ApiConfig.Admin_NewsList:
                         AdminControl.Admin_NewsList(result, parm);
                         break;

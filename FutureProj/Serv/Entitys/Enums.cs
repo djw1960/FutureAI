@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Serv.Entitys
 {
+    public enum SysModeType {
+        index,
+        news,
+        cangdan,
+    }
     public enum SysConfigType {
         TokenTimeout,
         IsEncry,

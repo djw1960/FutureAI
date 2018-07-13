@@ -30,7 +30,9 @@ namespace Serv.Entitys
 
         #region Manager
         public const int Admin_SignIn = 2000;//后台登录
-        
+        public const int Admin_SignOut = 2001;//退出后台登录
+        public const int Admin_GetMenuList = 2002;//获取登录之后的权限菜单列表
+
         public const int Admin_NewsList = 2010;//资讯列表 发布 删除
 
         public const int Admin_MomentList = 2040;//管理帖子列表
