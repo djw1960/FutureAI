@@ -11,6 +11,8 @@ data(){
   }
 },
 methods:{
+},
+created(){
 }
 }
 </script>
