@@ -216,12 +216,15 @@ namespace Api.Controllers
                     case ApiConfig.Admin_GetMenuList:
                         AdminControl.Admin_GetMenuList(result, parm);
                         break;
+                    case ApiConfig.Admin_GetCategoryList:
+                        AdminControl.Admin_GetCategoryList(result, parm);
+                        break;
                     case ApiConfig.Admin_NewsList:
                         AdminControl.Admin_NewsList(result, parm);
                         break;
                     case ApiConfig.Admin_AIList:
                         AdminControl.Admin_AIList(result, parm);
-                        break;
+                            break;
                     case ApiConfig.Admin_AIItemInfo:
                         AdminControl.Admin_AIItemInfo(result,parm);
                         break;

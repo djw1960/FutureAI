@@ -59,7 +59,7 @@
                 console.log(key);
                 switch (key) {
                     case 'add':
-                        
+                        this.$router.push({name:'aiAdd'});
                         break;
                     case 'publish':
                         

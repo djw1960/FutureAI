@@ -32,6 +32,7 @@ namespace Serv.Entitys
         public const int Admin_SignIn = 2000;//后台登录
         public const int Admin_SignOut = 2001;//退出后台登录
         public const int Admin_GetMenuList = 2002;//获取登录之后的权限菜单列表
+        public const int Admin_GetCategoryList = 2003;//获取分类列表
 
         public const int Admin_NewsList = 2010;//资讯列表 发布 删除
 
