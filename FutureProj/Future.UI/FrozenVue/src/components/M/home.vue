@@ -30,6 +30,11 @@
                 userEntity:{}
             }
         },
+        computed:{
+            getmenus(){
+                
+            }
+        },
         methods:{
             getTaskList(){
                 var self=this;
@@ -39,15 +44,23 @@
                 };
                 getdataPost(params).then(function (resp) {
                     if(resp.data.code==0){
-                        self.tlist=resp.data.data;
-                        var c=resp.data.data.length;
-                        self.trcount=c%3==0?(c/3):(c/3)+1;
+                        // 存储值：将对象转换为Json字符串
+                        sessionStorage.setItem('menulist', JSON.stringify(resp.data.data));
+                        for (let index = 0; index < resp.data.data.length; index++) {
+                            const element = resp.data.data[index];
+                            if (element.Mode=="index"&&element.MenuType=="menu") {
+                                self.tlist.push(element);
+                            }
+                        }
+                        var c=self.tlist.length;
+                        self.trcount=c%3==0?(c/3):Math.floor(c/3)+1;
                     }
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             loadinfo(url){
+                console.log(url);
                 this.$router.push({ path:url});
             }
         },

@@ -116,7 +116,15 @@ namespace Serv
         {
             if (IsLogin(result, param.Token))
             {
-                var menulist= ibll.FMenus.where(s => s.Mode == SysModeType.index.ToString() && s.IsAvailable&&s.Type=="2").ToList();
+                var menulist= ibll.FMenus.where(s =>s.IsAvailable&&s.Type=="2").OrderBy(s=>s.OrderBy).Select(ss=>new {
+                    ss.MenuTitle,
+                    ss.MenuIcon,
+                    ss.MenuCode,
+                    ss.MenuType,
+                    ss.Mode,
+                    ss.Url,
+                    ss.OrderBy
+                }).ToList();
                 result.code = RespCodeConfig.Normal;
                 result.data = menulist;
             }

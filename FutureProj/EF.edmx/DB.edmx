@@ -92,9 +92,11 @@
           <Property Name="MenuTitle" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MenuIcon" Type="varchar" MaxLength="50" />
           <Property Name="MenuCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuType" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="100" />
           <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="OrderBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FMoments">
           <Key>
@@ -586,6 +588,8 @@
           <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="MenuType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OrderBy" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -854,6 +858,8 @@
           <EntitySetMapping Name="FMenus">
             <EntityTypeMapping TypeName="PayServiceModel.FMenus">
               <MappingFragment StoreEntitySet="FMenus">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="MenuType" ColumnName="MenuType" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Mode" ColumnName="Mode" />

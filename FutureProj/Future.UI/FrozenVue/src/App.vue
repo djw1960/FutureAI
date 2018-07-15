@@ -5,10 +5,28 @@
 </template>
 
 <script>
+import login from '@/components/Share/login'
+import home from '@/components/M/home'
+import task from '@/components/M/task'
+import news from '@/components/M/news'
+import cangdan from '@/components/M/cangdan'
+import tongji from '@/components/M/tongji'
+import moment from '@/components/M/moment'
+import ai from '@/components/AI/index.vue'
 export default {
 data(){
   return{
   }
+},
+components:{
+login:login,
+home:home,
+task:task,
+news:news,
+cangdan:cangdan,
+tongji:tongji,
+moment:moment,
+ai:ai,
 },
 methods:{
 },
