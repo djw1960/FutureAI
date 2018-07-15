@@ -13,6 +13,7 @@ import cangdan from '@/components/M/cangdan'
 import tongji from '@/components/M/tongji'
 import moment from '@/components/M/moment'
 import ai from '@/components/AI/index.vue'
+import aidetial from '@/components/AI/detial.vue'
 export default {
 data(){
   return{
@@ -27,6 +28,7 @@ cangdan:cangdan,
 tongji:tongji,
 moment:moment,
 ai:ai,
+aidetial:aidetial
 },
 methods:{
 },

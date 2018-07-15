@@ -48,6 +48,11 @@ export default new Router({
       component: App.components.ai
     },
     {
+      path: '/ai/detial/:id',
+      name: 'aidetial',
+      component: App.components.aidetial
+    },
+    {
       path:'*',
       redirect:'/'
     }

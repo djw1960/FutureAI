@@ -195,17 +195,7 @@ namespace Serv
                         }
                         break;
                 }
-                var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList().Select(ss => new {
-                    ss.ID,
-                    ss.DT,
-                    ss.Cate,
-                    ss.DataType,
-                    ss.TurnType,
-                    Star = ss.Star > 85 ? 3 : ss.Star > 75 ? 2 : 1,
-                    ss.NPrice,
-                    ss.AddDate,
-                    ss.Status
-                });
+                var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList();
                 result.code = RespCodeConfig.Normal;
                 result.data = list;
             }
