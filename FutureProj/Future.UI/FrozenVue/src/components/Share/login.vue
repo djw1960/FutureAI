@@ -33,7 +33,7 @@
 
 <script>
     let Base64=require('js-base64').Base64;
-    import {getdataPost} from '@/api/ApiList.js'
+    import {getdataPost} from '@/api/ApiList.js';
     export default {
         components:{
         },
@@ -55,12 +55,23 @@
                 getdataPost(params).then(function (resp) {
                     if(resp.data.code==0)
                     {
+                        // 存储值：将对象转换为Json字符串
+                        sessionStorage.setItem('user', JSON.stringify(resp.data.data));
+                        
                         //login信息存储
-                        self.$router.push({ name: 'home',params:{token:resp.data.data.token}});
+                        self.$router.push({ name: 'home'});
                     }
                 }).catch(function (error) {
                     console.log(error);
                 });
+            }
+        },
+        created(){
+            // 取值时：把获取到的Json字符串转换回对象
+            var userJsonStr = sessionStorage.getItem('user');
+            if (userJsonStr) {
+                //login信息存储
+                this.$router.push({ name: 'home'});
             }
         }
     }

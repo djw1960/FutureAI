@@ -22,5 +22,7 @@ namespace EF.Entitys
         public string Mode { get; set; }
         public string Url { get; set; }
         public bool IsAvailable { get; set; }
+        public string MenuType { get; set; }
+        public int OrderBy { get; set; }
     }
 }

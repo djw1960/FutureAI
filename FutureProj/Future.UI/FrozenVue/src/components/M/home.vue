@@ -6,7 +6,7 @@
 <section id="tasklist">
     <table class="ui-table ui-border">
             <tr class="" v-for="n in trcount" :key="n">
-                <td v-for="task in tlist" :key="task.ID" @click="loadinfo(task.Url)">
+                <td v-if="index<3*n && index>=3*(n-1)" v-for="(task,index) in tlist" :key="task.ID" @click="loadinfo(task.Url)">
                     <div>
                         <div class="icon" :class="true?task.MenuIcon:''"></div>
                         <div class="tit">{{task.MenuTitle}}</div>
@@ -26,8 +26,13 @@
         data(){
             return {
                 trcount:0,
-                token:this.$route.params.token,
-                tlist:[]
+                tlist:[],
+                userEntity:{}
+            }
+        },
+        computed:{
+            getmenus(){
+                
             }
         },
         methods:{
@@ -35,13 +40,20 @@
                 var self=this;
                 var params = {
                     no: 2002,
-                    token:self.token
+                    token:self.userEntity.token
                 };
                 getdataPost(params).then(function (resp) {
                     if(resp.data.code==0){
-                        self.tlist=resp.data.data;
-                        var c=resp.data.data.length;
-                        self.trcount=c%3==0?(c/3):(c/3)+1;
+                        // 存储值：将对象转换为Json字符串
+                        sessionStorage.setItem('menulist', JSON.stringify(resp.data.data));
+                        for (let index = 0; index < resp.data.data.length; index++) {
+                            const element = resp.data.data[index];
+                            if (element.Mode=="index"&&element.MenuType=="menu") {
+                                self.tlist.push(element);
+                            }
+                        }
+                        var c=self.tlist.length;
+                        self.trcount=c%3==0?(c/3):Math.floor(c/3)+1;
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -53,6 +65,9 @@
             }
         },
         created(){
+            // 取值时：把获取到的Json字符串转换回对象
+            var userJsonStr = sessionStorage.getItem('user');
+            this.userEntity = JSON.parse(userJsonStr);
             this.getTaskList();
         }
     }

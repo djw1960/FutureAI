@@ -116,9 +116,35 @@ namespace Serv
         {
             if (IsLogin(result, param.Token))
             {
-                var menulist= ibll.FMenus.where(s => s.Mode == SysModeType.index.ToString() && s.IsAvailable&&s.Type=="2").ToList();
+                var menulist= ibll.FMenus.where(s =>s.IsAvailable&&s.Type=="2").OrderBy(s=>s.OrderBy).Select(ss=>new {
+                    ss.MenuTitle,
+                    ss.MenuIcon,
+                    ss.MenuCode,
+                    ss.MenuType,
+                    ss.Mode,
+                    ss.Url,
+                    ss.OrderBy
+                }).ToList();
                 result.code = RespCodeConfig.Normal;
                 result.data = menulist;
+            }
+        }
+        /// <summary>
+        /// 2003 登录获取菜单列表
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void Admin_GetCategoryList(ReturnModel result, AdminParamsM param)
+        {
+            if (IsLogin(result, param.Token))
+            {
+                var catelist = ibll.FSys_Category.where(s => s.IsAvailable && !s.IsDel &&s.Type==param.Cate).Select(ss => new {
+                    ss.ID,
+                    ss.CateKey,
+                    ss.CateValue
+                }).ToList();
+                result.code = RespCodeConfig.Normal;
+                result.data = catelist;
             }
         }
         /// <summary>
@@ -170,7 +196,7 @@ namespace Serv
                         if (param.Number > 0)
                         {
                             var dt = DateTime.Now.AddMonths(0 - param.Number);
-                            exp = exp.And<FAI>(s => s.DT >= dt && s.DT < DateTime.Today);
+                            exp = exp.And<FAI>(s => s.DT >= dt);
                         }
                         else
                         {
@@ -187,17 +213,7 @@ namespace Serv
                         }
                         break;
                 }
-                var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList().Select(ss => new {
-                    ss.ID,
-                    ss.DT,
-                    ss.Cate,
-                    ss.DataType,
-                    ss.TurnType,
-                    Star = ss.Star > 85 ? 3 : ss.Star > 75 ? 2 : 1,
-                    ss.NPrice,
-                    ss.AddDate,
-                    ss.Status
-                });
+                var list = ibll.FAI.where(exp).OrderByDescending(s => s.DT).ToList();
                 result.code = RespCodeConfig.Normal;
                 result.data = list;
             }
@@ -238,31 +254,69 @@ namespace Serv
                     result.msg = "内容为空";
                     return;
                 }
-                FAI model = JsonConvert.DeserializeObject<FAI>(param.Content);
-                if (model.AValue > 0 && model.Star > 0 && model.NPrice > 0)
+                if (param.Type == "edit")
                 {
-                    model.ReviseLV = (model.AValue * 100) / model.NPrice;
-                    model.ReviseStar = model.ReviseLV * model.Star;
-                    model.IsPublish = false;
-                    model.Status = 0;
-                    model.AddDate = DateTime.Now;
-                    ibll.FAI.Add(model);
-                    int n = ibll.SaveChanges();
-                    if (n > 0)
+                    //编辑
+                    FAI model = JsonConvert.DeserializeObject<FAI>(param.Content);
+                    FAI obj = ibll.FAI.Single(a => a.ID == model.ID);
+                    if (obj!=null)
                     {
-                        result.code = RespCodeConfig.Normal;
-                        result.data = "保存成功";
+                        obj.Cate = model.Cate;
+                        obj.CateType = model.CateType;
+                        obj.Status = model.Status;
+                        obj.TurnType = model.TurnType;
+                        obj.DT = model.DT;
+                        obj.NPrice = model.NPrice;
+                        obj.Remark = model.Remark;
+                        obj.ResultClose = model.ResultClose;
+                        obj.ResultLow = model.ResultLow;
+                        obj.ResultHight = model.ResultHight;
+                        obj.IsPublish = model.IsPublish;
+                        ibll.FAI.Update(obj, new string[] {
+                            "Cate", "CateType", "Status", "TurnType","IsPublish",
+                            "DT","NPrice","Remark","ResultClose","ResultLow","ResultHight"});
+                        int n=ibll.SaveChanges();
+                        if (n > 0)
+                        {
+                            result.code = RespCodeConfig.Normal;
+                            result.data = "保存成功";
+                        }
+                        else
+                        {
+                            result.code = RespCodeConfig.ServerError;
+                            result.data = "保存失败";
+                        }
+                    }
+                }
+                else if(param.Type=="add")
+                {
+                    //新增
+                    FAI model = JsonConvert.DeserializeObject<FAI>(param.Content);
+                    if (model.AValue > 0 && model.Star > 0 && model.NPrice > 0)
+                    {
+                        model.ReviseLV = (model.AValue * 100) / model.NPrice;
+                        model.ReviseStar = model.ReviseLV * model.Star;
+                        model.IsPublish = false;
+                        model.Status = 0;
+                        model.AddDate = DateTime.Now;
+                        ibll.FAI.Add(model);
+                        int n = ibll.SaveChanges();
+                        if (n > 0)
+                        {
+                            result.code = RespCodeConfig.Normal;
+                            result.data = "保存成功";
+                        }
+                        else
+                        {
+                            result.code = RespCodeConfig.ServerError;
+                            result.data = "保存失败";
+                        }
                     }
                     else
                     {
-                        result.code = RespCodeConfig.ServerError;
-                        result.data = "保存失败";
+                        result.code = RespCodeConfig.ArgumentExp;
+                        result.data = "数据有误";
                     }
-                }
-                else
-                {
-                    result.code = RespCodeConfig.ArgumentExp;
-                    result.data = "数据有误";
                 }
             }
         }
