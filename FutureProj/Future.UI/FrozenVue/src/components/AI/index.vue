@@ -10,14 +10,14 @@
             <tr><th>基本信息</th><th>预测</th><th>操作</th></tr>
             <tr v-for="(aiitem,index) in ailist" :key="aiitem.id">
                 <td>
-                    <p>{{aiitem.Cate}}  {{aiitem.NPrice}}</p>
-                    <p>日期:{{aiitem.DT|formatDate}}点</p>
+                    <p><span class="mcate">{{aiitem.Cate}}</span>  <span class="mnprice">{{aiitem.NPrice}}</span> </p>
+                    <p class="mdt">DT:{{aiitem.DT|formatDate}}点</p>
                 </td>
                 <td v-bind:class="{mgreen:aiitem.Status==0,mlose:aiitem.Status==2,mwin:aiitem.Status==1}">
                     <p>{{aiitem.TurnType}}</p>
                     <p>
-                        <span>{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
-                        <span>{{aiitem.IsPublish?aiitem.ReviseStar:'未发布'}}</span></p>
+                        <span class="mstatus">{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
+                        <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseStar:'未发布'}}</span></p>
                 </td>
                 <td>
                     <div class="mbtnblock">
@@ -28,18 +28,30 @@
                 </td>
             </tr>
         </table>
+    <v-dialog v-show="showDialog" :dialog-option="dialogOption" ref="dialog"></v-dialog>
     </div>
 </template>
 
 <script>
     import {getdataPost} from '@/api/ApiList.js'
-    import {formatDate} from '@/Common/data.js'
+    import {formatDate,format} from '@/Common/data.js'
+    import mdialog from '@/components/Share/dialog.vue'
     export default {
+        components:{
+            'v-dialog':mdialog
+        },
         data(){
             return{
                 userEntity:{},
                 menus:[],
                 ailist:[],
+                showDialog:false,
+                dialogOption:{
+                    title:'',
+                    text:'',
+                    cancelButtonText:'',
+                    confirmButtonText:''
+                }
             }
         },
         filters:{
@@ -65,12 +77,33 @@
                         
                         break;
                     case 'edit':
+                        this.$router.push({name:'aiedit',params:{id:item.ID}});
+                        break;
                     case 'detail':
-                        this.$router.push({name:'aidetial',params:{id:item.ID}});
+                        this.showDetial(item);
                         break;
                     default:
                         break;
                 }
+            },
+            showDetial(obj){
+                this.dialogOption.title="数据信息";
+                var x;
+                this.dialogOption.text='';
+                for (x in obj) {
+                   this.dialogOption.text+=format('<label class="ui-label mfield"><span class="mfieldkey">{0}</span>:<span class="mfieldvalue">{1}</span></label>',x,obj[x]);
+                }
+                this.dialogOption.cancelButtonText="取消";
+                this.dialogOption.confirmButtonText="确认";
+                this.showDialog = true;
+                this.$refs.dialog.confirm().then(() => {
+                this.showDialog = false;
+                //todo
+                console.log("点击关闭");
+                }).catch(() => {
+                this.showDialog = false;
+                //todo
+                })
             },
             loadAIList(){
                 var self=this;
@@ -108,7 +141,6 @@
 <style scoped>
 .mli{
     line-height: 60px;
-    
 }
 .mmenu{
     margin-left: 20px;
@@ -130,5 +162,23 @@
 .mwin{
     background-color: darkorange;
     color: white;
+}
+.mcate{
+    font-size: 0.1rem;
+    color: darkblue;
+}
+.mnprice{
+    font-size: 0.16rem;
+    color: deeppink;
+}
+.mdt{
+    font-size: 0.1rem;
+    color: darkgreen;
+}
+.mpublish{
+    font-size: 0.1rem;
+}
+.mstatus{
+    font-size: 0.1rem;
 }
 </style>

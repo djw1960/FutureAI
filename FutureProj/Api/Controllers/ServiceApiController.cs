@@ -241,7 +241,7 @@ namespace Api.Controllers
             catch (Exception ex)
             {
                 result.code = RespCodeConfig.ServerError;
-                result.msg = "";
+                result.msg = ex.Message;
                 LogHelper.Error<ServiceApiController>(ex);
             }
             long endT = DateTime.Now.Ticks;

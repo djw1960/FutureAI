@@ -48,9 +48,9 @@ export default new Router({
       component: App.components.ai
     },
     {
-      path: '/ai/detial/:id',
-      name: 'aidetial', 
-      component: App.components.aidetial
+      path: '/ai/edit/:id',
+      name: 'aiedit', 
+      component: App.components.aiedit
     },
     {
       path: '/ai/aiAdd',

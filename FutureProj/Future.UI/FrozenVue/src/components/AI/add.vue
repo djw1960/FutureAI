@@ -74,6 +74,10 @@
                 <input type="checkbox" checked="" v-model="formObj.IsPublish">
             </label>
         </div>
+        <div class="ui-form-item ui-border-b">
+            <label>备注：</label>
+            <input type="text" placeholder="备注" v-model="formObj.Remark">
+        </div>
         <div class="ui-btn-wrap">
             <button  type="submit" class="ui-btn-lg ui-btn-primary">
                 确定
