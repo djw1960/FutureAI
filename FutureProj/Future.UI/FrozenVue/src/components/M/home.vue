@@ -54,6 +54,11 @@
                         }
                         var c=self.tlist.length;
                         self.trcount=c%3==0?(c/3):Math.floor(c/3)+1;
+                    }else if(resp.data.code==-4){
+                        sessionStorage.removeItem('user');
+                       self.$router.push({ name: 'login'}); 
+                    }else{
+                        console.log(resp.data.msg);
                     }
                 }).catch(function (error) {
                     console.log(error);

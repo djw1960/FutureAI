@@ -47,6 +47,7 @@ namespace Serv.Entitys
     }
     public class RespCodeConfig
     {
+        public const int TokenTimeOut = -4;
         public const int OK = 1;
         public const int NotOK = 0;
         /// <summary>
@@ -69,26 +70,6 @@ namespace Serv.Entitys
         /// 序异常
         /// </summary>
         public const int ServerError = 4;
-        /// <summary>
-        /// 接口资源不存在
-        /// </summary>
-        public const int NoInterface = 5;
-        /// <summary>
-        /// 请求频率过快,服务器繁忙
-        /// </summary>
-        public const int ServerBusy = 6;
-        /// <summary>
-        /// 授权码无效
-        /// </summary>
-        public const int TokenError = 7;
-        /// <summary>
-        /// 授权码已过期
-        /// </summary>
-        public const int TokenTimeOut = 8;
-        /// <summary>
-        /// 上传失败
-        /// </summary>
-        public const int UploadError = 9;
         /// <summary>
         /// 验证签名失败
         /// </summary>

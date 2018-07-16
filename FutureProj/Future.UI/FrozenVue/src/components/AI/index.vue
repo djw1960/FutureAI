@@ -11,13 +11,21 @@
             <tr v-for="(aiitem,index) in ailist" :key="aiitem.id">
                 <td>
                     <p><span class="mcate">{{aiitem.Cate}}</span>  <span class="mnprice">{{aiitem.NPrice}}</span> </p>
-                    <p class="mdt">DT:{{aiitem.DT|formatDate}}点</p>
+                    <p class="mstatus">
+                        <span class="mstatus">{{aiitem.AValue}} ---</span>
+                        <span class="mpublish">{{aiitem.Star}}</span>
+                        </p>
+                    <p class="mdt">{{aiitem.DT|formatDate}}点</p>
                 </td>
                 <td v-bind:class="{mgreen:aiitem.Status==0,mlose:aiitem.Status==2,mwin:aiitem.Status==1}">
                     <p>{{aiitem.TurnType}}</p>
                     <p>
                         <span class="mstatus">{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
-                        <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseStar:'未发布'}}</span></p>
+                        <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseStar:'未发布'}}</span>
+                    </p>
+                    <p>
+                        <span v-for="star in count(aiitem.ReviseStar)" :key="star" class="icon-mstar"></span>
+                    </p>
                 </td>
                 <td>
                     <div class="mbtnblock">
@@ -61,6 +69,10 @@
             }
         },
         methods:{
+            count(c){
+                console.log(c);
+                return c>85?3:c>75?2:1;
+            },
             menusfilter(t){
                 return this.menus.filter(function (item) {
                     return item.MenuType==t;
