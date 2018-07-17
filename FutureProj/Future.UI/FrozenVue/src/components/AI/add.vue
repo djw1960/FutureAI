@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="mcatediv">
-            <span class="mcate" v-for="cate in catelist" :key="cate.ID">{{cate.CateKey}}:{{cate.CateValue}}</span>
+            <span class="mcate" v-for="cate in catelist" :key="cate.ID" @click="incate(cate)">{{cate.CateKey}}:{{cate.CateValue}}</span>
         </div>
         <form @submit.prevent="subform">
         <div class="ui-form-item ui-border-b">
@@ -121,6 +121,12 @@
                     console.log(error);
                 });
             },
+            incate(cateobj){
+                //此方式绑定无效
+                //this.formObj.Cate=cateobj.CateKey;
+                this.$set(this.formObj,'Cate',cateobj.CateKey)
+                this.$set(this.formObj,'CateType',cateobj.CateValue)
+            },
             subform(event){
                 var self=this;
                 var params = {
@@ -143,6 +149,7 @@
             // 取值时：把获取到的Json字符串转换回对象
             var userJsonStr = sessionStorage.getItem('user');
             this.userEntity = JSON.parse(userJsonStr);
+            this.formObj.DT= formatDate(new Date(),'yyyy.MM.dd ')+'21:00:00';
             this.loadCateList();
         }
     }

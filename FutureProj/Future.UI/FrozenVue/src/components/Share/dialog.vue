@@ -1,5 +1,5 @@
 <template>
-<div class="ui-dialog ui-dialog-operate show">
+<div class="ui-dialog ui-dialog-operate mdialog show">
     <div class="ui-dialog-cnt">
         <div class="ui-dialog-bd">
             <h3>{{modal.title}}</h3>
@@ -60,6 +60,10 @@
 </script>
 
 <style>
+.mdialog{
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
 .mfield{
     background-color: darkgray;
     color: white;

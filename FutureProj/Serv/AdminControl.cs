@@ -33,7 +33,7 @@ namespace Serv
                     }
                     else
                     {
-                        result.code = RespCodeConfig.Faild;
+                        result.code = RespCodeConfig.TokenTimeOut;
                         result.msg = "token失效";
                         return false;
                     }
