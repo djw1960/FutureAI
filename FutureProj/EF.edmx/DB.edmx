@@ -27,6 +27,7 @@
           <Property Name="ResultClose" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
           <Property Name="CateType" Type="varchar" MaxLength="10" />
+          <Property Name="IsAbandon" Type="bit" />
         </EntityType>
         <EntityType Name="FDataLV">
           <Key>
@@ -542,6 +543,7 @@
           <Property Name="ReviseLV" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ReviseStar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CateType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsAbandon" Type="Boolean" />
         </EntityType>
         <EntityType Name="View_AdminUser">
           <Key>
@@ -807,6 +809,7 @@
           <EntitySetMapping Name="FAI">
             <EntityTypeMapping TypeName="PayServiceModel.FAI">
               <MappingFragment StoreEntitySet="FAI">
+                <ScalarProperty Name="IsAbandon" ColumnName="IsAbandon" />
                 <ScalarProperty Name="CateType" ColumnName="CateType" />
                 <ScalarProperty Name="ReviseStar" ColumnName="ReviseStar" />
                 <ScalarProperty Name="ReviseLV" ColumnName="ReviseLV" />

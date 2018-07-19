@@ -17,16 +17,16 @@
             <input type="text" placeholder="RB" v-model="formObj.CateType">
         </div>
         <div class="ui-form-item ui-form-item-radio ui-border-b">
-            <label class="ui-radio mradio" for="radio">
-                <input type="radio" name="radio" v-model="formObj.DataType" value="day"/>
+            <label class="ui-radio mradio" for="DataType">
+                <input type="radio" name="DataType" v-model="formObj.DataType" value="day"/>
             </label>
             <p>day</p>
-            <label class="ui-radio mradio" for="radio">
-                <input type="radio" checked="" name="radio" v-model="formObj.DataType" value="m60"/>
+            <label class="ui-radio mradio" for="DataType">
+                <input type="radio" checked="" name="DataType" v-model="formObj.DataType" value="m60"/>
             </label>
             <p>m60</p>
-            <label class="ui-radio mradio" for="radio">
-                <input type="radio" checked="" name="radio" v-model="formObj.DataType" value="m30"/>
+            <label class="ui-radio mradio" for="DataType">
+                <input type="radio" checked="" name="DataType" v-model="formObj.DataType" value="m30"/>
             </label>
             <p>m30</p>
         </div>
@@ -43,12 +43,12 @@
             <input type="text" placeholder="79.63" v-model="formObj.Star">
         </div>
         <div class="ui-form-item ui-form-item-radio ui-border-b">
-            <label class="ui-radio mradio" for="radio">
-                <input type="radio" name="radio" v-model="formObj.TurnType" value="up"/>
+            <label class="ui-radio mradio" for="TurnType">
+                <input type="radio" name="TurnType" v-model="formObj.TurnType" value="up"/>
             </label>
             <p>上涨</p>
-            <label class="ui-radio mradio" for="radio">
-                <input type="radio" checked="" name="radio" v-model="formObj.TurnType" value="down"/>
+            <label class="ui-radio mradio" for="TurnType">
+                <input type="radio" checked="" name="TurnType" v-model="formObj.TurnType" value="down"/>
             </label>
             <p>下跌</p>
         </div>

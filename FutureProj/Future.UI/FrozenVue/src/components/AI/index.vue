@@ -9,7 +9,7 @@
         <table class="ui-table ui-border-tb">
             <tr><th>基本信息</th><th>预测</th><th>操作</th></tr>
             <tr v-for="(aiitem,index) in ailist" :key="aiitem.id">
-                <td>
+                <td v-bind:class="{mabandon:aiitem.IsAbandon}">
                     <p><span class="mcate">{{aiitem.Cate}}</span>  <span class="mnprice">{{aiitem.NPrice}}</span> </p>
                     <p class="mstatus">
                         <span class="mstatus">{{aiitem.AValue}} --</span>
@@ -23,7 +23,7 @@
                         <span class="mstatus">{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
                         <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseLV+'--'+aiitem.ReviseStar:'未发布'}}</span>
                     </p>
-                    <p v-bind:class="{mstar:aiitem.ReviseLV<0.9}">
+                    <p v-bind:class="{mstar:aiitem.ReviseLV<0.9||aiitem.IsAbandon}">
                         <span v-for="star in count(aiitem.Star)" :key="star" class="icon-mstar" ></span>
                     </p>
                 </td>
@@ -121,7 +121,7 @@
                     no: 2060,
                     token:self.userEntity.token,
                     cate:'m',
-                    number:1
+                    number:6
                 };
                 getdataPost(params).then(function (resp) {
                     if(resp.data.code==0){
@@ -193,5 +193,8 @@
 }
 .mstar{
     background-color: black;
+}
+.mabandon{
+    background-color:bisque;
 }
 </style>

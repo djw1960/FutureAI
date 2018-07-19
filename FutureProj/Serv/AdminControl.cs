@@ -272,9 +272,10 @@ namespace Serv
                         obj.ResultLow = model.ResultLow;
                         obj.ResultHight = model.ResultHight;
                         obj.IsPublish = model.IsPublish;
+                        obj.IsAbandon = model.IsAbandon;
                         ibll.FAI.Update(obj, new string[] {
                             "Cate", "CateType", "Status", "TurnType","IsPublish",
-                            "DT","NPrice","Remark","ResultClose","ResultLow","ResultHight"});
+                            "DT","NPrice","Remark","ResultClose","ResultLow","ResultHight","IsAbandon"});
                         int n=ibll.SaveChanges();
                         if (n > 0)
                         {
@@ -296,8 +297,7 @@ namespace Serv
                     {
                         model.ReviseLV = (model.AValue * 100) / model.NPrice;
                         model.ReviseStar = model.ReviseLV * model.Star;
-                        model.IsPublish = false;
-                        model.Status = 0;
+                        model.IsAbandon = model.ReviseLV < (decimal)0.9;
                         model.AddDate = DateTime.Now;
                         ibll.FAI.Add(model);
                         int n = ibll.SaveChanges();
