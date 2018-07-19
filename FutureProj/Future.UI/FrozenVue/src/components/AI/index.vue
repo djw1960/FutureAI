@@ -12,7 +12,7 @@
                 <td>
                     <p><span class="mcate">{{aiitem.Cate}}</span>  <span class="mnprice">{{aiitem.NPrice}}</span> </p>
                     <p class="mstatus">
-                        <span class="mstatus">{{aiitem.AValue}} ---</span>
+                        <span class="mstatus">{{aiitem.AValue}} --</span>
                         <span class="mpublish">{{aiitem.Star}}</span>
                         </p>
                     <p class="mdt">{{aiitem.DT|formatDate}}点</p>
@@ -21,10 +21,10 @@
                     <p>{{aiitem.TurnType}}</p>
                     <p>
                         <span class="mstatus">{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
-                        <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseStar:'未发布'}}</span>
+                        <span class="mpublish">{{aiitem.IsPublish?aiitem.ReviseLV+'--'+aiitem.ReviseStar:'未发布'}}</span>
                     </p>
-                    <p>
-                        <span v-for="star in count(aiitem.ReviseStar)" :key="star" class="icon-mstar"></span>
+                    <p v-bind:class="{mstar:aiitem.ReviseLV<0.9}">
+                        <span v-for="star in count(aiitem.Star)" :key="star" class="icon-mstar" ></span>
                     </p>
                 </td>
                 <td>
@@ -70,8 +70,7 @@
         },
         methods:{
             count(c){
-                console.log(c);
-                return c>85?3:c>75?2:1;
+                return c>90?3:c>80?2:1;
             },
             menusfilter(t){
                 return this.menus.filter(function (item) {
@@ -80,7 +79,6 @@
             },
             Opt(key,index){
                 let item=this.ailist[index];
-                console.log(key);
                 switch (key) {
                     case 'add':
                         this.$router.push({name:'aiAdd'});
@@ -192,5 +190,8 @@
 }
 .mstatus{
     font-size: 0.1rem;
+}
+.mstar{
+    background-color: black;
 }
 </style>
