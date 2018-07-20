@@ -15,6 +15,7 @@ import moment from '@/components/M/moment'
 import ai from '@/components/AI/index.vue'
 import aiedit from '@/components/AI/edit.vue'
 import aiAdd from '@/components/AI/add.vue'
+import master from '@/components/Share/master.vue'
 export default {
 data(){
   return{
@@ -31,6 +32,7 @@ components:{
   ai:ai,
   aiedit:aiedit,
   aiAdd:aiAdd,
+  master:master
 },
 methods:{
 },

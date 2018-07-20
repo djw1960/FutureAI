@@ -58,6 +58,11 @@ export default new Router({
       component: App.components.aiAdd
     },
     {
+      path: '/master',
+      name: 'master', 
+      component: App.components.master
+    },
+    {
       path:'*',
       redirect:'/'
     }

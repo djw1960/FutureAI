@@ -26,7 +26,7 @@
         </div>
 </div>
 </section>
-
+<v-loading v-show="showloading"></v-loading>
 </div>
 
 </template>
@@ -34,35 +34,40 @@
 <script>
     let Base64=require('js-base64').Base64;
     import {getdataPost} from '@/api/ApiList.js';
+    import loading from '@/components/Share/loading.vue'
     export default {
         components:{
+            'v-loading':loading
         },
         data(){
             return {
                 account:'',
                 pwd:'',
+                showloading:false
             }
         },
         methods:{
 
             Login(){
                 var self=this;
+                self.showloading=true;
                 var params = {
                     no: 2000,
                     account:Base64.encode(this.account.trim()),
                     pwd:Base64.encode(this.pwd.trim()),
                 };
                 getdataPost(params).then(function (resp) {
+                    self.showloading=false;
                     if(resp.data.code==0)
                     {
                         // 存储值：将对象转换为Json字符串
                         sessionStorage.setItem('user', JSON.stringify(resp.data.data));
-                        
                         //login信息存储
                         self.$router.push({ name: 'home'});
                     }
                 }).catch(function (error) {
                     console.log(error);
+                    self.showloading=false;
                 });
             }
         },

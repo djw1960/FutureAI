@@ -14,6 +14,8 @@ namespace Serv.Entitys
         public const int SERVICE_SignIn = 1000;//登录
         public const int SERVICE_SignOut = 1001;//退出登录
         public const int SERVICE_GetMenuList = 1002;//获取登录之后的权限菜单列表
+        public const int SERVICE_SignUp = 1003;//退出登录
+        
 
         public const int SERVICE_GetNewsList = 1010;//获取资讯列表
         public const int SERVICE_GetNewsInfo = 1011;//获取资讯详情

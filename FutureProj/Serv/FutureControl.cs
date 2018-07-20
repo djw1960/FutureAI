@@ -15,6 +15,11 @@ namespace Serv
         private static EF.IService.IServiceSession ibll = OperationContext.BLLSession;
 
         #region 用户基础模块
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
         public static void SERVICE_SignIn(ReturnModel result, RequestParamsM param)
         {
             #region 参数验证
@@ -40,6 +45,46 @@ namespace Serv
                 //写入登录session
 
                 result.data = new {token= Common.BillToken(),username=model.UserName,account=model.Login };
+                result.code = RespCodeConfig.Normal;
+            }
+            else
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "用户名或密码错误";
+                return;
+            }
+        }
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void SERVICE_SignUp(ReturnModel result, RequestParamsM param)
+        {
+            #region 参数验证
+
+            if (string.IsNullOrEmpty(param.Account) || string.IsNullOrEmpty(param.Pwd))
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return;
+            }
+            string account = Base64Util.DecodeBase64(Encoding.UTF8, param.Account);
+            string pwd = Base64Util.DecodeBase64(Encoding.UTF8, param.Pwd);
+            if (account == param.Account || pwd == param.Pwd)
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return;
+            }
+            #endregion
+
+            var model = ibll.FSysUser.Single(a => a.Login == account);
+            if (model != null && model.Pwd == MD5Encrypt.MD5(pwd, Encoding.UTF8))
+            {
+                //写入登录session
+
+                result.data = new { token = Common.BillToken(), username = model.UserName, account = model.Login };
                 result.code = RespCodeConfig.Normal;
             }
             else

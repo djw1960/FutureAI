@@ -37,6 +37,7 @@
             </tr>
         </table>
     <v-dialog v-show="showDialog" :dialog-option="dialogOption" ref="dialog"></v-dialog>
+    <v-loading v-show="showloading"></v-loading>
     </div>
 </template>
 
@@ -44,9 +45,11 @@
     import {getdataPost} from '@/api/ApiList.js'
     import {formatDate,format} from '@/Common/data.js'
     import mdialog from '@/components/Share/dialog.vue'
+    import loading from '@/components/Share/loading.vue'
     export default {
         components:{
-            'v-dialog':mdialog
+            'v-dialog':mdialog,
+            'v-loading':loading
         },
         data(){
             return{
@@ -54,6 +57,7 @@
                 menus:[],
                 ailist:[],
                 showDialog:false,
+                showloading:false,
                 dialogOption:{
                     title:'',
                     text:'',
@@ -117,6 +121,7 @@
             },
             loadAIList(){
                 var self=this;
+                self.showloading=true;
                 var params = {
                     no: 2060,
                     token:self.userEntity.token,
@@ -124,11 +129,13 @@
                     number:6
                 };
                 getdataPost(params).then(function (resp) {
+                    self.showloading=false;
                     if(resp.data.code==0){
                         self.ailist=resp.data.data;
                     }
                 }).catch(function (error) {
                     console.log(error);
+                    self.showloading=false;
                 });
             }
         },

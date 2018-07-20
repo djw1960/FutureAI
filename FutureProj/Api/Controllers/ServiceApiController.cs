@@ -42,6 +42,9 @@ namespace Api.Controllers
                     case ApiConfig.SERVICE_SignIn:
                         FutureControl.SERVICE_SignIn(result, parm);
                         break;
+                    case ApiConfig.SERVICE_SignUp:
+                        FutureControl.SERVICE_SignUp(result, parm);
+                        break;
                     case ApiConfig.SERVICE_GetMenuList:
                         break;
                     case ApiConfig.SERVICE_GetNewsList:

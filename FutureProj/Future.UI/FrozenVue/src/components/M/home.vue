@@ -73,6 +73,9 @@
             // 取值时：把获取到的Json字符串转换回对象
             var userJsonStr = sessionStorage.getItem('user');
             this.userEntity = JSON.parse(userJsonStr);
+            if(!this.userEntity){
+                this.$router.push({name:'login'});
+            }
             this.getTaskList();
         }
     }
