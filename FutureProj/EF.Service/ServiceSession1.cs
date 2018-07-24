@@ -123,13 +123,6 @@ namespace EF.Service
     			return new Service.Sons.FAI();
     		}
     	}
-    	public IService.Sons.IFMenus FMenus
-    	{
-    		get
-    		{
-    			return new Service.Sons.FMenus();
-    		}
-    	}
     	public IService.Sons.IView_AdminUser View_AdminUser
     	{
     		get
@@ -142,6 +135,20 @@ namespace EF.Service
     		get
     		{
     			return new Service.Sons.FSys_LoginSession();
+    		}
+    	}
+    	public IService.Sons.IFMenus FMenus
+    	{
+    		get
+    		{
+    			return new Service.Sons.FMenus();
+    		}
+    	}
+    	public IService.Sons.IFSysUser_Invite FSysUser_Invite
+    	{
+    		get
+    		{
+    			return new Service.Sons.FSysUser_Invite();
     		}
     	}
     }

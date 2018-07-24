@@ -28,9 +28,10 @@ namespace EF.IService
     	IService.Sons.IFMoments FMoments{ get; }
     	IService.Sons.IFMomentsReply FMomentsReply{ get; }
     	IService.Sons.IFAI FAI{ get; }
-    	IService.Sons.IFMenus FMenus{ get; }
     	IService.Sons.IView_AdminUser View_AdminUser{ get; }
     	IService.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
+    	IService.Sons.IFMenus FMenus{ get; }
+    	IService.Sons.IFSysUser_Invite FSysUser_Invite{ get; }
     }
     
     

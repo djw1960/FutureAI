@@ -63,10 +63,10 @@ namespace Serv
         {
             #region 参数验证
 
-            if (string.IsNullOrEmpty(param.Account) || string.IsNullOrEmpty(param.Pwd))
+            if (string.IsNullOrEmpty(param.Account.Trim()) || string.IsNullOrEmpty(param.Pwd.Trim()) ||string.IsNullOrEmpty(param.UserName.Trim())||string.IsNullOrEmpty(param.Content))
             {
                 result.code = RespCodeConfig.ArgumentExp;
-                result.msg = "参数错误";
+                result.msg = "参数不能为空";
                 return;
             }
             string account = Base64Util.DecodeBase64(Encoding.UTF8, param.Account);
@@ -79,20 +79,51 @@ namespace Serv
             }
             #endregion
 
-            var model = ibll.FSysUser.Single(a => a.Login == account);
-            if (model != null && model.Pwd == MD5Encrypt.MD5(pwd, Encoding.UTF8))
-            {
-                //写入登录session
 
-                result.data = new { token = Common.BillToken(), username = model.UserName, account = model.Login };
-                result.code = RespCodeConfig.Normal;
+            //验证邀请码
+            var invitemodel = ibll.FSysUser_Invite.Single(a => a.InviteCode == param.Content);
+            if (invitemodel != null)
+            {
+                var model = ibll.FSysUser.Single(a => a.Login == account);
+                if (model == null)
+                {
+                    //注册新账号
+                    FSysUser user = new FSysUser();
+                    user.Login = account;
+                    user.Pwd = MD5Encrypt.MD5(pwd, Encoding.UTF8);
+                    user.UserName = param.UserName;
+                    user.Remark = "";
+                    user.RoleID = (int)SysRuleType.view;
+                    user.IsAvailable = 1;
+                    user.AddDate = DateTime.Now;
+                    ibll.FSysUser.Add(user);
+                    int n = ibll.FSysUser.SaveChanges();
+                    if (n > 0)
+                    {
+                        result.msg = "注册成功";
+                        result.code = RespCodeConfig.Normal;
+                    }
+                    else
+                    {
+                        result.code = RespCodeConfig.ArgumentExp;
+                        result.msg = "网络错误";
+                        return;
+                    }
+                }
+                else
+                {
+                    result.code = RespCodeConfig.ArgumentExp;
+                    result.msg = "该账号已被注册";
+                    return;
+                }
             }
             else
             {
                 result.code = RespCodeConfig.ArgumentExp;
-                result.msg = "用户名或密码错误";
+                result.msg = "无效的邀请码";
                 return;
             }
+            
         }
         /// <summary>
         /// 1002 获取菜单列表

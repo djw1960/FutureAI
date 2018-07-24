@@ -21,5 +21,6 @@ namespace EF.Entitys
         public int RoleID { get; set; }
         public int IsAvailable { get; set; }
         public System.DateTime AddDate { get; set; }
+        public string Remark { get; set; }
     }
 }

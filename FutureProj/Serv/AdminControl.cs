@@ -197,6 +197,10 @@ namespace Serv
                         {
                             var dt = DateTime.Now.AddMonths(0 - param.Number);
                             exp = exp.And<FAI>(s => s.DT >= dt);
+                            if (!string.IsNullOrEmpty(param.Code))
+                            {
+                                exp = exp.And<FAI>(s => s.CateType == param.Code);
+                            }
                         }
                         else
                         {

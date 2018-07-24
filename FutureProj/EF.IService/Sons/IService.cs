@@ -72,15 +72,19 @@ namespace EF.IService.Sons
     {
     
     }
-    public partial interface IFMenus:IBaseService<EF.Entitys.FMenus>
-    {
-    
-    }
     public partial interface IView_AdminUser:IBaseService<EF.Entitys.View_AdminUser>
     {
     
     }
     public partial interface IFSys_LoginSession:IBaseService<EF.Entitys.FSys_LoginSession>
+    {
+    
+    }
+    public partial interface IFMenus:IBaseService<EF.Entitys.FMenus>
+    {
+    
+    }
+    public partial interface IFSysUser_Invite:IBaseService<EF.Entitys.FSysUser_Invite>
     {
     
     }

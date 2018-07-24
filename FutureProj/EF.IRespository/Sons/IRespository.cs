@@ -72,15 +72,19 @@ namespace EF.IRespository.Sons
     {
     
     }
-    public partial interface IFMenus:IBaseRespository<EF.Entitys.FMenus>
-    {
-    
-    }
     public partial interface IView_AdminUser:IBaseRespository<EF.Entitys.View_AdminUser>
     {
     
     }
     public partial interface IFSys_LoginSession:IBaseRespository<EF.Entitys.FSys_LoginSession>
+    {
+    
+    }
+    public partial interface IFMenus:IBaseRespository<EF.Entitys.FMenus>
+    {
+    
+    }
+    public partial interface IFSysUser_Invite:IBaseRespository<EF.Entitys.FSysUser_Invite>
     {
     
     }

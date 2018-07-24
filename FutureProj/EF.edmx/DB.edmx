@@ -243,9 +243,20 @@
           <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Pwd" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="IsAvailable" Type="int" Nullable="false" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FSysUser_Invite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="InviteCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="UseBy" Type="int" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“xds315586209_db.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -290,6 +301,7 @@
           <EntitySet Name="FSys_LoginSession" EntityType="Self.FSys_LoginSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSys_Role" EntityType="Self.FSys_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSysUser" EntityType="Self.FSysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FSysUser_Invite" EntityType="Self.FSysUser_Invite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="View_AdminUser" EntityType="Self.View_AdminUser" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_AdminUser].[ID] AS [ID], 
@@ -328,6 +340,7 @@
           <EntitySet Name="View_AdminUser" EntityType="PayServiceModel.View_AdminUser" />
           <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
           <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
+          <EntitySet Name="FSysUser_Invite" EntityType="PayServiceModel.FSysUser_Invite" />
         </EntityContainer>
         <EntityType Name="FDataMaterial">
           <Key>
@@ -434,6 +447,7 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="IsAvailable" Type="Int32" Nullable="false" />
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FDataLV">
           <Key>
@@ -593,6 +607,16 @@
           <Property Name="MenuType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="OrderBy" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="FSysUser_Invite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="InviteCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="UseBy" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -703,6 +727,7 @@
           <EntitySetMapping Name="FSysUser">
             <EntityTypeMapping TypeName="PayServiceModel.FSysUser">
               <MappingFragment StoreEntitySet="FSysUser">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -870,6 +895,17 @@
                 <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
                 <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FSysUser_Invite">
+            <EntityTypeMapping TypeName="PayServiceModel.FSysUser_Invite">
+              <MappingFragment StoreEntitySet="FSysUser_Invite">
+                <ScalarProperty Name="UseBy" ColumnName="UseBy" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="InviteCode" ColumnName="InviteCode" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

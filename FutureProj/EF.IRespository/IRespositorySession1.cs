@@ -28,9 +28,10 @@ namespace EF.IRespository
     	IRespository.Sons.IFMoments FMoments{ get; }
     	IRespository.Sons.IFMomentsReply FMomentsReply{ get; }
     	IRespository.Sons.IFAI FAI{ get; }
-    	IRespository.Sons.IFMenus FMenus{ get; }
     	IRespository.Sons.IView_AdminUser View_AdminUser{ get; }
     	IRespository.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
+    	IRespository.Sons.IFMenus FMenus{ get; }
+    	IRespository.Sons.IFSysUser_Invite FSysUser_Invite{ get; }
     }
     
     
