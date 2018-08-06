@@ -126,7 +126,7 @@
                     no: 2060,
                     token:self.userEntity.token,
                     cate:'m',
-                    number:6
+                    number:1
                 };
                 getdataPost(params).then(function (resp) {
                     self.showloading=false;
