@@ -152,15 +152,6 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
-    public partial class FMenus:BaseService<EF.Entitys.FMenus>,EF.IService.Sons.IFMenus
-    {
-    	    //IRespository.Sons.IFMenus dal;
-            public override void Setdal()
-            {
-                dal = base.DBSession.FMenus;
-                base.dal = dal;
-            }
-    }
     public partial class View_AdminUser:BaseService<EF.Entitys.View_AdminUser>,EF.IService.Sons.IView_AdminUser
     {
     	    //IRespository.Sons.IView_AdminUser dal;
@@ -176,6 +167,24 @@ namespace EF.Service.Sons
             public override void Setdal()
             {
                 dal = base.DBSession.FSys_LoginSession;
+                base.dal = dal;
+            }
+    }
+    public partial class FMenus:BaseService<EF.Entitys.FMenus>,EF.IService.Sons.IFMenus
+    {
+    	    //IRespository.Sons.IFMenus dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FMenus;
+                base.dal = dal;
+            }
+    }
+    public partial class FSysUser_Invite:BaseService<EF.Entitys.FSysUser_Invite>,EF.IService.Sons.IFSysUser_Invite
+    {
+    	    //IRespository.Sons.IFSysUser_Invite dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.FSysUser_Invite;
                 base.dal = dal;
             }
     }

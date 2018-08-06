@@ -44,5 +44,6 @@ namespace EF.edmx
         public virtual DbSet<View_AdminUser> View_AdminUser { get; set; }
         public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
         public virtual DbSet<FMenus> FMenus { get; set; }
+        public virtual DbSet<FSysUser_Invite> FSysUser_Invite { get; set; }
     }
 }

@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="PayServiceModel.View_AdminUser" Width="1.5" PointX="10.625" PointY="0.625" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FSys_LoginSession" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="false" />
         <EntityTypeShape EntityType="PayServiceModel.FMenus" Width="1.5" PointX="0.875" PointY="3.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="PayServiceModel.FSysUser_Invite" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

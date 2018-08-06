@@ -17,8 +17,9 @@ namespace Serv.Entitys
         EncryKey
     }
     public enum SysRuleType {
-        manager,
-        view
+        manager=1,
+        view=2,
+        suger=3,
     }
     public enum TradeHouseType
     {

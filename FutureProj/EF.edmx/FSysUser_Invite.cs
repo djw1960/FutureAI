@@ -12,15 +12,12 @@ namespace EF.edmx
     using System;
     using System.Collections.Generic;
     
-    public partial class FSysUser
+    public partial class FSysUser_Invite
     {
         public int ID { get; set; }
-        public string Login { get; set; }
-        public string Pwd { get; set; }
-        public string UserName { get; set; }
-        public int RoleID { get; set; }
-        public int IsAvailable { get; set; }
-        public System.DateTime AddDate { get; set; }
-        public string Remark { get; set; }
+        public int UID { get; set; }
+        public string InviteCode { get; set; }
+        public bool IsUsed { get; set; }
+        public Nullable<int> UseBy { get; set; }
     }
 }
