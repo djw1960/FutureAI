@@ -68,6 +68,53 @@
   <ItemGroup>
     <Content Include="Axure\FutureAI.rp" />
     <Content Include="favicon.ico" />
+    <Content Include="FrozenOnePage\.gitignore" />
+    <Content Include="FrozenOnePage\.postcssrc.js" />
+    <Content Include="FrozenOnePage\build\build.js" />
+    <Content Include="FrozenOnePage\build\check-versions.js" />
+    <Content Include="FrozenOnePage\build\logo.png" />
+    <Content Include="FrozenOnePage\build\utils.js" />
+    <Content Include="FrozenOnePage\build\vue-loader.conf.js" />
+    <Content Include="FrozenOnePage\build\webpack.base.conf.js" />
+    <Content Include="FrozenOnePage\build\webpack.dev.conf.js" />
+    <Content Include="FrozenOnePage\build\webpack.prod.conf.js" />
+    <Content Include="FrozenOnePage\config\dev.env.js" />
+    <Content Include="FrozenOnePage\config\index.js" />
+    <Content Include="FrozenOnePage\config\prod.env.js" />
+    <Content Include="FrozenOnePage\index.html" />
+    <Content Include="FrozenOnePage\src\api\ApiList.js" />
+    <Content Include="FrozenOnePage\src\assets\css\frozenui.css" />
+    <Content Include="FrozenOnePage\src\assets\css\style.css" />
+    <Content Include="FrozenOnePage\src\assets\images\actionsheet.png" />
+    <Content Include="FrozenOnePage\src\assets\images\article.png" />
+    <Content Include="FrozenOnePage\src\assets\images\button.png" />
+    <Content Include="FrozenOnePage\src\assets\images\cell.png" />
+    <Content Include="FrozenOnePage\src\assets\images\dialog.png" />
+    <Content Include="FrozenOnePage\src\assets\images\FAI.png" />
+    <Content Include="FrozenOnePage\src\assets\images\form.png" />
+    <Content Include="FrozenOnePage\src\assets\images\grid.png" />
+    <Content Include="FrozenOnePage\src\assets\images\icon-tips-info.png" />
+    <Content Include="FrozenOnePage\src\assets\images\icon-tips-warn.png" />
+    <Content Include="FrozenOnePage\src\assets\images\icons.png" />
+    <Content Include="FrozenOnePage\src\assets\images\isux.png" />
+    <Content Include="FrozenOnePage\src\assets\images\more.png" />
+    <Content Include="FrozenOnePage\src\assets\images\msg.png" />
+    <Content Include="FrozenOnePage\src\assets\images\panel.png" />
+    <Content Include="FrozenOnePage\src\assets\images\progress.png" />
+    <Content Include="FrozenOnePage\src\assets\images\qui.png" />
+    <Content Include="FrozenOnePage\src\assets\images\rstar.png" />
+    <Content Include="FrozenOnePage\src\assets\images\searchbar.png" />
+    <Content Include="FrozenOnePage\src\assets\images\star.png" />
+    <Content Include="FrozenOnePage\src\assets\images\star2.png" />
+    <Content Include="FrozenOnePage\src\assets\images\tab.png" />
+    <Content Include="FrozenOnePage\src\assets\images\toast.png" />
+    <Content Include="FrozenOnePage\src\assets\images\userh.png" />
+    <Content Include="FrozenOnePage\src\assets\images\ystar.png" />
+    <Content Include="FrozenOnePage\src\assets\logo.png" />
+    <Content Include="FrozenOnePage\src\Common\Common.js" />
+    <Content Include="FrozenOnePage\src\Common\data.js" />
+    <Content Include="FrozenOnePage\src\main.js" />
+    <Content Include="FrozenOnePage\src\router\index.js" />
     <Content Include="FrozenVer\css\frozenui.css" />
     <Content Include="FrozenVer\css\style.css" />
     <Content Include="FrozenVer\html\a\i.html" />
@@ -111,6 +158,29 @@
     <Content Include="FrozenVue\src\components\AI\edit.vue" />
     <Content Include="FrozenVue\src\components\AI\list.vue" />
     <Content Include="FrozenVue\src\components\AI\index.vue" />
+    <Content Include="FrozenOnePage\src\App.vue" />
+    <Content Include="FrozenOnePage\src\components\AI\add.vue" />
+    <Content Include="FrozenOnePage\src\components\AI\detial.vue" />
+    <Content Include="FrozenOnePage\src\components\AI\edit.vue" />
+    <Content Include="FrozenOnePage\src\components\AI\index.vue" />
+    <Content Include="FrozenOnePage\src\components\AI\list.vue" />
+    <Content Include="FrozenOnePage\src\components\M\404.vue" />
+    <Content Include="FrozenOnePage\src\components\M\cangdan.vue" />
+    <Content Include="FrozenOnePage\src\components\M\home.vue" />
+    <Content Include="FrozenOnePage\src\components\M\moment.vue" />
+    <Content Include="FrozenOnePage\src\components\M\news.vue" />
+    <Content Include="FrozenOnePage\src\components\M\task.vue" />
+    <Content Include="FrozenOnePage\src\components\M\tongji.vue" />
+    <Content Include="FrozenOnePage\src\components\Share\dialog.vue" />
+    <Content Include="FrozenOnePage\src\components\Share\loading.vue" />
+    <Content Include="FrozenOnePage\src\components\Share\login.vue" />
+    <Content Include="FrozenOnePage\src\components\Share\master.vue" />
+    <Content Include="FrozenOnePage\static\.gitkeep" />
+    <Content Include="FrozenOnePage\.babelrc" />
+    <Content Include="FrozenOnePage\.editorconfig" />
+    <Content Include="FrozenOnePage\package-lock.json" />
+    <Content Include="FrozenOnePage\package.json" />
+    <Content Include="FrozenOnePage\README.md" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -286,7 +356,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="FrozenOnePage\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
