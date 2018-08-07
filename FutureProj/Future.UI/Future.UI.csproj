@@ -102,15 +102,7 @@
     <Content Include="FrozenVue\README.md" />
     <Content Include="FrozenVue\src\api\ApiList.js" />
     <Content Include="FrozenVue\src\App.vue" />
-    <Content Include="FrozenVue\src\components\FHeader.vue" />
-    <Content Include="FrozenVue\src\components\Menus.vue" />
-    <Content Include="FrozenVue\src\components\News.Vue" />
     <Content Include="FrozenVue\static\.gitkeep" />
-    <Content Include="FrozenVue\src\components\CList.vue" />
-    <Content Include="FrozenVue\src\components\NewsLi.vue" />
-    <Content Include="FrozenVue\src\components\TList.vue" />
-    <Content Include="FrozenVue\src\components\AIndex.vue" />
-    <Content Include="FrozenVue\src\components\FIndex.vue" />
     <Content Include="FrozenVue\src\components\M\404.vue" />
     <Content Include="FrozenVue\src\components\M\home.vue" />
     <Content Include="FrozenVue\src\components\Share\login.vue" />
@@ -118,6 +110,7 @@
     <Content Include="FrozenVue\src\components\AI\detial.vue" />
     <Content Include="FrozenVue\src\components\AI\edit.vue" />
     <Content Include="FrozenVue\src\components\AI\list.vue" />
+    <Content Include="FrozenVue\src\components\AI\index.vue" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
