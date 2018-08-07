@@ -114,6 +114,10 @@
     <Content Include="FrozenVue\src\components\M\404.vue" />
     <Content Include="FrozenVue\src\components\M\home.vue" />
     <Content Include="FrozenVue\src\components\Share\login.vue" />
+    <Content Include="FrozenVue\src\components\AI\add.vue" />
+    <Content Include="FrozenVue\src\components\AI\detial.vue" />
+    <Content Include="FrozenVue\src\components\AI\edit.vue" />
+    <Content Include="FrozenVue\src\components\AI\list.vue" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
