@@ -1,0 +1,215 @@
+html {
+    width: 100%
+}
+
+body {
+    -webkit-user-select: initial;
+    background-color: #f2f2f2;
+    width: 100%
+}
+.index-wrap {
+    width: 100%;
+    overflow-x: hidden
+}
+
+    .index-wrap .header {
+        background-color: #F7F7F7;
+        height: 100px;
+        width:100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: center;
+        -webkit-box-pack: center
+    }
+    .index-wrap .loginheader {
+        background-color: #F7F7F7;
+        width:100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: center;
+        -webkit-box-pack: center
+    }
+
+    .index-wrap .footer {
+        height: 55px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-align: center;
+        -webkit-box-pack: center;
+        background-color: #F7F7F7
+    }
+
+.adlogo {
+    margin: 30px auto;
+    width: 280px;
+    height: 180px;
+    background: url(../images/FAI.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.userimg {
+    width: 40px;
+    height: 40px;
+    background: url(../images/userh.png) no-repeat;
+    background-size: 100% auto;
+}
+
+.overlayload {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -65px;
+    margin-top: -55px;
+}
+
+#ntabcontent .nimg{
+    width:70px;
+    height:70px;
+}
+
+#monthlist {
+    line-height: 40px;
+    text-align: center;
+}
+    #monthlist .current {
+        background-color: lightcoral;
+    }
+.ui-table {
+    text-align: center;
+    background-color: #fff;
+}
+    .ui-table .fcol {
+        background-color: #fcfcfc;
+        width:30%;
+        overflow:hidden;
+    }
+.contentb {
+    margin-bottom:55px;
+}
+.ui-actionsheet-cnt h4 {
+    color: #7CAE23;
+    letter-spacing: 2px;
+}
+.icon {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto;
+}
+.icon-actionsheet {
+    background: url(../images/actionsheet.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-article {
+    background: url(../images/article.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-button {
+    background: url(../images/button.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-cell {
+    background: url(../images/cell.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-dialog {
+    background: url(../images/dialog.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-icons {
+    background: url(../images/icons.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-msg {
+    background: url(../images/msg.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-panel {
+    background: url(../images/panel.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-progress {
+    background: url(../images/progress.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-searchbar {
+    background: url(../images/searchbar.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-tab {
+    background: url(../images/tab.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-toast {
+    background: url(../images/toast.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-more {
+    background: url(../images/more.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-grid {
+    background: url(../images/grid.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+
+.icon-form {
+    background: url(../images/form.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.icon-mstar{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../images/star.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.icon-ystar{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: url(../images/ystar.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.icon-rstar{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: url(../images/rstar.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}
+.qqinviteCode {
+    background: url(../images/858209118.png) no-repeat;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto
+}

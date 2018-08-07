@@ -40,7 +40,7 @@ namespace Serv
             #endregion
 
             var model=ibll.FSysUser.Single(a => a.Login == account);
-            if (model!=null&&model.Pwd == MD5Encrypt.MD5(pwd, Encoding.UTF8))
+            if (model!=null&&model.Pwd.ToLower() == MD5Encrypt.MD5(pwd, Encoding.UTF8))
             {
                 //写入登录session
 
