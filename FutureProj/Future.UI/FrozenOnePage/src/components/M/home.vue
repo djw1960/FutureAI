@@ -1,21 +1,21 @@
 <template>
 <div>
-    <div class="mvmodal" v-for="n in 5" :key="n">
+    <div class="mvmodal" v-for="aiitem in ailist" :key="aiitem.id">
         <div class="dheader">
             <div class="info">
-                <span v-for="star in 3" :key="star" class="icon-ystar" ></span>
+                <span v-for="star in aiitem.Star" :key="star" class="icon-ystar" ></span>
             </div>
         </div>
         <div class="content">
             <div class="citemlist">
                 <div class="citem">
                 <p><span class="sub"></span><span class="catename">07.20 21 夜盘</span></p>
-                <p><span class="catename">螺纹钢1809</span></p>
-                <p><span class="sub">收盘：</span><span class="nprice">3389.00</span></p>
+                <p><span class="catename">{{aiitem.Cate}}</span></p>
+                <p><span class="sub">收盘：</span><span class="nprice">{{aiitem.NPrice}}</span></p>
                 </div>
                 <div class="citem">
                 <p><span class="catename cbtn" @click="historylist('cate')">历史发布</span></p>
-                <p><span class="sub"></span><span class="catename">上涨</span></p>
+                <p><span class="sub"></span><span class="catename">{{aiitem.TurnType}}</span></p>
                 <p><span class="sub">概率：</span><span class="nprice">95.5%</span></p>
                 </div>
             </div>
@@ -24,20 +24,62 @@
             </div>
         </div>
     </div>
+    <div class="footer ui-footer">
+        <ul class="ui-tiled linklist">
+            <li data-href="index.html" class="ui-border-r">资讯</li>
+            <li data-href="./c/l.html" class="ui-border-r">仓单</li>
+            <li data-href="./t/l.html" class="ui-border-r">统计局</li>
+            <li data-href="./f/i.html" class="ui-border-r">圈子</li>
+            <li data-href="./a/i.html">AI量化</li>
+        </ul>
+    </div>
+    <v-loading v-show="showloading"></v-loading>
 </div>
 </template>
 
 <script>
+    import {getdataPost} from '@/api/ApiList.js'
+    import {formatDate,format} from '@/Common/data.js'
+    import loading from '@/components/Share/loading.vue'
     export default {
+        components:{
+            'v-loading':loading
+        },
         data(){
             return{
-                
+                ailist:[],
             }
         },
         methods:{
-            historylist(cate){
-                console.log(cate);
+            count(c){
+                return c>90?3:c>80?2:1;
+            },
+            loadAIList(){
+                var self=this;
+                self.showloading=true;
+                var params = {
+                    no: 1060,
+                    token:self.userEntity.token,
+                    cate:'m',
+                    number:1
+                    };
+                getdataPost(params).then(function (resp) {
+                    self.showloading=false;
+                    if(resp.data.code==0){
+                        self.ailist=resp.data.data;
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                    self.showloading=false;
+                });
             }
+        },
+        created(){
+            // 取值时：把获取到的Json字符串转换回对象
+            var userJsonStr = sessionStorage.getItem('user');
+            this.userEntity = JSON.parse(userJsonStr);
+            
+            this.loadAIList();
         }
     }
 </script>

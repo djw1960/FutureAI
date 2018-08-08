@@ -123,7 +123,7 @@
                 var self=this;
                 self.showloading=true;
                 var params = {
-                    no: 2060,
+                    no: 1060,
                     token:self.userEntity.token,
                     cate:'m',
                     number:1
