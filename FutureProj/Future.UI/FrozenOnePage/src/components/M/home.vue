@@ -14,7 +14,7 @@
                 <p><span class="sub">收盘：</span><span class="nprice">{{aiitem.NPrice}}</span></p>
                 </div>
                 <div class="citem">
-                <p><span class="catename cbtn" @click="historylist('cate')">历史发布</span></p>
+                <p><span class="catename cbtn" @click="historylist(aiitem.CateType)">历史发布</span></p>
                 <p><span class="sub"></span><span class="catename">{{aiitem.TurnType}}</span></p>
                 <p><span class="sub">概率：</span><span class="nprice">95.5%</span></p>
                 </div>
@@ -53,6 +53,9 @@
         methods:{
             count(c){
                 return c>90?3:c>80?2:1;
+            },
+            historylist(cate){
+                
             },
             loadAIList(){
                 var self=this;
