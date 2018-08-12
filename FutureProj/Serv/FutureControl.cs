@@ -549,12 +549,14 @@ namespace Serv
             if (IsLogin(result, param.Token))
             {
                 var exp = PredicateBuilder.True<FAI>();
+                exp = exp.And<FAI>(s => s.IsAbandon==false && s.IsPublish);
                 switch (param.Cate)
                 {
                     case "n"://new
-                             //获取今天的数据
+                             //获取今天的数据，或未完成的数据
                         {
-                            exp = exp.And<FAI>(s => s.DT >= DateTime.Today.AddDays(-1));
+                            var dt = DateTime.Today.AddDays(-1);
+                            exp = exp.And<FAI>(s => s.DT >= dt||s.Status==0);
                         }
                         break;
                     case "s"://someone
@@ -575,7 +577,7 @@ namespace Serv
                         if (param.Number > 0)
                         {
                             var dt = DateTime.Now.AddMonths(0 - param.Number);
-                            exp = exp.And<FAI>(s => s.DT >= dt);
+                            exp = exp.And<FAI>(s => s.DT >= dt&&s.Status>0);
                             if (!string.IsNullOrEmpty(param.Code))
                             {
                                 exp = exp.And<FAI>(s => s.CateType == param.Code);

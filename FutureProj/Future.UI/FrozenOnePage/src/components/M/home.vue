@@ -1,7 +1,17 @@
 <template>
 <div>
+    <section style="contentb">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li v-bind:class="{current:currendindex==index}" v-for="(item,index) in menus" :key="item.code" @click="menuailist(item.code,index)">{{item.title}}</li>
+            </ul>
+        </div>
+    </section>
     <div class="mvmodal" v-for="aiitem in ailist" :key="aiitem.id">
         <div class="dheader">
+            <div class="info">
+                <span class="title">{{aiitem.Cate}}</span>
+            </div>
             <div class="info">
                 <span v-for="star in aiitem.Star" :key="star" class="icon-ystar" ></span>
             </div>
@@ -9,28 +19,26 @@
         <div class="content">
             <div class="citemlist">
                 <div class="citem">
-                <p><span class="sub"></span><span class="catename">07.20 21 夜盘</span></p>
-                <p><span class="catename">{{aiitem.Cate}}</span></p>
-                <p><span class="sub">收盘：</span><span class="nprice">{{aiitem.NPrice}}</span></p>
+                <p><span class="sub"></span><span class="catename">{{aiitem.DT|formatDate}}</span></p>
+                <p><span class="sub">今收:</span><span class="nprice">{{aiitem.NPrice}}</span></p>
                 </div>
                 <div class="citem">
-                <p><span class="catename cbtn" @click="historylist(aiitem.CateType)">历史发布</span></p>
-                <p><span class="sub"></span><span class="catename">{{aiitem.TurnType}}</span></p>
-                <p><span class="sub">概率：</span><span class="nprice">95.5%</span></p>
+                <p><span class="catename cbtn" @click="loadAIList(aiitem.CateType)">历史发布</span></p>
+                <p><span class="sub">预期:</span><span class="nprice" v-bind:class="{mgreen:aiitem.TurnType=='down',mred:aiitem.TurnType=='up'}">{{aiitem.TurnType|turntitle}}</span></p>
                 </div>
             </div>
-            <div class="publishdate">
-                <p><span class="pubdate">发布时间：</span><span class="date">2018.07.20 14:45</span></p>
+            <div>
+                <p>
+                    结果：{{aiitem.Status==2?"失败":aiitem.Status==1?"成功":"进行中"}}
+                </p>
             </div>
         </div>
     </div>
     <div class="footer ui-footer">
         <ul class="ui-tiled linklist">
-            <li data-href="index.html" class="ui-border-r">资讯</li>
-            <li data-href="./c/l.html" class="ui-border-r">仓单</li>
-            <li data-href="./t/l.html" class="ui-border-r">统计局</li>
-            <li data-href="./f/i.html" class="ui-border-r">圈子</li>
+            <li data-href="./a/i.html">热点</li>
             <li data-href="./a/i.html">AI量化</li>
+            <li data-href="./f/i.html" class="ui-border-r">圈子</li>
         </ul>
     </div>
     <v-loading v-show="showloading"></v-loading>
@@ -47,26 +55,54 @@
         },
         data(){
             return{
+                currendindex:0,
+                userEntity:{},
                 ailist:[],
+                menus:[{title:"最新发布",code:"n"},{title:"历史战绩",code:"m"},{title:"AI技能",code:"d"}],
+                params:{
+                    no: 1060,
+                    token:'',
+                    cate:'n',
+                    code:'',
+                    number:1
+                    }
             }
+        },
+        filters:{
+            formatDate(time){
+                let dt=new Date(time);
+                return formatDate(dt,'MM.dd hh');
+            },
+            turntitle(c){
+                return c=="up"?"上涨":c=="down"?"下跌":"";
+            },
         },
         methods:{
             count(c){
                 return c>90?3:c>80?2:1;
             },
-            historylist(cate){
-                
+            menuailist(cate,index){
+                this.currendindex=index;
+                switch (cate) {
+                    case "n":
+                    case "m":
+                        this.params.cate=cate;
+                        this.loadAIList();
+                        break;
+                    case "d":
+                        break;
+                    default:
+                        break;
+                }
             },
-            loadAIList(){
+            loadAIList(code){
                 var self=this;
                 self.showloading=true;
-                var params = {
-                    no: 1060,
-                    token:self.userEntity.token,
-                    cate:'m',
-                    number:1
-                    };
-                getdataPost(params).then(function (resp) {
+                if(code&&code.trim().length>0){
+                    self.params.code=code;
+                    self.params.number=6;
+                }
+                getdataPost(self.params).then(function (resp) {
                     self.showloading=false;
                     if(resp.data.code==0){
                         self.ailist=resp.data.data;
@@ -81,7 +117,7 @@
             // 取值时：把获取到的Json字符串转换回对象
             var userJsonStr = sessionStorage.getItem('user');
             this.userEntity = JSON.parse(userJsonStr);
-            
+            this.params.token=this.userEntity.token;
             this.loadAIList();
         }
     }
@@ -94,16 +130,18 @@
 .mvmodal .dheader{
     margin-left: auto;
     margin-right: auto;
-    background-color: darkgray;
+    background-color: teal;
 }
 .dheader .info{
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    width: 126px;
+    width: 45%;
+    display:-webkit-inline-box;
 }
-.dheader .info span{
-    margin: 5px 5px;
+.dheader .info .title{
+    color: orange;
+    font-size: 1.6em;
 }
 .content{
     background: #f9f9f9;
@@ -131,6 +169,9 @@
 .citem .sub{
     font-size: 10px;
 }
+.citem p{
+    margin-bottom: 20px;
+}
 .content .catename{
     font-size: 18px;
     padding: .1rem 0;
@@ -144,5 +185,11 @@
 .content .nprice{
     font-size: 36px;
     line-height: .4rem;
+}
+.mgreen{
+    color: green;
+}
+.mred{
+    color: red;
 }
 </style>
