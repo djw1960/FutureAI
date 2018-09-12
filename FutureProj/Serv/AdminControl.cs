@@ -324,5 +324,22 @@ namespace Serv
                 }
             }
         }
+        /// <summary>
+        /// 2099 获取请求源ip地址
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="param"></param>
+        public static void Admin_GetIP(ReturnModel result, AdminParamsM param)
+        {
+            if (string.IsNullOrEmpty(param.Code) || !param.Code.Equals("ip"))
+            {
+                result.code = RespCodeConfig.ArgumentExp;
+                result.msg = "参数错误";
+                return;
+            }
+            string ip = Common.GetIP();
+            result.code = RespCodeConfig.Normal;
+            result.data = ip;
+        }
     }
 }

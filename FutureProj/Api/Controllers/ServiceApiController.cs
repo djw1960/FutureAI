@@ -234,6 +234,9 @@ namespace Api.Controllers
                     case ApiConfig.Admin_AIItemAdd:
                         AdminControl.Admin_AIItemAdd(result, parm);
                         break;
+                    case ApiConfig.Admin_GetIP:
+                        AdminControl.Admin_GetIP(result, parm);
+                        break;
                 }
             }
             catch (NotImplementedException notImp)

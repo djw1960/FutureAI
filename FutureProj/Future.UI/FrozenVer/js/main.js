@@ -1,7 +1,7 @@
 ﻿(function (doc, win) {
     var future = {
         data: {
-            urls: "http://www.doapi.info/api/futurecenter",
+            urls: "http://api.stroll.site/api/futurecenter",
             type: $.getParams("type") ||'',
             cate: $.getParams("cate")||'n',
             code: $.getParams("code") || '',
@@ -325,15 +325,17 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var dlist = data.data;
-                        var dt = [];
-                        var da = [];
-                        var model = dlist[0];
-                        for (var i = 0; i < dlist.length; i++) {
-                            var item = dlist[i];
-                            dt.push(item.DateTime);
-                            da.push(item.Price);
+                        if (dlist.length>0) {
+                            var dt = [];
+                            var da = [];
+                            var model = dlist[0];
+                            for (var i = 0; i < dlist.length; i++) {
+                                var item = dlist[i];
+                                dt.push(item.DateTime);
+                                da.push(item.Price);
+                            }
+                            self.InitEChartOneTable(model.PName, dt, da);
                         }
-                        self.InitEChartOneTable(model.PName, dt, da);
                     }
                     else {
                         alert(data.msg);
@@ -405,17 +407,20 @@
                     if (data.code == 0 && data.data) {
                         var dlist1 = data.data.list1;
                         var dlist2 = data.data.list2;
-                        var dt = [];
-                        var da1 = [];
-                        var da2 = [];
-                        var model1 = dlist1[0];
-                        var model2 = dlist2[0];
-                        for (var i = 0; i < dlist1.length; i++) {
-                            dt.push(dlist1[i].DateTime);
-                            da1.push(dlist1[i].Price);
-                            da2.push(dlist2[i].Price);
+                        if (dlist1.length > 0 && dlist2.length>0) {
+                            var dt = [];
+                            var da1 = [];
+                            var da2 = [];
+                            var model1 = dlist1[0];
+                            var model2 = dlist2[0];
+                            for (var i = 0; i < dlist1.length; i++) {
+                                dt.push(dlist1[i].DateTime);
+                                da1.push(dlist1[i].Price);
+                                da2.push(dlist2[i].Price);
+                            }
+                            self.InitEChartMoreTable(dt, da1, da2);
                         }
-                        self.InitEChartMoreTable(dt, da1,da2);
+                        
                     }
                     else {
                         alert(data.msg);
