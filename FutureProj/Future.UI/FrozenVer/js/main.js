@@ -1,7 +1,7 @@
 ﻿(function (doc, win) {
     var future = {
         data: {
-            urls: "http://www.doapi.info/api/futurecenter",
+            urls: "https://api.stroll.site/api/futurecenter",
             type: $.getParams("type") ||'',
             cate: $.getParams("cate")||'n',
             code: $.getParams("code") || '',
@@ -415,7 +415,7 @@
                             da1.push(dlist1[i].Price);
                             da2.push(dlist2[i].Price);
                         }
-                        self.InitEChartMoreTable(dt, da1,da2);
+                        self.InitEChartMoreTable(dt, da1, da2, model1.PName, model2.PName);
                     }
                     else {
                         alert(data.msg);
@@ -524,7 +524,7 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-        InitEChartMoreTable: function (date, data1, data2) {
+        InitEChartMoreTable: function (date, data1, data2,pname1,pname2) {
             var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
             option = {
                 tooltip: {
@@ -548,14 +548,14 @@
                 },
                 series: [
                     {
-                        name: data1[0].PName,
+                        name: pname1,
                         type: 'line',
                         smooth: true,
                         symbol: 'none',
                         sampling: 'average',
                         itemStyle: {
                             normal: {
-                                color: 'rgb(255, 70, 131)'
+                                color: 'rgb(255, 0, 0)'
                             }
                         },
                         areaStyle: {
@@ -571,14 +571,14 @@
                         },
                         data: data1
                     }, {
-                        name: data2[0].PName,
+                        name: pname2,
                         type: 'line',
                         smooth: true,
                         symbol: 'none',
                         sampling: 'average',
                         itemStyle: {
                             normal: {
-                                color: 'rgb(255, 70, 131)'
+                                color: 'rgb(0, 255, 0)'
                             }
                         },
                         areaStyle: {

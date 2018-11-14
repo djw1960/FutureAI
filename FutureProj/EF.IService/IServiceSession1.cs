@@ -32,6 +32,8 @@ namespace EF.IService
     	IService.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     	IService.Sons.IFMenus FMenus{ get; }
     	IService.Sons.IFSysUser_Invite FSysUser_Invite{ get; }
+    	IService.Sons.ISX_News SX_News{ get; }
+    	IService.Sons.ISX_SiteConfig SX_SiteConfig{ get; }
     }
     
     

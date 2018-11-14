@@ -82,7 +82,6 @@
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Jobs\FirstJob.cs" />
     <Compile Include="Jobs\PushOrderNotifyJob.cs" />
-    <Compile Include="Jobs\QueryOrderStatusJob.cs" />
     <Compile Include="PayServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>

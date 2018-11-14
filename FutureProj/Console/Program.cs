@@ -77,6 +77,12 @@ namespace Console
             //System.Console.WriteLine("新闻：Finish");
             #endregion
 
+
+            string str = "http://www.chancheng.gov.cn/ccjy/060102/bmlist2.shtml";
+            string xpath = "/html/body/div[1]/div[2]/div/div[2]/div[2]";
+            string itemxpath = "div/div";
+            var list=CrawlerUtils.FoShanChanChengedu(str, "佛山市禅城区教育局", xpath, itemxpath);
+            System.Console.WriteLine(list.Count);
             System.Console.ReadKey();
         }
 
@@ -91,7 +97,8 @@ namespace Console
             try
             {
                 var ibll = OperationContext.BLLSession;
-                string[] years = new string[] { "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" };
+                //string[] years = new string[] { "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" };
+                string[] years = new string[] {"2018" };
                 int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
                 string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -103,7 +110,7 @@ namespace Console
                         foreach (string day in days)
                         {
                             int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                            if (date > 20180616)
+                            if (date < 20180616)
                             {
                                 continue;
                             }
@@ -114,9 +121,13 @@ namespace Console
                                 {
                                     url = string.Format("http://www.czce.com.cn/portal/exchange/{0}/datawhsheet/{1}.htm", year, date);
                                 }
-                                else
+                                else if (date < 20180616)
                                 {
                                     url = string.Format("http://www.czce.com.cn/portal/DFSStaticFiles/Future/{0}/{1}/FutureDataWhsheet.htm", year, date);
+                                }
+                                else
+                                {
+                                    url = string.Format("http://www.czce.com.cn/cn/DFSStaticFiles/Future/{0}/{1}/FutureDataWhsheet.htm", year, date);
                                 }
                                 var model = CrawlerUtils.GetZZFDataRepository_First(url, date);
                                 if (model != null)
@@ -149,10 +160,10 @@ namespace Console
             try
             {
                 var ibll = OperationContext.BLLSession;
-                int count = ibll.FDataReposInit.where(a => a.Date < 20151001 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
+                int count = ibll.FDataReposInit.where(a => a.Date > 20180616 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).Count();
                 for (int page = 1; page <= (count / 10) + 1; page++)
                 {
-                    List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date < 20151001 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
+                    List<FDataReposInit> list = ibll.FDataReposInit.where(a => a.Date > 20180616 && a.TradeHouse == TradeHouseType.czce.ToString() && a.IsCheckFinish == 0).OrderBy(s => s.ID).Take(10).ToList();
                     foreach (FDataReposInit model in list)
                     {
                         List<FDataRepository> resplist = CrawlerUtils.GetZZFDataRepository_Second(model.Content, model.Date);
@@ -262,7 +273,7 @@ namespace Console
         public static void GetSHFDataRepository_Second()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] { "2015", "2016", "2017", "2018" };
+            string[] years = new string[] {  "2018" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -274,7 +285,7 @@ namespace Console
                     foreach (string day in days)
                     {
                         int date = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                        if (date >= 20180616)
+                        if (date <= 20180616)
                         {
                             continue;
                         }
@@ -334,7 +345,7 @@ namespace Console
         public static void GetDSFDataRepository_First()
         {
             var ibll = OperationContext.BLLSession;
-            string[] years = new string[] { "2013", "2014", "2015", "2016", "2017", "2018" };
+            string[] years = new string[] {"2018" };
             int[] months = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] days = new string[] { "01","02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
             ,"13","14","15","16","17","18","19","20","21","22"
@@ -346,7 +357,7 @@ namespace Console
                     foreach (string day in days)
                     {
                         int d = Convert.ToInt32(string.Format("{0}{1}{2}", year, month + 1 < 10 ? "0" + (month + 1).ToString() : (month + 1).ToString(), day));
-                        if (d < 20130530)
+                        if (d < 20180616)
                         {
                             continue;
                         }
@@ -391,6 +402,11 @@ namespace Console
             System.Console.WriteLine("大商Check：FINISH");
         }
         #endregion
+        public static void Proc_InitCateCode()
+        {
+            var ibll = OperationContext.BLLSession;
+            ibll.Proc_ExecuteSqlCommand(" exec [dbo].[Proc_InitCateCode] ");
+        }
         /// <summary>
         /// 多条件查询拼接
         /// </summary>

@@ -87,6 +87,14 @@ namespace EF.Respository.Sons
     {
     
     }
+    public partial class SX_News:BaseRespository<EF.Entitys.SX_News>,EF.IRespository.Sons.ISX_News
+    {
+    
+    }
+    public partial class SX_SiteConfig:BaseRespository<EF.Entitys.SX_SiteConfig>,EF.IRespository.Sons.ISX_SiteConfig
+    {
+    
+    }
     
     
     

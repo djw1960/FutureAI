@@ -188,6 +188,24 @@ namespace EF.Service.Sons
                 base.dal = dal;
             }
     }
+    public partial class SX_News:BaseService<EF.Entitys.SX_News>,EF.IService.Sons.ISX_News
+    {
+    	    //IRespository.Sons.ISX_News dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.SX_News;
+                base.dal = dal;
+            }
+    }
+    public partial class SX_SiteConfig:BaseService<EF.Entitys.SX_SiteConfig>,EF.IService.Sons.ISX_SiteConfig
+    {
+    	    //IRespository.Sons.ISX_SiteConfig dal;
+            public override void Setdal()
+            {
+                dal = base.DBSession.SX_SiteConfig;
+                base.dal = dal;
+            }
+    }
     
     
     

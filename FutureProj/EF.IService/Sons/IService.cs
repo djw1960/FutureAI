@@ -88,6 +88,14 @@ namespace EF.IService.Sons
     {
     
     }
+    public partial interface ISX_News:IBaseService<EF.Entitys.SX_News>
+    {
+    
+    }
+    public partial interface ISX_SiteConfig:IBaseService<EF.Entitys.SX_SiteConfig>
+    {
+    
+    }
     
     
     

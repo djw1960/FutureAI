@@ -46,5 +46,7 @@ namespace EF.Respository
         public virtual DbSet<FSys_LoginSession> FSys_LoginSession { get; set; }
         public virtual DbSet<FMenus> FMenus { get; set; }
         public virtual DbSet<FSysUser_Invite> FSysUser_Invite { get; set; }
+        public virtual DbSet<SX_News> SX_News { get; set; }
+        public virtual DbSet<SX_SiteConfig> SX_SiteConfig { get; set; }
     }
 }

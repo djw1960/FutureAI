@@ -51,11 +51,6 @@ namespace WinService
                 int s = Convert.ToInt32(ConfigurationHelper.PushOrderNotifyJob_Time);
                 ScheduleJob_Repeat<PushOrderNotifyJob>("PushOrderNotifyJob", GetCronExpression(s, 0)).GetAwaiter().GetResult();
             }
-            if (ConfigurationHelper.QueryOrderStatusJob_Switch)
-            {
-                int s = Convert.ToInt32(ConfigurationHelper.QueryOrderStatusJob_Time);
-                ScheduleJob_Repeat<QueryOrderStatusJob>("QueryOrderStatusJob", GetCronExpression(s, 0)).GetAwaiter().GetResult();
-            }
 
 
             #endregion

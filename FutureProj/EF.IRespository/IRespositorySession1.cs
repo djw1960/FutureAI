@@ -32,6 +32,8 @@ namespace EF.IRespository
     	IRespository.Sons.IFSys_LoginSession FSys_LoginSession{ get; }
     	IRespository.Sons.IFMenus FMenus{ get; }
     	IRespository.Sons.IFSysUser_Invite FSysUser_Invite{ get; }
+    	IRespository.Sons.ISX_News SX_News{ get; }
+    	IRespository.Sons.ISX_SiteConfig SX_SiteConfig{ get; }
     }
     
     

@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PayServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FDataMaterial" EntityType="PayServiceModel.FDataMaterial" />
+    <EntitySet Name="FNews" EntityType="PayServiceModel.FNews" />
+    <EntitySet Name="FPayGood" EntityType="PayServiceModel.FPayGood" />
+    <EntitySet Name="FPayMert" EntityType="PayServiceModel.FPayMert" />
+    <EntitySet Name="FPayOrder" EntityType="PayServiceModel.FPayOrder" />
+    <EntitySet Name="FSys_Config" EntityType="PayServiceModel.FSys_Config" />
+    <EntitySet Name="FSys_Role" EntityType="PayServiceModel.FSys_Role" />
+    <EntitySet Name="FSysUser" EntityType="PayServiceModel.FSysUser" />
+    <EntitySet Name="FDataLV" EntityType="PayServiceModel.FDataLV" />
+    <EntitySet Name="FDataReposInit" EntityType="PayServiceModel.FDataReposInit" />
+    <EntitySet Name="FDataRepository" EntityType="PayServiceModel.FDataRepository" />
+    <EntitySet Name="FPayWay" EntityType="PayServiceModel.FPayWay" />
+    <EntitySet Name="FSys_Category" EntityType="PayServiceModel.FSys_Category" />
+    <EntitySet Name="FMoments" EntityType="PayServiceModel.FMoments" />
+    <EntitySet Name="FMomentsReply" EntityType="PayServiceModel.FMomentsReply" />
+    <EntitySet Name="FAI" EntityType="PayServiceModel.FAI" />
+    <EntitySet Name="View_AdminUser" EntityType="PayServiceModel.View_AdminUser" />
+    <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
+    <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
+    <EntitySet Name="FSysUser_Invite" EntityType="PayServiceModel.FSysUser_Invite" />
+  </EntityContainer>
+  <EntityType Name="FDataMaterial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PCate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="RisePrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="RiseRange" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DateTime" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FNews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NewsType" Type="Int32" Nullable="false" />
+    <Property Name="NSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NewsUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="NewContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDel" Type="Boolean" Nullable="false" />
+    <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+    <Property Name="TradeHouse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NewsNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PublishDate" Type="DateTime" Precision="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FPayGood">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GTitle" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="GDesr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GType" Type="Int32" Nullable="false" />
+    <Property Name="GPrice" Type="Int32" Nullable="false" />
+    <Property Name="GSale" Type="Int32" Nullable="false" />
+    <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FPayMert">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MerApiUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MerApiUrlB" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MerApiUrlC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MerEncryKey" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MerPrivateKey" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="MerPublicKey" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="MerSerPubliKey" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsDel" Type="Int32" Nullable="false" />
+    <Property Name="NoteA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="NoteB" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FPayOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="IsFinish" Type="Int32" Nullable="false" />
+    <Property Name="PNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDel" Type="Int32" Nullable="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FSys_Config">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FSys_Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FSysUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Pwd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FDataLV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LV" Type="Int32" Nullable="false" />
+    <Property Name="CV" Type="Int32" Nullable="false" />
+    <Property Name="LV2" Type="Int32" Nullable="false" />
+    <Property Name="FX" Type="Int32" Nullable="false" />
+    <Property Name="STATUS" Type="Int32" Nullable="false" />
+    <Property Name="Result" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FDataReposInit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsCheckFinish" Type="Int32" Nullable="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TradeHouse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FDataRepository">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="Int32" Nullable="false" />
+    <Property Name="CateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Reps" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="YTDSum" Type="Int32" Nullable="false" />
+    <Property Name="TDSum" Type="Int32" Nullable="false" />
+    <Property Name="Change" Type="Int32" Nullable="false" />
+    <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="TradeHouse" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CateCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FPayWay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSys_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CateKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CateValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+    <Property Name="IsDel" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FMoments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+    <Property Name="Care" Type="Int32" Nullable="false" />
+    <Property Name="AddBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FMomentsReply">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MID" Type="Int32" Nullable="false" />
+    <Property Name="IsDel" Type="Boolean" Nullable="false" />
+    <Property Name="AddBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DT" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TurnType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DataType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="ResultHight" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ResultLow" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ResultClose" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Star" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReviseLV" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReviseStar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CateType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsAbandon" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_AdminUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Pwd" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="IsAvailable" />
+      <PropertyRef Name="AddDate" />
+      <PropertyRef Name="RoleCode" />
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Pwd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="IsAvailable" Type="Int32" Nullable="false" />
+    <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FSys_LoginSession">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UID" Type="Int64" Nullable="false" />
+    <Property Name="Token" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Source" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TimeOut" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FMenus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MenuTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+    <Property Name="MenuType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OrderBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSysUser_Invite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UID" Type="Int32" Nullable="false" />
+    <Property Name="InviteCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+    <Property Name="UseBy" Type="Int32" />
+  </EntityType>
+</Schema>

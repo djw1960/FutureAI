@@ -1,4 +1,5 @@
 ﻿using EF.Common;
+using Future.Serv;
 using Newtonsoft.Json;
 using Serv;
 using Serv.Entitys;
@@ -70,6 +71,9 @@ namespace Api.Controllers
                         break;
                     case ApiConfig.SERVICE_GetAIList:
                         FutureControl.SERVICE_GetAIList(result, parm);
+                        break;
+                    case ApiConfig.SERVICE_GetSX_NewsList:
+                        SXControl.SERVICE_GetSX_NewsList(result, parm);
                         break;
 
                 }

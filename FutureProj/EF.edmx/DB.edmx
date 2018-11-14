@@ -20,6 +20,7 @@
           <Property Name="ReviseLV" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ReviseStar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsPublish" Type="bit" Nullable="false" />
+          <Property Name="IsAbandon" Type="bit" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
           <Property Name="ResultHight" Type="decimal" Precision="18" Scale="2" />
@@ -27,7 +28,6 @@
           <Property Name="ResultClose" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AddDate" Type="datetime" Nullable="false" />
           <Property Name="CateType" Type="varchar" MaxLength="10" />
-          <Property Name="IsAbandon" Type="bit" />
         </EntityType>
         <EntityType Name="FDataLV">
           <Key>
@@ -76,7 +76,7 @@
           <Property Name="TradeHouse" Type="varchar" MaxLength="20" />
           <Property Name="Date" Type="int" Nullable="false" />
           <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CateCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CateCode" Type="varchar" MaxLength="50" />
           <Property Name="Reps" Type="nvarchar" MaxLength="20" />
           <Property Name="YTDSum" Type="int" Nullable="false" />
           <Property Name="TDSum" Type="int" Nullable="false" />
@@ -258,8 +258,33 @@
           <Property Name="IsUsed" Type="bit" Nullable="false" />
           <Property Name="UseBy" Type="int" />
         </EntityType>
+        <EntityType Name="SX_News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" />
+          <Property Name="Site" Type="varchar" MaxLength="200" />
+          <Property Name="AddDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SX_SiteConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SiteUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SiteListXPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="SiteItemXPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="SiteItemXPath2" Type="nvarchar" MaxLength="500" />
+          <Property Name="XPathNote1" Type="nvarchar" MaxLength="200" />
+          <Property Name="XPathNote2" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“xds315586209_db.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“FutureAI.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="View_AdminUser">
           <Key>
             <PropertyRef Name="ID" />
@@ -302,6 +327,8 @@
           <EntitySet Name="FSys_Role" EntityType="Self.FSys_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSysUser" EntityType="Self.FSysUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FSysUser_Invite" EntityType="Self.FSysUser_Invite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SX_News" EntityType="Self.SX_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SX_SiteConfig" EntityType="Self.SX_SiteConfig" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="View_AdminUser" EntityType="Self.View_AdminUser" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_AdminUser].[ID] AS [ID], 
@@ -341,6 +368,8 @@
           <EntitySet Name="FSys_LoginSession" EntityType="PayServiceModel.FSys_LoginSession" />
           <EntitySet Name="FMenus" EntityType="PayServiceModel.FMenus" />
           <EntitySet Name="FSysUser_Invite" EntityType="PayServiceModel.FSysUser_Invite" />
+          <EntitySet Name="SX_News" EntityType="PayServiceModel.SX_News" />
+          <EntitySet Name="SX_SiteConfig" EntityType="PayServiceModel.SX_SiteConfig" />
         </EntityContainer>
         <EntityType Name="FDataMaterial">
           <Key>
@@ -488,7 +517,7 @@
           <Property Name="DTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="TradeHouse" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CateCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FPayWay">
           <Key>
@@ -557,7 +586,7 @@
           <Property Name="ReviseLV" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ReviseStar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CateType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IsAbandon" Type="Boolean" />
+          <Property Name="IsAbandon" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="View_AdminUser">
           <Key>
@@ -616,6 +645,31 @@
           <Property Name="InviteCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsUsed" Type="Boolean" Nullable="false" />
           <Property Name="UseBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SX_News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Site" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddDate" Type="DateTime" Precision="3" />
+          <Property Name="SiteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SX_SiteConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SiteName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SiteUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SiteListXPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SiteItemXPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SiteItemXPath2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="XPathNote1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="XPathNote2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -906,6 +960,33 @@
                 <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="InviteCode" ColumnName="InviteCode" />
                 <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SX_News">
+            <EntityTypeMapping TypeName="PayServiceModel.SX_News">
+              <MappingFragment StoreEntitySet="SX_News">
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SX_SiteConfig">
+            <EntityTypeMapping TypeName="PayServiceModel.SX_SiteConfig">
+              <MappingFragment StoreEntitySet="SX_SiteConfig">
+                <ScalarProperty Name="XPathNote2" ColumnName="XPathNote2" />
+                <ScalarProperty Name="XPathNote1" ColumnName="XPathNote1" />
+                <ScalarProperty Name="SiteItemXPath2" ColumnName="SiteItemXPath2" />
+                <ScalarProperty Name="SiteItemXPath" ColumnName="SiteItemXPath" />
+                <ScalarProperty Name="SiteListXPath" ColumnName="SiteListXPath" />
+                <ScalarProperty Name="SiteUrl" ColumnName="SiteUrl" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

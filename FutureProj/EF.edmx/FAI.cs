@@ -32,6 +32,6 @@ namespace EF.edmx
         public Nullable<decimal> ReviseLV { get; set; }
         public Nullable<decimal> ReviseStar { get; set; }
         public string CateType { get; set; }
-        public Nullable<bool> IsAbandon { get; set; }
+        public bool IsAbandon { get; set; }
     }
 }

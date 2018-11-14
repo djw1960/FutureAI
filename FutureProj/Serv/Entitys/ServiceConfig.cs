@@ -30,6 +30,8 @@ namespace Serv.Entitys
 
         public const int SERVICE_GetAIList = 1060;//当前获取AI列表
 
+        public const int SERVICE_GetSX_NewsList = 1080;//获取菜单列表
+
         #region Manager
         public const int Admin_SignIn = 2000;//后台登录
         public const int Admin_SignOut = 2001;//退出后台登录

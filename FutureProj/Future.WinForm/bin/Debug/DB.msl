@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PayServiceModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="FDataMaterial">
+      <EntityTypeMapping TypeName="PayServiceModel.FDataMaterial">
+        <MappingFragment StoreEntitySet="FDataMaterial">
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="RiseRange" ColumnName="RiseRange" />
+          <ScalarProperty Name="RisePrice" ColumnName="RisePrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="PCate" ColumnName="PCate" />
+          <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FNews">
+      <EntityTypeMapping TypeName="PayServiceModel.FNews">
+        <MappingFragment StoreEntitySet="FNews">
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="NewsNo" ColumnName="NewsNo" />
+          <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
+          <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="NewContent" ColumnName="NewContent" />
+          <ScalarProperty Name="NewsUrl" ColumnName="NewsUrl" />
+          <ScalarProperty Name="NSource" ColumnName="NSource" />
+          <ScalarProperty Name="NewsType" ColumnName="NewsType" />
+          <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FPayGood">
+      <EntityTypeMapping TypeName="PayServiceModel.FPayGood">
+        <MappingFragment StoreEntitySet="FPayGood">
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="GSale" ColumnName="GSale" />
+          <ScalarProperty Name="GPrice" ColumnName="GPrice" />
+          <ScalarProperty Name="GType" ColumnName="GType" />
+          <ScalarProperty Name="GDesr" ColumnName="GDesr" />
+          <ScalarProperty Name="GTitle" ColumnName="GTitle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FPayMert">
+      <EntityTypeMapping TypeName="PayServiceModel.FPayMert">
+        <MappingFragment StoreEntitySet="FPayMert">
+          <ScalarProperty Name="NoteB" ColumnName="NoteB" />
+          <ScalarProperty Name="NoteA" ColumnName="NoteA" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="MerSerPubliKey" ColumnName="MerSerPubliKey" />
+          <ScalarProperty Name="MerPublicKey" ColumnName="MerPublicKey" />
+          <ScalarProperty Name="MerPrivateKey" ColumnName="MerPrivateKey" />
+          <ScalarProperty Name="MerEncryKey" ColumnName="MerEncryKey" />
+          <ScalarProperty Name="MerApiUrlC" ColumnName="MerApiUrlC" />
+          <ScalarProperty Name="MerApiUrlB" ColumnName="MerApiUrlB" />
+          <ScalarProperty Name="MerApiUrl" ColumnName="MerApiUrl" />
+          <ScalarProperty Name="MerName" ColumnName="MerName" />
+          <ScalarProperty Name="MerNo" ColumnName="MerNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FPayOrder">
+      <EntityTypeMapping TypeName="PayServiceModel.FPayOrder">
+        <MappingFragment StoreEntitySet="FPayOrder">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="PNo" ColumnName="PNo" />
+          <ScalarProperty Name="IsFinish" ColumnName="IsFinish" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="GNo" ColumnName="GNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSys_Config">
+      <EntityTypeMapping TypeName="PayServiceModel.FSys_Config">
+        <MappingFragment StoreEntitySet="FSys_Config">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SValue" ColumnName="SValue" />
+          <ScalarProperty Name="SKey" ColumnName="SKey" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSys_Role">
+      <EntityTypeMapping TypeName="PayServiceModel.FSys_Role">
+        <MappingFragment StoreEntitySet="FSys_Role">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSysUser">
+      <EntityTypeMapping TypeName="PayServiceModel.FSysUser">
+        <MappingFragment StoreEntitySet="FSysUser">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDataLV">
+      <EntityTypeMapping TypeName="PayServiceModel.FDataLV">
+        <MappingFragment StoreEntitySet="FDataLV">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="FX" ColumnName="FX" />
+          <ScalarProperty Name="LV2" ColumnName="LV2" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="LV" ColumnName="LV" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDataReposInit">
+      <EntityTypeMapping TypeName="PayServiceModel.FDataReposInit">
+        <MappingFragment StoreEntitySet="FDataReposInit">
+          <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsCheckFinish" ColumnName="IsCheckFinish" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDataRepository">
+      <EntityTypeMapping TypeName="PayServiceModel.FDataRepository">
+        <MappingFragment StoreEntitySet="FDataRepository">
+          <ScalarProperty Name="CateCode" ColumnName="CateCode" />
+          <ScalarProperty Name="TradeHouse" ColumnName="TradeHouse" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DTime" ColumnName="DTime" />
+          <ScalarProperty Name="Change" ColumnName="Change" />
+          <ScalarProperty Name="TDSum" ColumnName="TDSum" />
+          <ScalarProperty Name="YTDSum" ColumnName="YTDSum" />
+          <ScalarProperty Name="Reps" ColumnName="Reps" />
+          <ScalarProperty Name="CateName" ColumnName="CateName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FPayWay">
+      <EntityTypeMapping TypeName="PayServiceModel.FPayWay">
+        <MappingFragment StoreEntitySet="FPayWay">
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="PayCode" ColumnName="PayCode" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="PayName" ColumnName="PayName" />
+          <ScalarProperty Name="MerNo" ColumnName="MerNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSys_Category">
+      <EntityTypeMapping TypeName="PayServiceModel.FSys_Category">
+        <MappingFragment StoreEntitySet="FSys_Category">
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CateValue" ColumnName="CateValue" />
+          <ScalarProperty Name="CateKey" ColumnName="CateKey" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FMoments">
+      <EntityTypeMapping TypeName="PayServiceModel.FMoments">
+        <MappingFragment StoreEntitySet="FMoments">
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="AddBy" ColumnName="AddBy" />
+          <ScalarProperty Name="Care" ColumnName="Care" />
+          <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FMomentsReply">
+      <EntityTypeMapping TypeName="PayServiceModel.FMomentsReply">
+        <MappingFragment StoreEntitySet="FMomentsReply">
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="AddBy" ColumnName="AddBy" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="MID" ColumnName="MID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FAI">
+      <EntityTypeMapping TypeName="PayServiceModel.FAI">
+        <MappingFragment StoreEntitySet="FAI">
+          <ScalarProperty Name="IsAbandon" ColumnName="IsAbandon" />
+          <ScalarProperty Name="CateType" ColumnName="CateType" />
+          <ScalarProperty Name="ReviseStar" ColumnName="ReviseStar" />
+          <ScalarProperty Name="ReviseLV" ColumnName="ReviseLV" />
+          <ScalarProperty Name="Star" ColumnName="Star" />
+          <ScalarProperty Name="AValue" ColumnName="AValue" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="ResultClose" ColumnName="ResultClose" />
+          <ScalarProperty Name="ResultLow" ColumnName="ResultLow" />
+          <ScalarProperty Name="ResultHight" ColumnName="ResultHight" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="TurnType" ColumnName="TurnType" />
+          <ScalarProperty Name="NPrice" ColumnName="NPrice" />
+          <ScalarProperty Name="Cate" ColumnName="Cate" />
+          <ScalarProperty Name="DT" ColumnName="DT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_AdminUser">
+      <EntityTypeMapping TypeName="PayServiceModel.View_AdminUser">
+        <MappingFragment StoreEntitySet="View_AdminUser">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSys_LoginSession">
+      <EntityTypeMapping TypeName="PayServiceModel.FSys_LoginSession">
+        <MappingFragment StoreEntitySet="FSys_LoginSession">
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FMenus">
+      <EntityTypeMapping TypeName="PayServiceModel.FMenus">
+        <MappingFragment StoreEntitySet="FMenus">
+          <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+          <ScalarProperty Name="MenuType" ColumnName="MenuType" />
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FSysUser_Invite">
+      <EntityTypeMapping TypeName="PayServiceModel.FSysUser_Invite">
+        <MappingFragment StoreEntitySet="FSysUser_Invite">
+          <ScalarProperty Name="UseBy" ColumnName="UseBy" />
+          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+          <ScalarProperty Name="InviteCode" ColumnName="InviteCode" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

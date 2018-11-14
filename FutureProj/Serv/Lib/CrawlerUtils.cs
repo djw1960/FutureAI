@@ -111,7 +111,7 @@ namespace Serv.Lib
         public static FDataReposInit GetZZFDataRepository_First(string url, int date)
         {
             //下载网页源代码 
-            var docText = GetWebClient(url, Encoding.Default);
+            var docText = GetWebClient(url, Encoding.UTF8);
             //加载源代码，获取文档对象
             var doc = new HtmlDocument(); doc.LoadHtml(docText);
             HtmlNode res = null;
@@ -119,9 +119,13 @@ namespace Serv.Lib
             {
                 res = doc.DocumentNode.SelectSingleNode("//*[@id=\"toexcel\"]");
             }
-            else
+            else if (date < 20180616)
             {
                 res = doc.DocumentNode.SelectSingleNode("/html/body/table");
+            }
+            else
+            {
+                res = doc.DocumentNode.SelectSingleNode("/html/body/div");
             }
             if (res != null)
             {
@@ -159,7 +163,7 @@ namespace Serv.Lib
                 var tnode = HtmlNode.CreateNode(table);
                 if (tnode != null)
                 {
-                    var tablelist = tnode.SelectNodes(@"tr/td/table");
+                    var tablelist = tnode.SelectNodes(@"tbody/table");
                     foreach (var item in tablelist)
                     {
                         var trlist = item.SelectNodes(@"tr");
@@ -484,6 +488,7 @@ namespace Serv.Lib
                     {
                         model.Type = 2;//统计
                         model.Reps = "ALL";
+                        continue;
                     }
                     else if (model.Reps.Equals("总计"))
                     {
@@ -571,6 +576,7 @@ namespace Serv.Lib
                         {
                             model.Type = 3;//统计
                             model.Reps = "ALL";
+                            continue;
                         }
                         model.YTDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[2].ToString()).InnerText);
                         model.TDSum = Convert.ToInt32(HtmlNode.CreateNode(mc[3].ToString()).InnerText);
@@ -773,6 +779,47 @@ namespace Serv.Lib
                 var sourceNode = rootNode.SelectSingleNode("//*[@id=\"13380\"]/div[2]/div[2]/div[1]/p/span[1]");
                 model.NSource = sourceNode == null ? "" : sourceNode.InnerText.Replace("来源：", "");
             }
+        }
+        #endregion
+
+        #region 山香资讯解析
+        /// <summary>
+        ///佛山禅城区教育局- 获取公告，新闻信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<SX_News> FoShanChanChengedu(string url,string siteName, string tabXPath,string itemXPath)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(url);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(tabXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(itemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        SX_News model = new SX_News();
+                        model.SiteName = siteName;
+                        model.Title = item.SelectSingleNode("a").InnerText;
+                        model.Site = "http://www.chancheng.gov.cn";
+                        model.Url = item.SelectSingleNode("a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("span").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
         }
         #endregion
     }

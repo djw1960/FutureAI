@@ -151,6 +151,20 @@ namespace EF.Service
     			return new Service.Sons.FSysUser_Invite();
     		}
     	}
+    	public IService.Sons.ISX_News SX_News
+    	{
+    		get
+    		{
+    			return new Service.Sons.SX_News();
+    		}
+    	}
+    	public IService.Sons.ISX_SiteConfig SX_SiteConfig
+    	{
+    		get
+    		{
+    			return new Service.Sons.SX_SiteConfig();
+    		}
+    	}
     }
     
     

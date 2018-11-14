@@ -108,6 +108,7 @@
     <Compile Include="ServiceProvider\PayServiceBase.cs" />
     <Compile Include="ServiceProvider\WechatPayService.cs" />
     <Compile Include="Lib\SignUtils.cs" />
+    <Compile Include="SXControl.cs" />
     <Compile Include="WindowControl.cs" />
   </ItemGroup>
   <ItemGroup>

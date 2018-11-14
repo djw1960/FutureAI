@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PayServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DT" Type="datetime" Nullable="false" />
+    <Property Name="Cate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TurnType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DataType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AValue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Star" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ReviseLV" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ReviseStar" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPublish" Type="bit" Nullable="false" />
+    <Property Name="IsAbandon" Type="bit" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+    <Property Name="ResultHight" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ResultLow" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ResultClose" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+    <Property Name="CateType" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="FDataLV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LV" Type="int" Nullable="false" />
+    <Property Name="CV" Type="int" Nullable="false" />
+    <Property Name="LV2" Type="int" Nullable="false" />
+    <Property Name="FX" Type="int" Nullable="false" />
+    <Property Name="STATUS" Type="int" Nullable="false" />
+    <Property Name="Result" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FDataMaterial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PCate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="RisePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="RiseRange" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DateTime" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FDataReposInit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TradeHouse" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Date" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="IsCheckFinish" Type="int" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FDataRepository">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TradeHouse" Type="varchar" MaxLength="20" />
+    <Property Name="Date" Type="int" Nullable="false" />
+    <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CateCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Reps" Type="nvarchar" MaxLength="20" />
+    <Property Name="YTDSum" Type="int" Nullable="false" />
+    <Property Name="TDSum" Type="int" Nullable="false" />
+    <Property Name="Change" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="DTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FMenus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MenuTitle" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MenuIcon" Type="varchar" MaxLength="50" />
+    <Property Name="MenuCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MenuType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+    <Property Name="IsAvailable" Type="bit" Nullable="false" />
+    <Property Name="OrderBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FMoments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsPublish" Type="bit" Nullable="false" />
+    <Property Name="Care" Type="int" Nullable="false" />
+    <Property Name="AddBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FMomentsReply">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="200" />
+    <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MID" Type="int" Nullable="false" />
+    <Property Name="IsDel" Type="bit" Nullable="false" />
+    <Property Name="AddBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FNews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TradeHouse" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NewsNo" Type="varchar" MaxLength="50" />
+    <Property Name="NewsTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NewsType" Type="int" Nullable="false" />
+    <Property Name="NSource" Type="nvarchar" MaxLength="50" />
+    <Property Name="NewsUrl" Type="varchar" MaxLength="200" />
+    <Property Name="NewContent" Type="nvarchar(max)" />
+    <Property Name="AddDate" Type="datetime" />
+    <Property Name="IsDel" Type="bit" Nullable="false" />
+    <Property Name="IsPublish" Type="bit" Nullable="false" />
+    <Property Name="PublishDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FPayGood">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="GTitle" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="GDesr" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GType" Type="int" Nullable="false" />
+    <Property Name="GPrice" Type="int" Nullable="false" />
+    <Property Name="GSale" Type="int" Nullable="false" />
+    <Property Name="IsAvailable" Type="int" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FPayMert">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MerNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MerApiUrl" Type="varchar" MaxLength="200" />
+    <Property Name="MerApiUrlB" Type="varchar" MaxLength="200" />
+    <Property Name="MerApiUrlC" Type="varchar" MaxLength="200" />
+    <Property Name="MerEncryKey" Type="varchar" MaxLength="200" />
+    <Property Name="MerPrivateKey" Type="varchar" MaxLength="2000" />
+    <Property Name="MerPublicKey" Type="varchar" MaxLength="1000" />
+    <Property Name="MerSerPubliKey" Type="varchar" MaxLength="1000" />
+    <Property Name="IsDel" Type="int" Nullable="false" />
+    <Property Name="NoteA" Type="varchar" MaxLength="200" />
+    <Property Name="NoteB" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="FPayOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="IsFinish" Type="int" Nullable="false" />
+    <Property Name="PNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDel" Type="int" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FPayWay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MerNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsAvailable" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSys_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CateKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CateValue" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsAvailable" Type="bit" Nullable="false" />
+    <Property Name="IsDel" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSys_Config">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SKey" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSys_LoginSession">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="bigint" Nullable="false" />
+    <Property Name="Token" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="TimeOut" Type="datetime" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSys_Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleCode" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSysUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Pwd" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="IsAvailable" Type="int" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FSysUser_Invite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="int" Nullable="false" />
+    <Property Name="InviteCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsUsed" Type="bit" Nullable="false" />
+    <Property Name="UseBy" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“FutureAI.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="View_AdminUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Pwd" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="IsAvailable" />
+      <PropertyRef Name="AddDate" />
+      <PropertyRef Name="RoleCode" />
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Pwd" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="IsAvailable" Type="int" Nullable="false" />
+    <Property Name="AddDate" Type="datetime" Nullable="false" />
+    <Property Name="RoleCode" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="PayServiceModelStoreContainer">
+    <EntitySet Name="FAI" EntityType="Self.FAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FDataLV" EntityType="Self.FDataLV" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FDataMaterial" EntityType="Self.FDataMaterial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FDataReposInit" EntityType="Self.FDataReposInit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FDataRepository" EntityType="Self.FDataRepository" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FMenus" EntityType="Self.FMenus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FMoments" EntityType="Self.FMoments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FMomentsReply" EntityType="Self.FMomentsReply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FNews" EntityType="Self.FNews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPayGood" EntityType="Self.FPayGood" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPayMert" EntityType="Self.FPayMert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPayOrder" EntityType="Self.FPayOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPayWay" EntityType="Self.FPayWay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSys_Category" EntityType="Self.FSys_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSys_Config" EntityType="Self.FSys_Config" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSys_LoginSession" EntityType="Self.FSys_LoginSession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSys_Role" EntityType="Self.FSys_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSysUser" EntityType="Self.FSysUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FSysUser_Invite" EntityType="Self.FSysUser_Invite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_AdminUser" EntityType="Self.View_AdminUser" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_AdminUser].[ID] AS [ID], 
+    [View_AdminUser].[Login] AS [Login], 
+    [View_AdminUser].[Pwd] AS [Pwd], 
+    [View_AdminUser].[UserName] AS [UserName], 
+    [View_AdminUser].[RoleID] AS [RoleID], 
+    [View_AdminUser].[IsAvailable] AS [IsAvailable], 
+    [View_AdminUser].[AddDate] AS [AddDate], 
+    [View_AdminUser].[RoleCode] AS [RoleCode], 
+    [View_AdminUser].[RoleName] AS [RoleName]
+    FROM [dbo].[View_AdminUser] AS [View_AdminUser]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -91,6 +91,14 @@ namespace EF.Respository
     	{
     		get { return new Respository.Sons.FSysUser_Invite(); }
     	}
+    	public IRespository.Sons.ISX_News SX_News
+    	{
+    		get { return new Respository.Sons.SX_News(); }
+    	}
+    	public IRespository.Sons.ISX_SiteConfig SX_SiteConfig
+    	{
+    		get { return new Respository.Sons.SX_SiteConfig(); }
+    	}
     }
     
 }

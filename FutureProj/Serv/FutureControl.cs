@@ -386,7 +386,7 @@ namespace Serv
         {
             var exp = PredicateBuilder.True<FDataMaterial>();
             //最长查询12个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-36).ToString("yyyyMMdd"));
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-120).ToString("yyyyMMdd"));
             switch (param.Cate)
             {
                 case "n"://new
@@ -470,7 +470,7 @@ namespace Serv
         {
             var exp = PredicateBuilder.True<FDataMaterial>();
             //最长查询12个月内数据
-            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-36).ToString("yyyyMMdd"));
+            int dlimit = Convert.ToInt32(DateTime.Now.AddMonths(-120).ToString("yyyyMMdd"));
             string[] codes = param.Code.Split(new char[] { '|',',' }, StringSplitOptions.RemoveEmptyEntries);
             if (codes.Length != 2)
             {

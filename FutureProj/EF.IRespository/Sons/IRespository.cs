@@ -88,6 +88,14 @@ namespace EF.IRespository.Sons
     {
     
     }
+    public partial interface ISX_News:IBaseRespository<EF.Entitys.SX_News>
+    {
+    
+    }
+    public partial interface ISX_SiteConfig:IBaseRespository<EF.Entitys.SX_SiteConfig>
+    {
+    
+    }
     
     
     
