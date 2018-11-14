@@ -47,6 +47,7 @@ namespace Serv.Entitys
         public const int Admin_AIItemInfo = 2061;//某一个预测详情，用于编辑
         public const int Admin_AIItemAdd = 2062;//新增一条预测
 
+        public const int Admin_GetIP = 2099;//获取IP地址
         #endregion
     }
     public class RespCodeConfig

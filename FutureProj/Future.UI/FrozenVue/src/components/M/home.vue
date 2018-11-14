@@ -16,6 +16,7 @@
             </tr>
     </table>
 </section>
+<div class="test" @click="GetIp()"><h1>Test</h1></div>
 </div>
 
 </template>
@@ -67,6 +68,25 @@
             loadinfo(url){
                 console.log(url);
                 this.$router.push({ path:url});
+            },
+            GetIp(){
+                var self=this;
+                var params = {
+                    no: 2099,
+                    code:"ip"
+                };
+                getdataPost(params).then(function (resp) {
+                    if(resp.data.code==0){
+                        alert(resp.data.data);
+                    }else if(resp.data.code==-4){
+                        sessionStorage.removeItem('user');
+                       self.$router.push({ name: 'login'}); 
+                    }else{
+                        console.log(resp.data.msg);
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
             }
         },
         created(){
@@ -86,5 +106,10 @@
      width: 33.33%;
     position: relative;
 }
-
+.test{
+    background-color: deeppink;
+    height: 50px;
+    width: 100px;
+    color: white;
+}
 </style>

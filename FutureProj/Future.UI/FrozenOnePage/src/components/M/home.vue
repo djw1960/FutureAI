@@ -7,33 +7,29 @@
             </ul>
         </div>
     </section>
-    <div class="mvmodal" v-for="aiitem in ailist" :key="aiitem.id">
-        <div class="dheader">
-            <div class="info">
-                <span class="title">{{aiitem.Cate}}</span>
-            </div>
-            <div class="info">
-                <span v-for="star in aiitem.Star" :key="star" class="icon-ystar" ></span>
-            </div>
-        </div>
-        <div class="content">
-            <div class="citemlist">
-                <div class="citem">
-                <p><span class="sub"></span><span class="catename">{{aiitem.DT|formatDate}}</span></p>
-                <p><span class="sub">今收:</span><span class="nprice">{{aiitem.NPrice}}</span></p>
-                </div>
-                <div class="citem">
-                <p><span class="catename cbtn" @click="loadAIList(aiitem.CateType)">历史发布</span></p>
-                <p><span class="sub">预期:</span><span class="nprice" v-bind:class="{mgreen:aiitem.TurnType=='down',mred:aiitem.TurnType=='up'}">{{aiitem.TurnType|turntitle}}</span></p>
-                </div>
-            </div>
-            <div>
+    <table class="ui-table ui-border-tb">
+        <tr><th>基本信息</th><th>预测</th><th>概率</th></tr>
+        <tr v-for="(aiitem,index) in ailist" :key="aiitem.id">
+            <td>
+                <p><span class="mcate" @click="loadAIList(aiitem.CateType)">{{aiitem.Cate}}</span>  <span class="mnprice">{{aiitem.NPrice}}</span> </p>
+                <p class="mstatus">
+                    <span class="mstatus">  </span>
+                    </p>
+                <p class="mdt">{{aiitem.DT|formatDate}}点</p>
+            </td>
+            <td v-bind:class="{mgreen:aiitem.Status==0,mlose:aiitem.Status==2,mwin:aiitem.Status==1}">
+                <p>{{aiitem.TurnType}}</p>
                 <p>
-                    结果：{{aiitem.Status==2?"失败":aiitem.Status==1?"成功":"进行中"}}
+                    <span class="mstatus">{{aiitem.Status==0?'进行中':aiitem.Status==1?'成功':'失败'}}</span>
                 </p>
-            </div>
-        </div>
-    </div>
+            </td>
+            <td>
+                <p>
+                    <span v-for="star in aiitem.Star" :key="star" class="icon-mstar" ></span>
+                </p>
+            </td>
+        </tr>
+    </table>
     <div class="footer ui-footer">
         <ul class="ui-tiled linklist">
             <li data-href="./a/i.html">热点</li>
@@ -124,72 +120,52 @@
 </script>
 
 <style scoped>
-.mvmodal{
-    margin-top: 40px;
+.mli{
+    line-height: 60px;
 }
-.mvmodal .dheader{
-    margin-left: auto;
-    margin-right: auto;
-    background-color: teal;
+.mmenu{
+    margin-left: 20px;
 }
-.dheader .info{
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 45%;
-    display:-webkit-inline-box;
+.mbtnblock{
+    margin-left: 5px;
 }
-.dheader .info .title{
-    color: orange;
-    font-size: 1.6em;
-}
-.content{
-    background: #f9f9f9;
-    font-size: 14px;
-    padding: 0.1rem .2rem .1rem .2rem;
-    color: cornflowerblue;
-}
-.content .citemlist{
-    clear: both;
-    overflow: hidden;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-}
-.content .citem{
-    padding: .2rem 0;
-    width: 0;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    -webkit-flex: 1;
-    flex: 1;
+.mbtn{
     position: relative;
-}
-.citem .sub{
-    font-size: 10px;
-}
-.citem p{
-    margin-bottom: 20px;
-}
-.content .catename{
-    font-size: 18px;
-    padding: .1rem 0;
-    line-height: .4rem;
-}
-.citem .cbtn{
-    border: 1px solid lightblue;
-    padding: 5px;
-    border-radius: 3px;
-}
-.content .nprice{
-    font-size: 36px;
-    line-height: .4rem;
+    margin:5px;
 }
 .mgreen{
     color: green;
 }
-.mred{
-    color: red;
+.mlose{
+    background-color: darkgray;
+    color: white;
+}
+.mwin{
+    background-color: darkorange;
+    color: white;
+}
+.mcate{
+    font-size: 0.1rem;
+    color: darkblue;
+}
+.mnprice{
+    font-size: 0.16rem;
+    color: deeppink;
+}
+.mdt{
+    font-size: 0.1rem;
+    color: darkgreen;
+}
+.mpublish{
+    font-size: 0.1rem;
+}
+.mstatus{
+    font-size: 0.1rem;
+}
+.mstar{
+    background-color: black;
+}
+.mabandon{
+    background-color:bisque;
 }
 </style>

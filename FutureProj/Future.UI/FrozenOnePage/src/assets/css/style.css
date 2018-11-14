@@ -194,16 +194,16 @@ body {
 }
 .icon-ystar{
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
     background: url(../images/ystar.png) no-repeat;
     -webkit-background-size: 100% auto;
     background-size: 100% auto
 }
 .icon-rstar{
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
     background: url(../images/rstar.png) no-repeat;
     -webkit-background-size: 100% auto;
     background-size: 100% auto

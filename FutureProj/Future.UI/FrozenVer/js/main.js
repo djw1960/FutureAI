@@ -325,15 +325,17 @@
                 success: function (data) {
                     if (data.code == 0) {
                         var dlist = data.data;
-                        var dt = [];
-                        var da = [];
-                        var model = dlist[0];
-                        for (var i = 0; i < dlist.length; i++) {
-                            var item = dlist[i];
-                            dt.push(item.DateTime);
-                            da.push(item.Price);
+                        if (dlist.length>0) {
+                            var dt = [];
+                            var da = [];
+                            var model = dlist[0];
+                            for (var i = 0; i < dlist.length; i++) {
+                                var item = dlist[i];
+                                dt.push(item.DateTime);
+                                da.push(item.Price);
+                            }
+                            self.InitEChartOneTable(model.PName, dt, da);
                         }
-                        self.InitEChartOneTable(model.PName, dt, da);
                     }
                     else {
                         alert(data.msg);

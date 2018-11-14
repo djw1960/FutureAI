@@ -73,11 +73,11 @@
         },
         created(){
             // 取值时：把获取到的Json字符串转换回对象
-            var userJsonStr = sessionStorage.getItem('user');
-            if (userJsonStr) {
+            //var userJsonStr = sessionStorage.getItem('user');
+            //if (userJsonStr) {
                 //login信息存储
-                this.$router.push({ name: 'home'});
-            }
+                //this.$router.push({ name: 'home'});
+            //}
         }
     }
 </script>
