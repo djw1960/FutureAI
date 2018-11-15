@@ -418,7 +418,7 @@
                                 da1.push(dlist1[i].Price);
                                 da2.push(dlist2[i].Price);
                             }
-                            self.InitEChartMoreTable(dt, da1, da2);
+                            self.InitEChartMoreTable(dt, da1, da2,dlist1[0].PName,dlist2[0].PName);
                         }
                         
                     }
@@ -529,7 +529,7 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-        InitEChartMoreTable: function (date, data1, data2) {
+        InitEChartMoreTable: function (date, data1, data2,title1,title2) {
             var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' });
             option = {
                 tooltip: {
@@ -553,14 +553,14 @@
                 },
                 series: [
                     {
-                        name: data1[0].PName,
+                        name: title1,
                         type: 'line',
                         smooth: true,
                         symbol: 'none',
                         sampling: 'average',
                         itemStyle: {
                             normal: {
-                                color: 'rgb(255, 70, 131)'
+                                color: 'rgb(255, 0, 0)'
                             }
                         },
                         areaStyle: {
@@ -576,14 +576,14 @@
                         },
                         data: data1
                     }, {
-                        name: data2[0].PName,
+                        name:title2,
                         type: 'line',
                         smooth: true,
                         symbol: 'none',
                         sampling: 'average',
                         itemStyle: {
                             normal: {
-                                color: 'rgb(255, 70, 131)'
+                                color: 'rgb(0, 0, 255)'
                             }
                         },
                         areaStyle: {
