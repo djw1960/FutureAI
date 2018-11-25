@@ -23,5 +23,6 @@ namespace EF.edmx
         public string SiteItemXPath2 { get; set; }
         public string XPathNote1 { get; set; }
         public string XPathNote2 { get; set; }
+        public string SiteHost { get; set; }
     }
 }

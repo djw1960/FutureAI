@@ -31,7 +31,7 @@ namespace Future.Serv
                 ID = s.ID,
                 SiteName = s.SiteName,
                 Title = s.Title,
-                Url = s.Site + s.Url,
+                Url =s.Url.Contains("http")?s.Url:s.Site + s.Url,
                 DT = s.AddDate.HasValue ? s.AddDate.Value.ToString("yyyy-MM-dd") : ""
             }
                 ), page = page };

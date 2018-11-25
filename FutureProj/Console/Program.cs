@@ -18,70 +18,80 @@ namespace Console
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //string str = "{\"VARNAME\":\"铜$$COPPER\",\"VARSORT\":0,\"REGNAME\":\"上海$$Shanghai\",\"REGSORT\":0,\"WHABBRNAME\":\"期晟公司$$Qisheng\",\"WHROWS\":12,\"WGHTUNIT\":\"2\",\"WRTWGHTS\":1919,\"WRTCHANGE\":0,\"ROWORDER\":1,\"ROWSTATUS\":\"0\"}";
-            //string s = Regex.Replace(str, "(,\"VARSORT\".+?,)", ",");
-            //s = Regex.Replace(s, "(,\"REGSORT\".+?,)", ",");
-            //s = Regex.Replace(s, "(,\"WHROWS\".+?,)", ",");
-            //System.Console.WriteLine(s);
-            //s = Regex.Replace(s, "(,\"ROWORDER\".+?,)", ",");
-            //s = Regex.Replace(s, "(,\"WGHTUNIT\".+?,)", ",");
-            //s = Regex.Replace(s, "(,\"ROWSTATUS\".+?})", "}");
-            //s = Regex.Replace(s, "(\\$\\$.+?\")", "\"");
-            //System.Console.WriteLine(s);
+        //string str = "{\"VARNAME\":\"铜$$COPPER\",\"VARSORT\":0,\"REGNAME\":\"上海$$Shanghai\",\"REGSORT\":0,\"WHABBRNAME\":\"期晟公司$$Qisheng\",\"WHROWS\":12,\"WGHTUNIT\":\"2\",\"WRTWGHTS\":1919,\"WRTCHANGE\":0,\"ROWORDER\":1,\"ROWSTATUS\":\"0\"}";
+        //string s = Regex.Replace(str, "(,\"VARSORT\".+?,)", ",");
+        //s = Regex.Replace(s, "(,\"REGSORT\".+?,)", ",");
+        //s = Regex.Replace(s, "(,\"WHROWS\".+?,)", ",");
+        //System.Console.WriteLine(s);
+        //s = Regex.Replace(s, "(,\"ROWORDER\".+?,)", ",");
+        //s = Regex.Replace(s, "(,\"WGHTUNIT\".+?,)", ",");
+        //s = Regex.Replace(s, "(,\"ROWSTATUS\".+?})", "}");
+        //s = Regex.Replace(s, "(\\$\\$.+?\")", "\"");
+        //System.Console.WriteLine(s);
 
-            //string title = "品种：苹果AP单位：张日期：2018-06-19";
-            //string temp = Regex.Match(title, "(品种：.+单位：)").ToString();
-            //System.Console.WriteLine(temp);
-            //temp = temp.Replace("品种：", "").Replace("单位：", "");
-            //System.Console.WriteLine(temp);
-            //System.Console.WriteLine("---------------------------------------------------------------");
-            //System.Console.ReadKey();
+        //string title = "品种：苹果AP单位：张日期：2018-06-19";
+        //string temp = Regex.Match(title, "(品种：.+单位：)").ToString();
+        //System.Console.WriteLine(temp);
+        //temp = temp.Replace("品种：", "").Replace("单位：", "");
+        //System.Console.WriteLine(temp);
+        //System.Console.WriteLine("---------------------------------------------------------------");
+        //System.Console.ReadKey();
 
-            //var ibll = OperationContext.BLLSession;
-            //string str = "/dalianshangpin/yw/fw/jystz/ywtz/6095044/index.html";
-            //string no = Regex.Match(str, "(/[0-9]+/)").ToString();
-            //System.Console.WriteLine(no);
+        //var ibll = OperationContext.BLLSession;
+        //string str = "/dalianshangpin/yw/fw/jystz/ywtz/6095044/index.html";
+        //string no = Regex.Match(str, "(/[0-9]+/)").ToString();
+        //System.Console.WriteLine(no);
 
-            #region NewsTest
-            //var list = new List<FNews> { };
-            //var pageIndex = 1;
-            //while (pageIndex > 0 && pageIndex <= 2)
-            //{
-            //    /* 郑州所 这个站点做了处理
-            //     * 1.登录会话做了限制，会被重定向
-            //     * 2.详情被生成为PDF格式，需要解析
-            //     * */
-            //    var news = CrawlerUtils.GetNewsFromUrl_ZZ(1, pageIndex);
-            //    foreach (var item in news)
-            //    {
-            //        //ibll.FNews.Add(item);
-            //        System.Console.WriteLine($"{item.AddDate.Value.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
-            //    }
-            //    /*
-            //    int n = ibll.FNews.SaveChanges();
-            //    if (n > 0)
-            //    {
-            //        System.Console.WriteLine("新闻：save-{0}", n);
-            //    }
-            //    */
-            //    if (news.Count == 0)
-            //    {
-            //        pageIndex = 0;
-            //        break;
-            //    }
+        #region NewsTest
+        //var list = new List<FNews> { };
+        //var pageIndex = 1;
+        //while (pageIndex > 0 && pageIndex <= 2)
+        //{
+        //    /* 郑州所 这个站点做了处理
+        //     * 1.登录会话做了限制，会被重定向
+        //     * 2.详情被生成为PDF格式，需要解析
+        //     * */
+        //    var news = CrawlerUtils.GetNewsFromUrl_ZZ(1, pageIndex);
+        //    foreach (var item in news)
+        //    {
+        //        //ibll.FNews.Add(item);
+        //        System.Console.WriteLine($"{item.AddDate.Value.ToShortDateString()} {item.NewsTitle}~({(item.NewContent.Length > 0 ? "有采集到详情" : "无")})");
+        //    }
+        //    /*
+        //    int n = ibll.FNews.SaveChanges();
+        //    if (n > 0)
+        //    {
+        //        System.Console.WriteLine("新闻：save-{0}", n);
+        //    }
+        //    */
+        //    if (news.Count == 0)
+        //    {
+        //        pageIndex = 0;
+        //        break;
+        //    }
 
-            //    // 请求太快貌似会被4O4
-            //    Thread.Sleep(1000);
-            //    pageIndex++;
-            //}
-            //System.Console.WriteLine("新闻：Finish");
-            #endregion
+        //    // 请求太快貌似会被4O4
+        //    Thread.Sleep(1000);
+        //    pageIndex++;
+        //}
+        //System.Console.WriteLine("新闻：Finish");
+        #endregion
+        //SX_SiteConfig site = new SX_SiteConfig() { };
+        //site.SiteHost = "http://www.chancheng.gov.cn";
+        //site.SiteName = "佛山市禅城区教育局";
+        //site.SiteUrl = "http://www.chancheng.gov.cn/ccjy/060102/bmlist2.shtml";
+        //site.SiteListXPath = "/html/body/div[1]/div[2]/div/div[2]/div[2]";
+        //site.SiteItemXPath = "div/div";
+        //var list=CrawlerUtils.FoShanChanChengedu(site);
 
-
-            string str = "http://www.chancheng.gov.cn/ccjy/060102/bmlist2.shtml";
-            string xpath = "/html/body/div[1]/div[2]/div/div[2]/div[2]";
-            string itemxpath = "div/div";
-            var list=CrawlerUtils.FoShanChanChengedu(str, "佛山市禅城区教育局", xpath, itemxpath);
+        
+            SX_SiteConfig site = new SX_SiteConfig() { };
+            site.SiteHost = "http://huizhou.1211.cn";
+            site.SiteName = "山香教育惠州分校";
+            site.SiteUrl = "http://huizhou.1211.cn/index.php?m=content&c=index&a=lists&catid=6";
+            site.SiteListXPath = "/html/body/div[6]/div/div[2]/div/ul";
+            site.SiteItemXPath = "li";
+            var list = CrawlerUtils.HuiZhouShanXiangedu(site);
             System.Console.WriteLine(list.Count);
             System.Console.ReadKey();
         }

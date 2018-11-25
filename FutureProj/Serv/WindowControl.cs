@@ -37,9 +37,11 @@ namespace Serv
                 {
                     case "FoShanChanChengedu":
                         //佛山禅城教育局
-                        list= CrawlerUtils.FoShanChanChengedu(site.SiteUrl, site.SiteName,site.SiteListXPath, site.SiteItemXPath);
+                        list= CrawlerUtils.FoShanChanChengedu(site);
                         break;
-                    
+                    case "HuiZhouShanXiangedu":
+                        list = CrawlerUtils.HuiZhouShanXiangedu(site);
+                        break;
                     default:
                         break;
                 }

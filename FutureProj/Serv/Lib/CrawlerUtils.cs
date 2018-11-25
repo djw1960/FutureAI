@@ -787,26 +787,26 @@ namespace Serv.Lib
         ///佛山禅城区教育局- 获取公告，新闻信息
         /// </summary>
         /// <returns></returns>
-        public static List<SX_News> FoShanChanChengedu(string url,string siteName, string tabXPath,string itemXPath)
+        public static List<SX_News> FoShanChanChengedu(SX_SiteConfig site)
         {
             //下载网页源代码 
-            var docText = GetWebClient(url);
+            var docText = GetWebClient(site.SiteUrl);
             //加载源代码，获取文档对象
             var doc = new HtmlDocument(); doc.LoadHtml(docText);
             //更加xpath获取总的对象，如果不为空，就继续选择dl标签
-            var res = doc.DocumentNode.SelectSingleNode(tabXPath);
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
             if (res != null)
             {
-                var ilist = res.SelectNodes(itemXPath);//获取所有的表格行
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
                 List<SX_News> list = new List<SX_News>();
                 foreach (var item in ilist)
                 {
                     try
                     {
                         SX_News model = new SX_News();
-                        model.SiteName = siteName;
+                        model.SiteName = site.SiteName;
                         model.Title = item.SelectSingleNode("a").InnerText;
-                        model.Site = "http://www.chancheng.gov.cn";
+                        model.Site =site.SiteHost;
                         model.Url = item.SelectSingleNode("a").Attributes["href"].Value;
                         string dt = item.SelectSingleNode("span").InnerText;
                         model.AddDate = DateTime.Parse(dt);
@@ -821,6 +821,46 @@ namespace Serv.Lib
             }
             return null;
         }
+        /// <summary>
+        ///惠州山香教育
+        /// </summary>
+        /// <returns></returns>
+        public static List<SX_News> HuiZhouShanXiangedu(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("span").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+
+
         #endregion
     }
 }

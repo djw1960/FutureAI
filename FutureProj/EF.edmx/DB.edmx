@@ -282,6 +282,7 @@
           <Property Name="SiteItemXPath2" Type="nvarchar" MaxLength="500" />
           <Property Name="XPathNote1" Type="nvarchar" MaxLength="200" />
           <Property Name="XPathNote2" Type="nvarchar" MaxLength="200" />
+          <Property Name="SiteHost" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“FutureAI.dbo.View_AdminUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -670,6 +671,7 @@
           <Property Name="SiteItemXPath2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="XPathNote1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="XPathNote2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SiteHost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -979,6 +981,7 @@
           <EntitySetMapping Name="SX_SiteConfig">
             <EntityTypeMapping TypeName="PayServiceModel.SX_SiteConfig">
               <MappingFragment StoreEntitySet="SX_SiteConfig">
+                <ScalarProperty Name="SiteHost" ColumnName="SiteHost" />
                 <ScalarProperty Name="XPathNote2" ColumnName="XPathNote2" />
                 <ScalarProperty Name="XPathNote1" ColumnName="XPathNote1" />
                 <ScalarProperty Name="SiteItemXPath2" ColumnName="SiteItemXPath2" />
