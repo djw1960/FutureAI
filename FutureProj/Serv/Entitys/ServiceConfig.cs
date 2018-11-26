@@ -29,7 +29,8 @@ namespace Serv.Entitys
         public const int SERVICE_GetMomentDetail = 1041;//获取帖子详情
 
         public const int SERVICE_GetAIList = 1060;//当前获取AI列表
-
+        
+        public const int SERVICE_GetCateList = 1075;//获取菜单列表
         public const int SERVICE_GetSX_NewsList = 1080;//获取菜单列表
 
         #region Manager

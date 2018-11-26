@@ -72,6 +72,9 @@ namespace Api.Controllers
                     case ApiConfig.SERVICE_GetAIList:
                         FutureControl.SERVICE_GetAIList(result, parm);
                         break;
+                    case ApiConfig.SERVICE_GetCateList:
+                        SXControl.SERVICE_GetCateList(result, parm);
+                        break;
                     case ApiConfig.SERVICE_GetSX_NewsList:
                         SXControl.SERVICE_GetSX_NewsList(result, parm);
                         break;

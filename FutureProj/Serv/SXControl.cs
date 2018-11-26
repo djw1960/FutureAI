@@ -13,6 +13,17 @@ namespace Future.Serv
     {
         private static EF.IService.IServiceSession ibll = OperationContext.BLLSession;
 
+        public static void SERVICE_GetCateList(ReturnModel result, RequestParamsM param)
+        {
+            var list = ibll.SX_SiteConfig.where(s=>true).ToList();
+
+            result.code = RespCodeConfig.Normal;
+            result.data = list.Select(s => new {
+                s.ID,
+                s.SiteName,
+                s.Type
+            });
+        }
         public static void SERVICE_GetSX_NewsList(ReturnModel result, RequestParamsM param)
         {
             var p = PredicateBuilder.True<SX_News>();

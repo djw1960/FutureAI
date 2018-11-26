@@ -4,69 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <title>FrozenUI Demo</title>
-    <!-- 引入 FrozenUI -->
-    <link rel="stylesheet" href="../css/frozenui.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/lib/zepto.min.js"></script>
-    <script src="../js/common.js"></script>
 </head>
 <body ontouchstart>
-    <section class="ui-container">
-        <div class="index-wrap">
-            <div class="header">
-                <ul class="ui-row" style="width:100%">
-                    <li class="ui-col ui-col-80">
-                        <div class="adlogo"></div>
-                    </li>
-                    <li class="ui-col ui-col-20">
-                        <div class="ui-user userimg">
-                        </div>
-                        <div class="ui-user username">
-                            <button class="ui-btn-lg">user</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <section>
-                <div id="ntabcontent" class="ui-tab">
-                    <ul class="ui-tab-nav ui-border-b">
-                        <li class="current"><span>最新发布</span></li>
-                        <li data-type="dce"><span>大商所</span></li>
-                        <li data-type="czce"><span>郑商所</span></li>
-                        <li data-type="shfe"><span>上商所</span></li>
-                    </ul>
-                    <ul class="ui-tab-content contentb" style="width:400%;">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-            </section>
-            <div class="footer ui-footer">
-                <ul class="ui-tiled linklist">
-                    <li data-href="index.html" class="ui-border-r">资讯</li>
-                    <li data-href="./c/l.html" class="ui-border-r">仓单</li>
-                    <li data-href="./t/l.html" class="ui-border-r">统计局</li>
-                    <li data-href="./f/i.html" class="ui-border-r">圈子</li>
-                    <li data-href="./a/i.html">AI量化</li>
-                </ul>
-            </div>
-        </div>
-        <div class="ui-actionsheet" id="actionsheet1">
-            <div class="ui-actionsheet-cnt am-actionsheet-down">
-                <h4>登录体验AI智能之美</h4>
-                <button class="ui-actionsheet-del">登录</button>
-                <div class="ui-actionsheet-split-line"></div>
-                <button id="cancel">取消</button>
-            </div>
-        </div>
-    </section>
-    <script src="../js/main.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#ntabcontent>.ui-tab-nav>li.current').trigger('click');
-        });
-    </script>
+<script type="text/javascript" src="https://c.mql5.com/js/widgets/calendar/widget.js?5"></script>
+<div id="economicCalendarWidget"></div>
+<script type="text/javascript">
+    new economicCalendar({ width: "100%", height: "100%", mode: 2, lang: "en" });
+</script>
+
 </body>
 </html>
