@@ -1,4 +1,5 @@
-﻿using EF.Entitys;
+﻿using EF.Common;
+using EF.Entitys;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Serv.Entitys;
@@ -975,6 +976,7 @@ namespace Serv.Lib
                     }
                     catch (Exception ex)
                     {
+                        LogHelper.Error<CrawlerUtils>(ex);
                         continue;
                     }
                 }
