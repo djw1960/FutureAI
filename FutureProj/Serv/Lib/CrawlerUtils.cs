@@ -859,8 +859,216 @@ namespace Serv.Lib
             }
             return null;
         }
+        /// <summary>
+        /// 惠州龙门
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZLongMen(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("dt/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("dt/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("dd").InnerText;//发布时间：2018-08-28
+                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
 
+        /// <summary>
+        /// 惠州市直
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZShiZhi(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("li[@class='li_art_title']/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("li[@class='li_art_title']/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("li[@class='li_art_date']").InnerText;//发布时间：2018-08-28
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
 
+        /// <summary>
+        /// 惠州惠城区
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZHuiCheng(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("th")!=null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("td[2]/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("td[2]/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("td[3]").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        
+        /// <summary>
+        /// 惠州大亚湾1
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZDaYaWan1(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("th") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("dt/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("dt/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("dd").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 惠州大亚湾2
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZDaYaWan2(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("th") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("dt/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("dt/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("dd").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
         #endregion
     }
 }

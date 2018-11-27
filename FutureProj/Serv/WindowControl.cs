@@ -42,7 +42,20 @@ namespace Serv
                     case "HuiZhouShanXiangedu":
                         list = CrawlerUtils.HuiZhouShanXiangedu(site);
                         break;
-                    default:
+                    case "HZLongMen":
+                        list = CrawlerUtils.HZLongMen(site);
+                        break;
+                    case "HZShiZhi":
+                        list = CrawlerUtils.HZShiZhi(site);
+                        break;
+                    case "HZHuiCheng":
+                        list = CrawlerUtils.HZHuiCheng(site);
+                        break;
+                    case "HZDaYaWan1":
+                        list = CrawlerUtils.HZDaYaWan1(site);
+                        break;
+                    case "HZDaYaWan2":
+                        list = CrawlerUtils.HZDaYaWan2(site);
                         break;
                 }
                 if (list.Count>0)

@@ -86,12 +86,12 @@ namespace Console
 
         
             SX_SiteConfig site = new SX_SiteConfig() { };
-            site.SiteHost = "http://huizhou.1211.cn";
+            site.SiteHost = "http://www.longmen.gov.cn";
             site.SiteName = "山香教育惠州分校";
-            site.SiteUrl = "http://huizhou.1211.cn/index.php?m=content&c=index&a=lists&catid=6";
-            site.SiteListXPath = "/html/body/div[6]/div/div[2]/div/ul";
-            site.SiteItemXPath = "li";
-            var list = CrawlerUtils.HuiZhouShanXiangedu(site);
+            site.SiteUrl = "http://www.dayawan.gov.cn/qxjj/artList.html?sn=qxjj&cataId=bf317b5054bb4123b252c5d9b34e77aa&pageNo=1";
+            site.SiteListXPath = "//*[@id=\"art_list_div\"]";
+            site.SiteItemXPath = "dl";
+            var list = CrawlerUtils.HZDaYaWan1(site);
             System.Console.WriteLine(list.Count);
             System.Console.ReadKey();
         }
