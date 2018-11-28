@@ -57,6 +57,24 @@ namespace Serv
                     case "HZDaYaWan2":
                         list = CrawlerUtils.HZDaYaWan2(site);
                         break;
+                    case "HZZhongKai":
+                        list = CrawlerUtils.HZZhongKai(site);
+                        break;
+                    case "HZHuiDong":
+                        list = CrawlerUtils.HZHuiDong(site);
+                        break;
+                    case "HZHuiYang":
+                        list = CrawlerUtils.HZHuiYang(site);
+                        break;
+                    case "HZBoLuo":
+                        list = CrawlerUtils.HZBoLuo(site);
+                        break;
+                    case "SWChengQu":
+                        list = CrawlerUtils.SWChengQu(site);
+                        break;
+                    case "FSShunDe":
+                        list = CrawlerUtils.FSShunDe(site);
+                        break; 
                 }
                 if (list.Count>0)
                 {

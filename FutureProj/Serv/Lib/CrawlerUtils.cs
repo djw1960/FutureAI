@@ -1071,6 +1071,268 @@ namespace Serv.Lib
             }
             return null;
         }
+
+        /// <summary>
+        /// 惠州仲恺
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZZhongKai(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("div/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("div/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("table/tr[1]/td[1]").InnerText;//发布时间：\r\n                    2018-11-27
+                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 惠州惠东县
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZHuiDong(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("th") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("dt/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("dt/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("dd").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 惠州惠阳区
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZHuiYang(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl, Encoding.GetEncoding("GB2312"));
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("th") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("a").InnerText;
+                        model.Site = site.SiteHost;
+                        string href= item.SelectSingleNode("a").Attributes["href"].Value;
+                        model.Url = href.Replace("../","");
+                        string dt = item.SelectSingleNode("span").InnerText;
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 惠州博罗县
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> HZBoLuo(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("div/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("div/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("table/tr[1]/td[1]").InnerText;//发布时间：\r\n                    2018-11-27
+                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 汕尾城区
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> SWChengQu(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl,Encoding.GetEncoding("GB2312"));
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("table/tr[1]/td[1]/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("table/tr[1]/td[1]/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("table/tr[1]/td[2]/div").InnerText;//发布时间：\r\n                    2018-11-27
+                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 佛山顺德
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> FSShunDe(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl, Encoding.GetEncoding("GB2312"));
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("td[2]/a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("td[2]/a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("td[2]").InnerText;//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
+
+                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 35, 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
         #endregion
     }
 }

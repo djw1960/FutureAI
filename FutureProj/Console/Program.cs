@@ -88,10 +88,10 @@ namespace Console
             SX_SiteConfig site = new SX_SiteConfig() { };
             site.SiteHost = "http://www.longmen.gov.cn";
             site.SiteName = "山香教育惠州分校";
-            site.SiteUrl = "http://www.dayawan.gov.cn/qrsj/artList.html?cataId=b1d21feccdf645ba81ec3a342dc23bf3";
-            site.SiteListXPath = "//*[@id=\"art_list_div\"]";
-            site.SiteItemXPath = "dl";
-            var list = CrawlerUtils.HZDaYaWan1(site);
+            site.SiteUrl = "http://news.sdedu.net/moreNews.action?sort=3663";
+            site.SiteListXPath = "//*[@id=\"newsList\"]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table/tbody/tr/td/table";
+            site.SiteItemXPath = "tbody/tr";
+            var list = CrawlerUtils.FSShunDe(site);
             System.Console.WriteLine(list.Count);
             System.Console.ReadKey();
         }
