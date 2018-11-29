@@ -26,14 +26,16 @@ namespace Future.Serv
         }
         public static void SERVICE_GetSX_NewsList(ReturnModel result, RequestParamsM param)
         {
+            PageContent page = new PageContent();
+            page.index = param.page;
+            page.size = 50;
             var p = PredicateBuilder.True<SX_News>();
             if (!string.IsNullOrEmpty(param.Type))
             {
+                page.size = 20;
                 p = p.And(s => s.SiteName.Contains(param.Type));//根据分类获取某个交易所的信息
             }
-            PageContent page = new PageContent();
-            page.index = param.page;
-            page.size = 20;
+            
             var list = ibll.SX_News.where(p).OrderByDescending(ss => ss.AddDate).Skip(page.index * page.size).Take(page.size).ToList();
 
             result.code = RespCodeConfig.Normal;
