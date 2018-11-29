@@ -74,7 +74,19 @@ namespace Serv
                         break;
                     case "FSShunDe":
                         list = CrawlerUtils.FSShunDe(site);
-                        break; 
+                        break;
+                    case "FSNanHai":
+                        list = CrawlerUtils.FSNanHai(site);
+                        break;
+                    case "FSGaoMing1":
+                        list = CrawlerUtils.FSGaoMing1(site);
+                        break;
+                    case "FSGaoMing2":
+                        list = CrawlerUtils.FSGaoMing2(site);
+                        break;
+                    case "FSSanShui":
+                        list = CrawlerUtils.FSSanShui(site);
+                        break;
                 }
                 if (list.Count>0)
                 {

@@ -15,7 +15,7 @@ namespace Future.Serv
 
         public static void SERVICE_GetCateList(ReturnModel result, RequestParamsM param)
         {
-            var list = ibll.SX_SiteConfig.where(s=>true).ToList();
+            var list = ibll.SX_SiteConfig.where(s=>true).OrderBy(s=>s.Type).ToList();
 
             result.code = RespCodeConfig.Normal;
             result.data = list.Select(s => new {

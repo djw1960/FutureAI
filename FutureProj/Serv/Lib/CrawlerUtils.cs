@@ -1277,7 +1277,7 @@ namespace Serv.Lib
                         model.Site = site.SiteHost;
                         model.Url = item.SelectSingleNode("table/tr[1]/td[1]/a").Attributes["href"].Value;
                         string dt = item.SelectSingleNode("table/tr[1]/td[2]/div").InnerText;//发布时间：\r\n                    2018-11-27
-                        model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 10));
+                        model.AddDate = DateTime.Parse(dt);
                         list.Add(model);
                     }
                     catch (Exception ex)
@@ -1322,6 +1322,188 @@ namespace Serv.Lib
                         string dt = item.SelectSingleNode("td[2]").InnerText;//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
 
                         model.AddDate = DateTime.Parse(dt.Substring(dt.Length - 35, 10));
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 佛山南海
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> FSNanHai(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl, Encoding.GetEncoding("GB2312"));
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("a").InnerText;
+                        model.Site = site.SiteHost;
+                        model.Url = item.SelectSingleNode("a").Attributes["href"].Value;
+                        string dt = item.SelectSingleNode("span").InnerText;//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
+
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 佛山高明1
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> FSGaoMing1(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("li/a").InnerText.Replace("\t","").Replace("\n", "");
+                        model.Site = site.SiteHost;
+                       string href = item.SelectSingleNode("li/a").Attributes["href"].Value;
+                        model.Url = href.Replace("./","/");
+                        string dt = item.SelectSingleNode("li/span").InnerText;//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
+
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 佛山高明2
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> FSGaoMing2(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl);
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("li/a").InnerText.Replace("\t", "").Replace("\n","");
+                        model.Site = site.SiteHost;
+                        string href = item.SelectSingleNode("li/a").Attributes["href"].Value;
+                        model.Url = href.Replace("./", "/");
+                        string dt = item.SelectSingleNode("li/span").InnerText;//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
+
+                        model.AddDate = DateTime.Parse(dt);
+                        list.Add(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+                return list;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 佛山三水区
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static List<SX_News> FSSanShui(SX_SiteConfig site)
+        {
+            //下载网页源代码 
+            var docText = GetWebClient(site.SiteUrl, Encoding.GetEncoding("GB2312"));
+            //加载源代码，获取文档对象
+            var doc = new HtmlDocument(); doc.LoadHtml(docText);
+            //更加xpath获取总的对象，如果不为空，就继续选择dl标签
+            var res = doc.DocumentNode.SelectSingleNode(site.SiteListXPath);
+            if (res != null)
+            {
+                var ilist = res.SelectNodes(site.SiteItemXPath);//获取所有的表格行
+                List<SX_News> list = new List<SX_News>();
+                foreach (var item in ilist)
+                {
+                    try
+                    {
+                        if (item.SelectNodes("div[@class='page_num']") != null)
+                        {
+                            continue;
+                        }
+                        SX_News model = new SX_News();
+                        model.SiteName = site.SiteName;
+                        model.Title = item.SelectSingleNode("td[2]/a").InnerText;
+                        model.Site = site.SiteHost;
+                        string href = item.SelectSingleNode("td[2]/a").Attributes["href"].Value;
+                        model.Url = href.Replace("./", "/");
+                        string dt = item.SelectSingleNode("td[2]/span").InnerText.Replace("(","").Replace(")", "");//nbsp;&nbsp;&nbsp;&nbsp;2018-11-28 
+
+                        model.AddDate = DateTime.Parse(dt);
                         list.Add(model);
                     }
                     catch (Exception ex)
