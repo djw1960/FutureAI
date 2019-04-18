@@ -35,10 +35,6 @@ namespace Serv
                 List<SX_News> list = new List<SX_News>();
                 switch (site.Type)
                 {
-                    case "FoShanChanChengedu":
-                        //佛山禅城教育局
-                        list= CrawlerUtils.FoShanChanChengedu(site);
-                        break;
                     case "HuiZhouShanXiangedu":
                         list = CrawlerUtils.HuiZhouShanXiangedu(site);
                         break;
@@ -69,26 +65,30 @@ namespace Serv
                     case "HZBoLuo":
                         list = CrawlerUtils.HZBoLuo(site);
                         break;
-                    case "SWChengQu":
-                        list = CrawlerUtils.SWChengQu(site);
-                        break;
-                    case "FSShunDe":
-                        list = CrawlerUtils.FSShunDe(site);
-                        break;
-                    case "FSNanHai":
-                        list = CrawlerUtils.FSNanHai(site);
-                        break;
-                    case "FSGaoMing1":
-                        list = CrawlerUtils.FSGaoMing1(site);
-                        break;
-                    case "FSGaoMing2":
-                        list = CrawlerUtils.FSGaoMing2(site);
-                        break;
-                    case "FSSanShui":
-                        list = CrawlerUtils.FSSanShui(site);
-                        break;
+                    //case "FoShanChanChengedu":
+                    //    //佛山禅城教育局
+                    //    list = CrawlerUtils.FoShanChanChengedu(site);
+                    //    break;
+                        //case "SWChengQu":
+                        //    list = CrawlerUtils.SWChengQu(site);
+                        //    break;
+                        //case "FSShunDe":
+                        //    list = CrawlerUtils.FSShunDe(site);
+                        //    break;
+                        //case "FSNanHai":
+                        //    list = CrawlerUtils.FSNanHai(site);
+                        //    break;
+                        //case "FSGaoMing1":
+                        //    list = CrawlerUtils.FSGaoMing1(site);
+                        //    break;
+                        //case "FSGaoMing2":
+                        //    list = CrawlerUtils.FSGaoMing2(site);
+                        //    break;
+                        //case "FSSanShui":
+                        //    list = CrawlerUtils.FSSanShui(site);
+                        //    break;
                 }
-                if (list.Count>0)
+                if (list!=null&&list.Count>0)
                 {
                     foreach (var item in list)
                     {
